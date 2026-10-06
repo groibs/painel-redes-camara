@@ -285,9 +285,8 @@ function Week({
     shiftDate(data.weekStart, index),
   );
   const dates = days.slice(offset, offset + 4);
-  const start = new Date(`${data.weekStart}T12:00:00-03:00`);
   const end = new Date(`${data.weekEnd}T12:00:00-03:00`);
-  const range = `${start.getDate().toString().padStart(2, "0")}–${end.getDate().toString().padStart(2, "0")} ${new Intl.DateTimeFormat("pt-BR", { timeZone: TIMEZONE, month: "short" }).format(end).replace(".", "")}`;
+  const range = `${data.weekStart.slice(-2)}–${data.weekEnd.slice(-2)} ${new Intl.DateTimeFormat("pt-BR", { timeZone: TIMEZONE, month: "short" }).format(end).replace(".", "")}`;
   return (
     <section className="week-panel" aria-labelledby="week-title">
       <div className="week-heading">

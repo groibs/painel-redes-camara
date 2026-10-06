@@ -40,7 +40,7 @@ Preferências e último snapshot recebido ficam no navegador, quando o armazenam
 Fonte: [Dados Abertos da Câmara](https://dadosabertos.camara.leg.br/swagger/api.html).
 
 - `/eventos`: semana de segunda a domingo, com paginação e horário de Brasília; cache de 5 minutos.
-- `/votacoes`: resultados do Plenário (`idOrgao=180`), com data de registro; cache de 1 minuto.
+- `/votacoes`: resultados do Plenário nos últimos 30 dias (`idOrgao=180`), com data de registro; cache de 1 minuto.
 - `/votacoes/{id}`: placar registrado e proposições relacionadas. Votações simbólicas sem placar nominal não são apresentadas como votos zero.
 
 O navegador consulta `/api/painel` a cada minuto por padrão. Esse intervalo pode ser alterado na interface. O cache das fontes evita consultas desnecessárias à API oficial. Os números não são um placar de votação aberta: a API consultada fornece resultados registrados. A data e hora do resultado aparecem na tela.
@@ -100,6 +100,15 @@ O acesso de cada plataforma depende de permissões próprias: Instagram/Facebook
 ## Publicação
 
 Projeto Next.js 16.3.8 / React 19.3.0; Vercel usa a branch `main`. Build: `npm run build`. Instalação: `npm ci`. Runtime: Node.js 24. As variáveis opcionais estão em `.env.example`.
+
+A criação na Vercel foi bloqueada por limite de uso da conta. Há também um empacotamento portátil para publicar a mesma interface e API da Câmara em um Worker, sem acesso às redes sociais:
+
+```bash
+npm run build
+node scripts/build-portable-preview.mjs
+```
+
+O resultado fica em `dist/server/index.js`, com os assets locais incorporados. A versão Next.js continua sendo a base para a hospedagem definitiva e a conexão do coletor de redes. O empacotamento alternativo mantém `/` e `/demo` separados.
 
 ## Identidade visual
 

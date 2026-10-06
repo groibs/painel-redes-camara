@@ -1,5 +1,5 @@
 import { emptyPanel } from "./data";
-import { zonedTimestamp } from "./format";
+import { shiftDate, zonedTimestamp } from "./format";
 import { parseSnapshot, safeHttpsUrl } from "./snapshot";
 import type { AgendaEvent, PanelData, Source, Vote } from "./types";
 
@@ -39,7 +39,7 @@ async function apiJson(
   const response = await fetch(`${API}${path}`, {
     headers: { Accept: "application/json" },
     next: { revalidate },
-    signal,
+    signal: AbortSignal.any([signal, AbortSignal.timeout(12000)]),
   });
   if (!response.ok) throw new Error(`Câmara HTTP ${response.status}`);
   const json = object(await response.json());
@@ -111,18 +111,22 @@ async function latestVote(
 ): Promise<Vote | null> {
   // The public API exposes registered results. Never call these counts an open live vote.
   const yearStart = `${panel.date.slice(0, 4)}-01-01`;
-  const query = new URLSearchParams({
-    dataInicio: yearStart,
-    dataFim: panel.date,
-    idOrgao: "180",
-    itens: "10",
-    ordem: "DESC",
-    ordenarPor: "dataHoraRegistro",
-  });
-  const list = await apiJson(`/votacoes?${query}`, signal);
-  if (!Array.isArray(list.dados)) throw new Error("Lista de votações inválida");
   const selected = process.env.PANEL_VOTE_ID;
-  const candidates = selected ? [{ id: selected }] : list.dados.map(object);
+  let candidates: ApiObject[];
+  if (selected) candidates = [{ id: selected }];
+  else {
+    const query = new URLSearchParams({
+      dataInicio: [yearStart, shiftDate(panel.date, -30)].sort().at(-1)!,
+      dataFim: panel.date,
+      idOrgao: "180",
+      itens: "10",
+      ordem: "DESC",
+      ordenarPor: "dataHoraRegistro",
+    });
+    const list = await apiJson(`/votacoes?${query}`, signal);
+    if (!Array.isArray(list.dados)) throw new Error("Lista de votações inválida");
+    candidates = list.dados.map(object);
+  }
   for (const raw of candidates.slice(0, 10)) {
     const id = label(object(raw).id);
     if (!/^[A-Za-z0-9_-]+$/.test(id)) continue;
