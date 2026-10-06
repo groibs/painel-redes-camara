@@ -8,6 +8,10 @@ A variação de 24 horas só aparece quando existe uma coleta de pelo menos 24 h
 
 ## Configuração prevista
 
+Após conferir o sistema, as portas e os serviços existentes, `install.py` faz a primeira instalação como root, usando arquivos de uma revisão fixa e verificando seus hashes. Exige Python 3.12 e systemd, cria o usuário sem login e gera a credencial de leitura no arquivo root 0600. Para antes de alterar arquivos quando encontra uma instalação existente ou a porta ocupada. Não altera Caddy, firewall, serviços existentes nem configura o painel. Testa autenticação local e resume somente os domínios do Caddy, sem imprimir sua configuração ou credenciais. HTTP 503 autenticado é esperado até a primeira coleta autorizada.
+
+O instalador não serve para atualizar ou reparar uma instalação existente. Se ocorrer erro depois da criação dos arquivos, conferir o resultado antes de repetir. Autorizações das redes e domínio HTTPS continuam pendentes.
+
 1. Inspecionar serviços, portas, proxy HTTPS e domínio existentes antes de qualquer instalação.
 2. Criar usuário de serviço `rede-camara-social`, sem login; colocar `collector.py` em `/opt/rede-camara-social`, pertencendo a root e sem escrita pelo serviço.
 3. Configurar `/etc/rede-camara-social.env` diretamente no servidor, pertencendo a root, permissão 0600, seguindo `.env.example`. Definir uma credencial aleatória de leitura com pelo menos 32 caracteres. Nenhuma senha de rede social é necessária.
