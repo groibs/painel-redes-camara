@@ -478,13 +478,13 @@ p {
   height: 42px;
 }
 .network-facebook {
-  background: #0866ff;
+  background: #fff;
   border-radius: 50%;
 }
 .network-facebook .network-logo {
-  width: 42px;
-  height: 42px;
-  align-self: end;
+  width: 59px;
+  height: 59px;
+  color: #0866ff;
 }
 .metric-number {
   min-width: 0;
@@ -1114,8 +1114,8 @@ p {
   gap: 8px;
   min-height: 30px;
   padding: 3px 9px;
-  font-family: var(--display);
-  font-size: 16px;
+  font-family: var(--body);
+  font-size: 14px;
   color: #e1edf0;
   white-space: nowrap;
 }
@@ -1916,8 +1916,8 @@ legend {
     height: 35px;
   }
   .network-facebook .network-logo {
-    width: 35px;
-    height: 35px;
+    width: 49px;
+    height: 49px;
   }
   .metric-number strong {
     font-size: 32px;
