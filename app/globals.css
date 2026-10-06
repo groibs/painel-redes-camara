@@ -1053,11 +1053,12 @@ p {
   font-family: var(--display);
   font-size: 36px;
   font-weight: 700;
-  line-height: 0.98;
+  line-height: 1.05;
   text-transform: uppercase;
   color: white;
   z-index: 2;
-  text-wrap: balance;
+  text-wrap: wrap;
+  overflow-wrap: anywhere;
 }
 .post-brand {
   position: absolute;
