@@ -1,5 +1,6 @@
 """Add one authenticated social route to the inspected existing Caddy site."""
 import copy
+from contextlib import contextmanager
 import datetime as dt
 import json
 import os
@@ -18,6 +19,7 @@ HOST = "apuracao.revline.com.br"
 PUBLIC_PATH = "/redes/snapshot.json"
 ORIGIN = "https://" + HOST
 CONFIG = Path("/etc/caddy/Caddyfile")
+SITE = Path("/etc/caddy/camara-reserva.caddy")
 ENVIRONMENT = Path("/etc/rede-camara-social.env")
 BACKUPS = Path("/var/backups/rede-camara-caddy")
 ADMIN_URL = "http://127.0.0.1:2019/config/"
@@ -50,16 +52,17 @@ def active(service):
     return subprocess.run(["systemctl", "is-active", "--quiet", service], capture_output=True).returncode == 0
 
 
-def adapt(path):
+def adapt(path, aliases=None):
     data = json.loads(command(["caddy", "adapt", "--config", str(path), "--adapter", "caddyfile"]))
-    source = str(path.resolve())
+    sources = {str(path.resolve()): str(CONFIG.resolve())}
+    sources.update(aliases or {})
 
     def source_hide(value):
-        # file_server automatically hides the adaptation input file. A candidate
-        # has a temporary filename, but will run from CONFIG after replacement.
+        # file_server automatically hides configuration source files. Map only
+        # the temporary main/import filenames back to their permanent paths.
         if isinstance(value, dict):
             if value.get("handler") == "file_server" and isinstance(value.get("hide"), list):
-                value["hide"] = [str(CONFIG.resolve()) if item == source else item for item in value["hide"]]
+                value["hide"] = [sources.get(item, item) for item in value["hide"]]
             for child in value.values():
                 source_hide(child)
         elif isinstance(value, list):
@@ -155,6 +158,51 @@ def patch_source(original):
     return original[:insertion] + SNIPPET + original[insertion:]
 
 
+def site_imports(source):
+    """Find only explicit imports of the inspected presentation file."""
+    pattern = re.compile(r'(?m)^[ \t]*import[ \t]+(?P<target>"[^"\r\n]+"|`[^`\r\n]+`|[^\s#]+)')
+    matches = []
+    for match in pattern.finditer(source):
+        token = match.group("target")
+        if token[0] in ('"', '`'):
+            token = token[1:-1]
+        path = Path(token)
+        if not path.is_absolute():
+            path = CONFIG.parent / path
+        if os.path.abspath(path) == os.path.abspath(SITE):
+            matches.append(match)
+    return matches
+
+
+def source_target(main_source):
+    matches = site_imports(main_source)
+    if len(matches) > 1:
+        raise RuntimeError("O arquivo da apresentacao aparece em mais de um import; nenhuma alteracao foi feita.")
+    return SITE if matches else CONFIG
+
+
+@contextmanager
+def candidate_config(main_source, target, candidate):
+    """Validate the complete main config with a temporary imported site."""
+    with tempfile.NamedTemporaryFile(prefix=".rede-camara-site-", suffix=".tmp", dir=target.parent) as site:
+        site.write(candidate)
+        site.flush()
+        if target == CONFIG:
+            yield Path(site.name), {}
+            return
+        matches = site_imports(main_source)
+        if len(matches) != 1:
+            raise RuntimeError("O import da apresentacao mudou; nenhuma alteracao foi feita.")
+        match = matches[0]
+        patched_main = (main_source[:match.start("target")] + '"' + site.name + '"' +
+                        main_source[match.end("target"):])
+        with tempfile.NamedTemporaryFile(prefix=".rede-camara-main-", suffix=".tmp", dir=CONFIG.parent) as main:
+            main.write(patched_main.encode())
+            main.flush()
+            aliases = {str(Path(site.name).resolve()): str(target.resolve())}
+            yield Path(main.name), aliases
+
+
 def http_status(url, token=None):
     headers = {"Authorization": "Bearer " + token} if token else {}
     request = urllib.request.Request(url, headers=headers)
@@ -165,8 +213,8 @@ def http_status(url, token=None):
         return error.code
 
 
-def replace_config(content, metadata):
-    descriptor, name = tempfile.mkstemp(prefix=".rede-camara-", suffix=".tmp", dir=CONFIG.parent)
+def replace_config(target, content, metadata):
+    descriptor, name = tempfile.mkstemp(prefix=".rede-camara-", suffix=".tmp", dir=target.parent)
     temporary = Path(name)
     try:
         with os.fdopen(descriptor, "wb") as output:
@@ -175,13 +223,13 @@ def replace_config(content, metadata):
             os.fsync(output.fileno())
             os.fchown(output.fileno(), metadata.st_uid, metadata.st_gid)
             os.fchmod(output.fileno(), stat.S_IMODE(metadata.st_mode))
-        os.replace(temporary, CONFIG)
+        os.replace(temporary, target)
     finally:
         temporary.unlink(missing_ok=True)
 
 
-def activate(original_bytes, candidate, metadata, page_before, before, token):
-    replace_config(candidate, metadata)
+def activate(target, original_bytes, candidate, metadata, page_before, before, token):
+    replace_config(target, candidate, metadata)
     try:
         command(["caddy", "reload", "--config", str(CONFIG), "--adapter", "caddyfile"])
         public = http_status(ORIGIN + PUBLIC_PATH)
@@ -193,12 +241,12 @@ def activate(original_bytes, candidate, metadata, page_before, before, token):
         if {service: active(service) for service in SERVICES} != before:
             raise RuntimeError("O estado de um servico mudou.")
     except Exception:
-        replace_config(original_bytes, metadata)
+        replace_config(target, original_bytes, metadata)
         try:
             command(["caddy", "reload", "--config", str(CONFIG), "--adapter", "caddyfile"])
         except Exception:
-            raise RuntimeError("Caddyfile restaurado, mas a recarga de restauracao falhou; envie esta mensagem.")
-        raise RuntimeError("A verificacao falhou. Caddyfile anterior restaurado e recarregado; envie esta mensagem.")
+            raise RuntimeError("Arquivo anterior restaurado, mas a recarga de restauracao falhou; envie esta mensagem.")
+        raise RuntimeError("A verificacao falhou. Arquivo anterior restaurado e recarregado; envie esta mensagem.")
     return public, authorized
 
 
@@ -208,8 +256,7 @@ def main():
     os.umask(0o077)
     if CONFIG.is_symlink() or not CONFIG.is_file() or ENVIRONMENT.is_symlink():
         raise RuntimeError("Os caminhos de configuracao precisam ser conferidos.")
-    metadata = CONFIG.stat()
-    if metadata.st_uid != 0:
+    if CONFIG.stat().st_uid != 0:
         raise RuntimeError("O proprietario do Caddyfile precisa ser conferido.")
     start = command(["systemctl", "show", "caddy", "--property=ExecStart", "--value"])
     if not re.search(r"--config(?:=|\s+)" + re.escape(str(CONFIG)) + r"(?=\s|;|\}|$)", start):
@@ -222,29 +269,36 @@ def main():
     before = {service: active(service) for service in SERVICES}
     if not before["caddy.service"] or not before["rede-camara-social.service"]:
         raise RuntimeError("Caddy e coletor precisam estar ativos.")
-    original_bytes = CONFIG.read_bytes()
+    main_bytes = CONFIG.read_bytes()
+    main_source = main_bytes.decode()
+    target = source_target(main_source)
+    if target.is_symlink() or not target.is_file() or target.stat().st_uid != 0:
+        raise RuntimeError("O arquivo da apresentacao e seu proprietario precisam ser conferidos.")
+    metadata = target.stat()
+    original_bytes = target.read_bytes()
     candidate = patch_source(original_bytes.decode()).encode()
     original = adapt(CONFIG)
     if loaded_config() != original:
         raise RuntimeError("A configuracao ativa difere do arquivo; nenhuma alteracao foi feita.")
     page_before = http_status(ORIGIN + "/")
-    with tempfile.NamedTemporaryFile(prefix=".rede-camara-validate-", suffix=".tmp", dir=CONFIG.parent) as test:
-        test.write(candidate)
-        test.flush()
-        guard_routes(original, adapt(Path(test.name)))
-        command(["caddy", "validate", "--config", test.name, "--adapter", "caddyfile"])
-    if CONFIG.read_bytes() != original_bytes or loaded_config() != original:
+    with candidate_config(main_source, target, candidate) as (test, aliases):
+        guard_routes(original, adapt(test, aliases))
+        command(["caddy", "validate", "--config", str(test), "--adapter", "caddyfile"])
+    if CONFIG.read_bytes() != main_bytes or target.read_bytes() != original_bytes or loaded_config() != original:
         raise RuntimeError("A configuracao mudou durante a verificacao; nenhuma alteracao foi feita.")
     if BACKUPS.is_symlink():
         raise RuntimeError("O diretorio de backup precisa ser conferido.")
     BACKUPS.mkdir(mode=0o700, parents=True, exist_ok=True)
     BACKUPS.chmod(0o700)
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
-    backup = BACKUPS / ("Caddyfile-" + stamp)
-    with backup.open("xb") as output:
-        output.write(original_bytes)
-        os.fchmod(output.fileno(), 0o600)
-    public, authorized = activate(original_bytes, candidate, metadata, page_before, before, token)
+    originals = {CONFIG: main_bytes, target: original_bytes}
+    for path, content in originals.items():
+        with (BACKUPS / (path.name + "-" + stamp)).open("xb") as output:
+            output.write(content)
+            os.fchmod(output.fileno(), 0o600)
+    backup = BACKUPS / (target.name + "-" + stamp)
+    public, authorized = activate(target, original_bytes, candidate, metadata, page_before, before, token)
+    print("Arquivo ajustado: " + str(target))
     print("Fonte HTTPS: " + ORIGIN + PUBLIC_PATH)
     print(f"Sem credencial: HTTP {public}; com credencial: HTTP {authorized}")
     print(f"Apresentacao eleitoral: HTTP {page_before}; estados dos servicos preservados.")
