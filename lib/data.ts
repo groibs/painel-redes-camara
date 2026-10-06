@@ -28,6 +28,14 @@ export function emptyAccounts(): SocialAccount[] {
       updatedAt: null,
     },
     {
+      id: "youtube",
+      name: "YouTube",
+      handle: "Câmara dos Deputados",
+      followers: null,
+      change24h: null,
+      updatedAt: null,
+    },
+    {
       id: "facebook",
       name: "Facebook",
       handle: "Câmara dos Deputados",
@@ -82,10 +90,11 @@ export function demoPanel(): PanelData {
       "@camaradosdeputados",
       "@camaradosdeputados",
       "@camaradeputados",
+      "@camaradosdeputados",
       "Câmara dos Deputados",
     ][index],
-    followers: [1248600, 893420, 1102840, 516780][index],
-    change24h: [1240, 865, 392, 218][index],
+    followers: [3248600, 1893420, 1102840, 2405780, 1616780][index],
+    change24h: [1240, 865, 392, 740, 218][index],
     updatedAt: now,
   }));
   panel.events = [
@@ -120,6 +129,28 @@ export function demoPanel(): PanelData {
       status: "Convocada",
       organ: "Comissão de Meio Ambiente",
       location: "Anexo II · Plenário 8",
+      url: "",
+    },
+    {
+      id: 8,
+      startsAt: `${panel.date}T15:00:00-03:00`,
+      endsAt: null,
+      title: "Debate sobre segurança pública",
+      type: "Reunião deliberativa",
+      status: "Em andamento",
+      organ: "Comissão de Constituição e Justiça",
+      location: "Anexo II · Plenário 1",
+      url: "",
+    },
+    {
+      id: 9,
+      startsAt: `${panel.date}T14:30:00-03:00`,
+      endsAt: null,
+      title: "Saúde pública e acesso a medicamentos",
+      type: "Audiência pública",
+      status: "Convocada",
+      organ: "Comissão de Saúde",
+      location: "Anexo II · Plenário 7",
       url: "",
     },
     {
@@ -170,8 +201,8 @@ export function demoPanel(): PanelData {
   panel.posts = [
     {
       id: "demo-1",
-      caption: "O que está em jogo na Câmara?",
-      mediaUrl: null,
+      caption: "A semana na Câmara",
+      mediaUrl: "/brand/congresso.jpg",
       permalink: null,
       publishedAt: now,
       type: "carousel",
@@ -181,8 +212,8 @@ export function demoPanel(): PanelData {
     },
     {
       id: "demo-2",
-      caption: "Seu voto. Sua voz. Nosso futuro.",
-      mediaUrl: null,
+      caption: "Por dentro do Parlamento",
+      mediaUrl: "/brand/plenario.jpg",
       permalink: null,
       publishedAt: new Date(Date.now() - 3600000).toISOString(),
       type: "video",
@@ -192,7 +223,7 @@ export function demoPanel(): PanelData {
     },
     {
       id: "demo-3",
-      caption: "Por dentro do Parlamento",
+      caption: "5 programas aprovados nesta semana",
       mediaUrl: null,
       permalink: null,
       publishedAt: new Date(Date.now() - 7200000).toISOString(),

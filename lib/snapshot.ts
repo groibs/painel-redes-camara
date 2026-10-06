@@ -39,7 +39,7 @@ export function parseSnapshot(value: unknown): SocialSnapshot {
     throw new Error("Data de coleta no futuro");
   if (
     !Array.isArray(value.accounts) ||
-    value.accounts.length > 4 ||
+    value.accounts.length > networkIds.length ||
     !Array.isArray(value.posts) ||
     value.posts.length > 20
   )

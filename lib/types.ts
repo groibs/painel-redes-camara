@@ -1,4 +1,10 @@
-export const networkIds = ["instagram", "tiktok", "x", "facebook"] as const;
+export const networkIds = [
+  "instagram",
+  "tiktok",
+  "x",
+  "youtube",
+  "facebook",
+] as const;
 export type NetworkId = (typeof networkIds)[number];
 export type SourceState = "ok" | "pending" | "error";
 export type Source = {

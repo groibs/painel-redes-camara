@@ -7,6 +7,8 @@ Painel em português para uma TV 16:9 conectada por HDMI ao computador. Exibe se
 - `/`: dados reais. A agenda e os resultados vêm da API oficial da Câmara. Redes sem conexão mostram “Aguardando conexão”, sem números inventados.
 - `/demo`: prévia visual. **Todos os números, eventos, publicações e votos desta página são ilustrativos.** Não há mistura entre demonstração e dados oficiais.
 
+A composição segue a referência visual fornecida: cabeçalho claro e relógio grande; contadores verticais e feed à esquerda; destaque do plenário, resumo do dia e comissões ao centro; pautas e semana à direita. A faixa “Na pauta” mostra os destaques da agenda recebida. Os indicadores são calculados a partir dos eventos do dia, e “em andamento” usa a situação da fonte.
+
 O painel ocupa uma tela de 1920 × 1080 e escala mantendo a proporção. No celular, os blocos ficam empilhados. Use o botão de tela cheia ou F11 no PC da TV.
 
 ## Desenvolvimento
@@ -91,15 +93,15 @@ Formato da resposta:
 }
 ```
 
-IDs aceitos: `instagram`, `tiktok`, `x`, `facebook`. Cada rede aparece no máximo uma vez. `change24h` deve ser `null` quando não houver histórico de 24h; o painel não inventa crescimento. `likes` e `comments` podem ser `null`. Para vídeos, `mediaUrl` deve apontar para a **thumbnail**, não para o arquivo de vídeo. Tipos: `image`, `video`, `carousel`. Contadores são inteiros não negativos; datas têm fuso explícito. O coletor deve renovar URLs de mídia que expirarem e preservar a data real de cada coleta.
+IDs aceitos: `instagram`, `tiktok`, `x`, `youtube`, `facebook`. Cada rede aparece no máximo uma vez. `change24h` deve ser `null` quando não houver histórico de 24h; o painel não inventa crescimento. `likes` e `comments` podem ser `null`. Para vídeos, `mediaUrl` deve apontar para a **thumbnail**, não para o arquivo de vídeo. Tipos: `image`, `video`, `carousel`. Contadores são inteiros não negativos; datas têm fuso explícito. O coletor deve renovar URLs de mídia que expirarem e preservar a data real de cada coleta.
 
 A interface identifica métricas com mais de 30 minutos e mostra as datas das redes nas configurações. “Audiência nas redes” é a soma de seguidores, não pessoas únicas.
 
-O acesso de cada plataforma depende de permissões próprias: Instagram/Facebook pela Meta, TikTok pelo escopo de estatísticas da conta, X pelo aplicativo autorizado. Não existe uma API da Câmara que forneça automaticamente esses quatro conjuntos de métricas.
+O acesso de cada plataforma depende de permissões próprias: Instagram/Facebook pela Meta, TikTok pelo escopo de estatísticas da conta, X pelo aplicativo autorizado e YouTube pela API de dados do canal. Não existe uma API da Câmara que forneça automaticamente esses conjuntos de métricas.
 
 ## Publicação
 
-Projeto Next.js 16.3.8 / React 19.3.0; Vercel usa a branch `main`. Build: `npm run build`. Instalação: `npm ci`. Runtime: Node.js 24. As variáveis opcionais estão em `.env.example`.
+Projeto Next.js 16.3.8 / React 19.3.0; Fonte de código: branch `main`. A conta Rebelde recebeu a publicação por envio direto dos arquivos; publicações automáticas dependem da vinculação do GitHub na Vercel. Build: `npm run build`. Instalação: `npm ci`. Runtime: Node.js 24. As variáveis opcionais estão em `.env.example`.
 
 Há também um empacotamento portátil para publicar a mesma interface e API da Câmara em um Worker:
 
@@ -115,3 +117,7 @@ O resultado fica em `dist/server/index.js`, com os assets locais incorporados. O
 Direção extraída de **NOVA IDV - PROJETO.pdf**: `#00b142`, `#0095d4`, `#0a2e36`, `#27fb6b`, `#bcffdb`, `#e2ecf1`; superfícies sólidas, contraste alto e formas simples. Marca exportada do material fornecido, em tom neutro.
 
 O guia prevê Gotham/Gotham Condensed. Esta versão usa DM Sans/Barlow Condensed locais como substitutas, pois arquivos webfont licenciados de Gotham não foram fornecidos. Para usar Gotham, adicione os arquivos licenciados e substitua as famílias nas variáveis CSS. O PDF completo não foi colocado no repositório público.
+
+## Fotografias
+
+Imagens de arquivo do [Portal da Câmara dos Deputados](https://www.camara.leg.br/historia-e-arquivo/): plenário, Saulo Cruz/Câmara dos Deputados; Congresso Nacional, Brito Junior/Câmara dos Deputados. A foto do destaque é identificada como arquivo, sem sugerir transmissão ao vivo. As fotografias dos cards são usadas somente na demonstração do feed.
