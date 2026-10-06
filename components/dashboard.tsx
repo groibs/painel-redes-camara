@@ -426,13 +426,8 @@ export default function Dashboard({ demo }: { demo: boolean }) {
               <div className="header-location">
                 <span>BRASÍLIA · DF</span>
                 <div>
-                  <Landmark />
+                  <img src="/brand/camara-idv.svg" alt="Câmara dos Deputados" />
                   <p>
-                    <strong>
-                      CÂMARA DOS
-                      <br />
-                      DEPUTADOS
-                    </strong>
                     <small>Painel de acompanhamento</small>
                   </p>
                 </div>

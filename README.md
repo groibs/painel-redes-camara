@@ -116,7 +116,7 @@ O resultado fica em `dist/server/index.js`, com os assets locais incorporados. O
 
 Direção extraída de **NOVA IDV - PROJETO.pdf**: `#00b142`, `#0095d4`, `#0a2e36`, `#27fb6b`, `#bcffdb`, `#e2ecf1`; superfícies sólidas, contraste alto e formas simples. Marca exportada do material fornecido, em tom neutro.
 
-O guia prevê Gotham/Gotham Condensed. Esta versão usa DM Sans/Barlow Condensed locais como substitutas, pois arquivos webfont licenciados de Gotham não foram fornecidos. Para usar Gotham, adicione os arquivos licenciados e substitua as famílias nas variáveis CSS. O PDF completo não foi colocado no repositório público.
+Gotham Condensed fornecida pelo usuário é carregada localmente em WOFF2 nos pesos Book, Medium, Bold e Black. É aplicada nos títulos, chamadas, marca do painel e faixa inferior. Textos corridos e legendas usam DM Sans. O grafismo superior mantém os dois módulos com diagonais de 30° da capa do guia, em #00b142; a marca institucional foi extraída do PDF e usa #0a2e36. Logos das redes usam vetores, sem caracteres de fonte ou ícones genéricos. O PDF completo não foi colocado no repositório.
 
 ## Fotografias
 
