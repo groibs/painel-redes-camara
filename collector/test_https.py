@@ -36,6 +36,27 @@ class HttpsTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "conferido"):
             https.patch_source(ORIGINAL + "apuracao.revline.com.br {\n}\n")
 
+    def test_equivalent_explicit_tls_and_quoted_site_addresses_preserve_source(self):
+        for address in ("apuracao.revline.com.br:443", "https://apuracao.revline.com.br:443",
+                        '"apuracao.revline.com.br:443"', "`https://apuracao.revline.com.br:443`",
+                        "APURACAO.REVLINE.COM.BR:443"):
+            with self.subTest(address=address):
+                original = ORIGINAL.replace("apuracao.revline.com.br {", address + " {")
+                changed = https.patch_source(original)
+                self.assertEqual(changed.replace(https.SNIPPET, "", 1), original)
+
+    def test_unknown_header_diagnostics_do_not_expose_import_arguments_or_directive_secrets(self):
+        original = "import /etc/caddy/sites/*.caddy private-token\n" \
+                   "# apuracao.revline.com.br ignored-comment-secret\n" \
+                   "basic_auth {\n  user private-password-hash\n}\n"
+        with self.assertRaises(RuntimeError) as caught:
+            https.patch_source(original)
+        message = str(caught.exception)
+        self.assertIn("/etc/caddy/sites/*.caddy", message)
+        self.assertNotIn("private-token", message)
+        self.assertNotIn("private-password-hash", message)
+        self.assertNotIn("ignored-comment-secret", message)
+
     def test_guard_preserves_old_handlers_and_rejects_other_route_changes(self):
         encode = {"handler": "encode", "encodings": {"gzip": {}, "zstd": {}}}
         app = {"handler": "reverse_proxy", "upstreams": [{"dial": "127.0.0.1:4173"}]}

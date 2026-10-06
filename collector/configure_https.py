@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import re
+import shlex
 import shutil
 import stat
 import subprocess
@@ -122,14 +123,34 @@ def guard_routes(original, candidate):
         raise RuntimeError("A alteracao afetaria outras rotas; configuracao preservada.")
 
 
+def site_summary(original):
+    """Report only public site addresses and import paths, never directive values."""
+    report = []
+    address = re.compile(r"(?:https?://)?" + re.escape(HOST) + r"(?::[0-9]+)?", re.IGNORECASE)
+    for number, line in enumerate(original.splitlines(), 1):
+        try:
+            words = shlex.split(line.lstrip("\ufeff"), comments=True)
+        except ValueError:
+            continue
+        sites = [word.strip('`,"') for word in words if address.fullmatch(word.strip('`,"'))]
+        if sites:
+            report.append({"linha": number, "enderecos": sites})
+        if len(words) >= 2 and words[0] == "import":
+            # Import arguments can include credentials; only show the target.
+            report.append({"linha": number, "import": words[1]})
+    return report
+
+
 def patch_source(original):
     if PUBLIC_PATH in original:
         raise RuntimeError("A rota social ja aparece no arquivo; precisamos conferir antes de repetir.")
-    pattern = re.compile(r"(?m)^[ \t]*(?:https?://)?" + re.escape(HOST) +
-                         r"[ \t]*\{[ \t]*(?:#[^\n]*)?\r?\n")
+    pattern = re.compile(r"(?m)^\ufeff?[ \t]*(?P<quote>[\"`]?)(?:https?://)?" + re.escape(HOST) +
+                         r"(?::443)?(?P=quote)[ \t]*\{[ \t]*(?:#[^\n]*)?\r?\n", re.IGNORECASE)
     matches = list(pattern.finditer(original))
     if len(matches) != 1:
-        raise RuntimeError("O bloco do dominio precisa ser conferido; nenhuma alteracao foi feita.")
+        details = json.dumps(site_summary(original), ensure_ascii=False)
+        raise RuntimeError("O bloco do dominio precisa ser conferido; nenhuma alteracao foi feita. "
+                           "Enderecos e imports: " + details)
     insertion = matches[0].end()
     return original[:insertion] + SNIPPET + original[insertion:]
 

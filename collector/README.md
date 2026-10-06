@@ -14,6 +14,8 @@ O instalador não serve para atualizar ou reparar uma instalação existente. Se
 
 `configure_https.py` prepara a rota exata `/redes/snapshot.json` no domínio existente `apuracao.revline.com.br`. Só altera um bloco identificado; compara a configuração ativa com o arquivo, verifica que as outras rotas adaptadas continuam equivalentes, valida o candidato, salva backup root 0600 e recarrega Caddy. Confirma HTTPS autenticado, resposta da apresentação e estados dos serviços. Se a verificação falhar depois da troca do arquivo, restaura o original e tenta recarregá-lo. Nunca imprime a credencial nem altera o firewall ou configura automaticamente a Vercel. Uma configuração diferente da inspecionada exige nova conferência.
 
+O cabeçalho admite a porta HTTPS 443 explícita e endereços entre aspas. Quando o bloco não aparece no arquivo principal, o erro mostra somente os endereços públicos encontrados e os destinos de `import`, sem os argumentos dos imports ou valores de outras diretivas. Arquivos importados ainda exigem conferência antes de qualquer alteração.
+
 1. Inspecionar serviços, portas, proxy HTTPS e domínio existentes antes de qualquer instalação.
 2. Criar usuário de serviço `rede-camara-social`, sem login; colocar `collector.py` em `/opt/rede-camara-social`, pertencendo a root e sem escrita pelo serviço.
 3. Configurar `/etc/rede-camara-social.env` diretamente no servidor, pertencendo a root, permissão 0600, seguindo `.env.example`. Definir uma credencial aleatória de leitura com pelo menos 32 caracteres. Nenhuma senha de rede social é necessária.
