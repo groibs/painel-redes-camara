@@ -1,0 +1,10 @@
+# Add this block to the existing configuration after validating the chosen domain.
+# Never replace the existing Caddyfile or other hosted services.
+SOCIAL_COLLECTOR_DOMAIN {
+    handle /snapshot.json {
+        reverse_proxy 127.0.0.1:8715
+    }
+    handle {
+        respond "Not found" 404
+    }
+}

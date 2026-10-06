@@ -1,0 +1,25 @@
+[Unit]
+Description=Rede Camara social metrics collector
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=rede-camara-social
+Group=rede-camara-social
+WorkingDirectory=/opt/rede-camara-social
+EnvironmentFile=/etc/rede-camara-social.env
+ExecStart=/usr/bin/python3 /opt/rede-camara-social/collector.py
+Restart=on-failure
+RestartSec=15
+StateDirectory=rede-camara-social
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+
+[Install]
+WantedBy=multi-user.target

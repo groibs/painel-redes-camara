@@ -121,3 +121,7 @@ Gotham Condensed fornecida pelo usuário é carregada localmente em WOFF2 nos pe
 ## Fotografias
 
 Imagens de arquivo do [Portal da Câmara dos Deputados](https://www.camara.leg.br/historia-e-arquivo/): plenário, Saulo Cruz/Câmara dos Deputados; Congresso Nacional, Brito Junior/Câmara dos Deputados. A foto do destaque é identificada como arquivo, sem sugerir transmissão ao vivo. As fotografias dos cards são usadas somente na demonstração do feed.
+
+## Coletor no VPS
+
+O diretório `collector/` contém a implementação em Python, testes e configuração de serviço. A coleta ainda depende de instalação no servidor, domínio HTTPS e credenciais autorizadas; nenhuma rede foi ativada por este commit. Veja `collector/README.md`.
