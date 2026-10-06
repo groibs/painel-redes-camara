@@ -2,6 +2,8 @@
 
 Preparado para Python 3.12 / Ubuntu 24.04, sem dependências de terceiros. **Instalação no VPS confirmada em 06/10/2026; contas ainda não conectadas.** O serviço respondeu HTTP 401 sem credencial e HTTP 503 autenticado em `127.0.0.1:8715`. A coleta depende de credenciais autorizadas das plataformas.
 
+**HTTPS confirmado no VPS em 06/10/2026:** `https://apuracao.revline.com.br/redes/snapshot.json` respondeu HTTP 401 sem credencial e HTTP 503 autenticado. A apresentação eleitoral respondeu HTTP 200 e os estados dos serviços foram preservados. O bloco foi alterado em `/etc/caddy/camara-reserva.caddy`, com backup dos arquivos da configuração; a configuração principal permaneceu intacta. HTTP 503 nesta etapa indica ausência de dados coletados; a autorização das redes e a conexão da fonte ao painel continuam pendentes.
+
 O coletor consulta seguidores a cada 15 minutos e os seis posts mais recentes do Instagram a cada cinco minutos. Guarda métricas, histórico e posts em SQLite, com atualização independente de cada rede. Uma falha preserva o último conteúdo recebido e seu horário original. Respostas vazias bem-sucedidas limpam posts antigos. Uma reinicialização preserva os dados e os intervalos de consulta.
 
 A variação de 24 horas só aparece quando existe uma coleta de pelo menos 24 horas atrás, com tolerância de 30 minutos. O YouTube fornece inscritos arredondados; a variação calculada também reflete essa aproximação. Tokens expirados exigem renovação ou reautorização; este coletor não implementa o fluxo OAuth nem renova credenciais automaticamente.
@@ -10,7 +12,7 @@ A variação de 24 horas só aparece quando existe uma coleta de pelo menos 24 h
 
 Após conferir o sistema, as portas e os serviços existentes, `install.py` faz a primeira instalação como root, usando arquivos de uma revisão fixa e verificando seus hashes. Exige Python 3.12 e systemd, cria o usuário sem login e gera a credencial de leitura no arquivo root 0600. Para antes de alterar arquivos quando encontra uma instalação existente ou a porta ocupada. Não altera Caddy, firewall, serviços existentes nem configura o painel. Testa autenticação local e resume somente os domínios do Caddy, sem imprimir sua configuração ou credenciais. HTTP 503 autenticado é esperado até a primeira coleta autorizada.
 
-O instalador não serve para atualizar ou reparar uma instalação existente. Se ocorrer erro depois da criação dos arquivos, conferir o resultado antes de repetir. Autorizações das redes e domínio HTTPS continuam pendentes.
+O instalador não serve para atualizar ou reparar uma instalação existente. Se ocorrer erro depois da criação dos arquivos, conferir o resultado antes de repetir. A instalação e o HTTPS já foram confirmados; não repetir os instaladores. Autorizações das redes e conexão da fonte ao painel continuam pendentes.
 
 `configure_https.py` prepara a rota exata `/redes/snapshot.json` no domínio existente `apuracao.revline.com.br`. Só altera um bloco identificado; compara a configuração ativa com o arquivo, verifica que as outras rotas adaptadas continuam equivalentes, valida o candidato, salva backup root 0600 e recarrega Caddy. Confirma HTTPS autenticado, resposta da apresentação e estados dos serviços. Se a verificação falhar depois da troca do arquivo, restaura o original e tenta recarregá-lo. Nunca imprime a credencial nem altera o firewall ou configura automaticamente a Vercel. Uma configuração diferente da inspecionada exige nova conferência.
 
@@ -32,4 +34,4 @@ Logs registram a rede e o tipo de erro, sem URLs, respostas da plataforma ou cre
 
 `python3 -m unittest discover -s collector -p 'test_*.py'`
 
-Os testes usam respostas simuladas, validando conversão de APIs, falhas parciais, persistência, intervalos e histórico de 24 horas. Ainda não comprovam acesso às contas ou funcionamento no VPS.
+Os testes usam respostas simuladas, validando conversão de APIs, falhas parciais, persistência, intervalos e histórico de 24 horas. Com um executável Caddy disponível, também validam a adaptação completa de arquivos importados. A instalação, a autenticação do endpoint e o HTTPS foram confirmados no VPS; o acesso às contas e a coleta de dados reais ainda aguardam autorização.
