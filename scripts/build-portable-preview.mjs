@@ -1,5 +1,5 @@
 // Package the same Next.js UI and Câmara API as one portable Worker.
-// No secrets, external asset bindings, or filesystem access are needed at runtime.
+// Optional collector credentials are supplied only through runtime bindings.
 import fs from 'node:fs';
 import path from 'node:path';
 import { build } from 'esbuild';
@@ -26,11 +26,15 @@ const source = `
 import { getPanel } from './lib/camara.ts';
 const files = ${JSON.stringify(files)};
 export default {
-  async fetch(request) {
+  async fetch(request, env) {
     const url = new URL(request.url);
     if (!['GET', 'HEAD'].includes(request.method)) return new Response('Method not allowed', {status:405,headers:{Allow:'GET, HEAD'}});
     if (url.pathname === '/api/painel') {
-      try { return Response.json(await getPanel(), {headers:{'Cache-Control':'public, max-age=0, s-maxage=30, stale-while-revalidate=30'}}); }
+      try {
+        const data = await getPanel(env || {});
+        const headers = {'Content-Type':'application/json; charset=utf-8','Cache-Control':'public, max-age=0, s-maxage=30, stale-while-revalidate=30'};
+        return new Response(request.method === 'HEAD' ? null : JSON.stringify(data), {headers});
+      }
       catch { console.error('[painel] erro ao preparar resposta'); return Response.json({error:'Painel temporariamente indisponível'},{status:503}); }
     }
     const route = url.pathname === '/demo/' ? '/demo' : url.pathname;

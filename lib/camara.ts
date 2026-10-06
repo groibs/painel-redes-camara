@@ -4,6 +4,11 @@ import { parseSnapshot, safeHttpsUrl } from "./snapshot";
 import type { AgendaEvent, PanelData, Source, Vote } from "./types";
 
 const API = "https://dadosabertos.camara.leg.br/api/v2";
+export type PanelEnvironment = {
+  PANEL_VOTE_ID?: string;
+  PANEL_SOCIAL_SOURCE_URL?: string;
+  PANEL_SOCIAL_SOURCE_TOKEN?: string;
+};
 type ApiObject = Record<string, unknown>;
 function object(value: unknown): ApiObject {
   return typeof value === "object" && value !== null && !Array.isArray(value)
@@ -108,10 +113,11 @@ async function agenda(
 async function latestVote(
   panel: PanelData,
   signal: AbortSignal,
+  environment: PanelEnvironment,
 ): Promise<Vote | null> {
   // The public API exposes registered results. Never call these counts an open live vote.
   const yearStart = `${panel.date.slice(0, 4)}-01-01`;
-  const selected = process.env.PANEL_VOTE_ID;
+  const selected = environment.PANEL_VOTE_ID;
   let candidates: ApiObject[];
   if (selected) candidates = [{ id: selected }];
   else {
@@ -173,14 +179,18 @@ async function latestVote(
   return null;
 }
 
-async function social(panel: PanelData, signal: AbortSignal): Promise<void> {
-  const source = process.env.PANEL_SOCIAL_SOURCE_URL;
+async function social(
+  panel: PanelData,
+  signal: AbortSignal,
+  environment: PanelEnvironment,
+): Promise<void> {
+  const source = environment.PANEL_SOCIAL_SOURCE_URL;
   if (!source) return;
   const url = safeHttpsUrl(source);
   if (!url) throw new Error("Fonte social precisa usar HTTPS");
   const response = await fetch(url, {
-    headers: process.env.PANEL_SOCIAL_SOURCE_TOKEN
-      ? { Authorization: `Bearer ${process.env.PANEL_SOCIAL_SOURCE_TOKEN}` }
+    headers: environment.PANEL_SOCIAL_SOURCE_TOKEN
+      ? { Authorization: `Bearer ${environment.PANEL_SOCIAL_SOURCE_TOKEN}` }
       : {},
     redirect: "error",
     signal,
@@ -204,13 +214,19 @@ async function social(panel: PanelData, signal: AbortSignal): Promise<void> {
   };
 }
 
-export async function getPanel(): Promise<PanelData> {
+export async function getPanel(
+  environment: PanelEnvironment = {
+    PANEL_VOTE_ID: process.env.PANEL_VOTE_ID,
+    PANEL_SOCIAL_SOURCE_URL: process.env.PANEL_SOCIAL_SOURCE_URL,
+    PANEL_SOCIAL_SOURCE_TOKEN: process.env.PANEL_SOCIAL_SOURCE_TOKEN,
+  },
+): Promise<PanelData> {
   const panel = emptyPanel();
   const signal = AbortSignal.timeout(40000);
   const results = await Promise.allSettled([
     agenda(panel, signal),
-    latestVote(panel, signal),
-    social(panel, signal),
+    latestVote(panel, signal, environment),
+    social(panel, signal, environment),
   ]);
   const ok = (message: string): Source => ({
     state: "ok",

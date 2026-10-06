@@ -101,14 +101,14 @@ O acesso de cada plataforma depende de permissões próprias: Instagram/Facebook
 
 Projeto Next.js 16.3.8 / React 19.3.0; Vercel usa a branch `main`. Build: `npm run build`. Instalação: `npm ci`. Runtime: Node.js 24. As variáveis opcionais estão em `.env.example`.
 
-A criação na Vercel foi bloqueada por limite de uso da conta. Há também um empacotamento portátil para publicar a mesma interface e API da Câmara em um Worker, sem acesso às redes sociais:
+Há também um empacotamento portátil para publicar a mesma interface e API da Câmara em um Worker:
 
 ```bash
 npm run build
 node scripts/build-portable-preview.mjs
 ```
 
-O resultado fica em `dist/server/index.js`, com os assets locais incorporados. A versão Next.js continua sendo a base para a hospedagem definitiva e a conexão do coletor de redes. O empacotamento alternativo mantém `/` e `/demo` separados.
+O resultado fica em `dist/server/index.js`, com os assets locais incorporados. O empacotamento mantém `/` e `/demo` separados e recebe as mesmas variáveis opcionais pelo ambiente do Worker. Configure o token do coletor como segredo no provedor; ele permanece no servidor. Sem o coletor configurado, as redes ficam aguardando conexão.
 
 ## Identidade visual
 
