@@ -54,17 +54,8 @@ class CollectorTest(unittest.TestCase):
         self.assertEqual(public_youtube("@camara", lambda url: youtube), 1_470_000)
         tiktok = '<script>{"stats":{"followerCount":987654}}</script>'
         self.assertEqual(public_tiktok("@camara", lambda url: tiktok), 987_654)
-        xdata = {
-            "props": {
-                "pageProps": {
-                    "timeline": {
-                        "user": {"followers_count": 1_100_000}
-                    }
-                }
-            }
-        }
-        xhtml = '<script id="__NEXT_DATA__" type="application/json">' + json.dumps(xdata) + '</script>'
-        self.assertEqual(public_x("@camara", lambda url: xhtml), 1_100_000)
+        xdata = {"user": {"followers": 1_100_000}}
+        self.assertEqual(public_x("@camara", lambda url, params: xdata), 1_100_000)
 
     def test_public_profiles_work_without_platform_api_credentials(self):
         env = {
@@ -74,7 +65,6 @@ class CollectorTest(unittest.TestCase):
         }
         html = {
             "youtube": '{"subscriberCountText":{"simpleText":"1.5M subscribers"}}',
-            "x": '<script id="__NEXT_DATA__" type="application/json">{"followers_count":1100000}</script>',
             "tiktok": '{"followerCount":765432}',
         }
         self.assertEqual(
@@ -82,7 +72,11 @@ class CollectorTest(unittest.TestCase):
             1_500_000,
         )
         self.assertEqual(
-            fetch_component("x", env, get_text_fn=lambda url: html["x"])["followers"],
+            fetch_component(
+                "x",
+                env,
+                x_get_fn=lambda url, params: {"user": {"followers": 1_100_000}},
+            )["followers"],
             1_100_000,
         )
         self.assertEqual(
