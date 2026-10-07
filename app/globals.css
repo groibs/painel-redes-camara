@@ -1766,6 +1766,203 @@ legend {
   text-align: center;
 }
 
+/* Night broadcast theme. Keeps the Rede Câmara green accents while
+   reducing large bright surfaces for a TV running in a darker environment. */
+.theme-night {
+  background: #041117;
+  color-scheme: dark;
+}
+.theme-night .stage {
+  background: #061820;
+  color: #e7f0f3;
+}
+.theme-night .header {
+  background: #0a212a;
+  border-bottom: 1px solid #173641;
+}
+.theme-night .brand-mark strong {
+  color: #35e99a;
+}
+.theme-night .brand-mark::before {
+  background: #00b96c;
+}
+.theme-night .header-date,
+.theme-night .header-clock {
+  color: #eef7f8;
+}
+.theme-night .header-location {
+  border-left-color: #35515c;
+}
+.theme-night .header-location > span {
+  color: #9cb4bd;
+}
+.theme-night .header-location img {
+  filter: brightness(0) invert(1);
+  opacity: 0.94;
+}
+.theme-night .dark-panel {
+  background: linear-gradient(135deg, #062f39, #041f2a);
+}
+.theme-night .light-panel,
+.theme-night .vote-panel {
+  background: #0b242d;
+  border-color: #183943;
+  color: #e7f0f3;
+}
+.theme-night .panel-heading h2,
+.theme-night .schedule-row h3,
+.theme-night .committee-organ h3,
+.theme-night .week-content h3,
+.theme-night .section-top h1,
+.theme-night .vote-heading h2 {
+  color: #f0f7f8;
+}
+.theme-night .panel-link {
+  color: #48b9ff;
+}
+.theme-night .panel-foot,
+.theme-night .week-range,
+.theme-night .schedule-row p,
+.theme-night .committee-organ p,
+.theme-night .committee-topic,
+.theme-night .week-content p,
+.theme-night .week-date,
+.theme-night .vote-heading p,
+.theme-night .vote-foot,
+.theme-night .vote-result,
+.theme-night .eyebrow {
+  color: #93aeb9;
+}
+.theme-night .summary-counts {
+  background: #0e2b34;
+  border-color: #1b3b45;
+}
+.theme-night .summary-counts > div {
+  border-right-color: #24434d;
+}
+.theme-night .summary-counts strong {
+  color: #f4f9fa;
+}
+.theme-night .summary-counts span {
+  color: #c5d6dc;
+}
+.theme-night .schedule-row {
+  background: #102d37;
+  border-color: #1b3c46;
+}
+.theme-night .schedule-index {
+  background: #183b46;
+  color: #dcebed;
+}
+.theme-night .committee-row,
+.theme-night .week-row {
+  border-top-color: #1f3d47;
+}
+.theme-night .week-date {
+  border-right-color: #274650;
+}
+.theme-night .week-today .week-date {
+  color: #37d99c;
+}
+.theme-night .activity-dot.empty {
+  background: #4a6470;
+}
+.theme-night .empty-light {
+  color: #8fa8b2;
+}
+.theme-night .empty-light h3,
+.theme-night .empty-agenda h2 {
+  color: #dcebed;
+}
+.theme-night .empty-light svg {
+  color: #40c99b;
+}
+.theme-night .ticker {
+  background: #091f28;
+  border-top-color: #183842;
+}
+.theme-night .ticker-copy > span {
+  color: #b8cbd2;
+  border-right-color: #284852;
+}
+.theme-night .footer {
+  background: #071a22;
+  color: #819ba5;
+  border-top: 1px solid #15333d;
+}
+.theme-night .footer-vote,
+.theme-night .footer-source {
+  color: #9db3bc;
+}
+.theme-night .footer-vote:hover,
+.theme-night .footer-source:hover {
+  color: #f2f8fa;
+}
+.theme-night .vote-counts > div {
+  border-right-color: #24424b;
+}
+.theme-night .vote-track {
+  background: #183641;
+}
+.theme-night .settings-dialog {
+  background: #0b222b;
+  color: #e8f1f3;
+  border: 1px solid #21414b;
+}
+.theme-night .dialog-heading button {
+  background: #17343d;
+}
+.theme-night .mode-notice {
+  background: #0d3429;
+}
+.theme-night .mode-notice a {
+  color: #5de7a4;
+}
+.theme-night .view-options button {
+  border-color: #34505a;
+  background: #102b34;
+  color: #cfe0e4;
+}
+.theme-night .view-options .selected {
+  background: #00a96e;
+  color: #fff;
+  border-color: #00a96e;
+}
+.theme-night .settings-row,
+.theme-night .source-list {
+  border-color: #25424b;
+}
+.theme-night .settings-row small,
+.theme-night .source-row > div > span,
+.theme-night .source-row > span:last-child,
+.theme-night .snapshot-time,
+.theme-night .vote-explanation,
+.theme-night .dialog-actions a,
+.theme-night .keyboard-hint {
+  color: #91aab4;
+}
+.theme-night .settings-row select {
+  background: #102b34;
+  color: #e7f0f3;
+  border-color: #34505a;
+}
+.theme-night .vote-explanation {
+  background: #102a33;
+}
+.theme-night .toast {
+  background: #102b34;
+  color: #eaf3f5;
+  border-color: #34505a;
+}
+.theme-night .schedule-list,
+.theme-night .committee-list {
+  scrollbar-color: #44646f transparent;
+}
+.theme-night .schedule-list::-webkit-scrollbar-thumb,
+.theme-night .committee-list::-webkit-scrollbar-thumb {
+  background: #44646f;
+}
+
 .loading-screen {
   height: 100dvh;
   display: flex;
