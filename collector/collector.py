@@ -19,6 +19,7 @@ UTC = dt.timezone.utc
 NAMES = {"instagram": "Instagram", "facebook": "Facebook", "youtube": "YouTube", "x": "X / Twitter", "tiktok": "TikTok"}
 ORDER = ["instagram", "tiktok", "x", "youtube", "facebook"]
 MAX_RESPONSE = 1_000_000
+MAX_PUBLIC_RESPONSE = 5_000_000
 
 
 class NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -39,6 +40,101 @@ def get_json(url, params, token=None):
     if not isinstance(data, dict):
         raise ValueError("invalid_response")
     return data
+
+
+def get_text(url):
+    headers = {
+        "Accept": "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/154 Safari/537.36",
+        "Accept-Language": "pt-BR,pt;q=0.9,en;q=0.7",
+    }
+    request = urllib.request.Request(url, headers=headers)
+    with urllib.request.urlopen(request, timeout=20) as response:
+        body = response.read(MAX_PUBLIC_RESPONSE + 1)
+    if len(body) > MAX_PUBLIC_RESPONSE:
+        raise ValueError("public_response_limit")
+    return body.decode("utf-8", errors="replace")
+
+
+def compact_count(value):
+    if isinstance(value, int):
+        return count(value)
+    if not isinstance(value, str):
+        raise ValueError("invalid_compact_count")
+    raw = value.strip().replace("\xa0", " ")
+    digits = re.fullmatch(r"[0-9][0-9., ]*", raw)
+    if digits and not re.search(r"[A-Za-z]", raw):
+        normalized = re.sub(r"[^0-9]", "", raw)
+        return count(normalized)
+    match = re.search(r"([0-9]+(?:[.,][0-9]+)?)\s*(K|M|B|mil|mi|milh(?:ão|oes|ões)?|bilh(?:ão|oes|ões)?)\b",
+                      raw, re.IGNORECASE)
+    if not match:
+        raise ValueError("compact_count_not_found")
+    number = float(match.group(1).replace(",", "."))
+    suffix = match.group(2).lower()
+    if suffix in ("k", "mil"):
+        multiplier = 1_000
+    elif suffix in ("m", "mi") or suffix.startswith("milh"):
+        multiplier = 1_000_000
+    else:
+        multiplier = 1_000_000_000
+    return count(int(round(number * multiplier)))
+
+
+def recursive_number(value, keys):
+    if isinstance(value, dict):
+        for key in keys:
+            if key in value:
+                candidate = value[key]
+                if isinstance(candidate, (int, str)):
+                    try:
+                        return compact_count(candidate)
+                    except ValueError:
+                        pass
+        for child in value.values():
+            found = recursive_number(child, keys)
+            if found is not None:
+                return found
+    elif isinstance(value, list):
+        for child in value:
+            found = recursive_number(child, keys)
+            if found is not None:
+                return found
+    return None
+
+
+def public_youtube(handle, get_text_fn=get_text):
+    safe = urllib.parse.quote(handle.lstrip("@"), safe="")
+    text = get_text_fn("https://www.youtube.com/@" + safe)
+    patterns = [
+        r'"subscriberCountText"\s*:\s*\{[^{}]{0,500}?"simpleText"\s*:\s*"([^"]+)"',
+        r'"subscriberCountText"\s*:\s*\{[^{}]{0,1000}?"label"\s*:\s*"([^"]+)"',
+        r'"subscriberCountText"[^\n]{0,1200}?([0-9]+(?:[.,][0-9]+)?\s*(?:K|M|B|mil|mi|milh(?:ão|ões)?))',
+        r'([0-9]+(?:[.,][0-9]+)?\s*(?:K|M|B|mil|mi|milh(?:ão|ões)?))\s+de\s+inscritos',
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, text, re.IGNORECASE)
+        if match:
+            return compact_count(match.group(1))
+    raise ValueError("youtube_public_count_not_found")
+
+
+def public_tiktok(handle, get_text_fn=get_text):
+    safe = urllib.parse.quote(handle.lstrip("@"), safe="")
+    text = get_text_fn("https://www.tiktok.com/@" + safe)
+    match = re.search(r'"followerCount"\s*:\s*"?([0-9]+)"?', text)
+    if not match:
+        raise ValueError("tiktok_public_count_not_found")
+    return count(match.group(1))
+
+
+def public_x(handle, get_fn=get_json):
+    safe = urllib.parse.quote(handle.lstrip("@"), safe="")
+    data = get_fn("https://api.fxtwitter.com/2/profile/" + safe, {})
+    user = data.get("user")
+    if not isinstance(user, dict):
+        raise ValueError("x_public_profile_not_found")
+    return count(user["followers"])
 
 
 def count(value):
@@ -105,7 +201,7 @@ def meta_base(env, instagram=False):
     return f"https://{host}/{version}"
 
 
-def fetch_component(key, env, get=get_json):
+def fetch_component(key, env, get=get_json, get_text_fn=get_text, x_get_fn=get_json):
     if key.startswith("instagram"):
         user = urllib.parse.quote(env["INSTAGRAM_USER_ID"], safe="")
         base = meta_base(env, True) + "/" + user
@@ -117,30 +213,54 @@ def fetch_component(key, env, get=get_json):
         return account("instagram", data.get("username"), data["followers_count"])
     if key == "facebook":
         page = urllib.parse.quote(env["FACEBOOK_PAGE_ID"], safe="")
-        data = get(meta_base(env) + "/" + page, {"fields": "name,followers_count"}, env["FACEBOOK_PAGE_ACCESS_TOKEN"])
+        token = env.get("FACEBOOK_PAGE_ACCESS_TOKEN") or env.get("INSTAGRAM_ACCESS_TOKEN")
+        if not token:
+            raise ValueError("facebook_token_missing")
+        data = get(meta_base(env) + "/" + page, {"fields": "name,followers_count"}, token)
         return account(key, env.get("FACEBOOK_HANDLE", data.get("name")), data["followers_count"])
     if key == "youtube":
-        data = get("https://www.googleapis.com/youtube/v3/channels", {"part": "statistics,snippet", "id": env["YOUTUBE_CHANNEL_ID"], "key": env["YOUTUBE_API_KEY"]})
-        item = data["items"][0]
-        if item["statistics"].get("hiddenSubscriberCount"):
-            raise ValueError("hidden_subscribers")
-        return account(key, item["snippet"].get("customUrl", item["snippet"].get("title")), item["statistics"]["subscriberCount"])
+        if env.get("YOUTUBE_CHANNEL_ID") and env.get("YOUTUBE_API_KEY"):
+            data = get("https://www.googleapis.com/youtube/v3/channels", {"part": "statistics,snippet", "id": env["YOUTUBE_CHANNEL_ID"], "key": env["YOUTUBE_API_KEY"]})
+            item = data["items"][0]
+            if item["statistics"].get("hiddenSubscriberCount"):
+                raise ValueError("hidden_subscribers")
+            return account(key, item["snippet"].get("customUrl", item["snippet"].get("title")), item["statistics"]["subscriberCount"])
+        handle = env["YOUTUBE_HANDLE"]
+        return account(key, "@" + handle.lstrip("@"), public_youtube(handle, get_text_fn))
     if key == "x":
-        user = urllib.parse.quote(env["X_USER_ID"], safe="")
-        data = get("https://api.x.com/2/users/" + user, {"user.fields": "public_metrics"}, env["X_BEARER_TOKEN"])["data"]
-        return account(key, data.get("username"), data["public_metrics"]["followers_count"])
-    data = get("https://open.tiktokapis.com/v2/user/info/", {"fields": "display_name,follower_count"}, env["TIKTOK_ACCESS_TOKEN"])
-    if data.get("error", {}).get("code") != "ok":
-        raise ValueError("tiktok_api_error")
-    user = data["data"]["user"]
-    return account("tiktok", env.get("TIKTOK_HANDLE", user.get("display_name")), user["follower_count"])
+        if env.get("X_USER_ID") and env.get("X_BEARER_TOKEN"):
+            user = urllib.parse.quote(env["X_USER_ID"], safe="")
+            data = get("https://api.x.com/2/users/" + user, {"user.fields": "public_metrics"}, env["X_BEARER_TOKEN"])["data"]
+            return account(key, data.get("username"), data["public_metrics"]["followers_count"])
+        handle = env["X_HANDLE"]
+        return account(key, "@" + handle.lstrip("@"), public_x(handle, x_get_fn))
+    if env.get("TIKTOK_ACCESS_TOKEN"):
+        data = get("https://open.tiktokapis.com/v2/user/info/", {"fields": "display_name,follower_count"}, env["TIKTOK_ACCESS_TOKEN"])
+        if data.get("error", {}).get("code") != "ok":
+            raise ValueError("tiktok_api_error")
+        user = data["data"]["user"]
+        return account("tiktok", env.get("TIKTOK_HANDLE", user.get("display_name")), user["follower_count"])
+    handle = env["TIKTOK_HANDLE"]
+    return account("tiktok", "@" + handle.lstrip("@"), public_tiktok(handle, get_text_fn))
 
 
-REQUIRED = {"instagram": ["INSTAGRAM_USER_ID", "INSTAGRAM_ACCESS_TOKEN", "META_API_VERSION"],
-            "instagram.posts": ["INSTAGRAM_USER_ID", "INSTAGRAM_ACCESS_TOKEN", "META_API_VERSION"],
-            "facebook": ["FACEBOOK_PAGE_ID", "FACEBOOK_PAGE_ACCESS_TOKEN", "META_API_VERSION"],
-            "youtube": ["YOUTUBE_CHANNEL_ID", "YOUTUBE_API_KEY"],
-            "x": ["X_USER_ID", "X_BEARER_TOKEN"], "tiktok": ["TIKTOK_ACCESS_TOKEN"]}
+def configured(key, env):
+    if key in ("instagram", "instagram.posts"):
+        return all(env.get(field) for field in ("INSTAGRAM_USER_ID", "INSTAGRAM_ACCESS_TOKEN", "META_API_VERSION"))
+    if key == "facebook":
+        return bool(env.get("FACEBOOK_PAGE_ID") and env.get("META_API_VERSION") and
+                    (env.get("FACEBOOK_PAGE_ACCESS_TOKEN") or env.get("INSTAGRAM_ACCESS_TOKEN")))
+    if key == "youtube":
+        return bool((env.get("YOUTUBE_CHANNEL_ID") and env.get("YOUTUBE_API_KEY")) or env.get("YOUTUBE_HANDLE"))
+    if key == "x":
+        return bool((env.get("X_USER_ID") and env.get("X_BEARER_TOKEN")) or env.get("X_HANDLE"))
+    if key == "tiktok":
+        return bool(env.get("TIKTOK_ACCESS_TOKEN") or env.get("TIKTOK_HANDLE"))
+    return False
+
+
+COMPONENTS = ("instagram", "instagram.posts", "facebook", "youtube", "x", "tiktok")
+
 
 
 class Store:
@@ -190,10 +310,15 @@ class Store:
 def collect(store, env, now=None, fetch=fetch_component):
     now = time.time() if now is None else now
     pending = []
-    for key, fields in REQUIRED.items():
-        if not all(env.get(field) for field in fields):
+    for key in COMPONENTS:
+        if not configured(key, env):
             continue
-        interval = int(env.get("POSTS_INTERVAL_SECONDS" if key == "instagram.posts" else "FOLLOWERS_INTERVAL_SECONDS", "300" if key == "instagram.posts" else "900"))
+        if key == "instagram.posts":
+            interval = int(env.get("POSTS_INTERVAL_SECONDS", "300"))
+        elif key == "instagram":
+            interval = int(env.get("FOLLOWERS_INTERVAL_SECONDS", "900"))
+        else:
+            interval = int(env.get("PUBLIC_FOLLOWERS_INTERVAL_SECONDS", "86400"))
         if interval < 60:
             raise ValueError("interval_too_short")
         if store.due(key, now, interval):

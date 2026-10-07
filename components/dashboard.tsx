@@ -12,7 +12,6 @@ import {
   Maximize2,
   Minimize2,
   RefreshCw,
-  Settings2,
   Vote as VoteIcon,
   X,
 } from "lucide-react";
@@ -152,11 +151,9 @@ export default function Dashboard({ demo }: { demo: boolean }) {
   const [offline, setOffline] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
   const [notice, setNotice] = useState("");
-  const [displayButtons, setDisplayButtons] = useState(true);
   const dataRef = useRef<PanelData | null>(null);
   const requestRef = useRef(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const hideButtonsTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const refresh = useCallback(
     async (initial = false) => {
@@ -329,13 +326,6 @@ export default function Dashboard({ demo }: { demo: boolean }) {
     if (now && data && brasiliaDate(now) !== data.date) void refresh(true);
   }, [now, data, refresh]);
 
-  useEffect(
-    () => () => {
-      if (hideButtonsTimer.current) clearTimeout(hideButtonsTimer.current);
-    },
-    [],
-  );
-
   async function toggleFullscreen() {
     try {
       if (document.fullscreenElement) await document.exitFullscreen();
@@ -343,16 +333,6 @@ export default function Dashboard({ demo }: { demo: boolean }) {
     } catch {
       setNotice("Use F11 no navegador para abrir em tela cheia.");
     }
-  }
-
-  function showButtons() {
-    setDisplayButtons(true);
-    if (hideButtonsTimer.current) clearTimeout(hideButtonsTimer.current);
-    if (fullscreen)
-      hideButtonsTimer.current = setTimeout(
-        () => setDisplayButtons(false),
-        4000,
-      );
   }
 
   if (!data || !now)
@@ -387,29 +367,14 @@ export default function Dashboard({ demo }: { demo: boolean }) {
     : { transform: `scale(${scale})` };
 
   return (
-    <main
-      className={`screen ${fullscreen ? "is-fullscreen" : ""}`}
-      onPointerMove={showButtons}
-      onFocusCapture={showButtons}
-    >
+    <main className={`screen ${fullscreen ? "is-fullscreen" : ""}`}>
       <div className="stage-wrapper" style={wrapperStyle}>
         <div className="stage" style={stageStyle}>
           <header className="header">
             <div className="brand">
               <div className="brand-mark" aria-label="Rede Câmara">
-                <strong>
-                  Rede
-                  <br />
-                  Câmara
-                </strong>
+                <strong>Rede Câmara</strong>
               </div>
-              <p className="brand-slogan">
-                A CÂMARA
-                <br />
-                MAIS PERTO
-                <br />
-                DE VOCÊ
-              </p>
             </div>
             <div className="header-right">
               <div className="header-time">
@@ -427,42 +392,8 @@ export default function Dashboard({ demo }: { demo: boolean }) {
                 <span>BRASÍLIA · DF</span>
                 <div>
                   <img src="/brand/camara-idv.svg" alt="Câmara dos Deputados" />
-                  <p>
-                    <small>Painel de acompanhamento</small>
-                  </p>
                 </div>
               </div>
-            </div>
-            <div
-              className={`display-controls ${displayButtons ? "" : "controls-hidden"}`}
-            >
-              <button
-                type="button"
-                title="Atualizar dados (R)"
-                aria-label="Atualizar dados"
-                disabled={refreshing}
-                onClick={() => void refresh()}
-              >
-                <RefreshCw className={refreshing ? "spinning" : ""} />
-              </button>
-              <button
-                type="button"
-                title="Tela cheia"
-                aria-label={
-                  fullscreen ? "Sair da tela cheia" : "Abrir em tela cheia"
-                }
-                onClick={() => void toggleFullscreen()}
-              >
-                {fullscreen ? <Minimize2 /> : <Maximize2 />}
-              </button>
-              <button
-                type="button"
-                title="Configurações (S)"
-                aria-label="Abrir configurações"
-                onClick={() => setSettingsOpen(true)}
-              >
-                <Settings2 />
-              </button>
             </div>
           </header>
           <div className="panel-content">
@@ -485,10 +416,10 @@ export default function Dashboard({ demo }: { demo: boolean }) {
                 <VotePanel vote={data.vote} demo={demo} />
               )}
               <TodaySummary data={data} />
-              <Committees data={data} page={agendaPage} />
+              <Committees data={data} />
             </div>
             <div className="right-column">
-              <TodaySchedule data={data} page={agendaPage} />
+              <TodaySchedule data={data} />
               <Week data={data} offset={weekOffset} setOffset={setWeekOffset} />
             </div>
           </div>
@@ -667,6 +598,13 @@ export default function Dashboard({ demo }: { demo: boolean }) {
             Fonte oficial
             <ExternalLink />
           </a>
+          <button
+            type="button"
+            onClick={() => void toggleFullscreen()}
+          >
+            {fullscreen ? <Minimize2 /> : <Maximize2 />}
+            {fullscreen ? "Sair da tela cheia" : "Tela cheia"}
+          </button>
           <button
             type="button"
             className="primary-button"

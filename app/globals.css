@@ -124,8 +124,9 @@ p {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 58px 0 0;
+  justify-content: flex-start;
+  gap: 42px;
+  padding: 0 56px 0 0;
   background: var(--paper);
 }
 
@@ -133,13 +134,14 @@ p {
   display: flex;
   align-items: center;
   height: 100%;
+  flex: none;
   z-index: 1;
 }
 .brand-mark {
   position: relative;
-  width: 352px;
+  width: 318px;
   height: 100%;
-  padding: 75px 0 0 36px;
+  padding: 80px 0 0 36px;
 }
 .brand-mark::before {
   content: "";
@@ -163,22 +165,20 @@ p {
   display: block;
   color: var(--green);
   font-family: var(--display);
-  font-size: 54px;
-  line-height: 0.8;
+  font-size: 52px;
+  line-height: 1;
   letter-spacing: -1px;
   font-weight: 900;
+  white-space: nowrap;
 }
 .brand-slogan {
-  margin-left: 36px;
-  font-family: var(--display);
-  font-size: 29px;
-  font-weight: 700;
-  line-height: 1.04;
+  display: none;
 }
 .header-right {
   display: flex;
   align-items: center;
-  gap: 46px;
+  justify-content: flex-start;
+  gap: 44px;
   z-index: 1;
 }
 .header-date {
@@ -761,11 +761,15 @@ p {
 }
 .schedule-list {
   padding: 0 15px;
-  display: grid;
-  grid-auto-rows: minmax(0, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 10px;
   flex: 1;
   min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #a9becb transparent;
 }
 .schedule-row {
   display: grid;
@@ -776,7 +780,8 @@ p {
   border: 1px solid #e5ecf2;
   background: #f0f5f9;
   border-radius: 10px;
-  min-height: 0;
+  min-height: 78px;
+  flex: 0 0 auto;
 }
 .schedule-index {
   height: 100%;
@@ -810,6 +815,20 @@ p {
   width: 17px;
   height: 17px;
 }
+
+.schedule-list::-webkit-scrollbar,
+.committee-list::-webkit-scrollbar {
+  width: 7px;
+}
+.schedule-list::-webkit-scrollbar-thumb,
+.committee-list::-webkit-scrollbar-thumb {
+  background: #a9becb;
+  border-radius: 99px;
+}
+.schedule-list::-webkit-scrollbar-track,
+.committee-list::-webkit-scrollbar-track {
+  background: transparent;
+}
 .schedule-panel .panel-foot {
   font-size: 10px;
   padding-top: 10px;
@@ -822,17 +841,22 @@ p {
 .committee-list {
   flex: 1;
   min-height: 0;
-  display: grid;
-  grid-auto-rows: minmax(0, 1fr);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #a9becb transparent;
 }
 .committee-row {
   display: grid;
   grid-template-columns: 77px 10px minmax(0, 1.1fr) minmax(0, 1fr) 18px;
   gap: 14px;
   align-items: center;
-  padding: 6px 20px;
+  padding: 8px 20px;
   border-top: 1px solid #dfe8ee;
-  min-height: 0;
+  min-height: 68px;
+  flex: 0 0 auto;
 }
 .committee-time strong {
   font-size: 19px;
@@ -1032,18 +1056,6 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-.post-art:has(img)::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    transparent 20%,
-    #002e3699 70%,
-    #002e36cf
-  );
-  pointer-events: none;
 }
 .post-art h3 {
   position: absolute;
