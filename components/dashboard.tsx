@@ -11,7 +11,9 @@ import {
   Landmark,
   Maximize2,
   Minimize2,
+  Moon,
   RefreshCw,
+  Sun,
   Vote as VoteIcon,
   X,
 } from "lucide-react";
@@ -135,12 +137,19 @@ function VotePanel({ vote, demo }: { vote: Vote | null; demo: boolean }) {
   );
 }
 
-export default function Dashboard({ demo }: { demo: boolean }) {
+export default function Dashboard({
+  demo,
+  initialTheme = "day",
+}: {
+  demo: boolean;
+  initialTheme?: "day" | "night";
+}) {
   const [data, setData] = useState<PanelData | null>(null);
   const [now, setNow] = useState<Date | null>(null);
   const [scale, setScale] = useState(1);
   const [mobile, setMobile] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [theme, setTheme] = useState<"day" | "night">(initialTheme);
   const [view, setView] = useState<"agenda" | "vote">("agenda");
   const [autoRotate, setAutoRotate] = useState(true);
   const [refreshSeconds, setRefreshSeconds] = useState(60);
@@ -315,6 +324,8 @@ export default function Dashboard({ demo }: { demo: boolean }) {
       if (event.key.toLowerCase() === "s") setSettingsOpen((value) => !value);
       if (event.key.toLowerCase() === "v" && !dialogRef.current?.open)
         setView((value) => (value === "agenda" ? "vote" : "agenda"));
+      if (event.key.toLowerCase() === "n" && !dialogRef.current?.open)
+        setTheme((value) => (value === "day" ? "night" : "day"));
       if (event.key.toLowerCase() === "r" && !dialogRef.current?.open)
         void refresh();
     };
@@ -368,7 +379,9 @@ export default function Dashboard({ demo }: { demo: boolean }) {
     : { transform: `scale(${scale})` };
 
   return (
-    <main className={`screen ${fullscreen ? "is-fullscreen" : ""}`}>
+    <main
+      className={`screen theme-${theme} ${fullscreen ? "is-fullscreen" : ""}`}
+    >
       <div className="stage-wrapper" style={wrapperStyle}>
         <div className="stage" style={stageStyle}>
           <header className="header">
@@ -501,6 +514,27 @@ export default function Dashboard({ demo }: { demo: boolean }) {
           </a>
         </div>
         <fieldset>
+          <legend>Aparência</legend>
+          <div className="view-options theme-options">
+            <button
+              type="button"
+              className={theme === "day" ? "selected" : ""}
+              onClick={() => setTheme("day")}
+            >
+              <Sun />
+              Claro
+            </button>
+            <button
+              type="button"
+              className={theme === "night" ? "selected" : ""}
+              onClick={() => setTheme("night")}
+            >
+              <Moon />
+              Noturno
+            </button>
+          </div>
+        </fieldset>
+        <fieldset>
           <legend>Conteúdo principal</legend>
           <div className="view-options">
             <button
@@ -617,7 +651,7 @@ export default function Dashboard({ demo }: { demo: boolean }) {
           </button>
         </div>
         <p className="keyboard-hint">
-          S · configurações &nbsp; V · alternar votação &nbsp; R · consultar
+          S · configurações &nbsp; N · modo noturno &nbsp; V · alternar votação &nbsp; R · consultar
         </p>
       </dialog>
       {notice && (
