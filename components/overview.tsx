@@ -160,13 +160,9 @@ export function SocialMetrics({
                     </span>
                     <small>em 24 horas</small>
                   </>
-                ) : (
-                  <small>
-                    {account.followers === null
-                      ? "Aguardando conexão"
-                      : "Coleta recebida"}
-                  </small>
-                )}
+                ) : account.followers === null ? (
+                  <small>Aguardando conexão</small>
+                ) : null}
                 {stale && account.followers !== null ? (
                   <small className="metric-old">Última coleta</small>
                 ) : null}
@@ -372,19 +368,8 @@ export function TodaySummary({ data }: { data: PanelData }) {
   );
 }
 
-export function TodaySchedule({
-  data,
-  page,
-}: {
-  data: PanelData;
-  page: number;
-}) {
+export function TodaySchedule({ data }: { data: PanelData }) {
   const events = todayEvents(data);
-  const selected = Math.min(
-    page,
-    Math.max(0, Math.ceil(events.length / 4) - 1),
-  );
-  const visible = events.slice(selected * 4, selected * 4 + 4);
   return (
     <section
       className="schedule-panel light-panel"
@@ -397,10 +382,10 @@ export function TodaySchedule({
         </h2>
       </div>
       <div className="schedule-list">
-        {visible.length ? (
-          visible.map((event, index) => (
+        {events.length ? (
+          events.map((event, index) => (
             <article className="schedule-row" key={event.id}>
-              <span className="schedule-index">{selected * 4 + index + 1}</span>
+              <span className="schedule-index">{index + 1}</span>
               <div>
                 <h3>
                   {event.url ? (
@@ -430,14 +415,14 @@ export function TodaySchedule({
       </div>
       <div className="panel-foot">
         <span>{events.length} atividades na agenda de hoje</span>
-        <span>Horário de Brasília</span>
+        <span>Role para ver todas · Horário de Brasília</span>
       </div>
     </section>
   );
 }
 
-export function Committees({ data, page }: { data: PanelData; page: number }) {
-  const all = todayEvents(data)
+export function Committees({ data }: { data: PanelData }) {
+  const events = todayEvents(data)
     .filter(
       (event) => !isPlenary(event) && event.organ !== "Câmara dos Deputados",
     )
@@ -446,8 +431,6 @@ export function Committees({ data, page }: { data: PanelData; page: number }) {
         Number(isOngoing(b)) - Number(isOngoing(a)) ||
         a.startsAt.localeCompare(b.startsAt),
     );
-  const selected = Math.min(page, Math.max(0, Math.ceil(all.length / 3) - 1));
-  const events = all.slice(selected * 3, selected * 3 + 3);
   return (
     <section
       className="committee-panel light-panel"
