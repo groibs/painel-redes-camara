@@ -10,7 +10,8 @@ import unittest
 import urllib.error
 import urllib.request
 
-from collector import Store, account, collect, fetch_component, normalize_posts
+from collector import (Store, account, collect, compact_count, fetch_component,
+                       normalize_posts, public_tiktok, public_x, public_youtube)
 
 ENV = {"META_API_VERSION": "v99.0", "INSTAGRAM_USER_ID": "ig-id", "INSTAGRAM_ACCESS_TOKEN": "test-ig",
        "FACEBOOK_PAGE_ID": "page-id", "FACEBOOK_PAGE_ACCESS_TOKEN": "test-fb",
@@ -45,6 +46,66 @@ class CollectorTest(unittest.TestCase):
             fetch_component("youtube", ENV, lambda *args: {"items": [{"statistics": {"hiddenSubscriberCount": True}}]})
         with self.assertRaises(ValueError):
             fetch_component("tiktok", ENV, lambda *args: {"error": {"code": "access_token_invalid"}})
+
+    def test_public_profile_count_parsers(self):
+        self.assertEqual(compact_count("1,47 mi de inscritos"), 1_470_000)
+        self.assertEqual(compact_count("374.569"), 374_569)
+        youtube = '{"subscriberCountText":{"simpleText":"1.47M subscribers"}}'
+        self.assertEqual(public_youtube("@camara", lambda url: youtube), 1_470_000)
+        tiktok = '<script>{"stats":{"followerCount":987654}}</script>'
+        self.assertEqual(public_tiktok("@camara", lambda url: tiktok), 987_654)
+        xdata = {
+            "props": {
+                "pageProps": {
+                    "timeline": {
+                        "user": {"followers_count": 1_100_000}
+                    }
+                }
+            }
+        }
+        xhtml = '<script id="__NEXT_DATA__" type="application/json">' + json.dumps(xdata) + '</script>'
+        self.assertEqual(public_x("@camara", lambda url: xhtml), 1_100_000)
+
+    def test_public_profiles_work_without_platform_api_credentials(self):
+        env = {
+            "YOUTUBE_HANDLE": "camaradosdeputadosoficial",
+            "X_HANDLE": "camaradeputados",
+            "TIKTOK_HANDLE": "camaradosdeputados",
+        }
+        html = {
+            "youtube": '{"subscriberCountText":{"simpleText":"1.5M subscribers"}}',
+            "x": '<script id="__NEXT_DATA__" type="application/json">{"followers_count":1100000}</script>',
+            "tiktok": '{"followerCount":765432}',
+        }
+        self.assertEqual(
+            fetch_component("youtube", env, get_text_fn=lambda url: html["youtube"])["followers"],
+            1_500_000,
+        )
+        self.assertEqual(
+            fetch_component("x", env, get_text_fn=lambda url: html["x"])["followers"],
+            1_100_000,
+        )
+        self.assertEqual(
+            fetch_component("tiktok", env, get_text_fn=lambda url: html["tiktok"])["followers"],
+            765_432,
+        )
+
+    def test_facebook_can_reuse_instagram_meta_token(self):
+        env = {
+            "META_API_VERSION": "v26.0",
+            "FACEBOOK_PAGE_ID": "316136345150243",
+            "INSTAGRAM_ACCESS_TOKEN": "meta-token",
+            "FACEBOOK_HANDLE": "@camaradeputados",
+        }
+        seen = {}
+
+        def fake_get(url, params, token=None):
+            seen["token"] = token
+            return {"name": "Câmara dos Deputados", "followers_count": 123}
+
+        result = fetch_component("facebook", env, fake_get)
+        self.assertEqual(result["followers"], 123)
+        self.assertEqual(seen["token"], "meta-token")
 
     def test_post_thumbnail_carousel_and_unknown_counts(self):
         post = normalize_posts([POST])[0]
