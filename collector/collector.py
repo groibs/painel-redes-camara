@@ -110,6 +110,7 @@ def public_youtube(handle, get_text_fn=get_text):
         r'"subscriberCountText"\s*:\s*\{[^{}]{0,500}?"simpleText"\s*:\s*"([^"]+)"',
         r'"subscriberCountText"\s*:\s*\{[^{}]{0,1000}?"label"\s*:\s*"([^"]+)"',
         r'"subscriberCountText"[^\n]{0,1200}?([0-9]+(?:[.,][0-9]+)?\s*(?:K|M|B|mil|mi|milh(?:ão|ões)?))',
+        r'([0-9]+(?:[.,][0-9]+)?\s*(?:K|M|B|mil|mi|milh(?:ão|ões)?))\s+de\s+inscritos',
     ]
     for pattern in patterns:
         match = re.search(pattern, text, re.IGNORECASE)
@@ -129,15 +130,11 @@ def public_tiktok(handle, get_text_fn=get_text):
 
 def public_x(handle, get_text_fn=get_text):
     safe = urllib.parse.quote(handle.lstrip("@"), safe="")
-    text = get_text_fn("https://syndication.twitter.com/srv/timeline-profile/screen-name/" + safe)
-    match = re.search(r'<script[^>]+id="__NEXT_DATA__"[^>]*>(.*?)</script>', text, re.DOTALL | re.IGNORECASE)
-    if not match:
-        raise ValueError("x_public_payload_not_found")
-    data = json.loads(match.group(1))
-    followers = recursive_number(data, ("followers_count", "followersCount"))
-    if followers is None:
-        raise ValueError("x_public_count_not_found")
-    return followers
+    data = get_json("https://api.fxtwitter.com/2/profile/" + safe, {})
+    user = data.get("user")
+    if not isinstance(user, dict):
+        raise ValueError("x_public_profile_not_found")
+    return count(user["followers"])
 
 
 def count(value):
