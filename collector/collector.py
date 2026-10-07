@@ -128,9 +128,9 @@ def public_tiktok(handle, get_text_fn=get_text):
     return count(match.group(1))
 
 
-def public_x(handle, get_text_fn=get_text):
+def public_x(handle, get_fn=get_json):
     safe = urllib.parse.quote(handle.lstrip("@"), safe="")
-    data = get_json("https://api.fxtwitter.com/2/profile/" + safe, {})
+    data = get_fn("https://api.fxtwitter.com/2/profile/" + safe, {})
     user = data.get("user")
     if not isinstance(user, dict):
         raise ValueError("x_public_profile_not_found")
@@ -201,7 +201,7 @@ def meta_base(env, instagram=False):
     return f"https://{host}/{version}"
 
 
-def fetch_component(key, env, get=get_json, get_text_fn=get_text):
+def fetch_component(key, env, get=get_json, get_text_fn=get_text, x_get_fn=get_json):
     if key.startswith("instagram"):
         user = urllib.parse.quote(env["INSTAGRAM_USER_ID"], safe="")
         base = meta_base(env, True) + "/" + user
@@ -233,7 +233,7 @@ def fetch_component(key, env, get=get_json, get_text_fn=get_text):
             data = get("https://api.x.com/2/users/" + user, {"user.fields": "public_metrics"}, env["X_BEARER_TOKEN"])["data"]
             return account(key, data.get("username"), data["public_metrics"]["followers_count"])
         handle = env["X_HANDLE"]
-        return account(key, "@" + handle.lstrip("@"), public_x(handle, get_text_fn))
+        return account(key, "@" + handle.lstrip("@"), public_x(handle, x_get_fn))
     if env.get("TIKTOK_ACCESS_TOKEN"):
         data = get("https://open.tiktokapis.com/v2/user/info/", {"fields": "display_name,follower_count"}, env["TIKTOK_ACCESS_TOKEN"])
         if data.get("error", {}).get("code") != "ok":
