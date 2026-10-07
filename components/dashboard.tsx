@@ -343,11 +343,12 @@ export default function Dashboard({ demo }: { demo: boolean }) {
       </main>
     );
   const date = new Date(`${data.date}T12:00:00-03:00`);
-  const oldSocial = data.accounts.some(
-    (account) =>
-      account.updatedAt &&
-      Date.now() - Date.parse(account.updatedAt) > 30 * 60 * 1000,
-  );
+  const oldSocial = data.accounts.some((account) => {
+    if (!account.updatedAt) return false;
+    const freshnessWindow =
+      account.id === "instagram" ? 30 * 60 * 1000 : 26 * 60 * 60 * 1000;
+    return Date.now() - Date.parse(account.updatedAt) > freshnessWindow;
+  });
   const anyErrors =
     offline ||
     Object.values(data.sources).some((source) => source.state === "error") ||
