@@ -194,7 +194,7 @@ async function social(
       : {},
     redirect: "error",
     signal,
-    next: { revalidate: 300 },
+    cache: "no-store",
   });
   if (!response.ok) throw new Error(`Fonte social HTTP ${response.status}`);
   const length = Number(response.headers.get("content-length") || 0);
