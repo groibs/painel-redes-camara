@@ -19,7 +19,6 @@ import {
   Users,
 } from "lucide-react";
 import {
-  compactNumber,
   eventDate,
   fullNumber,
   isCancelled,
@@ -57,6 +56,24 @@ function shortOrgan(event: AgendaEvent) {
   if (/constitui|justi/i.test(event.organ)) return "CCJ";
   return event.organ;
 }
+function socialFollowerCount(id: NetworkId, value: number | null) {
+  if (value === null) return "—";
+  if (id === "youtube") {
+    if (value >= 1_000_000) {
+      return `${(value / 1_000_000).toLocaleString("pt-BR", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })} mi`;
+    }
+    if (value >= 1_000) {
+      return `${(value / 1_000).toLocaleString("pt-BR", {
+        maximumFractionDigits: 0,
+      })} mil`;
+    }
+  }
+  return fullNumber(value);
+}
+
 function noAgenda(data: PanelData) {
   return data.sources.agenda.state === "pending"
     ? "Consultando a agenda"
@@ -148,7 +165,7 @@ export function SocialMetrics({
                 <strong
                   title={`${account.name}: ${fullNumber(account.followers)}`}
                 >
-                  {compactNumber(account.followers)}
+                  {socialFollowerCount(account.id, account.followers)}
                 </strong>
                 <span>
                   {account.id === "youtube" ? "inscritos" : "seguidores"}
