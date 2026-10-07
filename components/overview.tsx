@@ -19,6 +19,7 @@ import {
   Users,
 } from "lucide-react";
 import {
+  compactNumber,
   eventDate,
   fullNumber,
   isCancelled,
