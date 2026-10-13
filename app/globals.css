@@ -612,24 +612,48 @@ p {
 .live-stream-stack {
   position: absolute;
   z-index: 4;
-  top: 66px;
+  top: 57px;
   right: 18px;
-  bottom: 36px;
+  bottom: 35px;
   width: 27%;
   display: grid;
+  align-content: start;
   gap: 10px;
   pointer-events: auto;
 }
 .live-stream-card {
   position: relative;
   min-height: 0;
-  overflow: hidden;
-  border-radius: 10px;
-  background: #001a22;
-  border: 1px solid #ffffff2b;
+  overflow: visible;
+  border-radius: 9px;
+  background: transparent;
   box-shadow: 0 5px 20px #00131b55;
 }
-.live-stream-card iframe {
+.live-stream-title {
+  width: 100%;
+  padding: 0 2px 5px;
+  color: #f4fafb;
+  font-family: var(--body);
+  font-size: 10px;
+  line-height: 1.15;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 5px #00131baa;
+}
+.live-stream-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #001a22;
+  border: 1px solid #ffffff2b;
+}
+.live-stream-video iframe {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   border: 0;
@@ -660,12 +684,14 @@ p {
   background: #fff;
 }
 .live-count-1 {
-  top: 104px;
-  bottom: 74px;
+  top: 58px;
+  width: 30%;
 }
-.live-count-1 .live-stream-card {
-  max-height: 190px;
-  align-self: center;
+.live-count-2 {
+  width: 24%;
+}
+.live-count-3 {
+  width: 19%;
 }
 .now-row {
   display: flex;
@@ -904,15 +930,39 @@ p {
   flex-direction: column;
   gap: 3px;
 }
-.trending-copy > strong {
+.trend-title {
   min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
   font-size: 17px;
   line-height: 1.02;
   font-weight: 700;
   color: #173f52;
+}
+.trend-title > strong {
+  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+}
+.trend-title-track {
+  display: flex;
+  width: max-content;
+  gap: 24px;
+  will-change: transform;
+  animation: radar-title-marquee 11s linear infinite;
+}
+.trend-title-track > strong {
+  flex: none;
+  font: inherit;
+  color: inherit;
+}
+@keyframes radar-title-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(calc(-50% - 12px), 0, 0);
+  }
 }
 .trending-copy > span {
   display: flex;
@@ -1058,45 +1108,20 @@ p {
   padding-top: 8px;
   padding-bottom: 4px;
 }
-.committee-nav {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.committee-pager {
-  gap: 0;
-}
-.committee-pager button {
-  width: 18px;
-  height: 20px;
-  color: #5e7684;
-}
-.committee-pager button:disabled {
-  opacity: 0.25;
-}
-.committee-pager svg {
-  width: 14px;
-  height: 14px;
-}
 .committee-list {
   flex: 1;
   min-height: 0;
+  overflow: hidden;
+  scrollbar-width: none;
+}
+.committee-list::-webkit-scrollbar {
+  display: none;
+}
+.committee-loop-track {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-}
-@keyframes committee-page-in {
-  from {
-    opacity: 0;
-    transform: translate3d(26px, 0, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-.committee-page-enter {
-  animation: committee-page-in 320ms ease-out both;
+  min-height: 100%;
+  will-change: scroll-position;
 }
 .committee-row {
   display: grid;
@@ -1166,29 +1191,6 @@ p {
 .committee-open svg {
   width: 18px;
   height: 18px;
-}
-.committee-panel {
-  position: relative;
-}
-.committee-dots {
-  position: absolute;
-  left: 50%;
-  bottom: 5px;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.committee-dots button {
-  width: 6px;
-  height: 6px;
-  border: 0;
-  border-radius: 50%;
-  padding: 0;
-  background: #b8c8d0;
-}
-.committee-dots button.selected {
-  background: var(--green);
 }
 .week-panel .panel-heading {
   min-height: 58px;
@@ -2148,7 +2150,7 @@ legend {
 .theme-night .trending-rank {
   color: #6f8a95;
 }
-.theme-night .trending-copy > strong {
+.theme-night .trend-title {
   color: #eef6f7;
 }
 .theme-night .trending-copy > span {
@@ -2177,15 +2179,6 @@ legend {
   border-color: #8bd8c133;
 }
 
-.theme-night .committee-pager button {
-  color: #a4bbc4;
-}
-.theme-night .committee-dots button {
-  background: #3c5963;
-}
-.theme-night .committee-dots button.selected {
-  background: #55e2a9;
-}
 .theme-night .schedule-row {
   background: #102d37;
   border-color: #1b3c46;
@@ -2338,6 +2331,9 @@ legend {
   .ticker-running .ticker-track {
     animation: ticker-scroll 90s linear infinite !important;
     -webkit-animation: ticker-scroll 90s linear infinite !important;
+  }
+  .trend-title-track {
+    animation: radar-title-marquee 11s linear infinite !important;
   }
 }
 @media (max-width: 799px) {
