@@ -14,6 +14,8 @@ import {
   Megaphone,
   MessageCircle,
   Play,
+  Radar,
+  Radio,
   TrendingDown,
   TrendingUp,
   Users,
@@ -30,6 +32,9 @@ import {
 } from "@/lib/format";
 import type {
   AgendaEvent,
+  EditorialData,
+  EditorialTopic,
+  LiveStream,
   NetworkId,
   PanelData,
   SocialPost,
@@ -202,10 +207,12 @@ export function NowPanel({
   data,
   page,
   setPage,
+  liveStreams = [],
 }: {
   data: PanelData;
   page: number;
   setPage: (page: number) => void;
+  liveStreams?: LiveStream[];
 }) {
   const all = todayEvents(data).sort(
     (a, b) =>
@@ -217,7 +224,10 @@ export function NowPanel({
   const selected = Math.min(page, pages - 1);
   const events = all.slice(selected * 3, selected * 3 + 3);
   return (
-    <section className="now-panel dark-panel" aria-labelledby="now-title">
+    <section
+      className={`now-panel dark-panel ${liveStreams.length ? "has-live-streams" : ""}`}
+      aria-labelledby="now-title"
+    >
       <img className="plenary-image" src="/brand/plenario.jpg" alt="" />
       <div className="now-shade" />
       <div className="now-top">
@@ -225,7 +235,7 @@ export function NowPanel({
         <span>Agenda do dia</span>
       </div>
       {events.length ? (
-        <div className="now-list">
+        <div className={`now-list ${liveStreams.length ? "now-list-with-live" : ""}`}>
           {events.map((event) => {
             const Icon = isPlenary(event)
               ? Landmark
@@ -276,6 +286,28 @@ export function NowPanel({
           </p>
         </div>
       )}
+      {liveStreams.length ? (
+        <div
+          className={`live-stream-stack live-count-${Math.min(3, liveStreams.length)}`}
+          aria-label="Transmissões ao vivo da Câmara no YouTube"
+        >
+          {liveStreams.slice(0, 3).map((stream) => (
+            <div className="live-stream-card" key={stream.id}>
+              <iframe
+                src={stream.embedUrl}
+                title={stream.title}
+                allow="autoplay; encrypted-media; picture-in-picture"
+                referrerPolicy="strict-origin-when-cross-origin"
+                loading="eager"
+              />
+              <span className="live-stream-badge">
+                <i />
+                AO VIVO
+              </span>
+            </div>
+          ))}
+        </div>
+      ) : null}
       <div className="now-bottom">
         <span>Foto de arquivo · Saulo Cruz / Câmara dos Deputados</span>
         <div className="pager dark-pager">
@@ -382,6 +414,108 @@ export function TodaySummary({ data }: { data: PanelData }) {
             <span>{count.label}</span>
           </div>
         ))}
+      </div>
+    </section>
+  );
+}
+
+function topicKey(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function agendaTopics(data: PanelData): EditorialTopic[] {
+  const generic =
+    /sess[aã]o|reuni[aã]o|discuss[aã]o|vota[cç][aã]o|propostas? legislativas?|plen[aá]rio/i;
+  const rows = todayEvents(data)
+    .map((event) =>
+      event.title
+        .replace(/homenagem ao /i, "")
+        .replace(/dia mundial da /i, "")
+        .replace(/audi[eê]ncia p[uú]blica (sobre|para|de)?/i, "")
+        .trim(),
+    )
+    .filter((title) => title.length >= 6 && !generic.test(title));
+
+  const seen = new Set<string>();
+  const topics: EditorialTopic[] = [];
+  for (const title of rows) {
+    const key = topicKey(title);
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    topics.push({
+      label: title.length > 30 ? title.slice(0, 28).trim() + "…" : title,
+      weight: 2,
+      sources: ["camara"],
+    });
+    if (topics.length >= 3) break;
+  }
+  return topics;
+}
+
+export function TopicRadar({
+  data,
+  editorial,
+}: {
+  data: PanelData;
+  editorial: EditorialData | null;
+}) {
+  const external = editorial?.topics ?? [];
+  const seen = new Set(external.map((topic) => topicKey(topic.label)));
+  const local = agendaTopics(data).filter(
+    (topic) => !seen.has(topicKey(topic.label)),
+  );
+  const topics = [...external, ...local].slice(0, 12);
+  const sourceLetter = { google: "G", x: "X", camara: "C" } as const;
+
+  return (
+    <section className="radar-panel light-panel" aria-labelledby="radar-title">
+      <div className="panel-heading radar-heading">
+        <h2 id="radar-title">
+          <Radar />
+          RADAR LEGISLATIVO
+        </h2>
+        <span className="radar-now">
+          <i />
+          AGORA
+        </span>
+      </div>
+      {topics.length ? (
+        <div className="topic-cloud" aria-label="Assuntos em alta">
+          {topics.map((topic, index) => (
+            <div
+              className={`topic-chip topic-weight-${topic.weight}`}
+              key={`${topicKey(topic.label)}-${index}`}
+            >
+              <span>{topic.label}</span>
+              <small aria-label="Fontes">
+                {topic.sources.map((source) => (
+                  <i className={`topic-source source-${source}`} key={source}>
+                    {sourceLetter[source]}
+                  </i>
+                ))}
+              </small>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="empty-light radar-empty">
+          <Radio />
+          <h3>Mapeando os assuntos em alta</h3>
+          <p>Google Trends, X e agenda legislativa alimentam este radar.</p>
+        </div>
+      )}
+      <div className="panel-foot radar-foot">
+        <span>Google Trends · X · Câmara</span>
+        <span>
+          {editorial?.collectedAt
+            ? `Atualizado às ${timeOf(editorial.collectedAt)}`
+            : "Atualizando"}
+        </span>
       </div>
     </section>
   );
