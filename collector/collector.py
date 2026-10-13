@@ -1,4 +1,9 @@
-"""Read-only social collector. Python 3.12+, standard library only."""
+"""Read-only social collector. Python 3.12+.
+
+Public follower counts use curl_cffi so outbound requests present a normal
+browser TLS fingerprint. Authenticated Meta access remains optional and is only
+needed for Instagram posts/insights.
+"""
 import concurrent.futures
 import datetime as dt
 import hmac
@@ -54,6 +59,82 @@ def get_text(url):
     if len(body) > MAX_PUBLIC_RESPONSE:
         raise ValueError("public_response_limit")
     return body.decode("utf-8", errors="replace")
+
+
+def browser_text(url, headers=None):
+    try:
+        from curl_cffi import requests as browser_requests
+    except ImportError as error:
+        raise RuntimeError("curl_cffi_required") from error
+
+    request_headers = {
+        "Accept": "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
+        "Accept-Language": "pt-BR,pt;q=0.9,en;q=0.7",
+    }
+    if headers:
+        request_headers.update(headers)
+
+    response = browser_requests.get(
+        url,
+        headers=request_headers,
+        impersonate="chrome",
+        timeout=20,
+        allow_redirects=True,
+    )
+    if response.status_code < 200 or response.status_code >= 300:
+        raise ValueError("public_http_error")
+    body = response.content
+    if len(body) > MAX_PUBLIC_RESPONSE:
+        raise ValueError("public_response_limit")
+    return response.text
+
+
+def public_instagram(handle, browser_get_fn=browser_text):
+    username = handle.lstrip("@")
+    if not re.fullmatch(r"[A-Za-z0-9._]{1,30}", username):
+        raise ValueError("invalid_instagram_handle")
+    safe = urllib.parse.quote(username, safe="")
+    text = browser_get_fn(
+        "https://www.instagram.com/api/v1/users/web_profile_info/?username=" + safe,
+        {
+            "X-Ig-App-Id": "936619743392459",
+            "X-Requested-With": "XMLHttpRequest",
+            "Referer": "https://www.instagram.com/",
+        },
+    )
+    data = json.loads(text)
+    user = data.get("data", {}).get("user", {})
+    followers = user.get("edge_followed_by", {}).get("count")
+    return count(followers)
+
+
+def public_facebook(handle, browser_get_fn=browser_text):
+    username = handle.lstrip("@")
+    if not re.fullmatch(r"[A-Za-z0-9._-]{1,100}", username):
+        raise ValueError("invalid_facebook_handle")
+    safe = urllib.parse.quote(username, safe="")
+    text = browser_get_fn(
+        "https://www.facebook.com/" + safe + "/?locale=pt_BR",
+        {"Referer": "https://www.facebook.com/"},
+    )
+    candidates = []
+    patterns = (
+        r"([0-9][0-9.,\s]*\s*(?:mil|mi|M|K)?)\s+seguidores\b",
+        r"([0-9][0-9.,\s]*\s*(?:mil|mi|M|K)?)\s+followers\b",
+    )
+    for pattern in patterns:
+        for match in re.finditer(pattern, text, re.IGNORECASE):
+            try:
+                value = compact_count(match.group(1))
+            except ValueError:
+                continue
+            if value >= 1000:
+                candidates.append(value)
+    if not candidates:
+        raise ValueError("facebook_public_count_not_found")
+    # The public page repeats the same count several times. Choosing the most
+    # common value avoids unrelated localized counters elsewhere in the HTML.
+    return max(set(candidates), key=candidates.count)
 
 
 def compact_count(value):
@@ -203,21 +284,34 @@ def meta_base(env, instagram=False):
 
 def fetch_component(key, env, get=get_json, get_text_fn=get_text, x_get_fn=get_json):
     if key.startswith("instagram"):
+        if key == "instagram.posts":
+            user = urllib.parse.quote(env["INSTAGRAM_USER_ID"], safe="")
+            base = meta_base(env, True) + "/" + user
+            token = env["INSTAGRAM_ACCESS_TOKEN"]
+            data = get(base + "/media", {"limit": "6", "fields": "id,caption,media_type,media_url,thumbnail_url,permalink,timestamp,like_count,comments_count,children{media_url,thumbnail_url}"}, token)
+            return normalize_posts(data["data"])
+
+        handle = env.get("INSTAGRAM_HANDLE") or env.get("INSTAGRAM_USERNAME")
+        if handle:
+            return account("instagram", "@" + handle.lstrip("@"), public_instagram(handle))
+
         user = urllib.parse.quote(env["INSTAGRAM_USER_ID"], safe="")
         base = meta_base(env, True) + "/" + user
         token = env["INSTAGRAM_ACCESS_TOKEN"]
-        if key == "instagram.posts":
-            data = get(base + "/media", {"limit": "6", "fields": "id,caption,media_type,media_url,thumbnail_url,permalink,timestamp,like_count,comments_count,children{media_url,thumbnail_url}"}, token)
-            return normalize_posts(data["data"])
         data = get(base, {"fields": "username,followers_count"}, token)
         return account("instagram", data.get("username"), data["followers_count"])
+
     if key == "facebook":
+        handle = env.get("FACEBOOK_HANDLE")
+        if handle:
+            return account("facebook", "@" + handle.lstrip("@"), public_facebook(handle))
+
         page = urllib.parse.quote(env["FACEBOOK_PAGE_ID"], safe="")
         token = env.get("FACEBOOK_PAGE_ACCESS_TOKEN") or env.get("INSTAGRAM_ACCESS_TOKEN")
         if not token:
             raise ValueError("facebook_token_missing")
         data = get(meta_base(env) + "/" + page, {"fields": "name,followers_count"}, token)
-        return account(key, env.get("FACEBOOK_HANDLE", data.get("name")), data["followers_count"])
+        return account(key, data.get("name"), data["followers_count"])
     if key == "youtube":
         if env.get("YOUTUBE_CHANNEL_ID") and env.get("YOUTUBE_API_KEY"):
             data = get("https://www.googleapis.com/youtube/v3/channels", {"part": "statistics,snippet", "id": env["YOUTUBE_CHANNEL_ID"], "key": env["YOUTUBE_API_KEY"]})
@@ -245,11 +339,26 @@ def fetch_component(key, env, get=get_json, get_text_fn=get_text, x_get_fn=get_j
 
 
 def configured(key, env):
-    if key in ("instagram", "instagram.posts"):
-        return all(env.get(field) for field in ("INSTAGRAM_USER_ID", "INSTAGRAM_ACCESS_TOKEN", "META_API_VERSION"))
+    if key == "instagram":
+        return bool(
+            env.get("INSTAGRAM_HANDLE")
+            or env.get("INSTAGRAM_USERNAME")
+            or all(env.get(field) for field in ("INSTAGRAM_USER_ID", "INSTAGRAM_ACCESS_TOKEN", "META_API_VERSION"))
+        )
+    if key == "instagram.posts":
+        posts_enabled = env.get("INSTAGRAM_POSTS_ENABLED", "1").lower() not in ("0", "false", "no")
+        return bool(posts_enabled and all(
+            env.get(field) for field in ("INSTAGRAM_USER_ID", "INSTAGRAM_ACCESS_TOKEN", "META_API_VERSION")
+        ))
     if key == "facebook":
-        return bool(env.get("FACEBOOK_PAGE_ID") and env.get("META_API_VERSION") and
-                    (env.get("FACEBOOK_PAGE_ACCESS_TOKEN") or env.get("INSTAGRAM_ACCESS_TOKEN")))
+        return bool(
+            env.get("FACEBOOK_HANDLE")
+            or (
+                env.get("FACEBOOK_PAGE_ID")
+                and env.get("META_API_VERSION")
+                and (env.get("FACEBOOK_PAGE_ACCESS_TOKEN") or env.get("INSTAGRAM_ACCESS_TOKEN"))
+            )
+        )
     if key == "youtube":
         return bool((env.get("YOUTUBE_CHANNEL_ID") and env.get("YOUTUBE_API_KEY")) or env.get("YOUTUBE_HANDLE"))
     if key == "x":
@@ -317,31 +426,6 @@ class Store:
                 "accounts": [data[key] for key in ORDER if key in data], "posts": data.get("instagram.posts", [])}
 
 
-def public_daily_due(store, key, now, env):
-    # Daily counters are tied to the Brasília calendar rather than to "24h since
-    # the previous attempt". A failed fetch retries later without waiting a day.
-    refresh_hour = int(env.get("PUBLIC_REFRESH_HOUR_BRASILIA", "0"))
-    retry_seconds = int(env.get("PUBLIC_FAILED_RETRY_SECONDS", "3600"))
-    if not 0 <= refresh_hour <= 23:
-        raise ValueError("invalid_public_refresh_hour")
-    if retry_seconds < 300:
-        raise ValueError("public_retry_too_short")
-
-    zone = dt.timezone(dt.timedelta(hours=-3))
-    current = dt.datetime.fromtimestamp(now, zone)
-    if current.hour < refresh_hour:
-        return False
-
-    success = store.last_success(key)
-    if success is not None:
-        success_date = dt.datetime.fromtimestamp(success, zone).date()
-        if success_date == current.date():
-            return False
-
-    attempt = store.last_attempt(key)
-    return attempt is None or now - attempt >= retry_seconds
-
-
 def collect(store, env, now=None, fetch=fetch_component):
     now = time.time() if now is None else now
     pending = []
@@ -350,16 +434,13 @@ def collect(store, env, now=None, fetch=fetch_component):
             continue
         if key == "instagram.posts":
             interval = int(env.get("POSTS_INTERVAL_SECONDS", "300"))
-            due = store.due(key, now, interval)
         elif key == "instagram":
             interval = int(env.get("FOLLOWERS_INTERVAL_SECONDS", "900"))
-            due = store.due(key, now, interval)
         else:
-            interval = None
-            due = public_daily_due(store, key, now, env)
-        if interval is not None and interval < 60:
+            interval = int(env.get("PUBLIC_FOLLOWERS_INTERVAL_SECONDS", "900"))
+        if interval < 60:
             raise ValueError("interval_too_short")
-        if due:
+        if store.due(key, now, interval):
             store.attempted(key, now)
             pending.append(key)
     with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
