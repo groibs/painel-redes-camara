@@ -25,7 +25,7 @@ UPDATES = {
     "FOLLOWERS_INTERVAL_SECONDS": "900",
     "PUBLIC_FOLLOWERS_INTERVAL_SECONDS": "900",
     "INSTAGRAM_HANDLE": "camaradosdeputados",
-    "INSTAGRAM_POSTS_ENABLED": "0",
+    "INSTAGRAM_POSTS_ENABLED": "1",
     "FACEBOOK_HANDLE": "camaradeputados",
     "TIKTOK_HANDLE": "camaradosdeputados",
     "YOUTUBE_HANDLE": "camaradosdeputadosoficial",
@@ -122,7 +122,7 @@ def main() -> None:
 
     print("=== FORÇANDO CONTADORES ===", flush=True)
     with sqlite3.connect(DB) as db:
-        for key in ("instagram", "facebook", "tiktok", "x", "youtube"):
+        for key in ("instagram", "instagram.posts", "facebook", "tiktok", "x", "youtube"):
             db.execute("DELETE FROM attempts WHERE key=?", (key,))
         db.commit()
 
