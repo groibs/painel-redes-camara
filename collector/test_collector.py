@@ -11,8 +11,8 @@ import urllib.error
 import urllib.request
 
 from collector import (Store, account, collect, compact_count, fetch_component,
-                       normalize_posts, public_daily_due, public_tiktok,
-                       public_x, public_youtube)
+                       normalize_posts, public_facebook, public_instagram,
+                       public_tiktok, public_x, public_youtube)
 
 ENV = {"META_API_VERSION": "v99.0", "INSTAGRAM_USER_ID": "ig-id", "INSTAGRAM_ACCESS_TOKEN": "test-ig",
        "FACEBOOK_PAGE_ID": "page-id", "FACEBOOK_PAGE_ACCESS_TOKEN": "test-fb",
@@ -153,18 +153,47 @@ class CollectorTest(unittest.TestCase):
         self.store.save("x", account("x", "camara", 120), 300000)
         self.assertIsNone(self.store.snapshot()["accounts"][0]["change24h"])
 
-    def test_public_counts_run_once_per_brasilia_day_and_retry_failures(self):
-        # 2026-10-13 03:05 UTC == 00:05 in Brasília.
-        now = 1791851100
-        self.assertTrue(public_daily_due(self.store, "x", now, {}))
-        self.store.attempted("x", now)
-        self.assertFalse(public_daily_due(self.store, "x", now + 3599, {}))
-        self.assertTrue(public_daily_due(self.store, "x", now + 3600, {}))
+    def test_public_instagram_and_facebook_parsers(self):
+        instagram = json.dumps({
+            "data": {"user": {"edge_followed_by": {"count": 376630}}}
+        })
+        self.assertEqual(
+            public_instagram("@camaradosdeputados", lambda url, headers: instagram),
+            376630,
+        )
 
-        self.store.save("x", account("x", "camara", 100), now + 3600)
-        self.assertFalse(public_daily_due(self.store, "x", now + 7200, {}))
-        # Next Brasília day should be due again, independent of 24h from attempt.
-        self.assertTrue(public_daily_due(self.store, "x", now + 86400, {}))
+        facebook = """
+        <html><body>
+          <span>664.281 seguidores</span>
+          <script>{"label":"664.281 seguidores"}</script>
+          <span>0mil seguidores em outro contexto</span>
+        </body></html>
+        """
+        self.assertEqual(
+            public_facebook("@camaradeputados", lambda url, headers: facebook),
+            664281,
+        )
+
+    def test_public_counts_refresh_on_configured_interval(self):
+        env = {
+            "YOUTUBE_HANDLE": "camara",
+            "X_HANDLE": "camara",
+            "TIKTOK_HANDLE": "camara",
+            "PUBLIC_FOLLOWERS_INTERVAL_SECONDS": "900",
+        }
+        calls = []
+
+        def fetch(key, env):
+            calls.append(key)
+            return account(key, "camara", 100)
+
+        collect(self.store, env, now=100000, fetch=fetch)
+        self.assertEqual(set(calls), {"youtube", "x", "tiktok"})
+        calls.clear()
+        collect(Store(self.path), env, now=100899, fetch=fetch)
+        self.assertEqual(calls, [])
+        collect(Store(self.path), env, now=100900, fetch=fetch)
+        self.assertEqual(set(calls), {"youtube", "x", "tiktok"})
 
     def test_counts_and_posts_have_separate_persistent_intervals(self):
         calls = []
