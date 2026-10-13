@@ -184,7 +184,7 @@ def recursive_number(value, keys):
     return None
 
 
-def public_youtube(handle, get_text_fn=browser_text):
+def public_youtube(handle, get_text_fn=get_text):
     safe = urllib.parse.quote(handle.lstrip("@"), safe="")
     text = get_text_fn("https://www.youtube.com/@" + safe)
     patterns = [
@@ -200,7 +200,7 @@ def public_youtube(handle, get_text_fn=browser_text):
     raise ValueError("youtube_public_count_not_found")
 
 
-def public_tiktok(handle, get_text_fn=browser_text):
+def public_tiktok(handle, get_text_fn=get_text):
     safe = urllib.parse.quote(handle.lstrip("@"), safe="")
     text = get_text_fn("https://www.tiktok.com/@" + safe)
     match = re.search(r'"followerCount"\s*:\s*"?([0-9]+)"?', text)
