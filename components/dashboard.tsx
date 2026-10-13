@@ -322,7 +322,7 @@ export default function Dashboard({
       setRadarPage(
         (page) =>
           (page + 1) %
-          Math.max(1, Math.ceil((editorial?.topics.length ?? 0) / 12)),
+          Math.max(1, Math.ceil((editorial?.topics.length ?? 0) / 8)),
       );
     }, 20000);
     return () => clearInterval(timer);
