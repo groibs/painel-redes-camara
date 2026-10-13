@@ -606,15 +606,15 @@ p {
 }
 
 .now-list-with-live {
-  width: 67%;
-  padding-right: 8px;
+  width: 68%;
+  padding-right: 12px;
 }
 .live-stream-stack {
   position: absolute;
   z-index: 4;
-  top: 57px;
-  right: 18px;
-  bottom: 35px;
+  top: 62px;
+  right: 16px;
+  bottom: 34px;
   width: 27%;
   display: grid;
   align-content: start;
@@ -624,22 +624,26 @@ p {
 .live-stream-card {
   position: relative;
   min-height: 0;
-  overflow: visible;
+  overflow: hidden;
   border-radius: 9px;
-  background: transparent;
-  box-shadow: 0 5px 20px #00131b55;
+  background: #002b35e8;
+  border: 1px solid #ffffff24;
+  box-shadow: 0 7px 24px #00131b66;
 }
 .live-stream-title {
   width: 100%;
-  padding: 0 2px 5px;
+  min-height: 30px;
+  padding: 6px 8px 5px;
   color: #f4fafb;
+  background: #002731e8;
   font-family: var(--body);
   font-size: 10px;
   line-height: 1.15;
-  font-weight: 600;
-  white-space: nowrap;
+  font-weight: 650;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
   text-shadow: 0 1px 5px #00131baa;
 }
 .live-stream-video {
@@ -647,15 +651,13 @@ p {
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  border-radius: 8px;
   background: #001a22;
-  border: 1px solid #ffffff2b;
 }
 .live-stream-video iframe {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  inset: -2.5%;
+  width: 105%;
+  height: 105%;
   border: 0;
   display: block;
   background: #001a22;
@@ -684,8 +686,8 @@ p {
   background: #fff;
 }
 .live-count-1 {
-  top: 58px;
-  width: 30%;
+  top: 62px;
+  width: 28.5%;
 }
 .live-count-2 {
   width: 24%;
