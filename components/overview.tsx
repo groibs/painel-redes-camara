@@ -452,7 +452,7 @@ function agendaTopics(data: PanelData): EditorialTopic[] {
     if (!key || seen.has(key)) continue;
     seen.add(key);
     topics.push({
-      label: title.length > 30 ? title.slice(0, 28).trim() + "…" : title,
+      label: title,
       weight: 2,
       sources: ["camara"],
     });
