@@ -23,8 +23,8 @@ import {
   NowPanel,
   SocialMetrics,
   Ticker,
-  TodaySchedule,
   TodaySummary,
+  TopicRadar,
   Week,
 } from "@/components/overview";
 import { demoPanel, emptyPanel } from "@/lib/data";
@@ -36,7 +36,7 @@ import {
   timeOf,
   TIMEZONE,
 } from "@/lib/format";
-import type { PanelData, Vote } from "@/lib/types";
+import type { EditorialData, PanelData, Vote } from "@/lib/types";
 
 const CACHE_KEY = "rede-camara:snapshot:v1";
 const SETTINGS_KEY = "rede-camara:display:v1";
@@ -159,6 +159,7 @@ export default function Dashboard({
   const [refreshing, setRefreshing] = useState(false);
   const [offline, setOffline] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
+  const [editorial, setEditorial] = useState<EditorialData | null>(null);
   const [notice, setNotice] = useState("");
   const dataRef = useRef<PanelData | null>(null);
   const requestRef = useRef(false);
@@ -274,6 +275,38 @@ export default function Dashboard({
     const timer = setInterval(() => void refresh(), refreshSeconds * 1000);
     return () => clearInterval(timer);
   }, [refresh, refreshSeconds]);
+
+  useEffect(() => {
+    if (demo) return;
+
+    let cancelled = false;
+    const loadEditorial = async () => {
+      try {
+        const response = await fetch("/api/editorial", {
+          cache: "no-store",
+          signal: AbortSignal.timeout(60000),
+        });
+        if (!response.ok) return;
+        const json = (await response.json()) as EditorialData;
+        if (
+          cancelled ||
+          !Array.isArray(json.topics) ||
+          !Array.isArray(json.liveStreams)
+        )
+          return;
+        setEditorial(json);
+      } catch {
+        /* The legislative panel stays usable if editorial sources are down. */
+      }
+    };
+
+    void loadEditorial();
+    const timer = setInterval(() => void loadEditorial(), 120000);
+    return () => {
+      cancelled = true;
+      clearInterval(timer);
+    };
+  }, [demo]);
 
   useEffect(() => {
     if (!data || !autoRotate || settingsOpen) return;
@@ -424,6 +457,7 @@ export default function Dashboard({
                   data={data}
                   page={agendaPage}
                   setPage={setAgendaPage}
+                  liveStreams={editorial?.liveStreams ?? []}
                 />
               ) : (
                 <VotePanel vote={data.vote} demo={demo} />
@@ -432,7 +466,7 @@ export default function Dashboard({
               <Committees data={data} />
             </div>
             <div className="right-column">
-              <TodaySchedule data={data} />
+              <TopicRadar data={data} editorial={editorial} />
               <Week data={data} offset={weekOffset} setOffset={setWeekOffset} />
             </div>
           </div>
