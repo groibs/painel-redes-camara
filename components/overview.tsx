@@ -474,7 +474,7 @@ export function TopicRadar({
     (topic) => !seen.has(topicKey(topic.label)),
   );
   const allTopics = [...external, ...local].slice(0, 30);
-  const pageSize = 12;
+  const pageSize = 8;
   const pages = Math.max(1, Math.ceil(allTopics.length / pageSize));
   const selected = Math.min(page, pages - 1);
   const topics = allTopics.slice(
@@ -518,7 +518,7 @@ export function TopicRadar({
         </div>
       </div>
       {topics.length ? (
-        <div className="trending-grid" aria-label="Assuntos em alta">
+        <div className="trending-grid radar-page-enter" key={selected} aria-label="Assuntos em alta">
           {topics.map((topic, index) => (
             <article
               className="trending-topic"
