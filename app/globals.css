@@ -874,10 +874,23 @@ p {
   padding: 2px 16px 4px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(6, minmax(0, 1fr));
+  grid-template-rows: repeat(4, minmax(0, 1fr));
   grid-auto-flow: column;
   column-gap: 14px;
   overflow: hidden;
+}
+@keyframes radar-page-in {
+  from {
+    opacity: 0;
+    transform: translate3d(24px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+.radar-page-enter {
+  animation: radar-page-in 320ms ease-out both;
 }
 .trending-topic {
   position: relative;
@@ -890,10 +903,10 @@ p {
   border-top: 1px solid #dce7ed;
 }
 .trending-topic:nth-child(1),
-.trending-topic:nth-child(7) {
+.trending-topic:nth-child(5) {
   border-top: 0;
 }
-.trending-topic:nth-child(n + 7) {
+.trending-topic:nth-child(n + 5) {
   padding-left: 12px;
   border-left: 1px solid #dce7ed;
 }
@@ -2127,7 +2140,7 @@ legend {
 .theme-night .trending-topic {
   border-top-color: #1f3d47;
 }
-.theme-night .trending-topic:nth-child(n + 7) {
+.theme-night .trending-topic:nth-child(n + 5) {
   border-left-color: #1f3d47;
 }
 .theme-night .trending-rank {
@@ -2614,11 +2627,11 @@ legend {
     grid-auto-flow: row;
     overflow-y: auto;
   }
-  .trending-topic:nth-child(n + 7) {
+  .trending-topic:nth-child(n + 5) {
     padding-left: 0;
     border-left: 0;
   }
-  .trending-topic:nth-child(7) {
+  .trending-topic:nth-child(5) {
     border-top: 1px solid #dce7ed;
   }
   .trending-copy > strong {
