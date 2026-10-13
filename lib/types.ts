@@ -73,3 +73,27 @@ export type SocialSnapshot = {
   accounts: SocialAccount[];
   posts: SocialPost[];
 };
+
+export type EditorialTopicSource = "google" | "x" | "camara";
+export type EditorialTopic = {
+  label: string;
+  weight: 1 | 2 | 3 | 4 | 5;
+  sources: EditorialTopicSource[];
+};
+export type LiveStream = {
+  id: string;
+  title: string;
+  watchUrl: string;
+  embedUrl: string;
+  thumbnail: string;
+};
+export type EditorialData = {
+  collectedAt: string;
+  topics: EditorialTopic[];
+  liveStreams: LiveStream[];
+  sources: {
+    google: "ok" | "error";
+    x: "ok" | "error";
+    youtube: "ok" | "error";
+  };
+};
