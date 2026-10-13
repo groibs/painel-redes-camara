@@ -848,6 +848,26 @@ p {
   background: var(--green);
   box-shadow: 0 0 0 4px #00b46317;
 }
+.radar-controls {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.radar-pager {
+  gap: 0;
+}
+.radar-pager button {
+  width: 18px;
+  height: 20px;
+  color: #5e7684;
+}
+.radar-pager button:disabled {
+  opacity: 0.25;
+}
+.radar-pager svg {
+  width: 14px;
+  height: 14px;
+}
 .trending-grid {
   flex: 1;
   min-height: 0;
@@ -960,6 +980,28 @@ p {
 .radar-foot {
   font-size: 10px;
   padding-top: 6px;
+}
+.radar-foot {
+  position: relative;
+}
+.radar-dots {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.radar-dots button {
+  width: 6px;
+  height: 6px;
+  border: 0;
+  border-radius: 50%;
+  padding: 0;
+  background: #b8c8d0;
+}
+.radar-dots button.selected {
+  background: var(--green);
 }
 .radar-empty {
   flex: 1;
@@ -2072,6 +2114,15 @@ legend {
 .theme-night .radar-now,
 .theme-night .radar-foot {
   color: #91aab4;
+}
+.theme-night .radar-pager button {
+  color: #a4bbc4;
+}
+.theme-night .radar-dots button {
+  background: #3c5963;
+}
+.theme-night .radar-dots button.selected {
+  background: #55e2a9;
 }
 .theme-night .trending-topic {
   border-top-color: #1f3d47;
