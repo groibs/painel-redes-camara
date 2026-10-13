@@ -1,6 +1,6 @@
 # Coletor das redes — VPS
 
-Preparado para Python 3.12 / Ubuntu 24.04. A coleta pública usa `curl_cffi` para apresentar uma impressão TLS de navegador real e reduzir bloqueios de datacenter. **Instalação no VPS confirmada em 06/10/2026; contas ainda não conectadas.** O serviço respondeu HTTP 401 sem credencial e HTTP 503 autenticado em `127.0.0.1:8715`. A coleta depende de credenciais autorizadas das plataformas.
+Preparado para Python 3.12 / Ubuntu 24.04. A coleta pública de Instagram e Facebook usa `curl_cffi` para apresentar uma impressão TLS de navegador real e reduzir bloqueios de datacenter. **Instalação no VPS confirmada em 06/10/2026; contas ainda não conectadas.** O serviço respondeu HTTP 401 sem credencial e HTTP 503 autenticado em `127.0.0.1:8715`. A coleta depende de credenciais autorizadas das plataformas.
 
 **HTTPS confirmado no VPS em 06/10/2026:** `https://apuracao.revline.com.br/redes/snapshot.json` respondeu HTTP 401 sem credencial e HTTP 503 autenticado. A apresentação eleitoral respondeu HTTP 200 e os estados dos serviços foram preservados. O bloco foi alterado em `/etc/caddy/camara-reserva.caddy`, com backup dos arquivos da configuração; a configuração principal permaneceu intacta. HTTP 503 nesta etapa indica ausência de dados coletados; a autorização das redes e a conexão da fonte ao painel continuam pendentes.
 
