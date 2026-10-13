@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   BookOpen,
   CalendarDays,
@@ -460,28 +460,47 @@ function agendaTopics(data: PanelData): EditorialTopic[] {
 export function TopicRadar({
   data,
   editorial,
-  page,
-  setPage,
 }: {
   data: PanelData;
   editorial: EditorialData | null;
-  page: number;
-  setPage: (page: number) => void;
 }) {
   const external = editorial?.topics ?? [];
   const seen = new Set(external.map((topic) => topicKey(topic.label)));
   const local = agendaTopics(data).filter(
     (topic) => !seen.has(topicKey(topic.label)),
   );
-  const allTopics = [...external, ...local].slice(0, 30);
-  const pageSize = 8;
-  const pages = Math.max(1, Math.ceil(allTopics.length / pageSize));
-  const selected = Math.min(page, pages - 1);
-  const topics = allTopics.slice(
-    selected * pageSize,
-    selected * pageSize + pageSize,
-  );
+  const topics = [...external, ...local].slice(0, 30);
   const sourceLetter = { google: "G", x: "X", camara: "C" } as const;
+  const scrollerRef = useRef<HTMLDivElement>(null);
+
+  const columns: EditorialTopic[][] = [];
+  for (let index = 0; index < topics.length; index += 4) {
+    columns.push(topics.slice(index, index + 4));
+  }
+
+  useEffect(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller || columns.length <= 2) return;
+
+    let frame = 0;
+    let previous = performance.now();
+    const speed = 13; // px/s: slow enough to read on a wallboard.
+
+    const tick = (now: number) => {
+      const elapsed = Math.min(64, now - previous);
+      previous = now;
+      scroller.scrollLeft += (speed * elapsed) / 1000;
+
+      const halfway = scroller.scrollWidth / 2;
+      if (halfway > 0 && scroller.scrollLeft >= halfway) {
+        scroller.scrollLeft -= halfway;
+      }
+      frame = requestAnimationFrame(tick);
+    };
+
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [topics.length, columns.length]);
 
   return (
     <section className="radar-panel light-panel" aria-labelledby="radar-title">
@@ -490,65 +509,62 @@ export function TopicRadar({
           <Radar />
           RADAR LEGISLATIVO
         </h2>
-        <div className="radar-controls">
-          <span className="radar-now">
-            <i />
-            AGORA
-          </span>
-          {pages > 1 ? (
-            <div className="pager radar-pager">
-              <button
-                type="button"
-                aria-label="Assuntos anteriores"
-                disabled={selected === 0}
-                onClick={() => setPage(selected - 1)}
-              >
-                <ChevronLeft />
-              </button>
-              <button
-                type="button"
-                aria-label="Próximos assuntos"
-                disabled={selected === pages - 1}
-                onClick={() => setPage(selected + 1)}
-              >
-                <ChevronRight />
-              </button>
-            </div>
-          ) : null}
-        </div>
+        <span className="radar-now">
+          <i />
+          AGORA
+        </span>
       </div>
       {topics.length ? (
-        <div className="trending-grid radar-page-enter" key={selected} aria-label="Assuntos em alta">
-          {topics.map((topic, index) => (
-            <article
-              className="trending-topic"
-              key={`${topicKey(topic.label)}-${index}`}
-            >
-              <span className="trending-rank">
-                {String(selected * pageSize + index + 1).padStart(2, "0")}
-              </span>
-              <div className="trending-copy">
-                <strong>{topic.label}</strong>
-                <span>
-                  Em alta
-                  <small aria-label="Fontes">
-                    {topic.sources.map((source) => (
-                      <i
-                        className={`topic-source source-${source}`}
-                        key={source}
+        <div
+          className={`radar-loop-viewport ${columns.length > 2 ? "is-scrolling" : ""}`}
+          ref={scrollerRef}
+          aria-label="Assuntos em alta"
+        >
+          <div className="radar-loop-track">
+            {[...columns, ...(columns.length > 2 ? columns : [])].map(
+              (column, columnIndex) => (
+                <div
+                  className="radar-topic-column"
+                  key={`column-${columnIndex}`}
+                >
+                  {column.map((topic, rowIndex) => {
+                    const originalIndex =
+                      (columnIndex % Math.max(1, columns.length)) * 4 + rowIndex;
+                    return (
+                      <article
+                        className="trending-topic"
+                        key={`${topicKey(topic.label)}-${columnIndex}-${rowIndex}`}
                       >
-                        {sourceLetter[source]}
-                      </i>
-                    ))}
-                  </small>
-                </span>
-              </div>
-              <i
-                className={`trend-level trend-level-${topic.weight}`}
-                aria-hidden="true"
-              />
-            </article>
-          ))}
+                        <span className="trending-rank">
+                          {String(originalIndex + 1).padStart(2, "0")}
+                        </span>
+                        <div className="trending-copy">
+                          <strong>{topic.label}</strong>
+                          <span>
+                            Em alta
+                            <small aria-label="Fontes">
+                              {topic.sources.map((source) => (
+                                <i
+                                  className={`topic-source source-${source}`}
+                                  key={source}
+                                >
+                                  {sourceLetter[source]}
+                                </i>
+                              ))}
+                            </small>
+                          </span>
+                        </div>
+                        <i
+                          className={`trend-level trend-level-${topic.weight}`}
+                          aria-hidden="true"
+                        />
+                      </article>
+                    );
+                  })}
+                </div>
+              ),
+            )}
+          </div>
         </div>
       ) : (
         <div className="empty-light radar-empty">
@@ -559,22 +575,6 @@ export function TopicRadar({
       )}
       <div className="panel-foot radar-foot">
         <span>Google Trends · X · Câmara</span>
-        {pages > 1 ? (
-          <div
-            className="radar-dots"
-            aria-label={`Página ${selected + 1} de ${pages}`}
-          >
-            {Array.from({ length: Math.min(5, pages) }, (_, index) => (
-              <button
-                type="button"
-                aria-label={`Ir para página ${index + 1}`}
-                className={index === selected % 5 ? "selected" : ""}
-                onClick={() => setPage(index)}
-                key={index}
-              />
-            ))}
-          </div>
-        ) : null}
         <span>
           {editorial?.collectedAt
             ? `Atualizado às ${timeOf(editorial.collectedAt)}`
