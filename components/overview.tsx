@@ -232,7 +232,6 @@ export function NowPanel({
       <div className="now-shade" />
       <div className="now-top">
         <h1 id="now-title">AGORA NA CÂMARA</h1>
-        <span>Agenda do dia</span>
       </div>
       {events.length ? (
         <div className={`now-list ${liveStreams.length ? "now-list-with-live" : ""}`}>
@@ -293,17 +292,22 @@ export function NowPanel({
         >
           {liveStreams.slice(0, 3).map((stream) => (
             <div className="live-stream-card" key={stream.id}>
-              <iframe
-                src={stream.embedUrl}
-                title={stream.title}
-                allow="autoplay; encrypted-media; picture-in-picture"
-                referrerPolicy="strict-origin-when-cross-origin"
-                loading="eager"
-              />
-              <span className="live-stream-badge">
-                <i />
-                AO VIVO
-              </span>
+              <div className="live-stream-title" title={stream.title}>
+                {stream.title}
+              </div>
+              <div className="live-stream-video">
+                <iframe
+                  src={stream.embedUrl}
+                  title={stream.title}
+                  allow="autoplay; encrypted-media; picture-in-picture"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  loading="eager"
+                />
+                <span className="live-stream-badge">
+                  <i />
+                  AO VIVO
+                </span>
+              </div>
             </div>
           ))}
         </div>
@@ -539,7 +543,19 @@ export function TopicRadar({
                           {String(originalIndex + 1).padStart(2, "0")}
                         </span>
                         <div className="trending-copy">
-                          <strong>{topic.label}</strong>
+                          <div
+                            className={`trend-title ${topic.label.length > 18 ? "is-marquee" : ""}`}
+                            title={topic.label}
+                          >
+                            {topic.label.length > 18 ? (
+                              <span className="trend-title-track">
+                                <strong>{topic.label}</strong>
+                                <strong aria-hidden="true">{topic.label}</strong>
+                              </span>
+                            ) : (
+                              <strong>{topic.label}</strong>
+                            )}
+                          </div>
                           <span>
                             Em alta
                             <small aria-label="Fontes">
@@ -650,27 +666,36 @@ function committeeEvents(data: PanelData) {
     );
 }
 
-export function committeePageCount(data: PanelData, pageSize = 2) {
-  return Math.max(1, Math.ceil(committeeEvents(data).length / pageSize));
-}
+export function Committees({ data }: { data: PanelData }) {
+  const events = committeeEvents(data);
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const scrolling = events.length > 2;
+  const rows = scrolling ? [...events, ...events] : events;
 
-export function Committees({
-  data,
-  page,
-  setPage,
-}: {
-  data: PanelData;
-  page: number;
-  setPage: (page: number) => void;
-}) {
-  const allEvents = committeeEvents(data);
-  const pageSize = 2;
-  const pages = Math.max(1, Math.ceil(allEvents.length / pageSize));
-  const selected = Math.min(page, pages - 1);
-  const events = allEvents.slice(
-    selected * pageSize,
-    selected * pageSize + pageSize,
-  );
+  useEffect(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller || !scrolling) return;
+
+    let frame = 0;
+    let previous = performance.now();
+    const speed = 10; // px/s, continuous and readable on a TV.
+
+    const tick = (now: number) => {
+      const elapsed = Math.min(64, now - previous);
+      previous = now;
+      scroller.scrollTop += (speed * elapsed) / 1000;
+
+      const halfway = scroller.scrollHeight / 2;
+      if (halfway > 0 && scroller.scrollTop >= halfway) {
+        scroller.scrollTop -= halfway;
+      }
+      frame = requestAnimationFrame(tick);
+    };
+
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [scrolling, events.length]);
+
   return (
     <section
       className="committee-panel light-panel"
@@ -681,72 +706,57 @@ export function Committees({
           <Users />
           COMISSÕES HOJE
         </h2>
-        <div className="committee-nav">
-          <a
-            className="panel-link"
-            href="https://www.camara.leg.br/agenda"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Ver todas
-            <ChevronRight />
-          </a>
-          {pages > 1 ? (
-            <div className="pager committee-pager">
-              <button
-                type="button"
-                aria-label="Comissões anteriores"
-                disabled={selected === 0}
-                onClick={() => setPage(selected - 1)}
-              >
-                <ChevronLeft />
-              </button>
-              <button
-                type="button"
-                aria-label="Próximas comissões"
-                disabled={selected === pages - 1}
-                onClick={() => setPage(selected + 1)}
-              >
-                <ChevronRight />
-              </button>
-            </div>
-          ) : null}
-        </div>
+        <a
+          className="panel-link"
+          href="https://www.camara.leg.br/agenda"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Ver todas
+          <ChevronRight />
+        </a>
       </div>
       <div
-        className="committee-list committee-page-enter"
-        key={selected}
+        className={`committee-list ${scrolling ? "committee-scrolling" : ""}`}
+        ref={scrollerRef}
       >
-        {events.length ? (
-          events.map((event) => (
-            <article className="committee-row" key={event.id}>
-              <div className="committee-time">
-                <strong>{timeOf(event.startsAt)}</strong>
-                {isOngoing(event) ? <span>AGORA</span> : null}
-              </div>
-              <span
-                className={`activity-dot ${isOngoing(event) ? "active" : ""}`}
-              />
-              <div className="committee-organ">
-                <h3>{event.organ}</h3>
-                <p>{event.type}</p>
-              </div>
-              <p className="committee-topic">{event.title}</p>
-              {event.url ? (
-                <a
-                  className="committee-open"
-                  href={event.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`Abrir ${event.title}`}
-                >
-                  <ChevronRight />
-                </a>
-              ) : (
-                <ChevronRight className="committee-open" aria-hidden="true" />
-              )}
-            </article>
-          ))
+        {rows.length ? (
+          <div className="committee-loop-track">
+            {rows.map((event, index) => (
+              <article
+                className="committee-row"
+                key={`${event.id}-${index >= events.length ? "copy" : "main"}`}
+                aria-hidden={index >= events.length ? "true" : undefined}
+              >
+                <div className="committee-time">
+                  <strong>{timeOf(event.startsAt)}</strong>
+                  {isOngoing(event) ? <span>AGORA</span> : null}
+                </div>
+                <span
+                  className={`activity-dot ${isOngoing(event) ? "active" : ""}`}
+                />
+                <div className="committee-organ">
+                  <h3>{event.organ}</h3>
+                  <p>{event.type}</p>
+                </div>
+                <p className="committee-topic">{event.title}</p>
+                {event.url ? (
+                  <a
+                    className="committee-open"
+                    href={event.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Abrir ${event.title}`}
+                    tabIndex={index >= events.length ? -1 : undefined}
+                  >
+                    <ChevronRight />
+                  </a>
+                ) : (
+                  <ChevronRight className="committee-open" aria-hidden="true" />
+                )}
+              </article>
+            ))}
+          </div>
         ) : (
           <div className="empty-light">
             <Users />
@@ -755,22 +765,6 @@ export function Committees({
           </div>
         )}
       </div>
-      {pages > 1 ? (
-        <div
-          className="committee-dots"
-          aria-label={`Página ${selected + 1} de ${pages}`}
-        >
-          {Array.from({ length: Math.min(5, pages) }, (_, index) => (
-            <button
-              type="button"
-              aria-label={`Ir para página ${index + 1}`}
-              className={index === selected % 5 ? "selected" : ""}
-              onClick={() => setPage(index)}
-              key={index}
-            />
-          ))}
-        </div>
-      ) : null}
     </section>
   );
 }
