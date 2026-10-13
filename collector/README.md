@@ -21,7 +21,7 @@ O cabeçalho admite a porta HTTPS 443 explícita e endereços entre aspas. No VP
 1. Inspecionar serviços, portas, proxy HTTPS e domínio existentes antes de qualquer instalação.
 2. Criar usuário de serviço `rede-camara-social`, sem login; colocar `collector.py` em `/opt/rede-camara-social`, pertencendo a root e sem escrita pelo serviço.
 3. Configurar `/etc/rede-camara-social.env` diretamente no servidor, pertencendo a root, permissão 0600, seguindo `.env.example`. Definir uma credencial aleatória de leitura com pelo menos 32 caracteres. Nenhuma senha de rede social é necessária.
-4. Configurar apenas os handles públicos: `INSTAGRAM_HANDLE`, `FACEBOOK_HANDLE`, `TIKTOK_HANDLE`, `X_HANDLE` e `YOUTUBE_HANDLE`. Isso basta para os contadores de seguidores. Token Meta só é necessário para os posts do Instagram; quando estiver indisponível, definir `INSTAGRAM_POSTS_ENABLED=0` preserva os últimos posts já salvos e interrompe tentativas OAuth inúteis.
+4. Configurar apenas os handles públicos: `INSTAGRAM_HANDLE`, `FACEBOOK_HANDLE`, `TIKTOK_HANDLE`, `X_HANDLE` e `YOUTUBE_HANDLE`. Isso basta para os contadores de seguidores. Com `INSTAGRAM_HANDLE` configurado, seguidores e posts do Instagram não dependem de token Meta. As credenciais Meta permanecem apenas como fallback opcional.
 5. Instalar a unidade de serviço fornecida. O processo escuta apenas em `127.0.0.1:8715`; não abrir essa porta na Internet.
 6. Adicionar um domínio HTTPS ao proxy existente. O exemplo Caddy é um bloco adicional, não uma substituição da configuração atual.
 7. Confirmar coleta real e resposta autenticada antes de configurar na Vercel `PANEL_SOCIAL_SOURCE_URL=https://DOMINIO/snapshot.json` e `PANEL_SOCIAL_SOURCE_TOKEN` com a mesma credencial de leitura. Esses valores ficam no backend.
