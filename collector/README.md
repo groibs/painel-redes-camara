@@ -1,6 +1,6 @@
 # Coletor das redes — VPS
 
-Preparado para Python 3.12 / Ubuntu 24.04, sem dependências de terceiros. **Instalação no VPS confirmada em 06/10/2026; contas ainda não conectadas.** O serviço respondeu HTTP 401 sem credencial e HTTP 503 autenticado em `127.0.0.1:8715`. A coleta depende de credenciais autorizadas das plataformas.
+Preparado para Python 3.12 / Ubuntu 24.04. A coleta pública usa `curl_cffi` para apresentar uma impressão TLS de navegador real e reduzir bloqueios de datacenter. **Instalação no VPS confirmada em 06/10/2026; contas ainda não conectadas.** O serviço respondeu HTTP 401 sem credencial e HTTP 503 autenticado em `127.0.0.1:8715`. A coleta depende de credenciais autorizadas das plataformas.
 
 **HTTPS confirmado no VPS em 06/10/2026:** `https://apuracao.revline.com.br/redes/snapshot.json` respondeu HTTP 401 sem credencial e HTTP 503 autenticado. A apresentação eleitoral respondeu HTTP 200 e os estados dos serviços foram preservados. O bloco foi alterado em `/etc/caddy/camara-reserva.caddy`, com backup dos arquivos da configuração; a configuração principal permaneceu intacta. HTTP 503 nesta etapa indica ausência de dados coletados; a autorização das redes e a conexão da fonte ao painel continuam pendentes.
 
@@ -21,14 +21,14 @@ O cabeçalho admite a porta HTTPS 443 explícita e endereços entre aspas. No VP
 1. Inspecionar serviços, portas, proxy HTTPS e domínio existentes antes de qualquer instalação.
 2. Criar usuário de serviço `rede-camara-social`, sem login; colocar `collector.py` em `/opt/rede-camara-social`, pertencendo a root e sem escrita pelo serviço.
 3. Configurar `/etc/rede-camara-social.env` diretamente no servidor, pertencendo a root, permissão 0600, seguindo `.env.example`. Definir uma credencial aleatória de leitura com pelo menos 32 caracteres. Nenhuma senha de rede social é necessária.
-4. Configurar apenas as redes necessárias. Meta exige versão válida do app, IDs e token de leitura para Instagram; o Facebook pode reutilizar esse token quando ele tiver acesso à Página. Para TikTok, X e YouTube, definir apenas `TIKTOK_HANDLE`, `X_HANDLE` e `YOUTUBE_HANDLE` habilita a leitura diária do contador público. As credenciais oficiais dessas plataformas continuam opcionais e, quando presentes, têm preferência.
+4. Configurar apenas os handles públicos: `INSTAGRAM_HANDLE`, `FACEBOOK_HANDLE`, `TIKTOK_HANDLE`, `X_HANDLE` e `YOUTUBE_HANDLE`. Isso basta para os contadores de seguidores. Token Meta só é necessário para os posts do Instagram; quando estiver indisponível, definir `INSTAGRAM_POSTS_ENABLED=0` preserva os últimos posts já salvos e interrompe tentativas OAuth inúteis.
 5. Instalar a unidade de serviço fornecida. O processo escuta apenas em `127.0.0.1:8715`; não abrir essa porta na Internet.
 6. Adicionar um domínio HTTPS ao proxy existente. O exemplo Caddy é um bloco adicional, não uma substituição da configuração atual.
 7. Confirmar coleta real e resposta autenticada antes de configurar na Vercel `PANEL_SOCIAL_SOURCE_URL=https://DOMINIO/snapshot.json` e `PANEL_SOCIAL_SOURCE_TOKEN` com a mesma credencial de leitura. Esses valores ficam no backend.
 
 `GET /snapshot.json` exige `Authorization: Bearer ...`. Sem nenhuma coleta válida, responde 503; nunca publica números fictícios ou zeros para contas ainda não conectadas. O endpoint publica somente o formato esperado por `lib/snapshot.ts`, sem tokens, histórico completo ou detalhes das contas de desenvolvedor.
 
-Logs registram a rede e o tipo de erro, sem URLs, respostas da plataforma ou credenciais. A leitura pública de seguidores depende do HTML público/sindicação de cada plataforma e pode quebrar se a plataforma alterar a página; por isso roda em baixa frequência e uma falha mantém o último número válido. As chamadas autenticadas da Meta continuam separadas. As URLs das imagens do Instagram são renovadas nas coletas de posts; podem expirar quando a fonte fica indisponível por muito tempo.
+Logs registram a rede e o tipo de erro, sem URLs, respostas da plataforma ou credenciais. A leitura pública de seguidores depende das superfícies públicas das plataformas e pode quebrar se elas alterarem o HTML/JSON; o coletor roda em frequência moderada, preserva o último número válido e tenta novamente no próximo intervalo. As chamadas autenticadas da Meta continuam separadas. As URLs das imagens do Instagram são renovadas nas coletas de posts; podem expirar quando a fonte fica indisponível por muito tempo.
 
 ## Validação local
 
