@@ -12,7 +12,8 @@ import urllib.request
 
 from collector import (Store, account, collect, compact_count, fetch_component,
                        normalize_posts, public_facebook, public_instagram,
-                       public_tiktok, public_x, public_youtube)
+                       public_instagram_posts, public_tiktok, public_x,
+                       public_youtube)
 
 ENV = {"META_API_VERSION": "v99.0", "INSTAGRAM_USER_ID": "ig-id", "INSTAGRAM_ACCESS_TOKEN": "test-ig",
        "FACEBOOK_PAGE_ID": "page-id", "FACEBOOK_PAGE_ACCESS_TOKEN": "test-fb",
@@ -55,8 +56,8 @@ class CollectorTest(unittest.TestCase):
         self.assertEqual(public_youtube("@camara", lambda url: youtube), 1_470_000)
         tiktok = '<script>{"stats":{"followerCount":987654}}</script>'
         self.assertEqual(public_tiktok("@camara", lambda url: tiktok), 987_654)
-        xdata = {"user": {"followers": 1_100_000}}
-        self.assertEqual(public_x("@camara", lambda url, params: xdata), 1_100_000)
+        xdata = json.dumps({"user": {"followers": 1_100_000}})
+        self.assertEqual(public_x("@camara", lambda url, headers: xdata), 1_100_000)
 
     def test_public_profiles_work_without_platform_api_credentials(self):
         env = {
@@ -76,7 +77,9 @@ class CollectorTest(unittest.TestCase):
             fetch_component(
                 "x",
                 env,
-                x_get_fn=lambda url, params: {"user": {"followers": 1_100_000}},
+                browser_get_fn=lambda url, headers: json.dumps(
+                    {"user": {"followers": 1_100_000}}
+                ),
             )["followers"],
             1_100_000,
         )
@@ -84,6 +87,43 @@ class CollectorTest(unittest.TestCase):
             fetch_component("tiktok", env, get_text_fn=lambda url: html["tiktok"])["followers"],
             765_432,
         )
+
+    def test_instagram_public_handle_replaces_meta_for_count_and_posts(self):
+        payload = json.dumps({
+            "data": {
+                "user": {
+                    "edge_followed_by": {"count": 321},
+                    "edge_owner_to_timeline_media": {
+                        "edges": [{
+                            "node": {
+                                "__typename": "GraphVideo",
+                                "id": "9",
+                                "shortcode": "POST9",
+                                "taken_at_timestamp": 1791890000,
+                                "display_url": "https://example.com/post.jpg",
+                                "edge_media_to_caption": {"edges": []},
+                                "edge_media_preview_like": {"count": 4},
+                                "edge_media_to_comment": {"count": 1},
+                                "is_video": True,
+                            }
+                        }]
+                    },
+                }
+            }
+        })
+        env = {"INSTAGRAM_HANDLE": "camara"}
+        count_result = fetch_component(
+            "instagram",
+            env,
+            browser_get_fn=lambda url, headers: payload,
+        )
+        post_result = fetch_component(
+            "instagram.posts",
+            env,
+            browser_get_fn=lambda url, headers: payload,
+        )
+        self.assertEqual(count_result["followers"], 321)
+        self.assertEqual(post_result[0]["type"], "video")
 
     def test_facebook_can_reuse_instagram_meta_token(self):
         env = {
@@ -154,12 +194,40 @@ class CollectorTest(unittest.TestCase):
 
     def test_public_instagram_and_facebook_parsers(self):
         instagram = json.dumps({
-            "data": {"user": {"edge_followed_by": {"count": 376630}}}
+            "data": {
+                "user": {
+                    "edge_followed_by": {"count": 376630},
+                    "edge_owner_to_timeline_media": {
+                        "edges": [{
+                            "node": {
+                                "__typename": "GraphImage",
+                                "id": "1",
+                                "shortcode": "ABC123",
+                                "taken_at_timestamp": 1791890000,
+                                "display_url": "https://example.com/image.jpg",
+                                "edge_media_to_caption": {
+                                    "edges": [{"node": {"text": "Legenda"}}]
+                                },
+                                "edge_media_preview_like": {"count": 42},
+                                "edge_media_to_comment": {"count": 3},
+                            }
+                        }]
+                    },
+                }
+            }
         })
         self.assertEqual(
             public_instagram("@camaradosdeputados", lambda url, headers: instagram),
             376630,
         )
+        posts = public_instagram_posts(
+            "@camaradosdeputados",
+            lambda url, headers: instagram,
+        )
+        self.assertEqual(posts[0]["id"], "1")
+        self.assertEqual(posts[0]["likes"], 42)
+        self.assertEqual(posts[0]["comments"], 3)
+        self.assertEqual(posts[0]["permalink"], "https://www.instagram.com/p/ABC123/")
 
         facebook = """
         <html><body>
