@@ -4,7 +4,7 @@ import type { EditorialData } from "@/lib/types";
 export const dynamic = "force-dynamic";
 
 const SOURCE =
-  "https://painel-redes-scraper-camara.vercel.app/api/editorial";
+  "https://painel-editorial-camara.vercel.app/api/editorial";
 
 function validEditorial(value: unknown): value is EditorialData {
   if (!value || typeof value !== "object") return false;
