@@ -638,8 +638,8 @@ export function TodaySchedule({ data }: { data: PanelData }) {
   );
 }
 
-export function Committees({ data }: { data: PanelData }) {
-  const events = todayEvents(data)
+function committeeEvents(data: PanelData) {
+  return todayEvents(data)
     .filter(
       (event) => !isPlenary(event) && event.organ !== "Câmara dos Deputados",
     )
@@ -648,6 +648,29 @@ export function Committees({ data }: { data: PanelData }) {
         Number(isOngoing(b)) - Number(isOngoing(a)) ||
         a.startsAt.localeCompare(b.startsAt),
     );
+}
+
+export function committeePageCount(data: PanelData, pageSize = 2) {
+  return Math.max(1, Math.ceil(committeeEvents(data).length / pageSize));
+}
+
+export function Committees({
+  data,
+  page,
+  setPage,
+}: {
+  data: PanelData;
+  page: number;
+  setPage: (page: number) => void;
+}) {
+  const allEvents = committeeEvents(data);
+  const pageSize = 2;
+  const pages = Math.max(1, Math.ceil(allEvents.length / pageSize));
+  const selected = Math.min(page, pages - 1);
+  const events = allEvents.slice(
+    selected * pageSize,
+    selected * pageSize + pageSize,
+  );
   return (
     <section
       className="committee-panel light-panel"
@@ -658,17 +681,42 @@ export function Committees({ data }: { data: PanelData }) {
           <Users />
           COMISSÕES HOJE
         </h2>
-        <a
-          className="panel-link"
-          href="https://www.camara.leg.br/agenda"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Ver todas
-          <ChevronRight />
-        </a>
+        <div className="committee-nav">
+          <a
+            className="panel-link"
+            href="https://www.camara.leg.br/agenda"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Ver todas
+            <ChevronRight />
+          </a>
+          {pages > 1 ? (
+            <div className="pager committee-pager">
+              <button
+                type="button"
+                aria-label="Comissões anteriores"
+                disabled={selected === 0}
+                onClick={() => setPage(selected - 1)}
+              >
+                <ChevronLeft />
+              </button>
+              <button
+                type="button"
+                aria-label="Próximas comissões"
+                disabled={selected === pages - 1}
+                onClick={() => setPage(selected + 1)}
+              >
+                <ChevronRight />
+              </button>
+            </div>
+          ) : null}
+        </div>
       </div>
-      <div className="committee-list">
+      <div
+        className="committee-list committee-page-enter"
+        key={selected}
+      >
         {events.length ? (
           events.map((event) => (
             <article className="committee-row" key={event.id}>
@@ -707,6 +755,22 @@ export function Committees({ data }: { data: PanelData }) {
           </div>
         )}
       </div>
+      {pages > 1 ? (
+        <div
+          className="committee-dots"
+          aria-label={`Página ${selected + 1} de ${pages}`}
+        >
+          {Array.from({ length: Math.min(5, pages) }, (_, index) => (
+            <button
+              type="button"
+              aria-label={`Ir para página ${index + 1}`}
+              className={index === selected % 5 ? "selected" : ""}
+              onClick={() => setPage(index)}
+              key={index}
+            />
+          ))}
+        </div>
+      ) : null}
     </section>
   );
 }
