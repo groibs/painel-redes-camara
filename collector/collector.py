@@ -89,23 +89,89 @@ def browser_text(url, headers=None):
     return response.text
 
 
-def public_instagram(handle, browser_get_fn=browser_text):
+def public_instagram_profile(handle, browser_get_fn=browser_text):
     username = handle.lstrip("@")
     if not re.fullmatch(r"[A-Za-z0-9._]{1,30}", username):
         raise ValueError("invalid_instagram_handle")
     safe = urllib.parse.quote(username, safe="")
-    text = browser_get_fn(
-        "https://www.instagram.com/api/v1/users/web_profile_info/?username=" + safe,
-        {
-            "X-Ig-App-Id": "936619743392459",
-            "X-Requested-With": "XMLHttpRequest",
-            "Referer": "https://www.instagram.com/",
-        },
-    )
-    data = json.loads(text)
-    user = data.get("data", {}).get("user", {})
-    followers = user.get("edge_followed_by", {}).get("count")
-    return count(followers)
+    headers = {
+        "X-Ig-App-Id": "936619743392459",
+        "X-Requested-With": "XMLHttpRequest",
+        "Referer": "https://www.instagram.com/" + safe + "/",
+    }
+
+    errors = []
+    for host in ("i.instagram.com", "www.instagram.com"):
+        try:
+            text = browser_get_fn(
+                f"https://{host}/api/v1/users/web_profile_info/?username=" + safe,
+                headers,
+            )
+            data = json.loads(text)
+            user = data.get("data", {}).get("user")
+            if not isinstance(user, dict):
+                raise ValueError("instagram_public_profile_missing")
+            return user
+        except Exception as error:
+            errors.append(type(error).__name__)
+
+    raise ValueError("instagram_public_profile_unavailable:" + ",".join(errors))
+
+
+def public_instagram(handle, browser_get_fn=browser_text):
+    user = public_instagram_profile(handle, browser_get_fn)
+    return count(user.get("edge_followed_by", {}).get("count"))
+
+
+def public_instagram_posts(handle, browser_get_fn=browser_text):
+    user = public_instagram_profile(handle, browser_get_fn)
+    timeline = user.get("edge_owner_to_timeline_media", {})
+    edges = timeline.get("edges") if isinstance(timeline, dict) else None
+    if not isinstance(edges, list):
+        raise ValueError("instagram_public_posts_missing")
+
+    posts = []
+    for edge in edges[:6]:
+        node = edge.get("node", {}) if isinstance(edge, dict) else {}
+        identifier = str(node.get("id") or "")
+        shortcode = str(node.get("shortcode") or "")
+        timestamp = node.get("taken_at_timestamp")
+        typename = node.get("__typename")
+        if not identifier or not shortcode or type(timestamp) is not int:
+            continue
+
+        captions = node.get("edge_media_to_caption", {}).get("edges", [])
+        caption = ""
+        if captions and isinstance(captions[0], dict):
+            caption = str(captions[0].get("node", {}).get("text") or "")
+
+        likes = node.get("edge_media_preview_like", {}).get("count")
+        if likes is None:
+            likes = node.get("edge_liked_by", {}).get("count")
+        comments = node.get("edge_media_to_comment", {}).get("count")
+
+        media_type = {
+            "GraphImage": "image",
+            "GraphVideo": "video",
+            "GraphSidecar": "carousel",
+        }.get(typename, "video" if node.get("is_video") else "image")
+
+        posts.append({
+            "id": identifier[:100],
+            "caption": caption[:4000],
+            "publishedAt": dt.datetime.fromtimestamp(timestamp, UTC).isoformat(),
+            "type": media_type,
+            "mediaUrl": https(node.get("display_url")),
+            "permalink": "https://www.instagram.com/p/" + shortcode + "/",
+            "likes": count(likes) if likes is not None else None,
+            "comments": count(comments) if comments is not None else None,
+        })
+
+    if not posts:
+        raise ValueError("instagram_public_posts_empty")
+    return sorted(posts, key=lambda post: post["publishedAt"], reverse=True)
+
+
 
 
 def public_facebook(handle, browser_get_fn=browser_text):
@@ -209,9 +275,13 @@ def public_tiktok(handle, get_text_fn=get_text):
     return count(match.group(1))
 
 
-def public_x(handle, get_fn=get_json):
+def public_x(handle, browser_get_fn=browser_text):
     safe = urllib.parse.quote(handle.lstrip("@"), safe="")
-    data = get_fn("https://api.fxtwitter.com/2/profile/" + safe, {})
+    text = browser_get_fn(
+        "https://api.fxtwitter.com/2/profile/" + safe,
+        {"Accept": "application/json"},
+    )
+    data = json.loads(text)
     user = data.get("user")
     if not isinstance(user, dict):
         raise ValueError("x_public_profile_not_found")
@@ -282,18 +352,24 @@ def meta_base(env, instagram=False):
     return f"https://{host}/{version}"
 
 
-def fetch_component(key, env, get=get_json, get_text_fn=get_text, x_get_fn=get_json):
+def fetch_component(key, env, get=get_json, get_text_fn=get_text, browser_get_fn=browser_text):
     if key.startswith("instagram"):
+        handle = env.get("INSTAGRAM_HANDLE") or env.get("INSTAGRAM_USERNAME")
+        if handle:
+            if key == "instagram.posts":
+                return public_instagram_posts(handle, browser_get_fn)
+            return account(
+                "instagram",
+                "@" + handle.lstrip("@"),
+                public_instagram(handle, browser_get_fn),
+            )
+
         if key == "instagram.posts":
             user = urllib.parse.quote(env["INSTAGRAM_USER_ID"], safe="")
             base = meta_base(env, True) + "/" + user
             token = env["INSTAGRAM_ACCESS_TOKEN"]
             data = get(base + "/media", {"limit": "6", "fields": "id,caption,media_type,media_url,thumbnail_url,permalink,timestamp,like_count,comments_count,children{media_url,thumbnail_url}"}, token)
             return normalize_posts(data["data"])
-
-        handle = env.get("INSTAGRAM_HANDLE") or env.get("INSTAGRAM_USERNAME")
-        if handle:
-            return account("instagram", "@" + handle.lstrip("@"), public_instagram(handle))
 
         user = urllib.parse.quote(env["INSTAGRAM_USER_ID"], safe="")
         base = meta_base(env, True) + "/" + user
@@ -327,7 +403,11 @@ def fetch_component(key, env, get=get_json, get_text_fn=get_text, x_get_fn=get_j
             data = get("https://api.x.com/2/users/" + user, {"user.fields": "public_metrics"}, env["X_BEARER_TOKEN"])["data"]
             return account(key, data.get("username"), data["public_metrics"]["followers_count"])
         handle = env["X_HANDLE"]
-        return account(key, "@" + handle.lstrip("@"), public_x(handle, x_get_fn))
+        return account(
+            key,
+            "@" + handle.lstrip("@"),
+            public_x(handle, browser_get_fn),
+        )
     if env.get("TIKTOK_ACCESS_TOKEN"):
         data = get("https://open.tiktokapis.com/v2/user/info/", {"fields": "display_name,follower_count"}, env["TIKTOK_ACCESS_TOKEN"])
         if data.get("error", {}).get("code") != "ok":
@@ -347,9 +427,17 @@ def configured(key, env):
         )
     if key == "instagram.posts":
         posts_enabled = env.get("INSTAGRAM_POSTS_ENABLED", "1").lower() not in ("0", "false", "no")
-        return bool(posts_enabled and all(
-            env.get(field) for field in ("INSTAGRAM_USER_ID", "INSTAGRAM_ACCESS_TOKEN", "META_API_VERSION")
-        ))
+        return bool(
+            posts_enabled
+            and (
+                env.get("INSTAGRAM_HANDLE")
+                or env.get("INSTAGRAM_USERNAME")
+                or all(
+                    env.get(field)
+                    for field in ("INSTAGRAM_USER_ID", "INSTAGRAM_ACCESS_TOKEN", "META_API_VERSION")
+                )
+            )
+        )
     if key == "facebook":
         return bool(
             env.get("FACEBOOK_HANDLE")
