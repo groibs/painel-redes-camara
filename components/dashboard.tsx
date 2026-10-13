@@ -18,6 +18,7 @@ import {
   X,
 } from "lucide-react";
 import {
+  committeePageCount,
   Committees,
   InstagramFeed,
   NowPanel,
@@ -156,6 +157,7 @@ export default function Dashboard({
   const [agendaPage, setAgendaPage] = useState(0);
   const [feedPage, setFeedPage] = useState(0);
   const [radarPage, setRadarPage] = useState(0);
+  const [committeePage, setCommitteePage] = useState(0);
   const [weekOffset, setWeekOffset] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
   const [offline, setOffline] = useState(false);
@@ -324,6 +326,9 @@ export default function Dashboard({
           (page + 1) %
           Math.max(1, Math.ceil((editorial?.topics.length ?? 0) / 8)),
       );
+      setCommitteePage(
+        (page) => (page + 1) % committeePageCount(data),
+      );
     }, 20000);
     return () => clearInterval(timer);
   }, [data, editorial, autoRotate, settingsOpen]);
@@ -469,7 +474,11 @@ export default function Dashboard({
                 <VotePanel vote={data.vote} demo={demo} />
               )}
               <TodaySummary data={data} />
-              <Committees data={data} />
+              <Committees
+                data={data}
+                page={committeePage}
+                setPage={setCommitteePage}
+              />
             </div>
             <div className="right-column">
               <TopicRadar
