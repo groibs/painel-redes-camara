@@ -4,6 +4,8 @@ import { parseSnapshot, safeHttpsUrl } from "./snapshot";
 import type { AgendaEvent, PanelData, Source, Vote } from "./types";
 
 const API = "https://dadosabertos.camara.leg.br/api/v2";
+const INSTAGRAM_MEDIA_PROXY =
+  "https://painel-redes-scraper-camara.vercel.app/media";
 export type PanelEnvironment = {
   PANEL_VOTE_ID?: string;
   PANEL_SOCIAL_SOURCE_URL?: string;
@@ -206,7 +208,14 @@ async function social(
     (account) =>
       snapshot.accounts.find((item) => item.id === account.id) || account,
   );
-  panel.posts = snapshot.posts;
+  panel.posts = snapshot.posts.map((post) =>
+    post.mediaUrl
+      ? {
+          ...post,
+          mediaUrl: `${INSTAGRAM_MEDIA_PROXY}?id=${encodeURIComponent(post.id)}`,
+        }
+      : post,
+  );
   panel.sources.social = {
     state: "ok",
     checkedAt: snapshot.collectedAt,
