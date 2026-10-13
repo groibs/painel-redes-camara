@@ -201,7 +201,7 @@ def _topics():
     ordered = sorted(
         merged.values(),
         key=lambda row: (-row["score"], row["bestRank"], row["label"].lower()),
-    )[:12]
+    )[:30]
 
     if ordered:
         high = max(row["score"] for row in ordered)
