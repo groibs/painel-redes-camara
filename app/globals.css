@@ -604,6 +604,69 @@ p {
   padding: 9px 0 0 27px;
   width: 80%;
 }
+
+.now-list-with-live {
+  width: 67%;
+  padding-right: 8px;
+}
+.live-stream-stack {
+  position: absolute;
+  z-index: 4;
+  top: 66px;
+  right: 18px;
+  bottom: 36px;
+  width: 27%;
+  display: grid;
+  gap: 10px;
+  pointer-events: auto;
+}
+.live-stream-card {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #001a22;
+  border: 1px solid #ffffff2b;
+  box-shadow: 0 5px 20px #00131b55;
+}
+.live-stream-card iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  background: #001a22;
+}
+.live-stream-badge {
+  position: absolute;
+  left: 7px;
+  bottom: 7px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 4px;
+  padding: 4px 6px;
+  background: #d20d24e8;
+  color: white;
+  font-family: var(--display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  pointer-events: none;
+}
+.live-stream-badge i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #fff;
+}
+.live-count-1 {
+  top: 104px;
+  bottom: 74px;
+}
+.live-count-1 .live-stream-card {
+  max-height: 190px;
+  align-self: center;
+}
 .now-row {
   display: flex;
   align-items: center;
@@ -762,6 +825,106 @@ p {
   line-height: 1.12;
   font-weight: 600;
 }
+.radar-panel {
+  display: flex;
+  flex-direction: column;
+}
+.radar-heading {
+  min-height: 58px;
+}
+.radar-now {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #627b8b;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+.radar-now i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 4px #00b46317;
+}
+.topic-cloud {
+  flex: 1;
+  min-height: 0;
+  padding: 5px 18px 4px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  gap: 9px 10px;
+  overflow: hidden;
+}
+.topic-chip {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 5px;
+  color: #315568;
+  line-height: 1;
+  font-family: var(--display);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.topic-chip > small {
+  display: inline-flex;
+  gap: 2px;
+  padding-top: 1px;
+}
+.topic-source {
+  width: 15px;
+  height: 15px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-family: var(--body);
+  font-style: normal;
+  font-size: 8px;
+  line-height: 1;
+  color: #fff;
+  background: #78909c;
+}
+.topic-source.source-google {
+  background: #4285f4;
+}
+.topic-source.source-x {
+  background: #101820;
+}
+.topic-source.source-camara {
+  background: #00a96b;
+}
+.topic-weight-1 {
+  font-size: 19px;
+  color: #6f8795;
+}
+.topic-weight-2 {
+  font-size: 22px;
+  color: #547181;
+}
+.topic-weight-3 {
+  font-size: 27px;
+  color: #315f70;
+}
+.topic-weight-4 {
+  font-size: 33px;
+  color: #007a6d;
+}
+.topic-weight-5 {
+  font-size: 39px;
+  color: #005c55;
+}
+.radar-foot {
+  font-size: 10px;
+  padding-top: 6px;
+}
+.radar-empty {
+  flex: 1;
+  min-height: 0;
+}
+
 .schedule-list {
   padding: 0 15px;
   display: flex;
@@ -1846,6 +2009,36 @@ legend {
 .theme-night .summary-counts span {
   color: #c5d6dc;
 }
+.theme-night .radar-panel {
+  background: #0b242d;
+}
+.theme-night .radar-now,
+.theme-night .radar-foot {
+  color: #91aab4;
+}
+.theme-night .topic-weight-1 {
+  color: #7f9aa4;
+}
+.theme-night .topic-weight-2 {
+  color: #9ab3bc;
+}
+.theme-night .topic-weight-3 {
+  color: #b7d0d6;
+}
+.theme-night .topic-weight-4 {
+  color: #55d6af;
+}
+.theme-night .topic-weight-5 {
+  color: #7af0c3;
+}
+.theme-night .topic-source.source-x {
+  background: #000;
+  border: 1px solid #3a4c53;
+}
+.theme-night .live-stream-card {
+  border-color: #8bd8c133;
+}
+
 .theme-night .schedule-row {
   background: #102d37;
   border-color: #1b3c46;
@@ -2160,6 +2353,21 @@ legend {
     width: 94%;
     padding-left: 16px;
   }
+  .now-list-with-live {
+    width: 70%;
+    padding-right: 4px;
+  }
+  .live-stream-stack {
+    top: 68px;
+    right: 10px;
+    bottom: 35px;
+    width: 27%;
+    gap: 7px;
+  }
+  .live-stream-badge {
+    font-size: 8px;
+    padding: 3px 5px;
+  }
   .event-icon {
     width: 51px;
     height: 63px;
@@ -2268,6 +2476,28 @@ legend {
   }
   .committee-topic {
     display: none;
+  }
+  .radar-panel {
+    height: 405px;
+  }
+  .topic-cloud {
+    padding: 8px 14px;
+    gap: 10px;
+  }
+  .topic-weight-1 {
+    font-size: 17px;
+  }
+  .topic-weight-2 {
+    font-size: 20px;
+  }
+  .topic-weight-3 {
+    font-size: 23px;
+  }
+  .topic-weight-4 {
+    font-size: 27px;
+  }
+  .topic-weight-5 {
+    font-size: 31px;
   }
   .schedule-panel {
     height: 405px;
