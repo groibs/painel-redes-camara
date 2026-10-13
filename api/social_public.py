@@ -1,9 +1,7 @@
 from http.server import BaseHTTPRequestHandler
 import datetime as dt
-import hmac
 import json
-import os
-from urllib.parse import quote
+from urllib.parse import parse_qs, quote, urlsplit
 
 from curl_cffi import requests
 
@@ -17,18 +15,11 @@ def _json_response(handler, status, payload):
     body = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
     handler.send_response(status)
     handler.send_header("Content-Type", "application/json; charset=utf-8")
-    handler.send_header("Cache-Control", "no-store")
+    handler.send_header("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300")
     handler.send_header("Content-Length", str(len(body)))
+    handler.send_header("X-Content-Type-Options", "nosniff")
     handler.end_headers()
     handler.wfile.write(body)
-
-
-def _authorized(handler):
-    expected = os.environ.get("PANEL_SOCIAL_SOURCE_TOKEN", "")
-    supplied = handler.headers.get("Authorization", "")
-    if not expected:
-        return False
-    return hmac.compare_digest(supplied, "Bearer " + expected)
 
 
 def _ig_profile():
@@ -75,10 +66,15 @@ def _ig_posts(user):
     timeline = user.get("edge_owner_to_timeline_media") or {}
     edges = timeline.get("edges") if isinstance(timeline, dict) else []
     posts = []
-    for edge in (edges or [])[:6]:
+    for edge in edges or []:
         node = edge.get("node") if isinstance(edge, dict) else None
         if not isinstance(node, dict):
             continue
+        # Instagram places pinned posts at the beginning of the profile response.
+        # They should not count as the latest posts shown in the wallboard.
+        if node.get("pinned_for_users"):
+            continue
+
         identifier = str(node.get("id") or "")
         shortcode = str(node.get("shortcode") or "")
         timestamp = node.get("taken_at_timestamp")
@@ -112,7 +108,41 @@ def _ig_posts(user):
             "likes": _count(likes),
             "comments": _count(comments),
         })
+        if len(posts) >= 6:
+            break
     return posts
+
+
+def _ig_media(post_id):
+    if not isinstance(post_id, str) or not post_id.isdigit() or len(post_id) > 100:
+        raise ValueError("invalid_post_id")
+
+    user = _ig_profile()
+    timeline = user.get("edge_owner_to_timeline_media") or {}
+    edges = timeline.get("edges") if isinstance(timeline, dict) else []
+    for edge in edges or []:
+        node = edge.get("node") if isinstance(edge, dict) else None
+        if not isinstance(node, dict) or str(node.get("id") or "") != post_id:
+            continue
+        url = node.get("display_url")
+        if not isinstance(url, str) or not url.startswith("https://"):
+            raise ValueError("media_url_missing")
+        response = requests.get(
+            url,
+            headers={"Referer": "https://www.instagram.com/"},
+            impersonate="chrome",
+            timeout=20,
+            allow_redirects=True,
+        )
+        if response.status_code != 200:
+            raise RuntimeError("media_http_error")
+        if len(response.content) > MAX_BODY:
+            raise RuntimeError("media_too_large")
+        content_type = response.headers.get("content-type", "image/jpeg")
+        if not content_type.startswith("image/"):
+            raise RuntimeError("media_not_image")
+        return response.content, content_type
+    raise LookupError("post_not_found")
 
 
 def _x_profile():
@@ -181,12 +211,35 @@ def collect():
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        if self.path.split("?", 1)[0] != "/api/social-public":
-            _json_response(self, 404, {"error": "not_found"})
+        parsed = urlsplit(self.path)
+
+        if parsed.path == "/media":
+            post_id = (parse_qs(parsed.query).get("id") or [""])[0]
+            try:
+                body, content_type = _ig_media(post_id)
+            except ValueError:
+                _json_response(self, 400, {"error": "invalid_media_request"})
+                return
+            except LookupError:
+                _json_response(self, 404, {"error": "media_not_found"})
+                return
+            except Exception:
+                _json_response(self, 502, {"error": "media_unavailable"})
+                return
+
+            self.send_response(200)
+            self.send_header("Content-Type", content_type)
+            self.send_header(
+                "Cache-Control",
+                "public, max-age=300, s-maxage=300, stale-while-revalidate=86400",
+            )
+            self.send_header("Content-Length", str(len(body)))
+            self.send_header("X-Content-Type-Options", "nosniff")
+            self.send_header("Cross-Origin-Resource-Policy", "cross-origin")
+            self.end_headers()
+            self.wfile.write(body)
             return
-        if not _authorized(self):
-            _json_response(self, 401, {"error": "unauthorized"})
-            return
+
         status, payload = collect()
         _json_response(self, status, payload)
 
