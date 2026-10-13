@@ -77,8 +77,6 @@ def _clean_label(value):
     if folded == "poupanca":
         return "Poupança"
 
-    if len(spaced) > 34:
-        spaced = spaced[:31].rstrip() + "…"
     if spaced.isupper() and len(spaced) > 5:
         spaced = spaced.title()
     return spaced
