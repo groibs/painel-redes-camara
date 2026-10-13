@@ -460,16 +460,27 @@ function agendaTopics(data: PanelData): EditorialTopic[] {
 export function TopicRadar({
   data,
   editorial,
+  page,
+  setPage,
 }: {
   data: PanelData;
   editorial: EditorialData | null;
+  page: number;
+  setPage: (page: number) => void;
 }) {
   const external = editorial?.topics ?? [];
   const seen = new Set(external.map((topic) => topicKey(topic.label)));
   const local = agendaTopics(data).filter(
     (topic) => !seen.has(topicKey(topic.label)),
   );
-  const topics = [...external, ...local].slice(0, 12);
+  const allTopics = [...external, ...local].slice(0, 30);
+  const pageSize = 12;
+  const pages = Math.max(1, Math.ceil(allTopics.length / pageSize));
+  const selected = Math.min(page, pages - 1);
+  const topics = allTopics.slice(
+    selected * pageSize,
+    selected * pageSize + pageSize,
+  );
   const sourceLetter = { google: "G", x: "X", camara: "C" } as const;
 
   return (
@@ -479,10 +490,32 @@ export function TopicRadar({
           <Radar />
           RADAR LEGISLATIVO
         </h2>
-        <span className="radar-now">
-          <i />
-          AGORA
-        </span>
+        <div className="radar-controls">
+          <span className="radar-now">
+            <i />
+            AGORA
+          </span>
+          {pages > 1 ? (
+            <div className="pager radar-pager">
+              <button
+                type="button"
+                aria-label="Assuntos anteriores"
+                disabled={selected === 0}
+                onClick={() => setPage(selected - 1)}
+              >
+                <ChevronLeft />
+              </button>
+              <button
+                type="button"
+                aria-label="Próximos assuntos"
+                disabled={selected === pages - 1}
+                onClick={() => setPage(selected + 1)}
+              >
+                <ChevronRight />
+              </button>
+            </div>
+          ) : null}
+        </div>
       </div>
       {topics.length ? (
         <div className="trending-grid" aria-label="Assuntos em alta">
@@ -492,7 +525,7 @@ export function TopicRadar({
               key={`${topicKey(topic.label)}-${index}`}
             >
               <span className="trending-rank">
-                {String(index + 1).padStart(2, "0")}
+                {String(selected * pageSize + index + 1).padStart(2, "0")}
               </span>
               <div className="trending-copy">
                 <strong>{topic.label}</strong>
@@ -526,6 +559,22 @@ export function TopicRadar({
       )}
       <div className="panel-foot radar-foot">
         <span>Google Trends · X · Câmara</span>
+        {pages > 1 ? (
+          <div
+            className="radar-dots"
+            aria-label={`Página ${selected + 1} de ${pages}`}
+          >
+            {Array.from({ length: Math.min(5, pages) }, (_, index) => (
+              <button
+                type="button"
+                aria-label={`Ir para página ${index + 1}`}
+                className={index === selected % 5 ? "selected" : ""}
+                onClick={() => setPage(index)}
+                key={index}
+              />
+            ))}
+          </div>
+        ) : null}
         <span>
           {editorial?.collectedAt
             ? `Atualizado às ${timeOf(editorial.collectedAt)}`
