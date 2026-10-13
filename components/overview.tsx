@@ -485,21 +485,36 @@ export function TopicRadar({
         </span>
       </div>
       {topics.length ? (
-        <div className="topic-cloud" aria-label="Assuntos em alta">
+        <div className="trending-grid" aria-label="Assuntos em alta">
           {topics.map((topic, index) => (
-            <div
-              className={`topic-chip topic-weight-${topic.weight}`}
+            <article
+              className="trending-topic"
               key={`${topicKey(topic.label)}-${index}`}
             >
-              <span>{topic.label}</span>
-              <small aria-label="Fontes">
-                {topic.sources.map((source) => (
-                  <i className={`topic-source source-${source}`} key={source}>
-                    {sourceLetter[source]}
-                  </i>
-                ))}
-              </small>
-            </div>
+              <span className="trending-rank">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <div className="trending-copy">
+                <strong>{topic.label}</strong>
+                <span>
+                  Em alta
+                  <small aria-label="Fontes">
+                    {topic.sources.map((source) => (
+                      <i
+                        className={`topic-source source-${source}`}
+                        key={source}
+                      >
+                        {sourceLetter[source]}
+                      </i>
+                    ))}
+                  </small>
+                </span>
+              </div>
+              <i
+                className={`trend-level trend-level-${topic.weight}`}
+                aria-hidden="true"
+              />
+            </article>
           ))}
         </div>
       ) : (
