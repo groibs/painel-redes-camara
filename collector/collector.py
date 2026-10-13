@@ -372,7 +372,7 @@ def public_scraper_snapshot(env):
         or not parsed.hostname
         or parsed.username
         or parsed.password
-        or parsed.path != "/api/social-public"
+        or parsed.path not in ("/api/social", "/")
     ):
         raise ValueError("invalid_public_scraper_url")
 
