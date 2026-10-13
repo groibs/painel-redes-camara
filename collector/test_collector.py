@@ -90,7 +90,6 @@ class CollectorTest(unittest.TestCase):
             "META_API_VERSION": "v26.0",
             "FACEBOOK_PAGE_ID": "316136345150243",
             "INSTAGRAM_ACCESS_TOKEN": "meta-token",
-            "FACEBOOK_HANDLE": "@camaradeputados",
         }
         seen = {}
 
