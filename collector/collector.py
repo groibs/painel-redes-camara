@@ -277,15 +277,21 @@ def public_tiktok(handle, get_text_fn=get_text):
 
 def public_x(handle, browser_get_fn=browser_text):
     safe = urllib.parse.quote(handle.lstrip("@"), safe="")
-    text = browser_get_fn(
+    errors = []
+    for url in (
+        "https://api.fxtwitter.com/" + safe,
         "https://api.fxtwitter.com/2/profile/" + safe,
-        {"Accept": "application/json"},
-    )
-    data = json.loads(text)
-    user = data.get("user")
-    if not isinstance(user, dict):
-        raise ValueError("x_public_profile_not_found")
-    return count(user["followers"])
+    ):
+        try:
+            text = browser_get_fn(url, {"Accept": "application/json"})
+            data = json.loads(text)
+            user = data.get("user")
+            if isinstance(user, dict):
+                return count(user["followers"])
+            errors.append("no_user")
+        except Exception as error:
+            errors.append(type(error).__name__)
+    raise ValueError("x_public_profile_unavailable:" + ",".join(errors))
 
 
 def count(value):
@@ -352,7 +358,132 @@ def meta_base(env, instagram=False):
     return f"https://{host}/{version}"
 
 
+_PUBLIC_SCRAPER_CACHE = {"url": None, "stamp": 0.0, "data": None}
+_PUBLIC_SCRAPER_LOCK = threading.Lock()
+
+
+def public_scraper_snapshot(env):
+    url = env.get("PUBLIC_SCRAPER_URL", "")
+    if not url:
+        raise ValueError("public_scraper_url_missing")
+    parsed = urllib.parse.urlsplit(url)
+    if (
+        parsed.scheme != "https"
+        or not parsed.hostname
+        or parsed.username
+        or parsed.password
+        or parsed.path != "/api/social-public"
+    ):
+        raise ValueError("invalid_public_scraper_url")
+
+    token = env.get("COLLECTOR_READ_TOKEN", "")
+    if len(token) < 32:
+        raise ValueError("collector_token_missing")
+
+    now = time.monotonic()
+    with _PUBLIC_SCRAPER_LOCK:
+        if (
+            _PUBLIC_SCRAPER_CACHE["url"] == url
+            and _PUBLIC_SCRAPER_CACHE["data"] is not None
+            and now - _PUBLIC_SCRAPER_CACHE["stamp"] < 30
+        ):
+            return _PUBLIC_SCRAPER_CACHE["data"]
+
+        request = urllib.request.Request(
+            url,
+            headers={
+                "Accept": "application/json",
+                "Authorization": "Bearer " + token,
+                "User-Agent": "RedeCamaraCollector/1",
+            },
+        )
+        with urllib.request.urlopen(request, timeout=40) as response:
+            body = response.read(MAX_PUBLIC_RESPONSE + 1)
+        if len(body) > MAX_PUBLIC_RESPONSE:
+            raise ValueError("public_scraper_response_limit")
+        data = json.loads(body)
+        if not isinstance(data, dict):
+            raise ValueError("invalid_public_scraper_response")
+
+        _PUBLIC_SCRAPER_CACHE["url"] = url
+        _PUBLIC_SCRAPER_CACHE["stamp"] = now
+        _PUBLIC_SCRAPER_CACHE["data"] = data
+        return data
+
+
+def normalize_public_posts(rows):
+    if not isinstance(rows, list):
+        raise ValueError("invalid_public_posts")
+    posts = []
+    for row in rows[:6]:
+        if not isinstance(row, dict):
+            raise ValueError("invalid_public_post")
+        identifier = str(row.get("id") or "")
+        caption = str(row.get("caption") or "")
+        published = row.get("publishedAt")
+        media_type = row.get("type")
+        if not identifier or len(identifier) > 100 or media_type not in ("image", "video", "carousel"):
+            raise ValueError("invalid_public_post")
+        if not isinstance(published, str):
+            raise ValueError("invalid_public_post_time")
+        date = dt.datetime.fromisoformat(published.replace("Z", "+00:00"))
+        if date.tzinfo is None:
+            raise ValueError("missing_public_post_timezone")
+
+        likes = row.get("likes")
+        comments = row.get("comments")
+        if likes is not None:
+            likes = count(likes)
+        if comments is not None:
+            comments = count(comments)
+
+        posts.append({
+            "id": identifier,
+            "caption": caption[:4000],
+            "mediaUrl": https(row.get("mediaUrl")),
+            "permalink": https(row.get("permalink"), True),
+            "publishedAt": date.astimezone(UTC).isoformat(),
+            "type": media_type,
+            "likes": likes,
+            "comments": comments,
+        })
+    if not posts:
+        raise ValueError("empty_public_posts")
+    return sorted(posts, key=lambda post: post["publishedAt"], reverse=True)
+
+
+def remote_component(key, env):
+    data = public_scraper_snapshot(env)
+    if key in ("instagram", "instagram.posts"):
+        instagram = data.get("instagram")
+        if not isinstance(instagram, dict):
+            raise ValueError("remote_instagram_missing")
+        if key == "instagram.posts":
+            return normalize_public_posts(instagram.get("posts"))
+        return account(
+            "instagram",
+            instagram.get("handle") or "@camaradosdeputados",
+            instagram.get("followers"),
+        )
+    if key == "x":
+        xdata = data.get("x")
+        if not isinstance(xdata, dict):
+            raise ValueError("remote_x_missing")
+        return account(
+            "x",
+            xdata.get("handle") or "@camaradeputados",
+            xdata.get("followers"),
+        )
+    raise ValueError("unsupported_remote_component")
+
+
 def fetch_component(key, env, get=get_json, get_text_fn=get_text, browser_get_fn=browser_text):
+    if key in ("instagram", "instagram.posts", "x") and env.get("PUBLIC_SCRAPER_URL"):
+        try:
+            return remote_component(key, env)
+        except Exception:
+            pass
+
     if key.startswith("instagram"):
         handle = env.get("INSTAGRAM_HANDLE") or env.get("INSTAGRAM_USERNAME")
         if handle:
