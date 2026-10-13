@@ -141,10 +141,7 @@ export function SocialMetrics({
       <div className="metrics-list">
         {data.accounts.map((account) => {
           const delta = account.change24h;
-          const freshnessWindow =
-            account.id === "instagram"
-              ? 30 * 60 * 1000
-              : 26 * 60 * 60 * 1000;
+          const freshnessWindow = 45 * 60 * 1000;
           const stale =
             offline ||
             data.sources.social.state === "error" ||
