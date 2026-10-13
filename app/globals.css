@@ -1470,9 +1470,14 @@ p {
 .ticker-track {
   display: flex;
   width: max-content;
+  min-width: max-content;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 .ticker-running .ticker-track {
   animation: ticker-scroll 90s linear infinite;
+  -webkit-animation: ticker-scroll 90s linear infinite;
 }
 .ticker-copy {
   display: flex;
@@ -1499,8 +1504,19 @@ p {
   flex: none;
 }
 @keyframes ticker-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+@-webkit-keyframes ticker-scroll {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+  to {
+    -webkit-transform: translate3d(-50%, 0, 0);
   }
 }
 .footer {
@@ -2241,8 +2257,12 @@ legend {
     animation: none !important;
     transition: none !important;
   }
-  .ticker-track {
-    transform: none;
+
+  /* The wallboard ticker is operational information rather than decoration.
+     Some TV browsers report reduced motion by default, which previously froze it. */
+  .ticker-running .ticker-track {
+    animation: ticker-scroll 90s linear infinite !important;
+    -webkit-animation: ticker-scroll 90s linear infinite !important;
   }
 }
 @media (max-width: 799px) {
