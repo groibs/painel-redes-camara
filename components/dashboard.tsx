@@ -155,6 +155,7 @@ export default function Dashboard({
   const [refreshSeconds, setRefreshSeconds] = useState(60);
   const [agendaPage, setAgendaPage] = useState(0);
   const [feedPage, setFeedPage] = useState(0);
+  const [radarPage, setRadarPage] = useState(0);
   const [weekOffset, setWeekOffset] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
   const [offline, setOffline] = useState(false);
@@ -318,9 +319,14 @@ export default function Dashboard({
       setFeedPage(
         (page) => (page + 1) % Math.max(1, Math.ceil(data.posts.length / 3)),
       );
+      setRadarPage(
+        (page) =>
+          (page + 1) %
+          Math.max(1, Math.ceil((editorial?.topics.length ?? 0) / 12)),
+      );
     }, 20000);
     return () => clearInterval(timer);
-  }, [data, autoRotate, settingsOpen]);
+  }, [data, editorial, autoRotate, settingsOpen]);
 
   useEffect(() => {
     if (!data) return;
@@ -466,7 +472,12 @@ export default function Dashboard({
               <Committees data={data} />
             </div>
             <div className="right-column">
-              <TopicRadar data={data} editorial={editorial} />
+              <TopicRadar
+                data={data}
+                editorial={editorial}
+                page={radarPage}
+                setPage={setRadarPage}
+              />
               <Week data={data} offset={weekOffset} setOffset={setWeekOffset} />
             </div>
           </div>
