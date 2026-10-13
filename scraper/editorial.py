@@ -29,7 +29,7 @@ POLICY_TERMS = (
     "universidade", "seguranca", "violencia", "mulher", "crianca",
     "agricultura", "agro", "clima", "meio ambiente", "energia", "moradia",
     "transporte", "economia", "poupanca", "direitos", "internet",
-    "inteligencia artificial", "ia ", "tribut", "fiscal", "bolsa familia",
+    "inteligencia artificial", "tribut", "fiscal", "bolsa familia",
     "sus", "inss", "pix", "banco central", "poderdata",
 )
 
@@ -56,7 +56,7 @@ def _clean_label(value):
         return "Voto feminino"
     if "sindicat" in folded:
         return "Sindicatos"
-    if "poderdata" in folded or "votos validos" in folded or (
+    if "poderdata" in folded or "poder data" in folded or "votos validos" in folded or (
         "pesquisa" in folded and ("btg" in folded or "eleit" in folded)
     ):
         return "Pesquisas eleitorais"
