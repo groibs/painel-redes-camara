@@ -131,8 +131,10 @@ def public_instagram_posts(handle, browser_get_fn=browser_text):
         raise ValueError("instagram_public_posts_missing")
 
     posts = []
-    for edge in edges[:6]:
+    for edge in edges:
         node = edge.get("node", {}) if isinstance(edge, dict) else {}
+        if node.get("pinned_for_users"):
+            continue
         identifier = str(node.get("id") or "")
         shortcode = str(node.get("shortcode") or "")
         timestamp = node.get("taken_at_timestamp")
@@ -166,6 +168,8 @@ def public_instagram_posts(handle, browser_get_fn=browser_text):
             "likes": count(likes) if likes is not None else None,
             "comments": count(comments) if comments is not None else None,
         })
+        if len(posts) >= 6:
+            break
 
     if not posts:
         raise ValueError("instagram_public_posts_empty")
