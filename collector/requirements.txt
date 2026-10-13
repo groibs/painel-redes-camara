@@ -1,0 +1,2 @@
+# Browser TLS impersonation for public Instagram/Facebook/TikTok/YouTube profile reads.
+curl-cffi>=0.16.0,<1
