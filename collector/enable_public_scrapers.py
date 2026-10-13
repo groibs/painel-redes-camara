@@ -24,6 +24,7 @@ UPDATES = {
     "PYTHONPATH": str(VENDOR),
     "FOLLOWERS_INTERVAL_SECONDS": "900",
     "PUBLIC_FOLLOWERS_INTERVAL_SECONDS": "900",
+    "PUBLIC_SCRAPER_URL": "https://painel-redes-scraper-camara.vercel.app/api/social",
     "INSTAGRAM_HANDLE": "camaradosdeputados",
     "INSTAGRAM_POSTS_ENABLED": "1",
     "FACEBOOK_HANDLE": "camaradeputados",
