@@ -281,6 +281,16 @@ class Store:
             row = db.execute("SELECT stamp FROM attempts WHERE key=?", (key,)).fetchone()
         return not row or now - row[0] >= interval
 
+    def last_attempt(self, key):
+        with self.connect() as db:
+            row = db.execute("SELECT stamp FROM attempts WHERE key=?", (key,)).fetchone()
+        return row[0] if row else None
+
+    def last_success(self, key):
+        with self.connect() as db:
+            row = db.execute("SELECT updated FROM components WHERE key=?", (key,)).fetchone()
+        return row[0] if row else None
+
     def attempted(self, key, now):
         with self.connect() as db:
             db.execute("INSERT OR REPLACE INTO attempts VALUES (?,?)", (key, now))
@@ -307,6 +317,31 @@ class Store:
                 "accounts": [data[key] for key in ORDER if key in data], "posts": data.get("instagram.posts", [])}
 
 
+def public_daily_due(store, key, now, env):
+    # Daily counters are tied to the Brasília calendar rather than to "24h since
+    # the previous attempt". A failed fetch retries later without waiting a day.
+    refresh_hour = int(env.get("PUBLIC_REFRESH_HOUR_BRASILIA", "0"))
+    retry_seconds = int(env.get("PUBLIC_FAILED_RETRY_SECONDS", "3600"))
+    if not 0 <= refresh_hour <= 23:
+        raise ValueError("invalid_public_refresh_hour")
+    if retry_seconds < 300:
+        raise ValueError("public_retry_too_short")
+
+    zone = dt.timezone(dt.timedelta(hours=-3))
+    current = dt.datetime.fromtimestamp(now, zone)
+    if current.hour < refresh_hour:
+        return False
+
+    success = store.last_success(key)
+    if success is not None:
+        success_date = dt.datetime.fromtimestamp(success, zone).date()
+        if success_date == current.date():
+            return False
+
+    attempt = store.last_attempt(key)
+    return attempt is None or now - attempt >= retry_seconds
+
+
 def collect(store, env, now=None, fetch=fetch_component):
     now = time.time() if now is None else now
     pending = []
@@ -315,13 +350,16 @@ def collect(store, env, now=None, fetch=fetch_component):
             continue
         if key == "instagram.posts":
             interval = int(env.get("POSTS_INTERVAL_SECONDS", "300"))
+            due = store.due(key, now, interval)
         elif key == "instagram":
             interval = int(env.get("FOLLOWERS_INTERVAL_SECONDS", "900"))
+            due = store.due(key, now, interval)
         else:
-            interval = int(env.get("PUBLIC_FOLLOWERS_INTERVAL_SECONDS", "86400"))
-        if interval < 60:
+            interval = None
+            due = public_daily_due(store, key, now, env)
+        if interval is not None and interval < 60:
             raise ValueError("interval_too_short")
-        if store.due(key, now, interval):
+        if due:
             store.attempted(key, now)
             pending.append(key)
     with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
