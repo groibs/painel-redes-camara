@@ -782,7 +782,7 @@ export function Committees({ data }: { data: PanelData }) {
             {rows.map((event, index) => (
               <article
                 className="committee-row"
-                key={`${event.id}-${index >= events.length ? "copy" : "main"}`}
+                key={`${event.id}-${index}`}
                 aria-hidden={index >= events.length ? "true" : undefined}
               >
                 <div className="committee-time">
