@@ -53,7 +53,7 @@ try:
    for v in within:
     norm=unicodedata.normalize("NFKD",v["description"] or "")
     norm="".join(c for c in norm if not unicodedata.combining(c)).lower()
-    strong=bool(re.search(r'me\\s*conta\\s*\\+|me\\s*conta\\s*mais|#mecontamais|#mecontaplus|#meconta\\b',norm))
+    strong=bool(re.search(r'me\s*conta\s*\+|me\s*conta\s*mais|#mecontamais|#mecontaplus|#meconta\b',norm))
     weak=bool(re.search(r'videocast|podcast da camara|meconta',norm))
     v["match_status"]="CONFIRMADO_LEGENDA" if strong else "REVISAR_CANDIDATO" if weak else "NAO_IDENTIFICADO"
    (O/"perfil_tiktok_desde_set2025.json").write_text(json.dumps(within,ensure_ascii=False,indent=2),encoding="utf-8")
