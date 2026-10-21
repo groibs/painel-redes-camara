@@ -2787,3 +2787,117 @@ legend {
     font-size: 9px;
   }
 }
+
+
+/* Layout resilience: measured scrolling replaces character-count truncation. */
+.auto-scroll-text {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+.auto-scroll-text-content {
+  display: block;
+  max-width: none;
+}
+.auto-scroll-horizontal { white-space: nowrap; }
+.auto-scroll-horizontal > .auto-scroll-text-content { width: max-content; }
+.auto-scroll-vertical > .auto-scroll-text-content {
+  width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.auto-scroll-text.is-overflowing > .auto-scroll-text-content {
+  will-change: transform;
+  animation-duration: var(--scroll-duration);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.auto-scroll-horizontal.is-overflowing > .auto-scroll-text-content {
+  animation-name: auto-scroll-pan-x;
+}
+.auto-scroll-vertical.is-overflowing > .auto-scroll-text-content {
+  animation-name: auto-scroll-pan-y;
+}
+.auto-scroll-text:hover > .auto-scroll-text-content,
+.auto-scroll-text:focus-within > .auto-scroll-text-content {
+  animation-play-state: paused;
+}
+@keyframes auto-scroll-pan-x {
+  0%, 13% { transform: translate3d(0, 0, 0); }
+  82%, 94% { transform: translate3d(var(--scroll-distance), 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes auto-scroll-pan-y {
+  0%, 13% { transform: translate3d(0, 0, 0); }
+  82%, 94% { transform: translate3d(0, var(--scroll-distance), 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+.now-event { flex: 1; min-width: 0; overflow: hidden; }
+.now-event-heading { min-width: 0; }
+.now-event h2 {
+  flex: 1 1 auto;
+  max-width: 100%;
+  min-width: 0;
+  display: block;
+  white-space: nowrap;
+  text-overflow: clip;
+}
+.now-event h2.now-organ-long { font-size: 23px; }
+.now-event .now-event-description {
+  display: block;
+  height: 2.5em;
+  overflow: hidden;
+  -webkit-line-clamp: unset;
+}
+.radar-topic-column { min-height: 0; }
+.radar-loop-viewport:not(.is-scrolling) .radar-topic-column { flex-basis: 100%; }
+.trending-copy { overflow: hidden; }
+.trend-title {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-weight: 700;
+  overflow: hidden;
+}
+.committee-topic {
+  display: block;
+  height: 2.3em;
+  overflow: hidden;
+  -webkit-line-clamp: unset;
+}
+.committee-organ { min-width: 0; overflow: hidden; }
+.committee-organ h3 { text-overflow: clip; }
+.committee-organ p { overflow: hidden; white-space: nowrap; }
+.week-row {
+  overflow: hidden;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+.week-content { overflow: hidden; }
+.week-content h3 {
+  display: block;
+  line-height: 1.1;
+  white-space: nowrap;
+  -webkit-line-clamp: unset;
+}
+.week-content p {
+  display: block;
+  white-space: nowrap;
+  text-overflow: clip;
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Text contains official information, so the wallboard must still reveal it. */
+  .auto-scroll-horizontal.is-overflowing > .auto-scroll-text-content {
+    animation: auto-scroll-pan-x var(--scroll-duration) ease-in-out infinite !important;
+  }
+  .auto-scroll-vertical.is-overflowing > .auto-scroll-text-content {
+    animation: auto-scroll-pan-y var(--scroll-duration) ease-in-out infinite !important;
+  }
+}
+@media (max-width: 799px) {
+  .now-event h2 { display: block; max-width: 100%; white-space: nowrap; }
+  .now-event h2.now-organ-long { font-size: 19px; }
+  .committee-topic { display: none; }
+}
