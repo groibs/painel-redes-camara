@@ -10,6 +10,7 @@ export type PanelEnvironment = {
   PANEL_VOTE_ID?: string;
   PANEL_SOCIAL_SOURCE_URL?: string;
   PANEL_SOCIAL_SOURCE_TOKEN?: string;
+  PANEL_SOCIAL_FALLBACK_PANEL_URL?: string;
 };
 type ApiObject = Record<string, unknown>;
 function object(value: unknown): ApiObject {
@@ -186,13 +187,80 @@ async function latestVote(
   return null;
 }
 
+async function socialFromLegacyPanel(
+  panel: PanelData,
+  signal: AbortSignal,
+  source: string,
+): Promise<void> {
+  // Temporary migration bridge while the legacy Vercel account is unavailable.
+  // This reads only the public API of the old panel, never a collector credential.
+  const url = safeHttpsUrl(source);
+  if (!url || new URL(url).hostname !== "painel-redes-camara-rebellum.vercel.app"
+      || new URL(url).pathname !== "/api/painel") {
+    throw new Error("Fonte legada não autorizada");
+  }
+  const response = await fetch(url, {
+    redirect: "error",
+    signal: AbortSignal.any([signal, AbortSignal.timeout(15000)]),
+    cache: "no-store",
+  });
+  if (!response.ok) throw new Error(`Painel legado HTTP ${response.status}`);
+  if (Number(response.headers.get("content-length") || 0) > 1_000_000)
+    throw new Error("Painel legado excede limite");
+  const body = await response.text();
+  if (body.length > 1_000_000) throw new Error("Painel legado excede limite");
+  const legacy = JSON.parse(body) as Partial<PanelData>;
+  if (
+    legacy.schemaVersion !== 1 ||
+    legacy.demo !== false ||
+    !Array.isArray(legacy.accounts) ||
+    !Array.isArray(legacy.posts) ||
+    legacy.sources?.social?.state !== "ok"
+  ) {
+    throw new Error("Painel legado sem coleta social válida");
+  }
+  const checkedAt = legacy.sources.social.checkedAt;
+  if (!checkedAt || !Number.isFinite(Date.parse(checkedAt)))
+    throw new Error("Painel legado sem data de coleta");
+  panel.accounts = panel.accounts.map((account) => {
+    const previous = legacy.accounts!.find((item) => item?.id === account.id);
+    if (!previous || previous.followers === null ||
+        !Number.isSafeInteger(previous.followers) || previous.followers < 0)
+      return account;
+    return {
+      ...account,
+      followers: previous.followers,
+      change24h: typeof previous.change24h === "number" &&
+        Number.isSafeInteger(previous.change24h) ? previous.change24h : null,
+      updatedAt: typeof previous.updatedAt === "string" &&
+        Number.isFinite(Date.parse(previous.updatedAt))
+        ? previous.updatedAt : checkedAt,
+    };
+  });
+  panel.posts = legacy.posts.filter((post) =>
+    post && typeof post.id === "string" &&
+    typeof post.caption === "string" &&
+    typeof post.publishedAt === "string" &&
+    ["video", "image", "carousel"].includes(post.type)
+  ).slice(0, 20);
+  panel.sources.social = {
+    state: "ok",
+    checkedAt,
+    message: "Dados públicos do painel anterior (migração temporária)",
+  };
+}
+
 async function social(
   panel: PanelData,
   signal: AbortSignal,
   environment: PanelEnvironment,
 ): Promise<void> {
   const source = environment.PANEL_SOCIAL_SOURCE_URL;
-  if (!source) return;
+  if (!source) {
+    if (environment.PANEL_SOCIAL_FALLBACK_PANEL_URL)
+      await socialFromLegacyPanel(panel, signal, environment.PANEL_SOCIAL_FALLBACK_PANEL_URL);
+    return;
+  }
   const url = safeHttpsUrl(source);
   if (!url) throw new Error("Fonte social precisa usar HTTPS");
   const response = await fetch(url, {
@@ -233,6 +301,7 @@ export async function getPanel(
     PANEL_VOTE_ID: process.env.PANEL_VOTE_ID,
     PANEL_SOCIAL_SOURCE_URL: process.env.PANEL_SOCIAL_SOURCE_URL,
     PANEL_SOCIAL_SOURCE_TOKEN: process.env.PANEL_SOCIAL_SOURCE_TOKEN,
+    PANEL_SOCIAL_FALLBACK_PANEL_URL: process.env.PANEL_SOCIAL_FALLBACK_PANEL_URL,
   },
 ): Promise<PanelData> {
   const panel = emptyPanel();
