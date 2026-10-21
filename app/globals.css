@@ -2901,3 +2901,21 @@ legend {
   .now-event h2.now-organ-long { font-size: 19px; }
   .committee-topic { display: none; }
 }
+
+/* Titles in the scrollable agenda can grow naturally: don't discard legal descriptions. */
+.schedule-row h3 {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.schedule-row > div:nth-child(2) { min-width: 0; }
+
+/* Live video title is always available, not just the first two clipped lines. */
+.live-stream-title {
+  display: block;
+  height: 36px;
+  min-height: 36px;
+  overflow: hidden;
+}
