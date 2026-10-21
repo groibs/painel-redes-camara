@@ -352,7 +352,7 @@ export function NowPanel({
           {liveStreams.slice(0, 3).map((stream) => (
             <div className="live-stream-card" key={stream.id}>
               <div className="live-stream-title" title={stream.title}>
-                {stream.title}
+                <AutoScrollText text={stream.title} axis="vertical" />
               </div>
               <div className="live-stream-video">
                 <iframe
@@ -881,7 +881,7 @@ export function Week({
                 </h3>
                 <p>
                   <AutoScrollText text={event
-                    ? `${timeOf(event.startsAt)} · ${event.organ}`
+                    ? `${timeOf(event.startsAt)} · ${event.organ}${events.length > 1 ? ` · +${events.length - 1} atividades` : ""}`
                     : "Agenda da Câmara"} />
                 </p>
               </div>
