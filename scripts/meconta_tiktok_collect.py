@@ -98,6 +98,34 @@ for p in range(160):
  if not data.get("hasMore") or not c or c==cursor:break
  cursor=c
  time.sleep(1.0)
+# Alternative discovery via keyword search when profile pagination is unavailable.
+searches=0
+for keyword in ["Me Conta+ Câmara dos Deputados","Me Conta Mais Câmara","mecontamais","Me Conta+"]:
+ cursor_search=0
+ for idx in range(3):
+  data=fetch("feed/search",{"keywords":keyword,"count":35,"cursor":cursor_search,"web":1})
+  if not isinstance(data,dict):break
+  videos=data.get("videos") or []
+  if not isinstance(videos,list) or not videos:break
+  searches+=1
+  matched=0
+  for v in videos:
+   if not isinstance(v,dict):continue
+   author=v.get("author") or {}
+   if not isinstance(author,dict) or str(author.get("unique_id","")).lstrip("@").lower()!=ACCOUNT:continue
+   dt=dt_from_id(str(v.get("id") or v.get("video_id") or ""))
+   if dt and dt.timestamp()<MIN_TIME:continue
+   r=parse(v,"busca por "+keyword)
+   if r:
+    posts[r["id_video"]]=r
+    matched+=1
+  print("SEARCH",keyword,idx,"results",len(videos),"matched",matched,flush=True)
+  nextcursor=data.get("cursor")
+  if nextcursor is None or str(nextcursor)==str(cursor_search):cursor_search+=len(videos)
+  else:cursor_search=nextcursor
+  if idx and matched==0:break
+  time.sleep(.7)
+
 # conservative group through repeated interviewee names from preexisting catalog is postponed pending review.
 rows=sorted(posts.values(),key=lambda x:x["id_video"])
 fields=list(rows[0].keys())
@@ -105,6 +133,6 @@ with (OUT/"publicacoes.csv").open("w",encoding="utf-8-sig",newline="") as f:
  w=csv.DictWriter(f,fieldnames=fields,delimiter=";");w.writeheader();w.writerows(rows)
 (OUT/"publicacoes.json").write_text(json.dumps(rows,ensure_ascii=False,indent=2),encoding="utf-8")
 report={"run_at":datetime.now(TZ).isoformat(),"total_posts":len(rows),"posts_with_metrics":sum(r["visualizacoes"] is not None for r in rows),
- "feed_pages":pages,"all_feed_videos_checked":checked,"reached_2025_09_25":reached,"errors":errors[:25],"error_count":len(errors)}
+ "feed_pages":pages,"all_feed_videos_checked":checked,"search_pages":searches,"reached_2025_09_25":reached,"errors":errors[:25],"error_count":len(errors)}
 (OUT/"relatorio.json").write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding="utf-8")
 print("FINAL REPORT",json.dumps(report,ensure_ascii=False),flush=True)
