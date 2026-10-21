@@ -6,11 +6,11 @@
     "duration_s": 85,
     "published_epoch": 1792532603,
     "published_utc": "2026-10-20T21:43:23+00:00",
-    "view_count": 293400,
-    "like_count": 8504,
-    "comment_count": 222,
-    "share_count": 2203,
-    "save_count": 1376,
+    "view_count": 294200,
+    "like_count": 8528,
+    "comment_count": 224,
+    "share_count": 2212,
+    "save_count": 1383,
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7698868858295242004",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
@@ -40,7 +40,7 @@
     "duration_s": 25,
     "published_epoch": 1792517606,
     "published_utc": "2026-10-20T17:33:26+00:00",
-    "view_count": 1863,
+    "view_count": 1864,
     "like_count": 136,
     "comment_count": 3,
     "share_count": 12,
@@ -949,7 +949,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7691824772937813266",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "NAO_IDENTIFICADO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7691801851821378822",
@@ -1136,7 +1136,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7689184161239813396",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "NAO_IDENTIFICADO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7689212917459225876",
@@ -1816,7 +1816,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7673627979561389333",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "REVISAR_CANDIDATO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7673647344381889813",
@@ -2088,7 +2088,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7663241203655232789",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "NAO_IDENTIFICADO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7663180993305627925",
@@ -2190,7 +2190,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7662071455739317524",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "NAO_IDENTIFICADO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7660965290175515925",
@@ -2224,7 +2224,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7660886571469753621",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "NAO_IDENTIFICADO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7660577482193620244",
@@ -2309,7 +2309,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7658054728013663508",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "REVISAR_CANDIDATO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7657306482987355412",
@@ -2360,7 +2360,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7655430088418282769",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "REVISAR_CANDIDATO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7655365072063188244",
@@ -2513,7 +2513,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7653168790858943764",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "REVISAR_CANDIDATO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7652832906754215188",
@@ -2530,7 +2530,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7652832906754215188",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "REVISAR_CANDIDATO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7652796638741761301",
@@ -2598,7 +2598,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7650509124534340884",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "REVISAR_CANDIDATO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7650115403754097940",
@@ -2660,7 +2660,7 @@
     "published_utc": "2026-05-28T00:28:22+00:00",
     "view_count": 6818,
     "like_count": 244,
-    "comment_count": 17,
+    "comment_count": 18,
     "share_count": 5,
     "save_count": 14,
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7644732947748244756",
@@ -2711,7 +2711,7 @@
     "published_utc": "2026-05-19T19:23:10+00:00",
     "view_count": 14700,
     "like_count": 770,
-    "comment_count": 38,
+    "comment_count": 39,
     "share_count": 185,
     "save_count": 46,
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7641685632946883861",
@@ -2768,7 +2768,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7639898210223328533",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "REVISAR_CANDIDATO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7639847866655100180",
@@ -2836,7 +2836,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7637271666028072212",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "REVISAR_CANDIDATO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7636129832404897044",
@@ -2938,7 +2938,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7631587465928920341",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "NAO_IDENTIFICADO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7630474576220343572",
@@ -3017,7 +3017,7 @@
     "published_utc": "2026-04-08T16:40:39+00:00",
     "view_count": 32600,
     "like_count": 1381,
-    "comment_count": 88,
+    "comment_count": 86,
     "share_count": 264,
     "save_count": 67,
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7626429250819673364",
@@ -3125,7 +3125,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7621928812388928789",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "NAO_IDENTIFICADO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7621239260699479317",
@@ -3159,7 +3159,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7619351580663434516",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "REVISAR_CANDIDATO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7618713008105098517",
@@ -3170,7 +3170,7 @@
     "published_utc": "2026-03-18T21:37:53+00:00",
     "view_count": 4920,
     "like_count": 432,
-    "comment_count": 6,
+    "comment_count": 5,
     "share_count": 36,
     "save_count": 34,
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7618713008105098517",
@@ -3210,7 +3210,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7616731683122892049",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "REVISAR_CANDIDATO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7616394336162319637",
@@ -3261,7 +3261,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7614151730288233744",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "REVISAR_CANDIDATO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7613868855454174472",
@@ -3458,8 +3458,8 @@
     "published_epoch": 1770390000,
     "published_utc": "2026-02-06T15:00:00+00:00",
     "view_count": 107800,
-    "like_count": 5082,
-    "comment_count": 52,
+    "like_count": 5083,
+    "comment_count": 50,
     "share_count": 94,
     "save_count": 427,
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7603735292931083540",
@@ -3510,7 +3510,7 @@
     "published_utc": "2026-02-04T16:48:29+00:00",
     "view_count": 602,
     "like_count": 14,
-    "comment_count": 1,
+    "comment_count": 0,
     "share_count": 0,
     "save_count": 1,
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7603052923022494994",
@@ -3578,7 +3578,7 @@
     "published_utc": "2026-01-24T21:00:00+00:00",
     "view_count": 22000,
     "like_count": 919,
-    "comment_count": 81,
+    "comment_count": 76,
     "share_count": 285,
     "save_count": 128,
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7598669063799213333",
@@ -3731,7 +3731,7 @@
     "published_utc": "2026-01-08T18:08:22+00:00",
     "view_count": 17400,
     "like_count": 1142,
-    "comment_count": 33,
+    "comment_count": 29,
     "share_count": 33,
     "save_count": 33,
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7593054197088537864",
@@ -3924,7 +3924,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7585550143718460693",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "REVISAR_CANDIDATO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7585315559990988040",
@@ -4094,7 +4094,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7582961622793211156",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "REVISAR_CANDIDATO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7582753572215885064",
@@ -4213,7 +4213,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7580371595768696082",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "REVISAR_CANDIDATO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7580147489047645458",
@@ -4309,7 +4309,7 @@
     "published_utc": "2025-12-04T00:26:20+00:00",
     "view_count": 2919,
     "like_count": 120,
-    "comment_count": 9,
+    "comment_count": 8,
     "share_count": 4,
     "save_count": 10,
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7579792529906797832",
@@ -4451,7 +4451,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7579657879506996488",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "REVISAR_CANDIDATO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7576351796734496007",
@@ -4485,7 +4485,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7574452600322526480",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "REVISAR_CANDIDATO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7574157530926943496",
@@ -4536,7 +4536,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7571451487449074965",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "REVISAR_CANDIDATO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7571168514384448824",
@@ -4570,7 +4570,7 @@
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7569982149219126545",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "REVISAR_CANDIDATO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7569324301652970760",
@@ -4615,13 +4615,13 @@
     "published_utc": "2025-10-24T14:00:00+00:00",
     "view_count": 958,
     "like_count": 21,
-    "comment_count": 5,
+    "comment_count": 4,
     "share_count": 2,
     "save_count": 0,
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7564780248676502840",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "REVISAR_CANDIDATO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7564482650493275400",
@@ -4632,13 +4632,13 @@
     "published_utc": "2025-10-23T18:16:10+00:00",
     "view_count": 1659,
     "like_count": 94,
-    "comment_count": 13,
+    "comment_count": 12,
     "share_count": 1,
     "save_count": 4,
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7564482650493275400",
     "uploader": "camaradosdeputados",
     "extractor": "yt_dlp profile flat",
-    "match_status": "REVISAR_CANDIDATO"
+    "match_status": "CONFIRMADO_LEGENDA"
   },
   {
     "id": "7564462480806661394",
@@ -4819,7 +4819,7 @@
     "published_utc": "2025-10-01T20:46:20+00:00",
     "view_count": 11700,
     "like_count": 1176,
-    "comment_count": 37,
+    "comment_count": 40,
     "share_count": 58,
     "save_count": 35,
     "url": "https://www.tiktok.com/@camaradosdeputados/video/7556357455375109388",

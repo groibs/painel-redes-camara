@@ -1,5 +1,5 @@
 {
-  "ran_at": "2026-10-21T20:01:19.313345+00:00",
+  "ran_at": "2026-10-21T20:03:07.251140+00:00",
   "candidates": {
     "7698868858295242004": [
       "yt_dlp"
@@ -1527,7 +1527,7 @@
     {
       "strategy": "profile_desktop",
       "status": 200,
-      "detail": "length=384000 candidates=0 head=<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  "
+      "detail": "length=400889 candidates=0 head=<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  "
     },
     {
       "strategy": "profile_mobile",
@@ -1552,17 +1552,17 @@
     {
       "strategy": "duckduckgo",
       "status": 200,
-      "detail": "length=93603 candidates=0 head=<!DOCTYPE html><html lang=\"pt-BR\"><head><title>Google Search</title><style>body{background-color:var(--xhUGwc)}</style><script nonce=\"o_GY2YQOGn2CLusx"
+      "detail": "length=92479 candidates=0 head=<!DOCTYPE html><html lang=\"pt-BR\"><head><title>Google Search</title><style>body{background-color:var(--xhUGwc)}</style><script nonce=\"pkrQrDJ4lol0ET_O"
     },
     {
       "strategy": "bing",
       "status": 200,
-      "detail": "length=134126 candidates=0 head=<!DOCTYPE html><html dir=\"ltr\" lang=\"pt\" xml:lang=\"pt\" xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:Web=\"http://schemas.live.com/Web/\"><script type=\"tex"
+      "detail": "length=124985 candidates=0 head=<!DOCTYPE html><html dir=\"ltr\" lang=\"pt\" xml:lang=\"pt\" xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:Web=\"http://schemas.live.com/Web/\"><script type=\"tex"
     },
     {
       "strategy": "yt_dlp_enumeration",
       "status": 0,
-      "detail": "total=507 since_start=291 matched=27 confirmed=7"
+      "detail": "total=507 since_start=291 matched=34 confirmed=34"
     },
     {
       "strategy": "yt_dlp",
