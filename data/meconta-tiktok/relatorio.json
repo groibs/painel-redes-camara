@@ -1,15 +1,32 @@
 {
-  "run_at": "2026-10-21T16:42:58.095917-03:00",
+  "run_at": "2026-10-21T16:44:48.238279-03:00",
   "total_posts": 4,
   "posts_with_metrics": 4,
   "feed_pages": 0,
   "all_feed_videos_checked": 0,
+  "search_pages": 0,
   "reached_2025_09_25": false,
   "errors": [
     {
       "url": "https://www.tikwm.com/api/user/posts?unique_id=camaradosdeputados&count=35&cursor=0",
       "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://www.tikwm.com/api/feed/search?keywords=Me+Conta%2B+C%C3%A2mara+dos+Deputados&count=35&cursor=0&web=1",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://www.tikwm.com/api/feed/search?keywords=Me+Conta+Mais+C%C3%A2mara&count=35&cursor=0&web=1",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://www.tikwm.com/api/feed/search?keywords=mecontamais&count=35&cursor=0&web=1",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://www.tikwm.com/api/feed/search?keywords=Me+Conta%2B&count=35&cursor=0&web=1",
+      "error": "HTTP Error 403: Forbidden"
     }
   ],
-  "error_count": 1
+  "error_count": 5
 }
