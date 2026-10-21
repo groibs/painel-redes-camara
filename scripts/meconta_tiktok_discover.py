@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Public TikTok profile history discovery: no login, no private content."""
-import json,subprocess,urllib.request,urllib.parse,os,re,html,time,datetime,traceback
+import unicodedata,json,subprocess,urllib.request,urllib.parse,os,re,html,time,datetime,traceback
 from pathlib import Path
 O=Path("data/meconta-tiktok");O.mkdir(parents=True,exist_ok=True)
 HANDLE="camaradosdeputados"
@@ -35,6 +35,35 @@ try:
  if out.strip():
   try:
    data=json.loads(out)
+   vids=data.get("entries") or []
+   compact=[]
+   for v in vids:
+    if not v:continue
+    vid=str(v.get("id") or "")
+    if not re.fullmatch("7[0-9]{18}",vid):continue
+    timestamp=v.get("timestamp") or (int(vid)>>32)
+    row={"id":vid,"title":v.get("title"),"description":v.get("description"),"duration_s":v.get("duration"),
+         "published_epoch":timestamp,"published_utc":datetime.datetime.fromtimestamp(timestamp,datetime.timezone.utc).isoformat(),
+         "view_count":v.get("view_count"),"like_count":v.get("like_count"),"comment_count":v.get("comment_count"),
+         "share_count":v.get("repost_count"),"save_count":v.get("save_count"),"url":v.get("url"),
+         "uploader":v.get("uploader"),"extractor":"yt_dlp profile flat"}
+    compact.append(row)
+   cutoff=datetime.datetime(2025,9,1,tzinfo=datetime.timezone.utc).timestamp()
+   within=[v for v in compact if v["published_epoch"]>=cutoff]
+   for v in within:
+    norm=unicodedata.normalize("NFKD",v["description"] or "")
+    norm="".join(c for c in norm if not unicodedata.combining(c)).lower()
+    strong=bool(re.search(r'me\\s*conta\\s*\\+|me\\s*conta\\s*mais|#mecontamais|#mecontaplus|#meconta\\b',norm))
+    weak=bool(re.search(r'videocast|podcast da camara|meconta',norm))
+    v["match_status"]="CONFIRMADO_LEGENDA" if strong else "REVISAR_CANDIDATO" if weak else "NAO_IDENTIFICADO"
+   (O/"perfil_tiktok_desde_set2025.json").write_text(json.dumps(within,ensure_ascii=False,indent=2),encoding="utf-8")
+   selected=[v for v in within if v["match_status"]!="NAO_IDENTIFICADO"]
+   (O/"meconta_identificados.json").write_text(json.dumps(selected,ensure_ascii=False,indent=2),encoding="utf-8")
+   import csv
+   with (O/"meconta_identificados.csv").open("w",newline="",encoding="utf-8-sig") as f:
+    w=csv.DictWriter(f,fieldnames=list(selected[0].keys()) if selected else list(compact[0].keys()),delimiter=";")
+    w.writeheader();w.writerows(selected)
+   log("yt_dlp_enumeration",0,"total="+str(len(compact))+" since_start="+str(len(within))+" matched="+str(len(selected))+" confirmed="+str(sum(v["match_status"]=="CONFIRMADO_LEGENDA" for v in selected)))
    for video in data.get("entries") or []:
     if video:
      vid=str(video.get("id") or "")
