@@ -40,6 +40,8 @@ export type AgendaEvent = {
   type: string;
   status: string;
   organ: string;
+  /** Official full name of the event's responsible organ(s), when available. */
+  organName?: string;
   location: string;
   url: string;
 };
