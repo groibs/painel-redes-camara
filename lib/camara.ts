@@ -95,6 +95,11 @@ async function agenda(
             .map((organ) => label(organ.sigla) || label(organ.nome))
             .filter(Boolean)
             .join(" · ") || "Câmara dos Deputados",
+        organName:
+          organs
+            .map((organ) => label(organ.nome) || label(organ.sigla))
+            .filter(Boolean)
+            .join(" · ") || "Câmara dos Deputados",
         location:
           [label(local.predio), label(local.sala)]
             .filter(Boolean)

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { type CSSProperties, useEffect, useRef, useState } from "react";
 import {
   BookOpen,
   CalendarDays,
@@ -57,10 +57,10 @@ function todayEvents(data: PanelData) {
 function isPlenary(event: AgendaEvent) {
   return /plen[aá]rio|^plen$/i.test(event.organ);
 }
-function shortOrgan(event: AgendaEvent) {
+function displayOrgan(event: AgendaEvent) {
   if (isPlenary(event)) return "Plenário";
-  if (/constitui|justi/i.test(event.organ)) return "CCJ";
-  return event.organ;
+  // Official full names are preferred; old cached events still work.
+  return event.organName || event.organ;
 }
 function socialFollowerCount(id: NetworkId, value: number | null) {
   if (value === null) return "—";
@@ -86,6 +86,69 @@ function noAgenda(data: PanelData) {
     : data.sources.agenda.state === "error"
       ? "Agenda temporariamente indisponível"
       : "Nenhuma atividade publicada";
+}
+
+
+/** Scroll only when the rendered text exceeds its actual available space. */
+function AutoScrollText({
+  text,
+  axis = "horizontal",
+  href,
+  className = "",
+}: {
+  text: string;
+  axis?: "horizontal" | "vertical";
+  href?: string;
+  className?: string;
+}) {
+  const viewportRef = useRef<HTMLSpanElement>(null);
+  const contentRef = useRef<HTMLSpanElement>(null);
+  const [distance, setDistance] = useState(0);
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    const content = contentRef.current;
+    if (!viewport || !content) return;
+    const measure = () => {
+      const overflow = axis === "horizontal"
+        ? content.scrollWidth - viewport.clientWidth
+        : content.scrollHeight - viewport.clientHeight;
+      setDistance(Math.max(0, Math.ceil(overflow)));
+    };
+    const observer = new ResizeObserver(measure);
+    observer.observe(viewport);
+    observer.observe(content);
+    measure();
+    let cancelled = false;
+    void document.fonts.ready.then(() => {
+      if (!cancelled) measure();
+    });
+    return () => {
+      cancelled = true;
+      observer.disconnect();
+    };
+  }, [axis, text]);
+
+  const duration = Math.max(
+    10,
+    Math.round(distance / (axis === "horizontal" ? 32 : 10) + 6),
+  );
+  const style = {
+    "--scroll-distance": `-${distance}px`,
+    "--scroll-duration": `${duration}s`,
+  } as CSSProperties;
+
+  return (
+    <span
+      ref={viewportRef}
+      className={`auto-scroll-text auto-scroll-${axis} ${distance > 2 ? "is-overflowing" : ""} ${className}`}
+      title={text}
+    >
+      <span className="auto-scroll-text-content" ref={contentRef} style={style}>
+        {href ? <a href={href} target="_blank" rel="noreferrer">{text}</a> : text}
+      </span>
+    </span>
+  );
 }
 
 const networkPaths: Partial<Record<NetworkId, string>> = {
@@ -248,7 +311,9 @@ export function NowPanel({
                 </span>
                 <div className="now-event">
                   <div className="now-event-heading">
-                    <h2>{shortOrgan(event)}</h2>
+                    <h2 className={displayOrgan(event).length > 40 ? "now-organ-long" : ""}>
+                      <AutoScrollText text={displayOrgan(event)} />
+                    </h2>
                     {isOngoing(event) ? (
                       <span className="live-badge">
                         <i />
@@ -261,14 +326,8 @@ export function NowPanel({
                       ? "Acontecendo agora"
                       : `${/sess[aã]o/i.test(event.type) ? "Sessão às" : "Previsto para"} ${timeOf(event.startsAt)}`}
                   </strong>
-                  <p>
-                    {event.url ? (
-                      <a href={event.url} target="_blank" rel="noreferrer">
-                        {event.title}
-                      </a>
-                    ) : (
-                      event.title
-                    )}
+                  <p className="now-event-description">
+                    <AutoScrollText text={event.title} axis="vertical" href={event.url || undefined} />
                   </p>
                 </div>
               </article>
@@ -484,7 +543,7 @@ export function TopicRadar({
 
   useEffect(() => {
     const scroller = scrollerRef.current;
-    if (!scroller || columns.length <= 2) return;
+    if (!scroller || columns.length <= 1) return;
 
     let frame = 0;
     let previous = performance.now();
@@ -495,9 +554,13 @@ export function TopicRadar({
       previous = now;
       scroller.scrollLeft += (speed * elapsed) / 1000;
 
-      const halfway = scroller.scrollWidth / 2;
-      if (halfway > 0 && scroller.scrollLeft >= halfway) {
-        scroller.scrollLeft -= halfway;
+      // Offset between matching columns includes the inter-cycle gap.
+      const track = scroller.firstElementChild;
+      const first = track?.children.item(0) as HTMLElement | null;
+      const duplicate = track?.children.item(columns.length) as HTMLElement | null;
+      const cycleWidth = first && duplicate ? duplicate.offsetLeft - first.offsetLeft : 0;
+      if (cycleWidth > 0 && scroller.scrollLeft >= cycleWidth) {
+        scroller.scrollLeft -= cycleWidth;
       }
       frame = requestAnimationFrame(tick);
     };
@@ -520,16 +583,21 @@ export function TopicRadar({
       </div>
       {topics.length ? (
         <div
-          className={`radar-loop-viewport ${columns.length > 2 ? "is-scrolling" : ""}`}
+          className={`radar-loop-viewport ${columns.length > 1 ? "is-scrolling" : ""}`}
           ref={scrollerRef}
           aria-label="Assuntos em alta"
         >
           <div className="radar-loop-track">
-            {[...columns, ...(columns.length > 2 ? columns : [])].map(
+            {[
+              ...columns,
+              ...(columns.length > 1 ? columns : []),
+              ...(columns.length > 1 ? columns : []),
+            ].map(
               (column, columnIndex) => (
                 <div
                   className="radar-topic-column"
                   key={`column-${columnIndex}`}
+                  aria-hidden={columnIndex >= columns.length ? true : undefined}
                 >
                   {column.map((topic, rowIndex) => {
                     const originalIndex =
@@ -543,19 +611,7 @@ export function TopicRadar({
                           {String(originalIndex + 1).padStart(2, "0")}
                         </span>
                         <div className="trending-copy">
-                          <div
-                            className={`trend-title ${topic.label.length > 18 ? "is-marquee" : ""}`}
-                            title={topic.label}
-                          >
-                            {topic.label.length > 18 ? (
-                              <span className="trend-title-track">
-                                <strong>{topic.label}</strong>
-                                <strong aria-hidden="true">{topic.label}</strong>
-                              </span>
-                            ) : (
-                              <strong>{topic.label}</strong>
-                            )}
-                          </div>
+                          <AutoScrollText text={topic.label} className="trend-title" />
                           <span>
                             Em alta
                             <small aria-label="Fontes">
@@ -670,7 +726,7 @@ export function Committees({ data }: { data: PanelData }) {
   const events = committeeEvents(data);
   const scrollerRef = useRef<HTMLDivElement>(null);
   const scrolling = events.length > 2;
-  const rows = scrolling ? [...events, ...events] : events;
+  const rows = scrolling ? Array.from({ length: 4 }, () => events).flat() : events;
 
   useEffect(() => {
     const scroller = scrollerRef.current;
@@ -685,9 +741,10 @@ export function Committees({ data }: { data: PanelData }) {
       previous = now;
       scroller.scrollTop += (speed * elapsed) / 1000;
 
-      const halfway = scroller.scrollHeight / 2;
-      if (halfway > 0 && scroller.scrollTop >= halfway) {
-        scroller.scrollTop -= halfway;
+      // Four cycles avoid the browser clamping scrollTop before a loop completes.
+      const cycleHeight = scroller.scrollHeight / 4;
+      if (cycleHeight > 0 && scroller.scrollTop >= cycleHeight) {
+        scroller.scrollTop -= cycleHeight;
       }
       frame = requestAnimationFrame(tick);
     };
@@ -725,7 +782,7 @@ export function Committees({ data }: { data: PanelData }) {
             {rows.map((event, index) => (
               <article
                 className="committee-row"
-                key={`${event.id}-${index >= events.length ? "copy" : "main"}`}
+                key={`${event.id}-${index}`}
                 aria-hidden={index >= events.length ? "true" : undefined}
               >
                 <div className="committee-time">
@@ -736,10 +793,14 @@ export function Committees({ data }: { data: PanelData }) {
                   className={`activity-dot ${isOngoing(event) ? "active" : ""}`}
                 />
                 <div className="committee-organ">
-                  <h3>{event.organ}</h3>
-                  <p>{event.type}</p>
+                  <h3 title={event.organName || event.organ}>
+                    <AutoScrollText text={event.organ} />
+                  </h3>
+                  <p><AutoScrollText text={event.type} /></p>
                 </div>
-                <p className="committee-topic">{event.title}</p>
+                <p className="committee-topic">
+                  <AutoScrollText text={event.title} axis="vertical" />
+                </p>
                 {event.url ? (
                   <a
                     className="committee-open"
@@ -815,15 +876,13 @@ export function Week({
               />
               <div className="week-content">
                 <h3>
-                  {event?.title ||
-                    (data.sources.agenda.state === "ok"
-                      ? "Sem atividade publicada"
-                      : noAgenda(data))}
+                  <AutoScrollText text={event?.title ||
+                    (data.sources.agenda.state === "ok" ? "Sem atividade publicada" : noAgenda(data))} />
                 </h3>
                 <p>
-                  {event
+                  <AutoScrollText text={event
                     ? `${timeOf(event.startsAt)} · ${event.organ}`
-                    : "Agenda da Câmara"}
+                    : "Agenda da Câmara"} />
                 </p>
               </div>
             </article>
