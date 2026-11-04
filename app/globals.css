@@ -1546,8 +1546,8 @@ p {
   -webkit-backface-visibility: hidden;
 }
 .ticker-running .ticker-track {
-  animation: ticker-scroll 90s linear infinite;
-  -webkit-animation: ticker-scroll 90s linear infinite;
+  animation: ticker-scroll var(--ticker-duration, 90s) linear infinite;
+  -webkit-animation: ticker-scroll var(--ticker-duration, 90s) linear infinite;
 }
 .ticker-copy {
   display: flex;
@@ -1557,11 +1557,11 @@ p {
 .ticker-copy > span {
   display: flex;
   align-items: center;
-  gap: 15px;
-  padding: 0 34px;
+  gap: 13px;
+  padding: 0 24px;
   border-right: 1px solid #bacbd6;
   font-family: var(--display);
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 500;
   color: #5a6b83;
   white-space: nowrap;
@@ -2331,8 +2331,8 @@ legend {
   /* The wallboard ticker is operational information rather than decoration.
      Some TV browsers report reduced motion by default, which previously froze it. */
   .ticker-running .ticker-track {
-    animation: ticker-scroll 90s linear infinite !important;
-    -webkit-animation: ticker-scroll 90s linear infinite !important;
+    animation: ticker-scroll var(--ticker-duration, 90s) linear infinite !important;
+    -webkit-animation: ticker-scroll var(--ticker-duration, 90s) linear infinite !important;
   }
   .trend-title-track {
     animation: radar-title-marquee 11s linear infinite !important;
@@ -2806,7 +2806,8 @@ legend {
 .auto-scroll-vertical > .auto-scroll-text-content {
   width: 100%;
   white-space: normal;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 .auto-scroll-text.is-overflowing > .auto-scroll-text-content {
   will-change: transform;
@@ -2825,14 +2826,14 @@ legend {
   animation-play-state: paused;
 }
 @keyframes auto-scroll-pan-x {
-  0%, 13% { transform: translate3d(0, 0, 0); }
-  82%, 94% { transform: translate3d(var(--scroll-distance), 0, 0); }
-  100% { transform: translate3d(0, 0, 0); }
+  0%, 11% { transform: translate3d(0, 0, 0); }
+  47%, 57% { transform: translate3d(var(--scroll-distance), 0, 0); }
+  94%, 100% { transform: translate3d(0, 0, 0); }
 }
 @keyframes auto-scroll-pan-y {
-  0%, 13% { transform: translate3d(0, 0, 0); }
-  82%, 94% { transform: translate3d(0, var(--scroll-distance), 0); }
-  100% { transform: translate3d(0, 0, 0); }
+  0%, 11% { transform: translate3d(0, 0, 0); }
+  47%, 57% { transform: translate3d(0, var(--scroll-distance), 0); }
+  94%, 100% { transform: translate3d(0, 0, 0); }
 }
 .now-event { flex: 1; min-width: 0; overflow: hidden; }
 .now-event-heading { min-width: 0; }

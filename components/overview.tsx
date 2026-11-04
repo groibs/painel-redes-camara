@@ -129,10 +129,10 @@ function AutoScrollText({
     };
   }, [axis, text]);
 
-  const duration = Math.max(
-    10,
-    Math.round(distance / (axis === "horizontal" ? 32 : 10) + 6),
-  );
+  // Match reading speed to actual rendered overflow. Both travel directions
+  // are animated, so long titles never snap back before they can be read.
+  const pixelsPerSecond = axis === "horizontal" ? 18 : 7;
+  const duration = Math.max(20, Math.ceil(16 + distance / (pixelsPerSecond * 0.36)));
   const style = {
     "--scroll-distance": `-${distance}px`,
     "--scroll-duration": `${duration}s`,
@@ -1060,13 +1060,62 @@ export function InstagramFeed({
 
 export function Ticker({ data }: { data: PanelData }) {
   const events = todayEvents(data);
-  const messages = events.length
-    ? events.map((event) => `${event.organ}: ${event.title}`)
+  // A short selection prevents a whole day's agenda from becoming one enormous
+  // ribbon. Full titles remain intact; cards and the agenda show all events.
+  const featured = [
+    ...events.filter((event) => isOngoing(event)),
+    ...events.filter((event) => !isOngoing(event)),
+  ].slice(0, 8);
+  const messages = featured.length
+    ? featured.map((event) => `${displayOrgan(event)}: ${event.title.replace(/\s+/g, " ").trim()}`)
     : [
         data.sources.agenda.state === "ok"
           ? "Acompanhe a agenda legislativa e as atividades da Câmara dos Deputados"
           : "Consultando as fontes da Câmara dos Deputados",
       ];
+
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const copyRef = useRef<HTMLDivElement>(null);
+  const [dimensions, setDimensions] = useState({ cycle: 0, viewport: 0 });
+  const messageSignature = messages.join("\u001f");
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    const copy = copyRef.current;
+    if (!viewport || !copy) return;
+
+    const measure = () => {
+      // scrollWidth/clientWidth are layout pixels, unaffected by TV scaling.
+      const cycle = copy.scrollWidth;
+      const visible = viewport.clientWidth;
+      setDimensions((previous) =>
+        previous.cycle === cycle && previous.viewport === visible
+          ? previous
+          : { cycle, viewport: visible },
+      );
+    };
+
+    const observer = new ResizeObserver(measure);
+    observer.observe(viewport);
+    observer.observe(copy);
+    measure();
+    let cancelled = false;
+    void document.fonts.ready.then(() => {
+      if (!cancelled) measure();
+    });
+    return () => {
+      cancelled = true;
+      observer.disconnect();
+    };
+  }, [messageSignature]);
+
+  const running = dimensions.cycle > dimensions.viewport + 2;
+  // Constant physical speed, regardless of how many headlines are present.
+  // 22 CSS px/s is intentionally slower than the original fixed 90 s loop.
+  const style = {
+    "--ticker-duration": `${Math.max(45, Math.ceil(dimensions.cycle / 22))}s`,
+  } as CSSProperties;
+
   return (
     <div className="ticker" aria-label="Destaques da agenda">
       <div className="ticker-label">
@@ -1074,10 +1123,11 @@ export function Ticker({ data }: { data: PanelData }) {
         NA PAUTA
       </div>
       <div
-        className={`ticker-viewport ${messages.length > 1 ? "ticker-running" : ""}`}
+        ref={viewportRef}
+        className={`ticker-viewport ${running ? "ticker-running" : ""}`}
       >
-        <div className="ticker-track">
-          <div className="ticker-copy">
+        <div className="ticker-track" style={style}>
+          <div className="ticker-copy" ref={copyRef}>
             {messages.map((message, index) => (
               <span key={index}>
                 <i />
@@ -1085,7 +1135,7 @@ export function Ticker({ data }: { data: PanelData }) {
               </span>
             ))}
           </div>
-          {messages.length > 1 ? (
+          {running ? (
             <div className="ticker-copy" aria-hidden="true">
               {messages.map((message, index) => (
                 <span key={index}>
