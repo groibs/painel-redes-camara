@@ -1067,7 +1067,7 @@ export function Ticker({ data }: { data: PanelData }) {
     ...events.filter((event) => !isOngoing(event)),
   ].slice(0, 8);
   const messages = featured.length
-    ? featured.map((event) => `${displayOrgan(event)}: ${event.title.replace(/\\s+/g, " ").trim()}`)
+    ? featured.map((event) => `${displayOrgan(event)}: ${event.title.replace(/\s+/g, " ").trim()}`)
     : [
         data.sources.agenda.state === "ok"
           ? "Acompanhe a agenda legislativa e as atividades da Câmara dos Deputados"
@@ -1077,7 +1077,7 @@ export function Ticker({ data }: { data: PanelData }) {
   const viewportRef = useRef<HTMLDivElement>(null);
   const copyRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ cycle: 0, viewport: 0 });
-  const messageSignature = messages.join("\\u001f");
+  const messageSignature = messages.join("\u001f");
 
   useEffect(() => {
     const viewport = viewportRef.current;
