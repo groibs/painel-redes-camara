@@ -2967,3 +2967,9 @@ legend {
   font-size: 18px;
   padding-inline: 22px;
 }
+
+/* Partial source: some networks updated, others unavailable. */
+.source-state.state-partial,
+.state-partial {
+  background: #d9a429;
+}
