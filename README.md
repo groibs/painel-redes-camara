@@ -49,6 +49,44 @@ O navegador consulta `/api/painel` a cada minuto por padrão. Esse intervalo pod
 
 Para fixar uma votação importante, defina `PANEL_VOTE_ID` no ambiente do servidor. O código também consulta as informações básicas oficiais desse ID.
 
+## Coleta agendada sem VPS (GitHub Actions + Supabase + Vercel)
+
+**Implementado:** `.github/workflows/coleta-redes.yml` executa o coletor público a cada 30 minutos (minutos 17 e 47 UTC), com disparo manual em **GitHub → Actions → Coleta pública das redes da Câmara → Run workflow**. O programa `scripts/sync_social.py` reutiliza `api/social_public.py` para consultar Instagram público (quando permitido), X e imagens do canal oficial da Câmara no Telegram. Nenhuma conta Meta é necessária e nenhum token de rede social é usado.
+
+O workflow guarda `social/snapshot.json` e `social/history.json` na branch **`social-data`**. O JSON mantém `observedAt` para cada fonte; se alguma coleta falhar, seu número anterior permanece com a **data original**, por até sete dias. Variações em 24 horas só são calculadas se existir uma amostra realmente observada cerca de 24 horas antes. Instagram manual de 397.329 seguidores (12/11/2026) permanece identificado como manual; o job **não** finge ter atualizado esse valor.
+
+A Vercel consulta os dados nesta prioridade:
+1. Supabase (quando um projeto exclusivo for conectado).
+2. Último snapshot da branch `social-data` do GitHub.
+3. Função pública `/api/social_public` da própria Vercel (se o snapshot agendado tiver mais de seis horas).
+4. Fontes anteriores de contingência.
+
+As fotos alternativas são **publicações do Telegram**, claramente identificadas; não representam os seis últimos posts do Instagram.
+
+### Ativar banco Supabase exclusivo
+
+**Não use os bancos de projetos pessoais existentes.** Crie ou selecione um projeto exclusivo para o painel da Câmara na organização autorizada e execute o arquivo `supabase/migrations/20261112_camara_social_snapshots.sql` no SQL Editor. Ele cria `camara_social_snapshots` (leitura pública restrita aos registros institucionais) e `camara_social_follower_history` (histórico privado), ambas com RLS. Apenas a chave de serviço pode escrever.
+
+Configure os seguintes segredos em **GitHub → repositório → Settings → Secrets and variables → Actions → Repository secrets**:
+
+- `SUPABASE_URL`: endereço `https://<ref>.supabase.co` do projeto dedicado.
+- `SUPABASE_SERVICE_ROLE_KEY`: chave secreta de escrita desse projeto. Nunca enviar em chat, no Git ou ao navegador.
+
+Configure estes valores em **Vercel → painel-redes-camara → Settings → Environment Variables**, nos ambientes Production e Preview, depois crie novo deployment:
+
+- `PANEL_SUPABASE_URL`: o mesmo endereço (sem segredos).
+- `PANEL_SUPABASE_ANON_KEY`: chave **publishable/anon** com acesso somente de leitura via RLS. **Nunca** use a chave de serviço na Vercel nem o prefixo `NEXT_PUBLIC_` para credenciais.
+
+Enquanto o Supabase não estiver provisionado, GitHub Actions + branch `social-data` já funcionam como persistência pública. O coletor ainda depende da disponibilidade das fontes públicas e os agendamentos do GitHub podem atrasar. Se houver um problema, consulte a aba Actions; a data original de cada fonte impede mostrar métricas antigas como novas.
+
+### Testes da coleta
+
+```bash
+python -m unittest discover -s tests -p 'test_sync_social.py' -v
+npm test
+npm run build
+```
+
 ## Contingência visual sem Instagram
 
 Quando o Instagram bloqueia o acesso público e não há autorização Meta disponível, a função `/api/social_public` tenta ler as seis publicações com imagens mais recentes do [canal público oficial da Câmara no Telegram](https://t.me/CamaradosDeputados). O painel sinaliza explicitamente **PUBLICAÇÕES DA CÂMARA · TELEGRAM**, usa a imagem e a data publicadas pelo canal e abre o link da mensagem original. **Não afirma que são as seis últimas publicações do Instagram, nem inventa seguidores, curtidas ou comentários.** A fonte é consultada sob demanda pela Vercel e pode falhar por alterações do HTML do Telegram. O Instagram autenticado continua sendo prioritário.
@@ -64,9 +102,9 @@ A conexão usa a própria infraestrutura serverless da Vercel, sem daemon ou VPS
 
 Em instalações fora da Vercel, `PANEL_PUBLIC_SOCIAL_URL` pode definir um endpoint HTTPS confiável com o caminho `/api/social_public`. Com `PANEL_SOCIAL_SOURCE_URL` configurado, o snapshot autorizado mantém prioridade sobre a coleta pública.
 
-## Conectar as redes via VPS
+## Fonte legada opcional (compatibilidade)
 
-A integração de redes foi preparada para receber um snapshot HTTPS do coletor. **O coletor ainda precisa ser conectado às contas autorizadas e publicado na VPS.** A primeira versão não coleta followers por raspagem nem depende de embeds do Instagram.
+O coletor antigo por HTTPS continua suportado, mas **a VPS não é mais necessária**: o fluxo padrão é GitHub Actions → snapshot persistente → Vercel. Use este endpoint apenas se houver um serviço legado autorizado.
 
 Configure no servidor/Vercel (nunca no navegador):
 
