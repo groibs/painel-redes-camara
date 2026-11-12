@@ -77,7 +77,16 @@ export function mergePanel(
     };
   }
   if (incoming.sources.social.state === "error") {
-    merged.accounts = previous.accounts;
+    merged.accounts = incoming.accounts.map((account) => {
+      const cached = previous.accounts.find((old) => old.id === account.id);
+      if (account.source !== "manual") return cached || account;
+      // A newly reported count takes precedence over an older browser cache.
+      if (cached?.source !== "manual" && cached?.updatedAt && account.updatedAt &&
+          Date.parse(cached.updatedAt) > Date.parse(account.updatedAt)) {
+        return cached;
+      }
+      return account;
+    });
     merged.posts = previous.posts;
     merged.sources.social = {
       ...incoming.sources.social,
