@@ -280,17 +280,13 @@ async function socialFromServerless(
 
   const ig = object(raw.instagram);
   const instagramFollowers = integer(ig.followers);
-  if (instagramFollowers === null) {
-    throw new Error("Instagram não respondeu ao coletor público");
+  const accounts: Array<Record<string, unknown>> = [];
+  if (instagramFollowers !== null) {
+    accounts.push({
+      id: "instagram", name: "Instagram", handle: "@camaradosdeputados",
+      followers: instagramFollowers, change24h: null, updatedAt: collectedAt,
+    });
   }
-  const accounts: Array<Record<string, unknown>> = [{
-    id: "instagram",
-    name: "Instagram",
-    handle: "@camaradosdeputados",
-    followers: instagramFollowers,
-    change24h: null,
-    updatedAt: collectedAt,
-  }];
   const x = object(raw.x);
   const xFollowers = integer(x.followers);
   if (xFollowers !== null) {
@@ -299,6 +295,7 @@ async function socialFromServerless(
       followers: xFollowers, change24h: null, updatedAt: collectedAt,
     });
   }
+  if (!accounts.length) throw new Error("Nenhuma rede respondeu ao coletor serverless");
   const snapshot = parseSnapshot({
     schemaVersion: 1,
     collectedAt,
@@ -308,11 +305,16 @@ async function socialFromServerless(
   panel.accounts = panel.accounts.map(
     (account) => snapshot.accounts.find((item) => item.id === account.id) || account,
   );
-  panel.posts = snapshot.posts;
+  if (instagramFollowers !== null) panel.posts = snapshot.posts;
   panel.sources.social = {
-    state: "ok",
+    state: instagramFollowers === null ? "partial" : "ok",
     checkedAt: snapshot.collectedAt,
-    message: "Instagram: coleta pública serverless; demais redes aguardam conexão",
+    instagramAvailable: instagramFollowers !== null,
+    message: instagramFollowers === null
+      ? "X atualizado; Instagram indisponível (conectar API Meta)"
+      : ig.source === "meta"
+        ? "Instagram via API oficial da Meta"
+        : "Instagram via consulta pública (sujeita a bloqueio)",
   };
 }
 
