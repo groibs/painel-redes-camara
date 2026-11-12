@@ -24,7 +24,7 @@ export type SocialAccount = {
   change24h: number | null;
   updatedAt: string | null;
   /** Explicitly reported follower count; never treated as a live API collection. */
-  source?: "manual";
+  source?: "manual" | "public_embed";
 };
 export type SocialPost = {
   id: string;
