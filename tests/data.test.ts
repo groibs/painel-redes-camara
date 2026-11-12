@@ -47,6 +47,18 @@ test("Social snapshot keeps zero followers and negative real growth", () => {
   assert.equal(parsed.accounts[0].updatedAt, snapshot.collectedAt);
 });
 
+test("Social snapshot preserves validated Instagram follower provenance", () => {
+  const parsed = parseSnapshot({
+    ...snapshot,
+    accounts: [{ ...snapshot.accounts[0], followers: 397350, source: "public_embed" }],
+  });
+  assert.equal(parsed.accounts[0].source, "public_embed");
+  assert.throws(() => parseSnapshot({
+    ...snapshot,
+    accounts: [{ ...snapshot.accounts[0], source: "<script>" }],
+  }));
+});
+
 test("Social snapshot rejects unsafe counts, duplicate accounts and executable links", () => {
   assert.throws(() =>
     parseSnapshot({
