@@ -295,6 +295,25 @@ function applyPublicCollection(panel: PanelData, value: unknown): void {
       updatedAt: xObserved,
     });
   }
+  // The public profiles are independently collected. A failed source is
+  // absent, not fabricated, and each successful read has its own timestamp.
+  for (const [id, label, handle] of [
+    ["youtube", "YouTube", "@camaradosdeputadosoficial"],
+    ["tiktok", "TikTok", "@camaradosdeputados"],
+    ["facebook", "Facebook", "@camaradeputados"],
+  ] as const) {
+    const profile = object(raw[id]);
+    const followers = integer(profile.followers);
+    if (followers === null) continue;
+    accounts.push({
+      id, name: label, handle,
+      followers,
+      change24h: id === "youtube" ? null :
+        typeof profile.change24h === "number" && Number.isSafeInteger(profile.change24h)
+          ? profile.change24h : null,
+      updatedAt: validDate(profile.observedAt) || collectedAt,
+    });
+  }
   if (!accounts.length && !feedRows.length)
     throw new Error("Snapshot social sem dados válidos");
   const snapshot = parseSnapshot({
