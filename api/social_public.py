@@ -1,5 +1,6 @@
 from http.server import BaseHTTPRequestHandler
 import datetime as dt
+import html
 from concurrent.futures import ThreadPoolExecutor
 import json
 import os
@@ -276,24 +277,99 @@ def _x_profile():
     raise RuntimeError("x:" + ",".join(errors))
 
 
+
+def _telegram_recent():
+    """Fetch photo thumbnails from the Câmara's verified public Telegram channel.
+
+    This is explicitly a Telegram fallback, not a claim of Instagram recency.
+    No Telegram login or third-party scraping service is required.
+    """
+    response = requests.get(
+        "https://t.me/s/CamaradosDeputados",
+        headers={"User-Agent": "Mozilla/5.0", "Accept": "text/html"},
+        impersonate="chrome",
+        timeout=9,
+        allow_redirects=False,
+    )
+    if response.status_code != 200:
+        raise RuntimeError(f"telegram:http_{response.status_code}")
+    if len(response.content) > MAX_BODY:
+        raise RuntimeError("telegram:response_too_large")
+    page = response.text
+    positions = list(re.finditer(r'data-post="CamaradosDeputados/(\d+)"', page))
+    posts = []
+    for index, match in enumerate(positions):
+        block = page[match.start():(positions[index + 1].start()
+                                    if index + 1 < len(positions) else len(page))]
+        stamp = re.search(r'<time\b[^>]*datetime="([^"]+)"', block)
+        photo = re.search(
+            r'tgme_widget_message_photo_wrap[^>]*style="([^"]+)"',
+            block, re.DOTALL,
+        )
+        if not stamp or not photo:
+            continue
+        photo_url = re.search(
+            r"""url\(\s*['"]?(https://[^)'"]+)""",
+            html.unescape(photo.group(1)),
+        )
+        if not photo_url:
+            continue
+        image = photo_url.group(1)
+        if not (urlsplit(image).hostname or "").endswith(".telesco.pe"):
+            continue
+        try:
+            published = dt.datetime.fromisoformat(stamp.group(1).replace("Z", "+00:00"))
+            if published.tzinfo is None:
+                continue
+        except ValueError:
+            continue
+        body = re.search(
+            r'<div class="tgme_widget_message_text[^"]*"[^>]*>(.*?)</div>',
+            block, re.DOTALL,
+        )
+        caption = re.sub(
+            r"\s+", " ",
+            re.sub(r"<[^>]+>", " ", html.unescape(body.group(1)) if body else ""),
+        ).strip()[:4000]
+        if not caption:
+            caption = "Publicação da Câmara dos Deputados"
+        post_id = match.group(1)
+        posts.append({
+            "id": "tg-" + post_id,
+            "caption": caption,
+            "mediaUrl": image,
+            "permalink": f"https://t.me/CamaradosDeputados/{post_id}",
+            "publishedAt": published.isoformat(),
+            "type": "video" if "tgme_widget_message_video" in block else "image",
+            "likes": None,
+            "comments": None,
+        })
+    if not posts:
+        raise RuntimeError("telegram:no_media_posts")
+    posts.sort(key=lambda post: post["publishedAt"], reverse=True)
+    return posts[:6]
+
+
 def collect():
     errors = {}
     result = {
         "collectedAt": dt.datetime.now(UTC).isoformat(),
         "instagram": None,
+        "telegram": None,
         "x": None,
         "errors": errors,
     }
 
     # Independent public sources run concurrently to keep the Vercel
     # serverless response inside the dashboard's network deadline.
-    with ThreadPoolExecutor(max_workers=2) as pool:
+    with ThreadPoolExecutor(max_workers=3) as pool:
         instagram_future = (
             pool.submit(_ig_profile)
             if not (os.environ.get("INSTAGRAM_ACCESS_TOKEN") and os.environ.get("INSTAGRAM_USER_ID"))
             else None
         )
         x_future = pool.submit(_x_profile)
+        telegram_future = pool.submit(_telegram_recent)
 
         try:
             if os.environ.get("INSTAGRAM_ACCESS_TOKEN") and os.environ.get("INSTAGRAM_USER_ID"):
@@ -317,6 +393,12 @@ def collect():
             else:
                 errors["instagram"] = str(error)[:240]
 
+        if result["instagram"] is None:
+            try:
+                result["telegram"] = {"posts": telegram_future.result()}
+            except Exception:
+                errors["telegram"] = "telegram:unavailable"
+
         try:
             user = x_future.result()
             result["x"] = {
@@ -326,7 +408,7 @@ def collect():
         except Exception as error:
             errors["x"] = str(error)[:240]
 
-    if result["instagram"] is None and result["x"] is None:
+    if result["instagram"] is None and result["telegram"] is None and result["x"] is None:
         return 503, result
     return 200, result
 
