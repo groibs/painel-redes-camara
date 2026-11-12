@@ -323,9 +323,11 @@ async function social(
 ): Promise<void> {
   const source = environment.PANEL_SOCIAL_SOURCE_URL;
   if (!source) {
+    // VERCEL_URL is optional in project settings; the production domain is a
+    // stable fallback when system environment variables are not exposed.
     const publicEndpoint = environment.PANEL_PUBLIC_SOCIAL_URL ||
-      (process.env.VERCEL_URL
-        ? `https://${process.env.VERCEL_URL}/api/social_public`
+      (process.env.NODE_ENV === "production"
+        ? `https://${process.env.VERCEL_URL || "painel-redes-camara-six.vercel.app"}/api/social_public`
         : undefined);
     let serverlessError: unknown = null;
     if (publicEndpoint) {
