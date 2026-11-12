@@ -30,7 +30,7 @@ import {
   timeOf,
   TIMEZONE,
 } from "@/lib/format";
-import { tickerHeadline, tickerMessage } from "@/lib/headlines";
+import { agendaHeadline, tickerMessage } from "@/lib/headlines";
 import type {
   AgendaEvent,
   EditorialData,
@@ -93,11 +93,13 @@ function noAgenda(data: PanelData) {
 /** Scroll only when the rendered text exceeds its actual available space. */
 function AutoScrollText({
   text,
+  fullTitle,
   axis = "horizontal",
   href,
   className = "",
 }: {
   text: string;
+  fullTitle?: string;
   axis?: "horizontal" | "vertical";
   href?: string;
   className?: string;
@@ -143,7 +145,7 @@ function AutoScrollText({
     <span
       ref={viewportRef}
       className={`auto-scroll-text auto-scroll-${axis} ${distance > 2 ? "is-overflowing" : ""} ${className}`}
-      title={text}
+      title={fullTitle || text}
     >
       <span className="auto-scroll-text-content" ref={contentRef} style={style}>
         {href ? <a href={href} target="_blank" rel="noreferrer">{text}</a> : text}
@@ -211,12 +213,25 @@ export function SocialMetrics({
         {data.accounts.map((account) => {
           const delta = account.change24h;
           const manualInstagram = account.id === "instagram" && account.source === "manual";
-          const freshnessWindow = 45 * 60 * 1000;
+          // Public counts are collected at least daily; a normal delay
+          // between GitHub Actions runs must not be labelled stale.
+          const freshnessWindow = 26 * 60 * 60 * 1000;
           const stale =
             offline ||
             data.sources.social.state === "error" ||
             (!!account.updatedAt &&
               Date.now() - Date.parse(account.updatedAt) > freshnessWindow);
+          const observed = account.updatedAt ? new Date(account.updatedAt) : null;
+          const observedTime = observed && Number.isFinite(observed.getTime())
+            ? new Intl.DateTimeFormat("pt-BR", {
+                hour: "2-digit", minute: "2-digit", timeZone: TIMEZONE,
+              }).format(observed)
+            : null;
+          const observedDate = observed && Number.isFinite(observed.getTime())
+            ? new Intl.DateTimeFormat("pt-BR", {
+                day: "2-digit", month: "2-digit", timeZone: TIMEZONE,
+              }).format(observed)
+            : null;
           return (
             <article
               className={`metric-row metric-${account.id}`}
@@ -256,8 +271,13 @@ export function SocialMetrics({
                   <small className="metric-old" title="Valor informado manualmente em 12/11/2026, não atualizado automaticamente">
                     Manual · 12/11
                   </small>
-                ) : stale && account.followers !== null ? (
-                  <small className="metric-old">Última coleta</small>
+                ) : account.followers !== null && observedTime ? (
+                  <small
+                    className={stale ? "metric-old" : "metric-refreshed"}
+                    title={`Última observação válida: ${observedDate} às ${observedTime} (Brasília)`}
+                  >
+                    {stale ? `Coleta: ${observedDate}` : `Atual. ${observedTime}`}
+                  </small>
                 ) : null}
               </div>
             </article>
@@ -333,7 +353,7 @@ export function NowPanel({
                       : `${/sess[aã]o/i.test(event.type) ? "Sessão às" : "Previsto para"} ${timeOf(event.startsAt)}`}
                   </strong>
                   <p className="now-event-description">
-                    <AutoScrollText text={event.title} axis="vertical" href={event.url || undefined} />
+                    <AutoScrollText text={agendaHeadline(event.title, 102)} fullTitle={event.title} axis="vertical" href={event.url || undefined} />
                   </p>
                 </div>
               </article>
@@ -617,7 +637,7 @@ export function TopicRadar({
                           {String(originalIndex + 1).padStart(2, "0")}
                         </span>
                         <div className="trending-copy">
-                          <AutoScrollText text={tickerHeadline(topic.label)} className="trend-title" />
+                          <AutoScrollText text={agendaHeadline(topic.label, 85)} fullTitle={topic.label} className="trend-title" />
                           <span>
                             Em alta
                             <small aria-label="Fontes">
@@ -682,13 +702,13 @@ export function TodaySchedule({ data }: { data: PanelData }) {
             <article className="schedule-row" key={event.id}>
               <span className="schedule-index">{index + 1}</span>
               <div>
-                <h3>
+                <h3 title={event.title}>
                   {event.url ? (
-                    <a href={event.url} target="_blank" rel="noreferrer">
-                      {event.title}
+                    <a href={event.url} target="_blank" rel="noreferrer" title={event.title}>
+                      {agendaHeadline(event.title, 106)}
                     </a>
                   ) : (
-                    event.title
+                    agendaHeadline(event.title, 106)
                   )}
                 </h3>
                 <p>
@@ -805,7 +825,7 @@ export function Committees({ data }: { data: PanelData }) {
                   <p><AutoScrollText text={event.type} /></p>
                 </div>
                 <p className="committee-topic">
-                  <AutoScrollText text={event.title} axis="vertical" />
+                  <AutoScrollText text={agendaHeadline(event.title, 102)} fullTitle={event.title} axis="vertical" />
                 </p>
                 {event.url ? (
                   <a
@@ -883,8 +903,9 @@ export function Week({
               <div className="week-content">
                 <h3>
                   <AutoScrollText
-                    text={event?.title ||
+                    text={event ? agendaHeadline(event.title, 90) :
                       (data.sources.agenda.state === "ok" ? "Sem atividade publicada" : noAgenda(data))}
+                    fullTitle={event?.title}
                     axis="vertical"
                   />
                 </h3>

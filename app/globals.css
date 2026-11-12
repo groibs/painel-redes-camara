@@ -538,6 +538,11 @@ p {
   font-size: 10px;
   color: #f3cf96;
 }
+.metric-change .metric-refreshed {
+  font-size: 11px;
+  color: #8bafb8;
+  white-space: nowrap;
+}
 .social-bottom {
   display: flex;
   justify-content: space-between;
