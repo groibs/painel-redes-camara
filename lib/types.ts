@@ -6,7 +6,7 @@ export const networkIds = [
   "facebook",
 ] as const;
 export type NetworkId = (typeof networkIds)[number];
-export type SourceState = "ok" | "pending" | "error";
+export type SourceState = "ok" | "pending" | "partial" | "error";
 export type Source = {
   state: SourceState;
   checkedAt: string | null;
