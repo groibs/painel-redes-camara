@@ -5,6 +5,7 @@ from concurrent.futures import ThreadPoolExecutor
 import json
 import os
 import re
+import time
 from urllib.parse import parse_qs, quote, urlsplit
 
 from curl_cffi import requests
@@ -363,14 +364,22 @@ def _ig_media(post_id):
 def _x_profile():
     safe = quote(X_HANDLE, safe="")
     errors = []
-    for url in (
-        f"https://api.fxtwitter.com/{safe}",
+    # FxTwitter v2 is the supported profile endpoint; the legacy path often
+    # returns HTTP 404. Retry a transient v2 failure once before legacy.
+    for attempt, url in enumerate((
         f"https://api.fxtwitter.com/2/profile/{safe}",
-    ):
+        f"https://api.fxtwitter.com/2/profile/{safe}",
+        f"https://api.fxtwitter.com/{safe}",
+    )):
+        if attempt == 1:
+            time.sleep(0.4)
         try:
             response = requests.get(
                 url,
-                headers={"Accept": "application/json"},
+                headers={
+                    "Accept": "application/json",
+                    "User-Agent": "Mozilla/5.0",
+                },
                 impersonate="chrome",
                 timeout=10,
                 allow_redirects=True,
