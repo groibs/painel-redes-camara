@@ -46,6 +46,9 @@ jobs:
       - name: Instalar dependências dos coletores
         run: python -m pip install -r requirements.txt
 
+      - name: Verificar timestamps, cache e variação em 24 horas
+        run: python -m unittest discover -s tests -p 'test_sync_social.py' -v
+
       - name: Coletar, preservar valores anteriores e atualizar o histórico
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
