@@ -212,7 +212,6 @@ export function SocialMetrics({
       <div className="metrics-list">
         {data.accounts.map((account) => {
           const delta = account.change24h;
-          const manualInstagram = account.id === "instagram" && account.source === "manual";
           const publicInstagram = account.id === "instagram" && account.source === "public_embed";
           // Public counts are collected at least daily; a normal delay
           // between GitHub Actions runs must not be labelled stale.
@@ -247,7 +246,7 @@ export function SocialMetrics({
               <div className="metric-number">
                 <h3 className="sr-only">{account.name}</h3>
                 <strong
-                  title={`${account.name}: ${fullNumber(account.followers)}${manualInstagram ? " · informado manualmente em 12/11/2026" : publicInstagram ? " · leitura pública do Instagram, sujeita a atraso de cache" : ""}`}
+                  title={`${account.name}: ${fullNumber(account.followers)}${publicInstagram ? " · leitura pública do Instagram, sujeita a atraso de cache" : ""}`}
                 >
                   {socialFollowerCount(account.id, account.followers)}
                 </strong>
@@ -268,25 +267,9 @@ export function SocialMetrics({
                 ) : account.followers === null ? (
                   <small>Aguardando conexão</small>
                 ) : null}
-                {manualInstagram ? (
-                  <>
-                    <small className="metric-old" title="Valor informado manualmente em 12/11/2026; uma fonte pública pode estar defasada.">
-                      Manual · 12/11
-                    </small>
-                    {data.sources.social.instagramPublicCheckedAt ? (
-                      <small
-                        className="metric-refreshed"
-                        title="Horário da última consulta pública do Instagram; a contagem dessa fonte ainda não foi validada."
-                      >
-                        Busca · {new Intl.DateTimeFormat("pt-BR", {
-                          hour: "2-digit", minute: "2-digit", timeZone: TIMEZONE,
-                        }).format(new Date(data.sources.social.instagramPublicCheckedAt))}
-                      </small>
-                    ) : null}
-                  </>
-                ) : publicInstagram ? (
-                  <small className="metric-refreshed" title="Contagem pública observada automaticamente. O Instagram pode servir cópias antigas do perfil.">
-                    Público · {observedDate}
+                {publicInstagram ? (
+                  <small className={stale ? "metric-old" : "metric-refreshed"} title="Seguidores obtidos da fonte pública do Instagram. O número pode estar defasado por cache; a coleta é automática.">
+                    Público · {observedDate || "—"}
                   </small>
                 ) : account.followers !== null && observedTime ? (
                   <small
