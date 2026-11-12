@@ -13,6 +13,7 @@ export type Source = {
   message: string;
   /** For partial social responses, whether Instagram posts were fetched. */
   instagramAvailable?: boolean;
+  feedSource?: "instagram" | "telegram";
 };
 
 export type SocialAccount = {
