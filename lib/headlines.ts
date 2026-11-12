@@ -1,5 +1,5 @@
-/** Concise headlines for the TV news ticker.
- * Full official agenda titles remain available in the detailed sections.
+/** Concise, human-readable headlines for all compact TV agenda surfaces.
+ * Keep the original official title in source data and accessible tooltips.
  */
 export const TICKER_MAX_LENGTH = 116;
 
@@ -32,6 +32,14 @@ export function tickerHeadline(title: string): string {
     .replace(/;\s*e\s+(?=[a-záàâãéêíóôõúç])/gi, " e ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+/** Summarize long legislative enumerations across all compact agenda surfaces.
+ * Keep shorter titles unchanged and never mutate the original agenda record.
+ * A char ceiling is still necessary for arbitrary, non-enumeration titles.
+ */
+export function agendaHeadline(title: string, maxLength = 96): string {
+  return shorten(tickerHeadline(title), Math.max(32, Math.min(180, maxLength)));
 }
 
 /** Limit the complete ticker item, including its source, to prevent
