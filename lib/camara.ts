@@ -12,6 +12,8 @@ export type PanelEnvironment = {
   PANEL_SOCIAL_SOURCE_TOKEN?: string;
   PANEL_SOCIAL_FALLBACK_PANEL_URL?: string;
   PANEL_PUBLIC_SOCIAL_URL?: string;
+  PANEL_SUPABASE_URL?: string;
+  PANEL_SUPABASE_ANON_KEY?: string;
 };
 type ApiObject = Record<string, unknown>;
 function object(value: unknown): ApiObject {
@@ -251,56 +253,69 @@ async function socialFromLegacyPanel(
   };
 }
 
-/** A Vercel Python function provides a best-effort public Instagram feed without a VPS.
- * The official Meta integration (PANEL_SOCIAL_SOURCE_URL) remains preferred.
+/** Public snapshots are written by GitHub Actions to a separate data branch.
+ * Supabase (once provisioned) is the preferred persistent store; neither
+ * requires a VPS. Values preserve the timestamp of their own last successful
+ * observation, so an old metric is never represented as a fresh reading.
  */
-async function socialFromServerless(
-  panel: PanelData,
-  signal: AbortSignal,
-  endpoint: string,
-): Promise<void> {
-  const url = safeHttpsUrl(endpoint);
-  if (!url || new URL(url).pathname !== "/api/social_public") {
-    throw new Error("Endpoint social serverless inválido");
-  }
-  const response = await fetch(url, {
-    redirect: "error",
-    signal: AbortSignal.any([signal, AbortSignal.timeout(22000)]),
-    next: { revalidate: 120 },
-  });
-  if (!response.ok) throw new Error(`Coletor serverless HTTP ${response.status}`);
-  if (Number(response.headers.get("content-length") || 0) > 1_000_000) {
-    throw new Error("Resposta social excede limite");
-  }
-  const body = await response.text();
-  if (body.length > 1_000_000) throw new Error("Resposta social excede limite");
-  const raw = object(JSON.parse(body));
-  const collectedAt = validDate(raw.collectedAt);
-  if (!collectedAt) throw new Error("Coleta social sem data válida");
+const GITHUB_SOCIAL_DATA =
+  "https://raw.githubusercontent.com/groibs/painel-redes-camara/social-data/social/snapshot.json";
+const COLLECTOR_MAX_AGE = 6 * 60 * 60 * 1000;
 
+function applyPublicCollection(panel: PanelData, value: unknown): void {
+  const raw = object(value);
+  const collectedAt = validDate(raw.collectedAt);
+  if (!collectedAt || Date.parse(collectedAt) > Date.now() + 300000)
+    throw new Error("Snapshot social sem data válida");
   const ig = object(raw.instagram);
+  const x = object(raw.x);
+  const telegram = object(raw.telegram);
   const instagramFollowers = integer(ig.followers);
+  const xFollowers = integer(x.followers);
+  const igObserved = validDate(ig.observedAt) || collectedAt;
+  const xObserved = validDate(x.observedAt) || collectedAt;
+  const telegramPosts = Array.isArray(telegram.posts) ? telegram.posts.slice(0, 6) : [];
+  const feedRows = instagramFollowers !== null && Array.isArray(ig.posts) && ig.posts.length
+    ? ig.posts.slice(0, 6)
+    : telegramPosts;
   const accounts: Array<Record<string, unknown>> = [];
   if (instagramFollowers !== null) {
     accounts.push({
       id: "instagram", name: "Instagram", handle: "@camaradosdeputados",
-      followers: instagramFollowers, change24h: null, updatedAt: collectedAt,
+      followers: instagramFollowers, change24h: integer(ig.change24h) ?? null,
+      updatedAt: igObserved,
     });
   }
-  const x = object(raw.x);
-  const xFollowers = integer(x.followers);
   if (xFollowers !== null) {
     accounts.push({
       id: "x", name: "X", handle: "@camaradeputados",
-      followers: xFollowers, change24h: null, updatedAt: collectedAt,
+      followers: xFollowers,
+      change24h: typeof x.change24h === "number" && Number.isSafeInteger(x.change24h)
+        ? x.change24h : null,
+      updatedAt: xObserved,
     });
   }
-  if (!accounts.length) throw new Error("Nenhuma rede respondeu ao coletor serverless");
-  const telegram = object(raw.telegram);
-  const telegramPosts = Array.isArray(telegram.posts) ? telegram.posts.slice(0, 6) : [];
-  const feedRows = instagramFollowers !== null
-    ? (Array.isArray(ig.posts) ? ig.posts.slice(0, 6) : [])
-    : telegramPosts;
+  // The public profiles are independently collected. A failed source is
+  // absent, not fabricated, and each successful read has its own timestamp.
+  for (const [id, label, handle] of [
+    ["youtube", "YouTube", "@camaradosdeputadosoficial"],
+    ["tiktok", "TikTok", "@camaradosdeputados"],
+    ["facebook", "Facebook", "@camaradeputados"],
+  ] as const) {
+    const profile = object(raw[id]);
+    const followers = integer(profile.followers);
+    if (followers === null) continue;
+    accounts.push({
+      id, name: label, handle,
+      followers,
+      change24h: id === "youtube" ? null :
+        typeof profile.change24h === "number" && Number.isSafeInteger(profile.change24h)
+          ? profile.change24h : null,
+      updatedAt: validDate(profile.observedAt) || collectedAt,
+    });
+  }
+  if (!accounts.length && !feedRows.length)
+    throw new Error("Snapshot social sem dados válidos");
   const snapshot = parseSnapshot({
     schemaVersion: 1,
     collectedAt,
@@ -310,23 +325,69 @@ async function socialFromServerless(
   panel.accounts = panel.accounts.map(
     (account) => snapshot.accounts.find((item) => item.id === account.id) || account,
   );
-  if (instagramFollowers !== null || telegramPosts.length > 0)
-    panel.posts = snapshot.posts;
+  if (feedRows.length) panel.posts = snapshot.posts;
+  const usingInstagramFeed = instagramFollowers !== null &&
+    Array.isArray(ig.posts) && ig.posts.length > 0;
   panel.sources.social = {
     state: instagramFollowers === null ? "partial" : "ok",
-    checkedAt: snapshot.collectedAt,
+    checkedAt: collectedAt,
     instagramAvailable: instagramFollowers !== null,
-    feedSource: instagramFollowers !== null
-      ? "instagram"
-      : telegramPosts.length > 0 ? "telegram" : undefined,
+    feedSource: usingInstagramFeed ? "instagram" :
+      telegramPosts.length ? "telegram" : undefined,
     message: instagramFollowers === null
       ? telegramPosts.length
         ? "Instagram indisponível; últimas imagens do canal oficial da Câmara no Telegram"
-        : "X atualizado; Instagram indisponível (conectar API Meta)"
+        : "Instagram indisponível; métricas públicas disponíveis"
       : ig.source === "meta"
         ? "Instagram via API oficial da Meta"
-        : "Instagram via consulta pública (sujeita a bloqueio)",
+        : "Instagram via consulta pública",
   };
+}
+
+async function limitedJson(
+  url: string, signal: AbortSignal, headers: Record<string, string> = {},
+  timeout = 10000,
+): Promise<unknown> {
+  const response = await fetch(url, {
+    headers,
+    redirect: "error",
+    signal: AbortSignal.any([signal, AbortSignal.timeout(timeout)]),
+    next: { revalidate: 90 },
+  });
+  if (!response.ok) throw new Error("Fonte social HTTP " + response.status);
+  if (Number(response.headers.get("content-length") || 0) > 1_000_000)
+    throw new Error("Fonte social excede limite");
+  const body = await response.text();
+  if (body.length > 1_000_000) throw new Error("Fonte social excede limite");
+  return JSON.parse(body) as unknown;
+}
+
+async function publicServerlessCollection(
+  signal: AbortSignal, endpoint: string,
+): Promise<unknown> {
+  const url = safeHttpsUrl(endpoint);
+  if (!url || new URL(url).pathname !== "/api/social_public")
+    throw new Error("Endpoint social serverless inválido");
+  return limitedJson(url, signal, {}, 22000);
+}
+
+async function publicSupabaseCollection(
+  signal: AbortSignal, base: string, key: string,
+): Promise<unknown> {
+  const url = safeHttpsUrl(base);
+  if (!url || !/^([a-z0-9-]+\.)?supabase\.co$/.test(new URL(url).hostname))
+    throw new Error("URL do Supabase inválida");
+  const endpoint = new URL("/rest/v1/camara_social_snapshots?select=payload&id=eq.camara",
+    new URL(url).origin).toString();
+  const rows = await limitedJson(endpoint, signal, { apikey: key });
+  if (!Array.isArray(rows) || rows.length !== 1 || !object(rows[0]).payload)
+    throw new Error("Snapshot Supabase ainda não inicializado");
+  return object(rows[0]).payload;
+}
+
+function collectionAge(value: unknown): number {
+  const date = validDate(object(value).collectedAt);
+  return date ? Date.now() - Date.parse(date) : Infinity;
 }
 
 async function social(
@@ -336,31 +397,51 @@ async function social(
 ): Promise<void> {
   const source = environment.PANEL_SOCIAL_SOURCE_URL;
   if (!source) {
-    // VERCEL_URL is optional in project settings; the production domain is a
-    // stable fallback when system environment variables are not exposed.
+    const candidates: unknown[] = [];
+    if (environment.PANEL_SUPABASE_URL && environment.PANEL_SUPABASE_ANON_KEY) {
+      try {
+        candidates.push(await publicSupabaseCollection(
+          signal, environment.PANEL_SUPABASE_URL, environment.PANEL_SUPABASE_ANON_KEY,
+        ));
+      } catch { /* Dedicated Supabase not provisioned yet: use GitHub. */ }
+    }
+    try {
+      candidates.push(await limitedJson(GITHUB_SOCIAL_DATA, signal));
+    } catch { /* No scheduled snapshot published yet: use live collector. */ }
+
+    // Prefer the freshest *scheduled* snapshot if collection is recent.
+    const valid = candidates.filter((item) => collectionAge(item) < Infinity)
+      .sort((a, b) => collectionAge(a) - collectionAge(b));
+    for (const item of valid) {
+      if (collectionAge(item) > COLLECTOR_MAX_AGE) continue;
+      try {
+        applyPublicCollection(panel, item);
+        return;
+      } catch { /* Malformed snapshot; try the other source. */ }
+    }
+
+    // If Actions is delayed or both stores fail, query the Vercel function.
     const publicEndpoint = environment.PANEL_PUBLIC_SOCIAL_URL ||
       (process.env.NODE_ENV === "production"
         ? `https://${process.env.VERCEL_URL || "painel-redes-camara-six.vercel.app"}/api/social_public`
         : undefined);
-    let serverlessError: unknown = null;
     if (publicEndpoint) {
       try {
-        await socialFromServerless(panel, signal, publicEndpoint);
+        applyPublicCollection(panel, await publicServerlessCollection(signal, publicEndpoint));
         return;
-      } catch (error) {
-        serverlessError = error;
-      }
+      } catch { /* Preserve older stored readings with their original timestamps. */ }
+    }
+    for (const item of valid) {
+      try {
+        applyPublicCollection(panel, item);
+        return;
+      } catch { /* Ignore an invalid stored snapshot. */ }
     }
     if (environment.PANEL_SOCIAL_FALLBACK_PANEL_URL) {
-      try {
-        await socialFromLegacyPanel(panel, signal, environment.PANEL_SOCIAL_FALLBACK_PANEL_URL);
-        return;
-      } catch (error) {
-        if (!serverlessError) serverlessError = error;
-      }
+      await socialFromLegacyPanel(panel, signal, environment.PANEL_SOCIAL_FALLBACK_PANEL_URL);
+      return;
     }
-    if (serverlessError) throw serverlessError;
-    return;
+    throw new Error("Sem fonte social disponível");
   }
   const url = safeHttpsUrl(source);
   if (!url) throw new Error("Fonte social precisa usar HTTPS");
@@ -436,6 +517,8 @@ export async function getPanel(
     PANEL_SOCIAL_SOURCE_TOKEN: process.env.PANEL_SOCIAL_SOURCE_TOKEN,
     PANEL_SOCIAL_FALLBACK_PANEL_URL: process.env.PANEL_SOCIAL_FALLBACK_PANEL_URL,
     PANEL_PUBLIC_SOCIAL_URL: process.env.PANEL_PUBLIC_SOCIAL_URL,
+    PANEL_SUPABASE_URL: process.env.PANEL_SUPABASE_URL,
+    PANEL_SUPABASE_ANON_KEY: process.env.PANEL_SUPABASE_ANON_KEY,
   },
 ): Promise<PanelData> {
   const panel = emptyPanel();
