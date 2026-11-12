@@ -621,7 +621,7 @@ export function TopicRadar({
                           {String(originalIndex + 1).padStart(2, "0")}
                         </span>
                         <div className="trending-copy">
-                          <AutoScrollText text={topic.label} className="trend-title" />
+                          <AutoScrollText text={tickerHeadline(topic.label)} className="trend-title" />
                           <span>
                             Em alta
                             <small aria-label="Fontes">
