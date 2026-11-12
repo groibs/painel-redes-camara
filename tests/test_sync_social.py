@@ -5,6 +5,7 @@ import tempfile
 import unittest
 
 from scripts.sync_social import merge_collection, update_history, main
+from scripts.check_social_freshness import freshness_problems
 
 UTC = dt.timezone.utc
 
@@ -46,6 +47,25 @@ class ScheduledSocialTests(unittest.TestCase):
         self.assertEqual(len(result["samples"]), 2)
         self.assertEqual(len(added), 1)
         self.assertNotIn("instagram", [s["network"] for s in result["samples"]])
+
+    def test_daily_freshness_checks_all_public_follower_sources(self):
+        fresh_date = self.now - dt.timedelta(hours=25)
+        recent = {"observedAt": fresh_date.isoformat(), "followers": 1234}
+        snapshot = {name: dict(recent) for name in ("x", "tiktok", "facebook", "youtube")}
+        self.assertEqual(freshness_problems(snapshot, self.now), [])
+        snapshot["facebook"]["observedAt"] = (
+            self.now - dt.timedelta(hours=27)).isoformat()
+        self.assertEqual(len(freshness_problems(snapshot, self.now)), 1)
+        self.assertIn("facebook", freshness_problems(snapshot, self.now)[0])
+
+    def test_daily_freshness_ignores_manual_instagram_and_flags_missing_source(self):
+        now = self.now
+        sources = {name: {"followers": 1, "observedAt": now.isoformat()}
+                   for name in ("x", "tiktok", "facebook", "youtube")}
+        sources["instagram"] = {"followers": None, "source": "embed"}
+        self.assertEqual(freshness_problems(sources, now), [])
+        sources.pop("youtube")
+        self.assertTrue(any("youtube" in problem for problem in freshness_problems(sources, now)))
 
     def test_never_invents_missing_social_network(self):
         fresh = {"collectedAt": self.now.isoformat(),
