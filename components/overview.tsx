@@ -30,6 +30,7 @@ import {
   timeOf,
   TIMEZONE,
 } from "@/lib/format";
+import { tickerMessage } from "@/lib/headlines";
 import type {
   AgendaEvent,
   EditorialData,
@@ -61,16 +62,6 @@ function displayOrgan(event: AgendaEvent) {
   if (isPlenary(event)) return "Plenário";
   // Official full names are preferred; old cached events still work.
   return event.organName || event.organ;
-}
-/** Shorten long enumerations in the small news ticker only.
- * Detailed agenda cards keep the official, unabridged event title.
- */
-function tickerHeadline(title: string) {
-  return title.replace(/\s+/g, " ").trim().replace(
-    /Apreciação dos PLNs?['’]?\s*n[º°]s?\.?\s*((?:\d+\s*,\s*){4,}\d+(?:\s*e\s*\d+)?),?\s*de\s*(20\d{2})/gi,
-    (_match, numbers: string, year: string) =>
-      `Apreciação de ${(numbers.match(/\d+/g) || []).length} PLNs de ${year}`,
-  );
 }
 function socialFollowerCount(id: NetworkId, value: number | null) {
   if (value === null) return "—";
@@ -1088,7 +1079,7 @@ export function Ticker({ data }: { data: PanelData }) {
     ...events.filter((event) => !isOngoing(event)),
   ].slice(0, 6);
   const messages = featured.length
-    ? featured.map((event) => `${displayOrgan(event)}: ${tickerHeadline(event.title)}`)
+    ? featured.map((event) => tickerMessage(displayOrgan(event), event.title))
     : [
         data.sources.agenda.state === "ok"
           ? "Acompanhe a agenda legislativa e as atividades da Câmara dos Deputados"
