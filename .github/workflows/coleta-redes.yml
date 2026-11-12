@@ -11,6 +11,8 @@ on:
       - ".github/workflows/coleta-redes.yml"
       - "scripts/sync_social.py"
       - "api/social_public.py"
+      - "collector/collector.py"
+      - "tests/test_sync_social.py"
       - "requirements.txt"
 
 permissions:
