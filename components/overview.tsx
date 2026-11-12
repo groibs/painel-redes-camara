@@ -936,6 +936,7 @@ export function Week({
 }
 
 function PostCard({ post }: { post: SocialPost }) {
+  const isTelegram = post.id.startsWith("tg-");
   const [failedImage, setFailedImage] = useState(false);
   const content = (
     <>
@@ -973,14 +974,14 @@ function PostCard({ post }: { post: SocialPost }) {
         </span>
       </div>
       <div className="post-meta">
-        <span>
-          <Heart />
-          {compactNumber(post.likes)}
-        </span>
-        <span>
-          <MessageCircle />
-          {compactNumber(post.comments)}
-        </span>
+        {isTelegram ? (
+          <span className="post-origin">TELEGRAM · VER PUBLICAÇÃO</span>
+        ) : (
+          <>
+            <span><Heart />{compactNumber(post.likes)}</span>
+            <span><MessageCircle />{compactNumber(post.comments)}</span>
+          </>
+        )}
       </div>
     </>
   );
@@ -990,7 +991,7 @@ function PostCard({ post }: { post: SocialPost }) {
       href={post.permalink}
       target="_blank"
       rel="noreferrer"
-      aria-label={post.caption || "Publicação do Instagram"}
+      aria-label={post.caption || (isTelegram ? "Publicação no Telegram" : "Publicação do Instagram")}
     >
       {content}
     </a>
@@ -1018,7 +1019,9 @@ export function InstagramFeed({
       <div className="feed-heading">
         <h2 id="feed-title">
           <CalendarDays />
-          ÚLTIMOS POSTS NO INSTAGRAM
+          {data.sources.social.feedSource === "telegram"
+            ? "PUBLICAÇÕES DA CÂMARA · TELEGRAM"
+            : "ÚLTIMOS POSTS NO INSTAGRAM"}
         </h2>
         <div className="pager dark-pager">
           <button

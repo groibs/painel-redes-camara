@@ -92,8 +92,12 @@ export function mergePanel(
         ? account
         : previous.accounts.find((old) => old.id === account.id && old.followers !== null) || account,
     );
-    if (incoming.sources.social.instagramAvailable === false) {
+    // A fresh Telegram fallback should replace the stale photo grid.
+    // Preserve older Instagram photos only when neither source has new posts.
+    if (incoming.sources.social.instagramAvailable === false &&
+        incoming.posts.length === 0) {
       merged.posts = previous.posts;
+      merged.sources.social.feedSource = previous.sources.social.feedSource;
     }
   }
   return merged;

@@ -49,6 +49,10 @@ O navegador consulta `/api/painel` a cada minuto por padrão. Esse intervalo pod
 
 Para fixar uma votação importante, defina `PANEL_VOTE_ID` no ambiente do servidor. O código também consulta as informações básicas oficiais desse ID.
 
+## Contingência visual sem Instagram
+
+Quando o Instagram bloqueia o acesso público e não há autorização Meta disponível, a função `/api/social_public` tenta ler as seis publicações com imagens mais recentes do [canal público oficial da Câmara no Telegram](https://t.me/CamaradosDeputados). O painel sinaliza explicitamente **PUBLICAÇÕES DA CÂMARA · TELEGRAM**, usa a imagem e a data publicadas pelo canal e abre o link da mensagem original. **Não afirma que são as seis últimas publicações do Instagram, nem inventa seguidores, curtidas ou comentários.** A fonte é consultada sob demanda pela Vercel e pode falhar por alterações do HTML do Telegram. O Instagram autenticado continua sendo prioritário.
+
 ## Coleta do Instagram sem VPS (Vercel)
 
 **Fonte confiável (recomendada):** autorize a conta profissional da Câmara na API oficial da Meta e configure em **Vercel → Project → Settings → Environment Variables**: `INSTAGRAM_USER_ID`, `INSTAGRAM_ACCESS_TOKEN`, `META_API_VERSION` e `INSTAGRAM_LOGIN` (`facebook` se for login com Página vinculada, `instagram` se for Instagram Login). Não compartilhe tokens no chat e nunca use `NEXT_PUBLIC_`. Sem essas credenciais, somente as fontes públicas podem ser consultadas, e elas podem ser bloqueadas. A Vercel precisa de um novo deployment após a configuração.
