@@ -334,6 +334,8 @@ function applyPublicCollection(panel: PanelData, value: unknown): void {
     state: instagramFollowers === null ? "partial" : "ok",
     checkedAt: collectedAt,
     instagramAvailable: instagramFollowers !== null,
+    instagramPublicCheckedAt: validDate(ig.publicCheckedAt) ||
+      (integer(ig.publicFollowers) !== null ? collectedAt : undefined),
     feedSource: usingInstagramFeed ? "instagram" :
       telegramPosts.length ? "telegram" : undefined,
     message: usingInstagramFeed
