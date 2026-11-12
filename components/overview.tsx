@@ -62,6 +62,16 @@ function displayOrgan(event: AgendaEvent) {
   // Official full names are preferred; old cached events still work.
   return event.organName || event.organ;
 }
+/** Shorten long enumerations in the small news ticker only.
+ * Detailed agenda cards keep the official, unabridged event title.
+ */
+function tickerHeadline(title: string) {
+  return title.replace(/\s+/g, " ").trim().replace(
+    /Apreciação dos PLNs?\s*n[º°]s?\.?\s*((?:\d+\s*,\s*){4,}\d+),?\s*de\s*(20\d{2})/gi,
+    (_match, numbers: string, year: string) =>
+      `Apreciação de ${numbers.split(",").length} PLNs de ${year}`,
+  );
+}
 function socialFollowerCount(id: NetworkId, value: number | null) {
   if (value === null) return "—";
   if (id === "youtube") {
@@ -876,8 +886,11 @@ export function Week({
               />
               <div className="week-content">
                 <h3>
-                  <AutoScrollText text={event?.title ||
-                    (data.sources.agenda.state === "ok" ? "Sem atividade publicada" : noAgenda(data))} />
+                  <AutoScrollText
+                    text={event?.title ||
+                      (data.sources.agenda.state === "ok" ? "Sem atividade publicada" : noAgenda(data))}
+                    axis="vertical"
+                  />
                 </h3>
                 <p>
                   <AutoScrollText text={event
@@ -1065,9 +1078,9 @@ export function Ticker({ data }: { data: PanelData }) {
   const featured = [
     ...events.filter((event) => isOngoing(event)),
     ...events.filter((event) => !isOngoing(event)),
-  ].slice(0, 8);
+  ].slice(0, 6);
   const messages = featured.length
-    ? featured.map((event) => `${displayOrgan(event)}: ${event.title.replace(/\s+/g, " ").trim()}`)
+    ? featured.map((event) => `${displayOrgan(event)}: ${tickerHeadline(event.title)}`)
     : [
         data.sources.agenda.state === "ok"
           ? "Acompanhe a agenda legislativa e as atividades da Câmara dos Deputados"
@@ -1111,9 +1124,9 @@ export function Ticker({ data }: { data: PanelData }) {
 
   const running = dimensions.cycle > dimensions.viewport + 2;
   // Constant physical speed, regardless of how many headlines are present.
-  // 22 CSS px/s is intentionally slower than the original fixed 90 s loop.
+  // Keep a consistent, readable pace even for very long announcements.
   const style = {
-    "--ticker-duration": `${Math.max(45, Math.ceil(dimensions.cycle / 22))}s`,
+    "--ticker-duration": `${Math.max(55, Math.ceil(dimensions.cycle / 18))}s`,
   } as CSSProperties;
 
   return (
