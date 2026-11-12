@@ -126,6 +126,117 @@ def _meta_instagram():
     }
 
 
+
+def _parse_embed_profile(page):
+    """Decode Instagram's public embed ServerJS payload without executing JS.
+
+    Instagram returns the six public profile posts in contextJSON inside a
+    ServerJS handle call, even when its unauthenticated profile API
+    rejects requests. This is an undocumented format and may change.
+    """
+    decoder = json.JSONDecoder()
+    for match in re.finditer(r"s\.handle\(", page):
+        try:
+            data, _ = decoder.raw_decode(page[match.end():])
+        except (ValueError, TypeError):
+            continue
+
+        stack = [data]
+        inspected = 0
+        while stack and inspected < 1800:
+            inspected += 1
+            current = stack.pop()
+            if isinstance(current, dict):
+                blob = current.get("contextJSON")
+                if isinstance(blob, str) and len(blob) < 500_000:
+                    try:
+                        context = json.loads(blob).get("context")
+                    except (ValueError, TypeError):
+                        context = None
+                    if (isinstance(context, dict)
+                            and context.get("username", "").lower() == IG_HANDLE
+                            and isinstance(context.get("graphql_media"), list)):
+                        return context
+                stack.extend(current.values())
+            elif isinstance(current, list):
+                stack.extend(current)
+    raise RuntimeError("instagram:embed_data_missing")
+
+
+def _ig_embed():
+    """Fetch original recent Instagram thumbnails without login or Meta API.
+
+    The followers_count field in the public embed can lag behind the actual
+    profile. We intentionally do *not* report it as a live follower count.
+    """
+    response = requests.get(
+        f"https://www.instagram.com/{IG_HANDLE}/embed/",
+        headers={
+            "User-Agent": "InstagramEmbedCollector/1.0",
+            "Accept": "text/html",
+            "Accept-Language": "pt-BR,pt;q=0.9",
+        },
+        timeout=12,
+        allow_redirects=False,
+    )
+    if response.status_code != 200:
+        raise RuntimeError(f"instagram:embed_http_{response.status_code}")
+    if len(response.content) > MAX_BODY:
+        raise RuntimeError("instagram:embed_too_large")
+    context = _parse_embed_profile(response.text)
+    posts = []
+    for row in context["graphql_media"]:
+        node = row.get("shortcode_media") if isinstance(row, dict) else None
+        if not isinstance(node, dict) or node.get("pinned_for_users"):
+            continue
+        identifier = str(node.get("id") or "")
+        shortcode = str(node.get("shortcode") or "")
+        timestamp = node.get("taken_at_timestamp")
+        if (not identifier.isdigit() or len(identifier) > 100
+                or not re.fullmatch(r"[A-Za-z0-9_-]{6,32}", shortcode)
+                or type(timestamp) is not int or timestamp < 1000000000
+                or timestamp > dt.datetime.now(UTC).timestamp() + 300):
+            continue
+        image = node.get("display_url")
+        if not isinstance(image, str) or len(image) > 3000:
+            continue
+        parsed_url = urlsplit(image)
+        if (parsed_url.scheme != "https"
+                or not (parsed_url.hostname or "").endswith(".cdninstagram.com")
+                or parsed_url.username or parsed_url.password):
+            continue
+        edges = (node.get("edge_media_to_caption") or {}).get("edges") or []
+        caption = ""
+        if edges and isinstance(edges[0], dict):
+            caption = str((edges[0].get("node") or {}).get("text") or "")
+        media_type = {
+            "GraphImage": "image",
+            "GraphVideo": "video",
+            "GraphSidecar": "carousel",
+        }.get(node.get("__typename"))
+        if not media_type:
+            continue
+        posts.append({
+            "id": identifier,
+            "caption": caption[:4000],
+            "mediaUrl": image,
+            "permalink": f"https://www.instagram.com/p/{shortcode}/",
+            "publishedAt": dt.datetime.fromtimestamp(timestamp, UTC).isoformat(),
+            "type": media_type,
+            "likes": _count((node.get("edge_liked_by") or {}).get("count")),
+            "comments": _count((node.get("edge_media_to_comment") or {}).get("count")),
+        })
+    if not posts:
+        raise RuntimeError("instagram:embed_posts_missing")
+    posts.sort(key=lambda post: post["publishedAt"], reverse=True)
+    return {
+        "handle": "@" + IG_HANDLE,
+        "followers": None,
+        "posts": posts[:6],
+        "source": "embed",
+    }
+
+
 def _ig_profile():
     safe = quote(IG_HANDLE, safe="")
     headers = {
@@ -364,7 +475,7 @@ def collect():
     # serverless response inside the dashboard's network deadline.
     with ThreadPoolExecutor(max_workers=3) as pool:
         instagram_future = (
-            pool.submit(_ig_profile)
+            pool.submit(_ig_embed)
             if not (os.environ.get("INSTAGRAM_ACCESS_TOKEN") and os.environ.get("INSTAGRAM_USER_ID"))
             else None
         )
@@ -376,16 +487,7 @@ def collect():
                 result["instagram"] = _meta_instagram()
                 result["instagram"]["source"] = "meta"
             else:
-                user = instagram_future.result()
-                followers = ((user.get("edge_followed_by") or {}).get("count"))
-                if type(followers) is not int:
-                    raise RuntimeError("instagram:invalid_followers")
-                result["instagram"] = {
-                    "handle": "@" + IG_HANDLE,
-                    "followers": followers,
-                    "posts": _ig_posts(user),
-                    "source": "public",
-                }
+                result["instagram"] = instagram_future.result()
         except Exception as error:
             # Never include Meta response bodies, URLs with credentials or tokens.
             if os.environ.get("INSTAGRAM_ACCESS_TOKEN"):
@@ -393,7 +495,7 @@ def collect():
             else:
                 errors["instagram"] = str(error)[:240]
 
-        if result["instagram"] is None:
+        if not (isinstance(result["instagram"], dict) and result["instagram"].get("posts")):
             try:
                 result["telegram"] = {"posts": telegram_future.result()}
             except Exception:
