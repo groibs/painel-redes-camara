@@ -397,6 +397,38 @@ async function social(
   };
 }
 
+/**
+ * One-off reported Instagram count. Keep its original timestamp: repeated
+ * Vercel refreshes must never make a manual report look like a live reading.
+ * A genuinely newer automatic count takes precedence.
+ */
+const reportedInstagram = {
+  followers: 397329,
+  reportedAt: "2026-11-12T11:32:00-03:00",
+} as const;
+
+function applyReportedInstagram(panel: PanelData): void {
+  panel.accounts = panel.accounts.map((account) => {
+    if (account.id !== "instagram") return account;
+    const automaticIsNewer =
+      account.followers !== null &&
+      !!account.updatedAt &&
+      Date.parse(account.updatedAt) > Date.parse(reportedInstagram.reportedAt);
+    if (automaticIsNewer) return account;
+    return {
+      ...account,
+      handle: "@camaradosdeputados",
+      followers: reportedInstagram.followers,
+      change24h: null,
+      updatedAt: reportedInstagram.reportedAt,
+      source: "manual" as const,
+    };
+  });
+  if (panel.accounts.find((account) => account.id === "instagram")?.source === "manual") {
+    panel.sources.social.message += " · Instagram: 397.329 informados em 12/11";
+  }
+}
+
 export async function getPanel(
   environment: PanelEnvironment = {
     PANEL_VOTE_ID: process.env.PANEL_VOTE_ID,
@@ -447,6 +479,7 @@ export async function getPanel(
     );
     console.error("[painel] redes indisponíveis");
   }
+  applyReportedInstagram(panel);
   panel.generatedAt = new Date().toISOString();
   return panel;
 }
