@@ -274,10 +274,11 @@ function applyPublicCollection(panel: PanelData, value: unknown): void {
   const xFollowers = integer(x.followers);
   const igObserved = validDate(ig.observedAt) || collectedAt;
   const xObserved = validDate(x.observedAt) || collectedAt;
+  const instagramPosts = Array.isArray(ig.posts) ? ig.posts.slice(0, 6) : [];
   const telegramPosts = Array.isArray(telegram.posts) ? telegram.posts.slice(0, 6) : [];
-  const feedRows = instagramFollowers !== null && Array.isArray(ig.posts) && ig.posts.length
-    ? ig.posts.slice(0, 6)
-    : telegramPosts;
+  // Instagram embeds expose original posts without a trustworthy live follower
+  // count. Prefer real Instagram posts even when followers are still manual.
+  const feedRows = instagramPosts.length > 0 ? instagramPosts : telegramPosts;
   const accounts: Array<Record<string, unknown>> = [];
   if (instagramFollowers !== null) {
     accounts.push({
@@ -326,21 +327,20 @@ function applyPublicCollection(panel: PanelData, value: unknown): void {
     (account) => snapshot.accounts.find((item) => item.id === account.id) || account,
   );
   if (feedRows.length) panel.posts = snapshot.posts;
-  const usingInstagramFeed = instagramFollowers !== null &&
-    Array.isArray(ig.posts) && ig.posts.length > 0;
+  const usingInstagramFeed = instagramPosts.length > 0;
   panel.sources.social = {
     state: instagramFollowers === null ? "partial" : "ok",
     checkedAt: collectedAt,
     instagramAvailable: instagramFollowers !== null,
     feedSource: usingInstagramFeed ? "instagram" :
       telegramPosts.length ? "telegram" : undefined,
-    message: instagramFollowers === null
-      ? telegramPosts.length
+    message: usingInstagramFeed
+      ? ig.source === "embed"
+        ? "Posts reais do Instagram via incorporação pública; seguidores informados manualmente"
+        : "Publicações originais do Instagram"
+      : telegramPosts.length
         ? "Instagram indisponível; últimas imagens do canal oficial da Câmara no Telegram"
-        : "Instagram indisponível; métricas públicas disponíveis"
-      : ig.source === "meta"
-        ? "Instagram via API oficial da Meta"
-        : "Instagram via consulta pública",
+        : "Instagram indisponível; métricas públicas disponíveis",
   };
 }
 
