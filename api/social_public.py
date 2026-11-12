@@ -230,9 +230,14 @@ def _ig_embed():
     if not posts:
         raise RuntimeError("instagram:embed_posts_missing")
     posts.sort(key=lambda post: post["publishedAt"], reverse=True)
+    # A public embed can return a stale follower count (e.g. 396896 while
+    # the institutional team reported 397329). Store it separately, never
+    # claim it as a live measurement until subsequent readings corroborate it.
+    public_followers = _count(context.get("followers_count"))
     return {
         "handle": "@" + IG_HANDLE,
         "followers": None,
+        "publicFollowers": public_followers,
         "posts": posts[:6],
         "source": "embed",
     }
