@@ -270,7 +270,8 @@ function applyPublicCollection(panel: PanelData, value: unknown): void {
   const ig = object(raw.instagram);
   const x = object(raw.x);
   const telegram = object(raw.telegram);
-  const instagramFollowers = integer(ig.followers);
+  const instagramFollowers = integer(ig.followers) ??
+    (ig.source === "embed" ? integer(ig.publicFollowers) : null);
   const xFollowers = integer(x.followers);
   const igObserved = validDate(ig.followersObservedAt) ||
     validDate(ig.observedAt) || collectedAt;
@@ -286,7 +287,8 @@ function applyPublicCollection(panel: PanelData, value: unknown): void {
       id: "instagram", name: "Instagram", handle: "@camaradosdeputados",
       followers: instagramFollowers, change24h: integer(ig.change24h) ?? null,
       updatedAt: igObserved,
-      source: ig.source === "embed_observed" ? "public_embed" : undefined,
+      source: ["embed", "embed_observed"].includes(String(ig.source))
+        ? "public_embed" : undefined,
     });
   }
   if (xFollowers !== null) {
@@ -339,11 +341,9 @@ function applyPublicCollection(panel: PanelData, value: unknown): void {
     feedSource: usingInstagramFeed ? "instagram" :
       telegramPosts.length ? "telegram" : undefined,
     message: usingInstagramFeed
-      ? ig.source === "embed_observed"
-        ? "Posts e seguidores via incorporação pública; contagem pode estar defasada"
-        : ig.source === "embed"
-          ? "Posts reais do Instagram via incorporação pública; contador manual até validação"
-          : "Publicações originais do Instagram"
+      ? ["embed", "embed_observed"].includes(String(ig.source))
+        ? "Instagram via fonte pública; contagem sujeita a atraso da plataforma"
+        : "Publicações originais do Instagram"
       : telegramPosts.length
         ? "Instagram indisponível; últimas imagens do canal oficial da Câmara no Telegram"
         : "Instagram indisponível; métricas públicas disponíveis",
@@ -489,33 +489,6 @@ async function social(
  * Vercel refreshes must never make a manual report look like a live reading.
  * A genuinely newer automatic count takes precedence.
  */
-const reportedInstagram = {
-  followers: 397329,
-  reportedAt: "2026-11-12T11:32:00-03:00",
-} as const;
-
-function applyReportedInstagram(panel: PanelData): void {
-  panel.accounts = panel.accounts.map((account) => {
-    if (account.id !== "instagram") return account;
-    const automaticIsNewer =
-      account.followers !== null &&
-      !!account.updatedAt &&
-      Date.parse(account.updatedAt) > Date.parse(reportedInstagram.reportedAt);
-    if (automaticIsNewer) return account;
-    return {
-      ...account,
-      handle: "@camaradosdeputados",
-      followers: reportedInstagram.followers,
-      change24h: null,
-      updatedAt: reportedInstagram.reportedAt,
-      source: "manual" as const,
-    };
-  });
-  if (panel.accounts.find((account) => account.id === "instagram")?.source === "manual") {
-    panel.sources.social.message += " · Instagram: 397.329 informados em 12/11";
-  }
-}
-
 export async function getPanel(
   environment: PanelEnvironment = {
     PANEL_VOTE_ID: process.env.PANEL_VOTE_ID,
@@ -568,7 +541,6 @@ export async function getPanel(
     );
     console.error("[painel] redes indisponíveis");
   }
-  applyReportedInstagram(panel);
   panel.generatedAt = new Date().toISOString();
   return panel;
 }
