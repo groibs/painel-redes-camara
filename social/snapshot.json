@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-11-12T15:16:53.281369+00:00",
+  "collectedAt": "2026-11-12T15:24:23.551486+00:00",
   "errors": {
     "instagram": "instagram:i.instagram.com:404,www.instagram.com:404"
   },
@@ -7,11 +7,11 @@
     "change24h": null,
     "followers": 666033,
     "handle": "@camaradeputados",
-    "observedAt": "2026-11-12T15:16:53.281369+00:00"
+    "observedAt": "2026-11-12T15:24:23.551486+00:00"
   },
   "instagram": null,
   "telegram": {
-    "observedAt": "2026-11-12T15:16:53.281369+00:00",
+    "observedAt": "2026-11-12T15:24:23.551486+00:00",
     "posts": [
       {
         "caption": "🇧🇷 Mais apoio aos exportadores brasileiros! A Câmara aprovou a terceira edição do Plano Brasil Soberano, que amplia o crédito com juros reduzidos para empresas afetadas pelo tarifaço dos EUA e por conflitos internacionais. 💰 A nova etapa prevê até R$ 13,5 bilhões adicionais em recursos do Tesouro Nacional e do BNDES. 🌾 Setores como agricultura, pecuária, pesca, indústria e minerais estratégicos estão entre os beneficiados. 🏛️ A MP 1379/2026 já está valendo, mas, para virar lei, ainda precisa ser aprovada pelo Senado. 📲 Acompanhe as redes da Câmara e saiba mais: cd.leg.br/redes",
@@ -79,18 +79,18 @@
     "change24h": null,
     "followers": 149500,
     "handle": "@camaradosdeputados",
-    "observedAt": "2026-11-12T15:16:53.281369+00:00"
+    "observedAt": "2026-11-12T15:24:23.551486+00:00"
   },
   "x": {
     "change24h": null,
-    "followers": 1087136,
+    "followers": 1087137,
     "handle": "@camaradeputados",
-    "observedAt": "2026-11-12T15:16:53.281369+00:00"
+    "observedAt": "2026-11-12T15:24:23.551486+00:00"
   },
   "youtube": {
     "change24h": null,
     "followers": 1500000,
     "handle": "@camaradosdeputadosoficial",
-    "observedAt": "2026-11-12T15:16:53.281369+00:00"
+    "observedAt": "2026-11-12T15:24:23.551486+00:00"
   }
 }
