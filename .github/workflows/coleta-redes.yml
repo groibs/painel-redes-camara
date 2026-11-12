@@ -13,6 +13,7 @@ on:
       - "api/social_public.py"
       - "collector/collector.py"
       - "tests/test_sync_social.py"
+      - "tests/test_social_embed.py"
       - "requirements.txt"
 
 permissions:
@@ -49,7 +50,7 @@ jobs:
         run: python -m pip install -r requirements.txt
 
       - name: Verificar timestamps, cache e variação em 24 horas
-        run: python -m unittest discover -s tests -p 'test_sync_social.py' -v
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
 
       - name: Coletar, preservar valores anteriores e atualizar o histórico
         env:
