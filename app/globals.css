@@ -2920,3 +2920,50 @@ legend {
   min-height: 36px;
   overflow: hidden;
 }
+
+
+/* Broadcast text safety improvements (November 2026).
+   Preserve full titles instead of clipping or breaking words indiscriminately. */
+.week-content {
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
+}
+.week-content h3 {
+  display: block;
+  height: 2.16em;
+  font-size: 18px;
+  line-height: 1.08;
+  white-space: normal;
+  overflow: hidden;
+  -webkit-line-clamp: unset;
+}
+.week-content h3 .auto-scroll-text {
+  height: 100%;
+}
+.week-content h3 .auto-scroll-text-content {
+  white-space: normal;
+  line-height: 1.08;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+.week-content p {
+  margin-top: 2px;
+  line-height: 1.05;
+  max-height: 1.1em;
+}
+.schedule-row h3 {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+.trending-copy,
+.trend-title {
+  min-width: 0;
+}
+.trend-title {
+  line-height: 1.12;
+}
+.ticker-copy > span {
+  font-size: 18px;
+  padding-inline: 22px;
+}
