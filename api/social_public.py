@@ -33,7 +33,7 @@ def _meta_api_json(path, params=None):
     login = os.environ.get("INSTAGRAM_LOGIN", "facebook")
     if not token or not re.fullmatch(r"[0-9]{2,32}", user_id):
         raise RuntimeError("meta:missing_credentials")
-    if not re.fullmatch(r"v[0-9]{1,2}\\.[0-9]+", version):
+    if not re.fullmatch(r"v[0-9]{1,2}\.[0-9]+", version):
         raise RuntimeError("meta:invalid_api_version")
     if login not in ("instagram", "facebook"):
         raise RuntimeError("meta:invalid_login_mode")
