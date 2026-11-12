@@ -30,7 +30,7 @@ import {
   timeOf,
   TIMEZONE,
 } from "@/lib/format";
-import { tickerMessage } from "@/lib/headlines";
+import { tickerHeadline, tickerMessage } from "@/lib/headlines";
 import type {
   AgendaEvent,
   EditorialData,
