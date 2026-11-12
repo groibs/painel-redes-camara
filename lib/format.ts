@@ -84,5 +84,17 @@ export function mergePanel(
       checkedAt: previous.sources.social.checkedAt,
     };
   }
+  if (incoming.sources.social.state === "partial") {
+    // Retain each unavailable network's original timestamp, so stale badges
+    // remain accurate and a successful X refresh does not erase Instagram.
+    merged.accounts = incoming.accounts.map((account) =>
+      account.followers !== null
+        ? account
+        : previous.accounts.find((old) => old.id === account.id && old.followers !== null) || account,
+    );
+    if (incoming.sources.social.instagramAvailable === false) {
+      merged.posts = previous.posts;
+    }
+  }
   return merged;
 }

@@ -49,6 +49,17 @@ O navegador consulta `/api/painel` a cada minuto por padrão. Esse intervalo pod
 
 Para fixar uma votação importante, defina `PANEL_VOTE_ID` no ambiente do servidor. O código também consulta as informações básicas oficiais desse ID.
 
+## Coleta do Instagram sem VPS (Vercel)
+
+**Fonte confiável (recomendada):** autorize a conta profissional da Câmara na API oficial da Meta e configure em **Vercel → Project → Settings → Environment Variables**: `INSTAGRAM_USER_ID`, `INSTAGRAM_ACCESS_TOKEN`, `META_API_VERSION` e `INSTAGRAM_LOGIN` (`facebook` se for login com Página vinculada, `instagram` se for Instagram Login). Não compartilhe tokens no chat e nunca use `NEXT_PUBLIC_`. Sem essas credenciais, somente as fontes públicas podem ser consultadas, e elas podem ser bloqueadas. A Vercel precisa de um novo deployment após a configuração.
+
+
+O projeto também contém a função Python `/api/social_public`. Na Vercel, o painel passa a consultá-la automaticamente pelo endereço de deployment (`VERCEL_URL`) quando `PANEL_SOCIAL_SOURCE_URL` não estiver configurado. A função tenta ler o perfil público de `@camaradosdeputados`, exclui publicações fixadas e retorna até seis posts, curtidas, comentários e seguidores quando o Instagram disponibiliza os dados.
+
+A conexão usa a própria infraestrutura serverless da Vercel, sem daemon ou VPS. **Esta coleta pública é sujeita a bloqueio e mudanças do Instagram**: se indisponível, o painel pode usar `PANEL_SOCIAL_FALLBACK_PANEL_URL` como contingência e identifica dados antigos; nunca inventa números ou variação em 24 horas. Outros perfis não são garantidos por esta função. Uma integração autorizada via Meta Graph API, com credenciais mantidas no backend, continua sendo a alternativa recomendada para coleta confiável.
+
+Em instalações fora da Vercel, `PANEL_PUBLIC_SOCIAL_URL` pode definir um endpoint HTTPS confiável com o caminho `/api/social_public`. Com `PANEL_SOCIAL_SOURCE_URL` configurado, o snapshot autorizado mantém prioridade sobre a coleta pública.
+
 ## Conectar as redes via VPS
 
 A integração de redes foi preparada para receber um snapshot HTTPS do coletor. **O coletor ainda precisa ser conectado às contas autorizadas e publicado na VPS.** A primeira versão não coleta followers por raspagem nem depende de embeds do Instagram.

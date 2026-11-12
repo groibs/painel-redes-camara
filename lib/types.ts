@@ -6,11 +6,13 @@ export const networkIds = [
   "facebook",
 ] as const;
 export type NetworkId = (typeof networkIds)[number];
-export type SourceState = "ok" | "pending" | "error";
+export type SourceState = "ok" | "pending" | "partial" | "error";
 export type Source = {
   state: SourceState;
   checkedAt: string | null;
   message: string;
+  /** For partial social responses, whether Instagram posts were fetched. */
+  instagramAvailable?: boolean;
 };
 
 export type SocialAccount = {
