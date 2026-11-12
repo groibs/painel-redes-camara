@@ -2,6 +2,8 @@ from http.server import BaseHTTPRequestHandler
 import datetime as dt
 from concurrent.futures import ThreadPoolExecutor
 import json
+import os
+import re
 from urllib.parse import parse_qs, quote, urlsplit
 
 from curl_cffi import requests
@@ -21,6 +23,106 @@ def _json_response(handler, status, payload):
     handler.send_header("X-Content-Type-Options", "nosniff")
     handler.end_headers()
     handler.wfile.write(body)
+
+
+def _meta_api_json(path, params=None):
+    """Authenticated Instagram professional account read; never leak credentials."""
+    token = os.environ.get("INSTAGRAM_ACCESS_TOKEN", "")
+    user_id = os.environ.get("INSTAGRAM_USER_ID", "")
+    version = os.environ.get("META_API_VERSION", "")
+    login = os.environ.get("INSTAGRAM_LOGIN", "facebook")
+    if not token or not re.fullmatch(r"[0-9]{2,32}", user_id):
+        raise RuntimeError("meta:missing_credentials")
+    if not re.fullmatch(r"v[0-9]{1,2}\\.[0-9]+", version):
+        raise RuntimeError("meta:invalid_api_version")
+    if login not in ("instagram", "facebook"):
+        raise RuntimeError("meta:invalid_login_mode")
+    host = "graph.instagram.com" if login == "instagram" else "graph.facebook.com"
+    url = f"https://{host}/{version}/{quote(user_id, safe='')}{path}"
+    try:
+        response = requests.get(
+            url,
+            headers={"Authorization": f"Bearer {token}", "Accept": "application/json"},
+            params=params or {},
+            timeout=9,
+            allow_redirects=False,
+        )
+        if response.status_code != 200:
+            raise RuntimeError(f"meta:http_{response.status_code}")
+        if len(response.content) > MAX_BODY:
+            raise RuntimeError("meta:response_too_large")
+        value = response.json()
+        if not isinstance(value, dict) or "error" in value:
+            raise RuntimeError("meta:invalid_response")
+        return value
+    except RuntimeError:
+        raise
+    except Exception:
+        raise RuntimeError("meta:request_failed") from None
+
+
+def _meta_instagram():
+    profile = _meta_api_json("", {"fields": "username,followers_count"})
+    followers = _count(profile.get("followers_count"))
+    if followers is None:
+        raise RuntimeError("meta:followers_unavailable")
+    media = _meta_api_json(
+        "/media",
+        {
+            "limit": "16",
+            "fields": "id,caption,media_type,media_url,thumbnail_url,permalink,timestamp,like_count,comments_count,children{media_url,thumbnail_url}",
+        },
+    )
+    rows = media.get("data")
+    if not isinstance(rows, list):
+        raise RuntimeError("meta:media_unavailable")
+    posts = []
+    for row in rows:
+        if not isinstance(row, dict) or row.get("is_pinned") is True:
+            continue
+        identifier = str(row.get("id") or "")
+        published = row.get("timestamp")
+        permalink = row.get("permalink")
+        media_type = {
+            "IMAGE": "image",
+            "VIDEO": "video",
+            "REELS": "video",
+            "CAROUSEL_ALBUM": "carousel",
+        }.get(row.get("media_type"))
+        if not identifier or not media_type or not isinstance(published, str):
+            continue
+        if not isinstance(permalink, str) or not permalink.startswith("https://www.instagram.com/"):
+            continue
+        media_url = row.get("thumbnail_url") or row.get("media_url")
+        if media_type == "carousel" and not media_url:
+            children = (row.get("children") or {}).get("data") or []
+            if children and isinstance(children[0], dict):
+                media_url = children[0].get("thumbnail_url") or children[0].get("media_url")
+        if not isinstance(media_url, str) or not media_url.startswith("https://"):
+            media_url = None
+        try:
+            timestamp = dt.datetime.fromisoformat(published.replace("Z", "+00:00"))
+            if timestamp.tzinfo is None:
+                continue
+            published = timestamp.isoformat()
+        except ValueError:
+            continue
+        posts.append({
+            "id": identifier[:100],
+            "caption": str(row.get("caption") or "")[:4000],
+            "mediaUrl": media_url,
+            "permalink": permalink,
+            "publishedAt": published,
+            "type": media_type,
+            "likes": _count(row.get("like_count")),
+            "comments": _count(row.get("comments_count")),
+        })
+    posts.sort(key=lambda post: post["publishedAt"], reverse=True)
+    return {
+        "handle": "@" + str(profile.get("username") or IG_HANDLE)[:30],
+        "followers": followers,
+        "posts": posts[:6],
+    }
 
 
 def _ig_profile():
@@ -186,21 +288,34 @@ def collect():
     # Independent public sources run concurrently to keep the Vercel
     # serverless response inside the dashboard's network deadline.
     with ThreadPoolExecutor(max_workers=2) as pool:
-        instagram_future = pool.submit(_ig_profile)
+        instagram_future = (
+            pool.submit(_ig_profile)
+            if not (os.environ.get("INSTAGRAM_ACCESS_TOKEN") and os.environ.get("INSTAGRAM_USER_ID"))
+            else None
+        )
         x_future = pool.submit(_x_profile)
 
         try:
-            user = instagram_future.result()
-            followers = ((user.get("edge_followed_by") or {}).get("count"))
-            if type(followers) is not int:
-                raise RuntimeError("instagram:invalid_followers")
-            result["instagram"] = {
-                "handle": "@" + IG_HANDLE,
-                "followers": followers,
-                "posts": _ig_posts(user),
-            }
+            if os.environ.get("INSTAGRAM_ACCESS_TOKEN") and os.environ.get("INSTAGRAM_USER_ID"):
+                result["instagram"] = _meta_instagram()
+                result["instagram"]["source"] = "meta"
+            else:
+                user = instagram_future.result()
+                followers = ((user.get("edge_followed_by") or {}).get("count"))
+                if type(followers) is not int:
+                    raise RuntimeError("instagram:invalid_followers")
+                result["instagram"] = {
+                    "handle": "@" + IG_HANDLE,
+                    "followers": followers,
+                    "posts": _ig_posts(user),
+                    "source": "public",
+                }
         except Exception as error:
-            errors["instagram"] = str(error)[:240]
+            # Never include Meta response bodies, URLs with credentials or tokens.
+            if os.environ.get("INSTAGRAM_ACCESS_TOKEN"):
+                errors["instagram"] = "meta:unavailable"
+            else:
+                errors["instagram"] = str(error)[:240]
 
         try:
             user = x_future.result()
