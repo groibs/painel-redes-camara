@@ -1,5 +1,6 @@
 from http.server import BaseHTTPRequestHandler
 import datetime as dt
+from concurrent.futures import ThreadPoolExecutor
 import json
 from urllib.parse import parse_qs, quote, urlsplit
 
@@ -37,7 +38,7 @@ def _ig_profile():
                 f"https://{host}/api/v1/users/web_profile_info/?username={safe}",
                 headers=headers,
                 impersonate="chrome",
-                timeout=20,
+                timeout=8,
                 allow_redirects=True,
             )
             if response.status_code != 200:
@@ -131,7 +132,7 @@ def _ig_media(post_id):
             url,
             headers={"Referer": "https://www.instagram.com/"},
             impersonate="chrome",
-            timeout=20,
+            timeout=8,
             allow_redirects=True,
         )
         if response.status_code != 200:
@@ -157,7 +158,7 @@ def _x_profile():
                 url,
                 headers={"Accept": "application/json"},
                 impersonate="chrome",
-                timeout=20,
+                timeout=10,
                 allow_redirects=True,
             )
             if response.status_code != 200:
@@ -182,27 +183,33 @@ def collect():
         "errors": errors,
     }
 
-    try:
-        user = _ig_profile()
-        followers = ((user.get("edge_followed_by") or {}).get("count"))
-        if type(followers) is not int:
-            raise RuntimeError("instagram:invalid_followers")
-        result["instagram"] = {
-            "handle": "@" + IG_HANDLE,
-            "followers": followers,
-            "posts": _ig_posts(user),
-        }
-    except Exception as error:
-        errors["instagram"] = str(error)[:240]
+    # Independent public sources run concurrently to keep the Vercel
+    # serverless response inside the dashboard's network deadline.
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        instagram_future = pool.submit(_ig_profile)
+        x_future = pool.submit(_x_profile)
 
-    try:
-        user = _x_profile()
-        result["x"] = {
-            "handle": "@" + X_HANDLE,
-            "followers": user["followers"],
-        }
-    except Exception as error:
-        errors["x"] = str(error)[:240]
+        try:
+            user = instagram_future.result()
+            followers = ((user.get("edge_followed_by") or {}).get("count"))
+            if type(followers) is not int:
+                raise RuntimeError("instagram:invalid_followers")
+            result["instagram"] = {
+                "handle": "@" + IG_HANDLE,
+                "followers": followers,
+                "posts": _ig_posts(user),
+            }
+        except Exception as error:
+            errors["instagram"] = str(error)[:240]
+
+        try:
+            user = x_future.result()
+            result["x"] = {
+                "handle": "@" + X_HANDLE,
+                "followers": user["followers"],
+            }
+        except Exception as error:
+            errors["x"] = str(error)[:240]
 
     if result["instagram"] is None and result["x"] is None:
         return 503, result
