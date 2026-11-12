@@ -52,6 +52,10 @@ def usable_value(source, value):
         return False
     if source == "telegram":
         return isinstance(value.get("posts"), list) and bool(value["posts"])
+    # Instagram public embed offers genuine posts even when the follower
+    # figure is unavailable or cached too long to be trusted.
+    if source == "instagram" and isinstance(value.get("posts"), list) and value["posts"]:
+        return True
     if source in FOLLOWER_SOURCES:
         return type(value.get("followers")) is int and 0 <= value["followers"] < 10**12
     return False
@@ -100,7 +104,8 @@ def update_history(previous, result, fresh_names):
     created = []
     for name in FOLLOWER_SOURCES:
         source = result.get(name)
-        if name not in fresh_names or not usable_value(name, source):
+        if (name not in fresh_names or not isinstance(source, dict)
+                or type(source.get("followers")) is not int):
             continue
         row = {
             "network": name,
