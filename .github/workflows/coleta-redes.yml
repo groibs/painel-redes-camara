@@ -16,6 +16,7 @@ on:
       - "collector/collector.py"
       - "tests/test_sync_social.py"
       - "tests/test_social_embed.py"
+      - "tests/test_x_profile.py"
       - "scripts/check_social_freshness.py"
       - "requirements.txt"
 
