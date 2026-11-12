@@ -51,7 +51,7 @@ Para fixar uma votação importante, defina `PANEL_VOTE_ID` no ambiente do servi
 
 ## Coleta agendada sem VPS (GitHub Actions + Supabase + Vercel)
 
-**Implementado:** `.github/workflows/coleta-redes.yml` executa o coletor público a cada 30 minutos (minutos 17 e 47 UTC), com disparo manual em **GitHub → Actions → Coleta pública das redes da Câmara → Run workflow**. O programa `scripts/sync_social.py` reutiliza `api/social_public.py` para consultar Instagram público (quando permitido), X e imagens do canal oficial da Câmara no Telegram. Nenhuma conta Meta é necessária e nenhum token de rede social é usado.
+**Implementado:** `.github/workflows/coleta-redes.yml` executa o coletor público a cada 30 minutos (minutos 17 e 47 UTC), com disparo manual em **GitHub → Actions → Coleta pública das redes da Câmara → Run workflow**. O programa `scripts/sync_social.py` reutiliza `api/social_public.py` para consultar Instagram público (quando permitido), X e imagens do canal oficial da Câmara no Telegram, além de consultar perfis públicos confirmados de TikTok, Facebook e YouTube (contagem de inscritos do YouTube arredondada). Nenhuma conta Meta é necessária e nenhum token de rede social é usado.
 
 O workflow guarda `social/snapshot.json` e `social/history.json` na branch **`social-data`**. O JSON mantém `observedAt` para cada fonte; se alguma coleta falhar, seu número anterior permanece com a **data original**, por até sete dias. Variações em 24 horas só são calculadas se existir uma amostra realmente observada cerca de 24 horas antes. Instagram manual de 397.329 seguidores (12/11/2026) permanece identificado como manual; o job **não** finge ter atualizado esse valor.
 
