@@ -219,6 +219,7 @@ export function SocialMetrics({
       <div className="metrics-list">
         {data.accounts.map((account) => {
           const delta = account.change24h;
+          const manualInstagram = account.id === "instagram" && account.source === "manual";
           const freshnessWindow = 45 * 60 * 1000;
           const stale =
             offline ||
@@ -239,7 +240,7 @@ export function SocialMetrics({
               <div className="metric-number">
                 <h3 className="sr-only">{account.name}</h3>
                 <strong
-                  title={`${account.name}: ${fullNumber(account.followers)}`}
+                  title={`${account.name}: ${fullNumber(account.followers)}${manualInstagram ? " · informado manualmente em 12/11/2026" : ""}`}
                 >
                   {socialFollowerCount(account.id, account.followers)}
                 </strong>
@@ -260,7 +261,11 @@ export function SocialMetrics({
                 ) : account.followers === null ? (
                   <small>Aguardando conexão</small>
                 ) : null}
-                {stale && account.followers !== null ? (
+                {manualInstagram ? (
+                  <small className="metric-old" title="Valor informado manualmente em 12/11/2026, não atualizado automaticamente">
+                    Manual · 12/11
+                  </small>
+                ) : stale && account.followers !== null ? (
                   <small className="metric-old">Última coleta</small>
                 ) : null}
               </div>
