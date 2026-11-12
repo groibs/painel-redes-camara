@@ -244,7 +244,12 @@ def main(argv=None):
     for name in SOURCES:
         item = merged.get(name)
         print(f"{name}: " + ("preservado " + str(item.get("observedAt", "")) if name not in fresh_names and item else "atualizado" if item else "indisponível"))
-    mirror_supabase(merged, rows)
+    try:
+        mirror_supabase(merged, rows)
+    except Exception as exc:
+        # GitHub persistence remains functional even if the optional database
+        # is unavailable. Report a warning without exposing response bodies.
+        print(f"::warning::Espelhamento Supabase indisponível ({type(exc).__name__}); GitHub preservado")
 
 
 if __name__ == "__main__":
