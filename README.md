@@ -51,7 +51,7 @@ Para fixar uma votação importante, defina `PANEL_VOTE_ID` no ambiente do servi
 
 ## Coleta agendada sem VPS (GitHub Actions + Supabase + Vercel)
 
-**Implementado:** `.github/workflows/coleta-redes.yml` executa o coletor público a cada 30 minutos (minutos 17 e 47 UTC), com disparo manual em **GitHub → Actions → Coleta pública das redes da Câmara → Run workflow**. O programa `scripts/sync_social.py` reutiliza `api/social_public.py` para consultar Instagram público (quando permitido), X e imagens do canal oficial da Câmara no Telegram, além de consultar perfis públicos confirmados de TikTok, Facebook e YouTube (contagem de inscritos do YouTube arredondada). Nenhuma conta Meta é necessária e nenhum token de rede social é usado.
+**Implementado:** `.github/workflows/coleta-redes.yml` executa o coletor público a cada 30 minutos (minutos 17 e 47 UTC), com disparo manual em **GitHub → Actions → Coleta pública das redes da Câmara → Run workflow**. O programa `scripts/sync_social.py` reutiliza `api/social_public.py` para consultar posts reais do embed público do Instagram (quando permitido), X e imagens de contingência do canal oficial da Câmara no Telegram, além de consultar perfis públicos confirmados de TikTok, Facebook e YouTube (contagem de inscritos do YouTube arredondada). Nenhuma conta Meta é necessária e nenhum token de rede social é usado.
 
 O workflow guarda `social/snapshot.json` e `social/history.json` na branch **`social-data`**. O JSON mantém `observedAt` para cada fonte; se alguma coleta falhar, seu número anterior permanece com a **data original**, por até sete dias. Variações em 24 horas só são calculadas se existir uma amostra realmente observada cerca de 24 horas antes. Instagram manual de 397.329 seguidores (12/11/2026) permanece identificado como manual; o job **não** finge ter atualizado esse valor.
 
@@ -82,21 +82,27 @@ Enquanto o Supabase não estiver provisionado, GitHub Actions + branch `social-d
 ### Testes da coleta
 
 ```bash
-python -m unittest discover -s tests -p 'test_sync_social.py' -v
+python -m unittest discover -s tests -p 'test_*.py' -v
 npm test
 npm run build
 ```
 
-## Contingência visual sem Instagram
+## Cards com publicações reais do Instagram, sem Meta nem VPS
 
-Quando o Instagram bloqueia o acesso público e não há autorização Meta disponível, a função `/api/social_public` tenta ler as seis publicações com imagens mais recentes do [canal público oficial da Câmara no Telegram](https://t.me/CamaradosDeputados). O painel sinaliza explicitamente **PUBLICAÇÕES DA CÂMARA · TELEGRAM**, usa a imagem e a data publicadas pelo canal e abre o link da mensagem original. **Não afirma que são as seis últimas publicações do Instagram, nem inventa seguidores, curtidas ou comentários.** A fonte é consultada sob demanda pela Vercel e pode falhar por alterações do HTML do Telegram. O Instagram autenticado continua sendo prioritário.
+O coletor público utiliza primeiro a página de incorporação fornecida pelo próprio Instagram, `https://www.instagram.com/camaradosdeputados/embed/`. Essa página atualmente contém dados estruturados das seis publicações mais recentes de `@camaradosdeputados`: miniaturas originais, legenda, tipo, data e links para as publicações. O parser lê o JSON de inicialização sem executar scripts de terceiros. Publicações fixadas identificáveis são ignoradas; se restarem menos de seis, não são fabricadas outras.
+
+Os cards exibem novamente **ÚLTIMOS POSTS NO INSTAGRAM**. Fotos e vídeos usam as miniaturas oficiais do Instagram e, ao clicar, abrem a postagem original. O Instagram pode mudar essa estrutura ou bloquear a consulta, portanto a coleta é de melhor esforço e **não substitui a API Meta oficial**.
+
+O mesmo embed divulga uma contagem de seguidores que pode estar atrasada. **Não a tratamos como atual**. Até que exista uma contagem confiável, o painel preserva os **397.329 seguidores informados manualmente em 12/11/2026**, identificados como manuais e sem variação fictícia em 24 horas.
+
+Quando o embed falha e não há dados recentes disponíveis do Instagram, o coletor recorre a fotos do [canal público oficial da Câmara no Telegram](https://t.me/CamaradosDeputados), com o cabeçalho **PUBLICAÇÕES DA CÂMARA · TELEGRAM**. Essas fotos nunca são apresentadas como posts do Instagram.
 
 ## Coleta do Instagram sem VPS (Vercel)
 
 **Fonte confiável (recomendada):** autorize a conta profissional da Câmara na API oficial da Meta e configure em **Vercel → Project → Settings → Environment Variables**: `INSTAGRAM_USER_ID`, `INSTAGRAM_ACCESS_TOKEN`, `META_API_VERSION` e `INSTAGRAM_LOGIN` (`facebook` se for login com Página vinculada, `instagram` se for Instagram Login). Não compartilhe tokens no chat e nunca use `NEXT_PUBLIC_`. Sem essas credenciais, somente as fontes públicas podem ser consultadas, e elas podem ser bloqueadas. A Vercel precisa de um novo deployment após a configuração.
 
 
-O projeto também contém a função Python `/api/social_public`. Na Vercel, o painel passa a consultá-la automaticamente pelo endereço de deployment (`VERCEL_URL`) quando `PANEL_SOCIAL_SOURCE_URL` não estiver configurado. A função tenta ler o perfil público de `@camaradosdeputados`, exclui publicações fixadas e retorna até seis posts, curtidas, comentários e seguidores quando o Instagram disponibiliza os dados.
+O projeto também contém a função Python `/api/social_public`. Na Vercel, o painel passa a consultá-la automaticamente pelo endereço de deployment (`VERCEL_URL`) quando `PANEL_SOCIAL_SOURCE_URL` não estiver configurado. A função prioriza o embed público do Instagram para recuperar até seis publicações originais, sem credenciais. O contador do embed não é usado como uma atualização automática de seguidores porque pode estar defasado.
 
 A conexão usa a própria infraestrutura serverless da Vercel, sem daemon ou VPS. **Esta coleta pública é sujeita a bloqueio e mudanças do Instagram**: se indisponível, o painel pode usar `PANEL_SOCIAL_FALLBACK_PANEL_URL` como contingência e identifica dados antigos; nunca inventa números ou variação em 24 horas. Outros perfis não são garantidos por esta função. Uma integração autorizada via Meta Graph API, com credenciais mantidas no backend, continua sendo a alternativa recomendada para coleta confiável.
 

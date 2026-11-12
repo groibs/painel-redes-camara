@@ -53,6 +53,29 @@ class ScheduledSocialTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             merge_collection(fresh, {})
 
+    def test_instagram_posts_without_followers_are_persisted(self):
+        latest_post = {
+            "id": "4028851524474792239",
+            "caption": "Publicação real",
+            "mediaUrl": "https://scontent-iad6-1.cdninstagram.com/test.jpg",
+            "permalink": "https://www.instagram.com/p/DfpWx2hHGkv/",
+            "publishedAt": self.now.isoformat(),
+            "type": "image", "likes": None, "comments": None,
+        }
+        fresh = {
+            "collectedAt": self.now.isoformat(),
+            "instagram": {
+                "source": "embed", "followers": None, "posts": [latest_post],
+            },
+            "x": {"followers": 1087137},
+        }
+        merged, sources = merge_collection(fresh, {})
+        self.assertIn("instagram", sources)
+        self.assertIsNone(merged["instagram"]["followers"])
+        self.assertEqual(merged["instagram"]["posts"][0]["id"], latest_post["id"])
+        _, history_rows = update_history({}, merged, sources)
+        self.assertEqual([row["network"] for row in history_rows], ["x"])
+
     def test_ignores_ancient_stale_counts(self):
         previous_time = (self.now - dt.timedelta(days=9)).isoformat()
         previous = {
