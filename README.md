@@ -65,7 +65,7 @@ As fotos alternativas são **publicações do Telegram**, claramente identificad
 
 ### Ativar banco Supabase exclusivo
 
-**Não use os bancos de projetos pessoais existentes.** Crie ou selecione um projeto exclusivo para o painel da Câmara na organização autorizada e execute o arquivo `supabase/migrations/20261112_camara_social_snapshots.sql` no SQL Editor. Ele cria `camara_social_snapshots` (leitura pública restrita aos registros institucionais) e `camara_social_follower_history` (histórico privado), ambas com RLS. Apenas a chave de serviço pode escrever.
+**Não use os bancos de projetos pessoais existentes.** Crie ou selecione um projeto exclusivo para o painel da Câmara na organização autorizada e execute o arquivo `supabase/migrations/20261112152118_camara_social_snapshots.sql` no SQL Editor. Ele cria `camara_social_snapshots` (leitura pública restrita aos registros institucionais) e `camara_social_follower_history` (histórico privado), ambas com RLS. Apenas a chave de serviço pode escrever.
 
 Configure os seguintes segredos em **GitHub → repositório → Settings → Secrets and variables → Actions → Repository secrets**:
 
