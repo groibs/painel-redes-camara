@@ -213,12 +213,25 @@ export function SocialMetrics({
         {data.accounts.map((account) => {
           const delta = account.change24h;
           const manualInstagram = account.id === "instagram" && account.source === "manual";
-          const freshnessWindow = 45 * 60 * 1000;
+          // Public counts are collected at least daily; a normal delay
+          // between GitHub Actions runs must not be labelled stale.
+          const freshnessWindow = 26 * 60 * 60 * 1000;
           const stale =
             offline ||
             data.sources.social.state === "error" ||
             (!!account.updatedAt &&
               Date.now() - Date.parse(account.updatedAt) > freshnessWindow);
+          const observed = account.updatedAt ? new Date(account.updatedAt) : null;
+          const observedTime = observed && Number.isFinite(observed.getTime())
+            ? new Intl.DateTimeFormat("pt-BR", {
+                hour: "2-digit", minute: "2-digit", timeZone: TIMEZONE,
+              }).format(observed)
+            : null;
+          const observedDate = observed && Number.isFinite(observed.getTime())
+            ? new Intl.DateTimeFormat("pt-BR", {
+                day: "2-digit", month: "2-digit", timeZone: TIMEZONE,
+              }).format(observed)
+            : null;
           return (
             <article
               className={`metric-row metric-${account.id}`}
@@ -258,8 +271,13 @@ export function SocialMetrics({
                   <small className="metric-old" title="Valor informado manualmente em 12/11/2026, não atualizado automaticamente">
                     Manual · 12/11
                   </small>
-                ) : stale && account.followers !== null ? (
-                  <small className="metric-old">Última coleta</small>
+                ) : account.followers !== null && observedTime ? (
+                  <small
+                    className={stale ? "metric-old" : "metric-refreshed"}
+                    title={`Última observação válida: ${observedDate} às ${observedTime} (Brasília)`}
+                  >
+                    {stale ? `Coleta: ${observedDate}` : `Atual. ${observedTime}`}
+                  </small>
                 ) : null}
               </div>
             </article>
