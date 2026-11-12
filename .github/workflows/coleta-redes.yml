@@ -4,6 +4,8 @@ on:
   schedule:
     # UTC. Fora do início da hora para reduzir atrasos na fila do GitHub.
     - cron: "17,47 * * * *"
+    # Verificação diária dedicada: 07:11 no horário de Brasília.
+    - cron: "11 10 * * *"
   workflow_dispatch:
   push:
     branches: [main]
@@ -14,6 +16,7 @@ on:
       - "collector/collector.py"
       - "tests/test_sync_social.py"
       - "tests/test_social_embed.py"
+      - "scripts/check_social_freshness.py"
       - "requirements.txt"
 
 permissions:
@@ -74,3 +77,9 @@ jobs:
             git -C social-data commit -m "data: atualiza redes oficiais"
             git -C social-data push origin HEAD:social-data
           fi
+
+      - name: Auditar atualização diária de seguidores
+        if: github.event_name == 'schedule' && github.event.schedule == '11 10 * * *'
+        run: |
+          python scripts/check_social_freshness.py \
+            --snapshot social-data/social/snapshot.json
