@@ -691,7 +691,7 @@ export function TodaySchedule({ data }: { data: PanelData }) {
                     </a>
                   ) : (
                     agendaHeadline(event.title, 106)
-                  )
+                  )}
                 </h3>
                 <p>
                   {isOngoing(event)
