@@ -296,22 +296,33 @@ async function socialFromServerless(
     });
   }
   if (!accounts.length) throw new Error("Nenhuma rede respondeu ao coletor serverless");
+  const telegram = object(raw.telegram);
+  const telegramPosts = Array.isArray(telegram.posts) ? telegram.posts.slice(0, 6) : [];
+  const feedRows = instagramFollowers !== null
+    ? (Array.isArray(ig.posts) ? ig.posts.slice(0, 6) : [])
+    : telegramPosts;
   const snapshot = parseSnapshot({
     schemaVersion: 1,
     collectedAt,
     accounts,
-    posts: Array.isArray(ig.posts) ? ig.posts.slice(0, 6) : [],
+    posts: feedRows,
   });
   panel.accounts = panel.accounts.map(
     (account) => snapshot.accounts.find((item) => item.id === account.id) || account,
   );
-  if (instagramFollowers !== null) panel.posts = snapshot.posts;
+  if (instagramFollowers !== null || telegramPosts.length > 0)
+    panel.posts = snapshot.posts;
   panel.sources.social = {
     state: instagramFollowers === null ? "partial" : "ok",
     checkedAt: snapshot.collectedAt,
     instagramAvailable: instagramFollowers !== null,
+    feedSource: instagramFollowers !== null
+      ? "instagram"
+      : telegramPosts.length > 0 ? "telegram" : undefined,
     message: instagramFollowers === null
-      ? "X atualizado; Instagram indisponível (conectar API Meta)"
+      ? telegramPosts.length
+        ? "Instagram indisponível; últimas imagens do canal oficial da Câmara no Telegram"
+        : "X atualizado; Instagram indisponível (conectar API Meta)"
       : ig.source === "meta"
         ? "Instagram via API oficial da Meta"
         : "Instagram via consulta pública (sujeita a bloqueio)",
