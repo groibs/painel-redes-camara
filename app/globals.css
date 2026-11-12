@@ -2973,3 +2973,15 @@ legend {
 .state-partial {
   background: #d9a429;
 }
+
+/* Public Telegram fallback is labelled distinctly from Instagram metrics. */
+.post-meta .post-origin {
+  overflow: hidden;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: .25px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
