@@ -213,6 +213,7 @@ export function SocialMetrics({
         {data.accounts.map((account) => {
           const delta = account.change24h;
           const manualInstagram = account.id === "instagram" && account.source === "manual";
+          const publicInstagram = account.id === "instagram" && account.source === "public_embed";
           // Public counts are collected at least daily; a normal delay
           // between GitHub Actions runs must not be labelled stale.
           const freshnessWindow = 26 * 60 * 60 * 1000;
@@ -246,7 +247,7 @@ export function SocialMetrics({
               <div className="metric-number">
                 <h3 className="sr-only">{account.name}</h3>
                 <strong
-                  title={`${account.name}: ${fullNumber(account.followers)}${manualInstagram ? " · informado manualmente em 12/11/2026" : ""}`}
+                  title={`${account.name}: ${fullNumber(account.followers)}${manualInstagram ? " · informado manualmente em 12/11/2026" : publicInstagram ? " · leitura pública do Instagram, sujeita a atraso de cache" : ""}`}
                 >
                   {socialFollowerCount(account.id, account.followers)}
                 </strong>
@@ -268,8 +269,12 @@ export function SocialMetrics({
                   <small>Aguardando conexão</small>
                 ) : null}
                 {manualInstagram ? (
-                  <small className="metric-old" title="Valor informado manualmente em 12/11/2026, não atualizado automaticamente">
+                  <small className="metric-old" title="Valor informado manualmente em 12/11/2026. A verificação pública está automatizada, mas ainda pode fornecer números defasados.">
                     Manual · 12/11
+                  </small>
+                ) : publicInstagram ? (
+                  <small className="metric-refreshed" title="Contagem pública observada automaticamente. O Instagram pode servir cópias antigas do perfil.">
+                    Público · {observedDate}
                   </small>
                 ) : account.followers !== null && observedTime ? (
                   <small
