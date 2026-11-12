@@ -20,7 +20,8 @@ from urllib.parse import urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 UTC = dt.timezone.utc
-SOURCES = ("instagram", "x", "telegram")
+SOURCES = ("instagram", "x", "telegram", "youtube", "tiktok", "facebook")
+FOLLOWER_SOURCES = ("instagram", "x", "youtube", "tiktok", "facebook")
 MAX_AGE_DAYS = 7
 
 
@@ -51,7 +52,7 @@ def usable_value(source, value):
         return False
     if source == "telegram":
         return isinstance(value.get("posts"), list) and bool(value["posts"])
-    if source in ("instagram", "x"):
+    if source in FOLLOWER_SOURCES:
         return type(value.get("followers")) is int and 0 <= value["followers"] < 10**12
     return False
 
@@ -62,9 +63,7 @@ def merge_collection(fresh, previous):
     old_stamp = previous.get("collectedAt")
     result = {
         "collectedAt": stamp,
-        "instagram": None,
-        "x": None,
-        "telegram": None,
+        **{name: None for name in SOURCES},
         "errors": fresh.get("errors") if isinstance(fresh.get("errors"), dict) else {},
     }
     fresh_names = set()
@@ -93,13 +92,13 @@ def update_history(previous, result, fresh_names):
     samples = [
         item for item in rows
         if isinstance(item, dict)
-        and item.get("network") in ("instagram", "x")
+        and item.get("network") in FOLLOWER_SOURCES
         and type(item.get("followers")) is int
         and (date := parse_date(item.get("collectedAt"))) is not None
         and cutoff <= date <= now
     ]
     created = []
-    for name in ("instagram", "x"):
+    for name in FOLLOWER_SOURCES:
         source = result.get(name)
         if name not in fresh_names or not usable_value(name, source):
             continue
@@ -115,7 +114,9 @@ def update_history(previous, result, fresh_names):
             s for s in samples if s["network"] == name
             and abs((parse_date(s["collectedAt"]) - target).total_seconds()) <= 5400
         ]
-        if nearby:
+        # YouTube publishes rounded subscribers (1.50M), so a delta from
+        # that display count would be misleading even with two samples.
+        if nearby and name != "youtube":
             baseline = min(nearby, key=lambda s: abs((parse_date(s["collectedAt"]) - target).total_seconds()))
             source["change24h"] = source["followers"] - baseline["followers"]
         else:
@@ -184,6 +185,32 @@ def mirror_supabase(result, history_rows):
     return True
 
 
+def collect_other_public_profiles():
+    """Other verified Câmara accounts; failure does not invalidate the job."""
+    from concurrent.futures import ThreadPoolExecutor
+    from collector.collector import fetch_component
+
+    handles = {
+        "youtube": "camaradosdeputadosoficial",
+        "tiktok": "camaradosdeputados",
+        "facebook": "camaradeputados",
+    }
+    def read(name):
+        try:
+            profile = fetch_component(name, {name.upper() + "_HANDLE": handles[name]})
+            if profile.get("id") == name and usable_value(name, profile):
+                return name, {
+                    "handle": profile["handle"],
+                    "followers": profile["followers"],
+                }, None
+        except Exception as exc:
+            return name, None, type(exc).__name__
+        return name, None, "invalid_profile"
+
+    with ThreadPoolExecutor(max_workers=3) as pool:
+        return list(pool.map(read, handles))
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("--previous", default="social-data/social/snapshot.json")
@@ -202,6 +229,10 @@ def main(argv=None):
         status, fresh = collect()
         if status not in (200, 503) or not isinstance(fresh, dict):
             raise RuntimeError("Coletor retornou resposta inválida")
+        for name, profile, error in collect_other_public_profiles():
+            fresh[name] = profile
+            if error:
+                fresh.setdefault("errors", {})[name] = error
     previous = read_json(args.previous, {})
     history = read_json(args.history, {})
     merged, fresh_names = merge_collection(fresh, previous)
