@@ -269,9 +269,21 @@ export function SocialMetrics({
                   <small>Aguardando conexão</small>
                 ) : null}
                 {manualInstagram ? (
-                  <small className="metric-old" title="Valor informado manualmente em 12/11/2026. A verificação pública está automatizada, mas ainda pode fornecer números defasados.">
-                    Manual · 12/11
-                  </small>
+                  <>
+                    <small className="metric-old" title="Valor informado manualmente em 12/11/2026; uma fonte pública pode estar defasada.">
+                      Manual · 12/11
+                    </small>
+                    {data.sources.social.instagramPublicCheckedAt ? (
+                      <small
+                        className="metric-refreshed"
+                        title="Horário da última consulta pública do Instagram; a contagem dessa fonte ainda não foi validada."
+                      >
+                        Busca · {new Intl.DateTimeFormat("pt-BR", {
+                          hour: "2-digit", minute: "2-digit", timeZone: TIMEZONE,
+                        }).format(new Date(data.sources.social.instagramPublicCheckedAt))}
+                      </small>
+                    ) : null}
+                  </>
                 ) : publicInstagram ? (
                   <small className="metric-refreshed" title="Contagem pública observada automaticamente. O Instagram pode servir cópias antigas do perfil.">
                     Público · {observedDate}
