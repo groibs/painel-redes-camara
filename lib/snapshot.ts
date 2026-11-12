@@ -70,6 +70,8 @@ export function parseSnapshot(value: unknown): SocialSnapshot {
     const updatedAt = item.updatedAt ?? value.collectedAt;
     if (!timestamp(updatedAt) || Date.parse(updatedAt) > Date.now() + 300000)
       throw new Error("Data de métrica inválida");
+    if (item.source !== undefined && !["manual", "public_embed"].includes(item.source as string))
+      throw new Error("Origem da métrica inválida");
     seen.add(item.id as string);
     return {
       id: item.id as SocialAccount["id"],
@@ -78,6 +80,7 @@ export function parseSnapshot(value: unknown): SocialSnapshot {
       followers: item.followers,
       change24h: (item.change24h as number | null) ?? null,
       updatedAt,
+      ...(item.source ? { source: item.source as SocialAccount["source"] } : {}),
     };
   });
   const postIds = new Set<string>();
