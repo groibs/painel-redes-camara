@@ -163,6 +163,43 @@ test("Successful empty results clear stale content; demo is never merged into li
   assert.equal(mergePanel(previous, incoming).events.length, 0);
 });
 
+test("legacy manual Instagram count is never restored from browser cache", () => {
+  const old = panel();
+  old.accounts = [
+    { id: "instagram", name: "Instagram", handle: "@camaradosdeputados",
+      followers: 397329, change24h: null, updatedAt: "2026-11-12T14:32:00Z",
+      source: "manual" },
+  ];
+  const incoming = panel();
+  incoming.accounts = [
+    { id: "instagram", name: "Instagram", handle: "@camaradosdeputados",
+      followers: null, change24h: null, updatedAt: null },
+  ];
+  incoming.sources.social = { state: "partial", checkedAt: null, message: "Sem leitura" };
+  assert.equal(mergePanel(old, incoming).accounts[0].followers, null);
+  incoming.sources.social = { state: "error", checkedAt: null, message: "Falha" };
+  assert.equal(mergePanel(old, incoming).accounts[0].followers, null);
+});
+
+test("new public Instagram counter wins over old manual cache", () => {
+  const old = panel();
+  old.accounts = [
+    { id: "instagram", name: "Instagram", handle: "@camaradosdeputados",
+      followers: 397329, change24h: null, updatedAt: "2026-11-12T14:32:00Z",
+      source: "manual" },
+  ];
+  const incoming = panel();
+  incoming.accounts = [
+    { id: "instagram", name: "Instagram", handle: "@camaradosdeputados",
+      followers: 396896, change24h: null, updatedAt: "2026-11-12T17:40:00Z",
+      source: "public_embed" },
+  ];
+  incoming.sources.social = { state: "ok", checkedAt: incoming.generatedAt,
+    message: "Fonte pública" };
+  assert.equal(mergePanel(old, incoming).accounts[0].followers, 396896);
+  assert.equal(mergePanel(old, incoming).accounts[0].source, "public_embed");
+});
+
 test("An old week is not recycled after an agenda failure in a new week", () => {
   const previous = panel();
   const incoming = panel();

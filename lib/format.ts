@@ -78,7 +78,9 @@ export function mergePanel(
   }
   if (incoming.sources.social.state === "error") {
     merged.accounts = incoming.accounts.map((account) => {
-      const cached = previous.accounts.find((old) => old.id === account.id);
+      const cached = previous.accounts.find(
+        (old) => old.id === account.id && old.source !== "manual",
+      );
       if (account.source !== "manual") return cached || account;
       // A newly reported count takes precedence over an older browser cache.
       if (cached?.source !== "manual" && cached?.updatedAt && account.updatedAt &&
@@ -99,7 +101,10 @@ export function mergePanel(
     merged.accounts = incoming.accounts.map((account) =>
       account.followers !== null
         ? account
-        : previous.accounts.find((old) => old.id === account.id && old.followers !== null) || account,
+        : previous.accounts.find((old) =>
+            old.id === account.id && old.followers !== null &&
+            old.source !== "manual",
+          ) || account,
     );
     // A fresh Telegram fallback should replace the stale photo grid.
     // Preserve older Instagram photos only when neither source has new posts.
