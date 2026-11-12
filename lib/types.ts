@@ -14,6 +14,8 @@ export type Source = {
   /** For partial social responses, whether Instagram posts were fetched. */
   instagramAvailable?: boolean;
   feedSource?: "instagram" | "telegram";
+  /** Last successful public Instagram follower-counter request (not proof of live value). */
+  instagramPublicCheckedAt?: string;
 };
 
 export type SocialAccount = {
@@ -24,7 +26,7 @@ export type SocialAccount = {
   change24h: number | null;
   updatedAt: string | null;
   /** Explicitly reported follower count; never treated as a live API collection. */
-  source?: "manual";
+  source?: "manual" | "public_embed";
 };
 export type SocialPost = {
   id: string;

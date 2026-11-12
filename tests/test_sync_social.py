@@ -4,7 +4,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from scripts.sync_social import merge_collection, update_history, main
+from scripts.sync_social import merge_collection, update_history, main, reconcile_instagram_public_followers
 from scripts.check_social_freshness import freshness_problems
 
 UTC = dt.timezone.utc
@@ -52,6 +52,11 @@ class ScheduledSocialTests(unittest.TestCase):
         fresh_date = self.now - dt.timedelta(hours=25)
         recent = {"observedAt": fresh_date.isoformat(), "followers": 1234}
         snapshot = {name: dict(recent) for name in ("x", "tiktok", "facebook", "youtube")}
+        snapshot["instagram"] = {
+            "publicFollowers": 396896,
+            "publicCheckedAt": fresh_date.isoformat(),
+            "publicCountChangedAt": fresh_date.isoformat(),
+        }
         self.assertEqual(freshness_problems(snapshot, self.now), [])
         snapshot["facebook"]["observedAt"] = (
             self.now - dt.timedelta(hours=27)).isoformat()
@@ -62,10 +67,84 @@ class ScheduledSocialTests(unittest.TestCase):
         now = self.now
         sources = {name: {"followers": 1, "observedAt": now.isoformat()}
                    for name in ("x", "tiktok", "facebook", "youtube")}
-        sources["instagram"] = {"followers": None, "source": "embed"}
+        sources["instagram"] = {
+            "followers": None, "source": "embed", "publicFollowers": 396896,
+            "publicCheckedAt": now.isoformat(), "publicCountChangedAt": now.isoformat(),
+        }
         self.assertEqual(freshness_problems(sources, now), [])
         sources.pop("youtube")
         self.assertTrue(any("youtube" in problem for problem in freshness_problems(sources, now)))
+
+    def test_instagram_public_cache_does_not_override_manual_count(self):
+        old = self.now - dt.timedelta(minutes=30)
+        previous = {"instagram": {
+            "source": "embed", "followers": None, "publicFollowers": 396896,
+            "publicCheckedAt": old.isoformat(),
+            "publicCountChangedAt": old.isoformat(),
+            "posts": [{"id": "1"}],
+        }}
+        fresh = {"collectedAt": self.now.isoformat(), "instagram": {
+            "source": "embed", "followers": None, "publicFollowers": 396896,
+            "posts": [{"id": "2"}],
+        }}
+        reconcile_instagram_public_followers(fresh, previous)
+        ig = fresh["instagram"]
+        self.assertIsNone(ig["followers"])
+        self.assertEqual(ig["publicCountChangedAt"], old.isoformat())
+        self.assertEqual(ig["publicCheckedAt"], self.now.isoformat())
+
+    def test_instagram_promotes_only_newer_distinct_reading_above_manual(self):
+        previous_time = self.now - dt.timedelta(minutes=30)
+        previous = {"instagram": {
+            "source": "embed", "publicFollowers": 396896,
+            "publicCheckedAt": previous_time.isoformat(),
+            "publicCountChangedAt": previous_time.isoformat(),
+        }}
+        fresh = {"collectedAt": self.now.isoformat(), "instagram": {
+            "source": "embed", "followers": None, "publicFollowers": 397350,
+            "posts": [{"id": "2"}],
+        }}
+        reconcile_instagram_public_followers(fresh, previous)
+        self.assertEqual(fresh["instagram"]["followers"], 397350)
+        self.assertEqual(fresh["instagram"]["source"], "embed_observed")
+        self.assertEqual(fresh["instagram"]["followersObservedAt"], self.now.isoformat())
+        merged, sources = merge_collection(fresh, previous)
+        history, added = update_history({}, merged, sources)
+        self.assertEqual([item["network"] for item in added], ["instagram"])
+
+        # Repeated cached values do not invent new historical samples.
+        later_time = self.now + dt.timedelta(minutes=30)
+        later = {"collectedAt": later_time.isoformat(), "instagram": {
+            "source": "embed", "followers": None, "publicFollowers": 397350,
+            "posts": [{"id": "3"}],
+        }}
+        reconcile_instagram_public_followers(later, merged)
+        self.assertEqual(later["instagram"]["followers"], 397350)
+        self.assertEqual(later["instagram"]["followersObservedAt"], self.now.isoformat())
+        merged2, fresh_names = merge_collection(later, merged)
+        _, new_rows = update_history(history, merged2, fresh_names)
+        self.assertEqual(new_rows, [])
+
+    def test_instagram_does_not_promote_one_unconfirmed_high_count(self):
+        fresh = {"collectedAt": self.now.isoformat(), "instagram": {
+            "source": "embed", "followers": None, "publicFollowers": 397550,
+            "posts": [{"id": "3"}],
+        }}
+        reconcile_instagram_public_followers(fresh, {})
+        self.assertIsNone(fresh["instagram"]["followers"])
+
+    def test_instagram_daily_audit_flags_old_unchanged_public_count(self):
+        old = (self.now - dt.timedelta(hours=73)).isoformat()
+        recent = self.now.isoformat()
+        values = {name: {"followers": 1, "observedAt": recent}
+                  for name in ("x", "tiktok", "facebook", "youtube")}
+        values["instagram"] = {
+            "publicFollowers": 396896,
+            "publicCheckedAt": recent,
+            "publicCountChangedAt": old,
+        }
+        self.assertTrue(any("instagram" in text and "72 horas" in text
+                            for text in freshness_problems(values, self.now)))
 
     def test_never_invents_missing_social_network(self):
         fresh = {"collectedAt": self.now.isoformat(),

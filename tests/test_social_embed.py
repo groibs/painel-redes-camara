@@ -55,6 +55,7 @@ class InstagramEmbedTests(TestCase):
         with patch("api.social_public.requests.get", return_value=DummyResponse(self.make_html())):
             result = _ig_embed()
         self.assertIsNone(result["followers"])
+        self.assertEqual(result["publicFollowers"], 100)
 
     def test_missing_embed_data_is_rejected(self):
         with self.assertRaises(RuntimeError):

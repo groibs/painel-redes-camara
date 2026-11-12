@@ -23,6 +23,12 @@ UTC = dt.timezone.utc
 SOURCES = ("instagram", "x", "telegram", "youtube", "tiktok", "facebook")
 FOLLOWER_SOURCES = ("instagram", "x", "youtube", "tiktok", "facebook")
 MAX_AGE_DAYS = 7
+# Manual institutional count reported on 12/11/2026. Public embeds may
+# return a historical replica; never replace this baseline with a lower
+# count unless a future official authenticated source supplies it.
+INSTAGRAM_MANUAL_FOLLOWERS = 397329
+INSTAGRAM_RECHECK_MINUTES = 10
+
 
 
 def parse_date(value):
@@ -87,6 +93,64 @@ def merge_collection(fresh, previous):
     return result, fresh_names
 
 
+def reconcile_instagram_public_followers(fresh, previous):
+    """Track Instagram embed counts and promote only a corroborated change.
+
+    The embed currently reports fewer followers than the human-confirmed
+    count. Its value is NOT reliable enough to replace the manual count merely
+    because it was downloaded today. A distinct later reading above that
+    baseline is required before the dashboard can use it.
+    """
+    ig = fresh.get("instagram")
+    if not isinstance(ig, dict) or ig.get("source") == "meta":
+        return
+    now = parse_date(fresh.get("collectedAt")) or dt.datetime.now(UTC)
+    current = ig.get("publicFollowers")
+    prior = previous.get("instagram")
+    prior = prior if isinstance(prior, dict) else {}
+    prev_candidate = prior.get("publicFollowers")
+    prev_checked = parse_date(prior.get("publicCheckedAt"))
+    prev_changed = parse_date(prior.get("publicCountChangedAt"))
+    if type(current) is not int or current < 1000 or current > 10**9:
+        return
+    ig["publicCheckedAt"] = now.isoformat()
+    ig["publicCountChangedAt"] = (
+        prev_changed.isoformat()
+        if current == prev_candidate and prev_changed
+        else now.isoformat()
+    )
+
+    # A previously validated value is maintained with the timestamp of its
+    # actual observed change, even if a stale replica is served next time.
+    prev_confirmed = (
+        prior.get("source") == "embed_observed"
+        and type(prior.get("followers")) is int
+        and prior["followers"] >= INSTAGRAM_MANUAL_FOLLOWERS
+    )
+    if prev_confirmed:
+        ig["followers"] = prior["followers"]
+        ig["followersObservedAt"] = (
+            prior.get("followersObservedAt")
+            or prior.get("observedAt")
+            or prior.get("publicCheckedAt")
+        )
+        ig["source"] = "embed_observed"
+
+    # Avoid accepting one cached response as a new actual count.
+    distinct_later_reading = (
+        type(prev_candidate) is int
+        and current != prev_candidate
+        and prev_checked is not None
+        and dt.timedelta(minutes=INSTAGRAM_RECHECK_MINUTES)
+            <= now - prev_checked <= dt.timedelta(days=7)
+        and abs(current - prev_candidate) <= max(1000, int(prev_candidate * 0.05))
+    )
+    if distinct_later_reading and current >= INSTAGRAM_MANUAL_FOLLOWERS:
+        ig["followers"] = current
+        ig["followersObservedAt"] = now.isoformat()
+        ig["source"] = "embed_observed"
+
+
 def update_history(previous, result, fresh_names):
     now = parse_date(result["collectedAt"])
     rows = previous.get("samples")
@@ -107,6 +171,11 @@ def update_history(previous, result, fresh_names):
         if (name not in fresh_names or not isinstance(source, dict)
                 or type(source.get("followers")) is not int):
             continue
+        if name == "instagram" and source.get("source") == "embed_observed":
+            # Repeated cached HTML is not a new follower measurement.
+            if (parse_date(source.get("followersObservedAt"))
+                    != parse_date(result["collectedAt"])):
+                continue
         row = {
             "network": name,
             "followers": source["followers"],
@@ -239,6 +308,7 @@ def main(argv=None):
             if error:
                 fresh.setdefault("errors", {})[name] = error
     previous = read_json(args.previous, {})
+    reconcile_instagram_public_followers(fresh, previous)
     history = read_json(args.history, {})
     merged, fresh_names = merge_collection(fresh, previous)
     updated_history, rows = update_history(history, merged, fresh_names)
