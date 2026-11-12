@@ -104,14 +104,16 @@ export function parseSnapshot(value: unknown): SocialSnapshot {
     const mediaUrl = safeHttpsUrl(item.mediaUrl);
     const permalink = safeHttpsUrl(item.permalink);
     if (item.mediaUrl && !mediaUrl) throw new Error("URL de mídia inválida");
-    if (
-      item.permalink &&
-      (!permalink ||
-        !["instagram.com", "www.instagram.com"].includes(
-          new URL(permalink).hostname,
-        ))
-    )
-      throw new Error("Link da publicação inválido");
+    if (item.permalink) {
+      if (!permalink) throw new Error("Link da publicação inválido");
+      const link = new URL(permalink);
+      const isInstagram = ["instagram.com", "www.instagram.com"].includes(link.hostname);
+      const isCâmaraTelegram = link.hostname === "t.me" &&
+        /^\/CamaradosDeputados\/\d+$/.test(link.pathname) &&
+        /^tg-\d+$/.test(String(item.id));
+      if (!isInstagram && !isCâmaraTelegram)
+        throw new Error("Link da publicação inválido");
+    }
     postIds.add(item.id);
     return {
       id: item.id,
