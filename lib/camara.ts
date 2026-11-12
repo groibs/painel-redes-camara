@@ -11,6 +11,7 @@ export type PanelEnvironment = {
   PANEL_SOCIAL_SOURCE_URL?: string;
   PANEL_SOCIAL_SOURCE_TOKEN?: string;
   PANEL_SOCIAL_FALLBACK_PANEL_URL?: string;
+  PANEL_PUBLIC_SOCIAL_URL?: string;
 };
 type ApiObject = Record<string, unknown>;
 function object(value: unknown): ApiObject {
@@ -250,6 +251,71 @@ async function socialFromLegacyPanel(
   };
 }
 
+/** A Vercel Python function provides a best-effort public Instagram feed without a VPS.
+ * The official Meta integration (PANEL_SOCIAL_SOURCE_URL) remains preferred.
+ */
+async function socialFromServerless(
+  panel: PanelData,
+  signal: AbortSignal,
+  endpoint: string,
+): Promise<void> {
+  const url = safeHttpsUrl(endpoint);
+  if (!url || new URL(url).pathname !== "/api/social_public") {
+    throw new Error("Endpoint social serverless inválido");
+  }
+  const response = await fetch(url, {
+    redirect: "error",
+    signal: AbortSignal.any([signal, AbortSignal.timeout(22000)]),
+    next: { revalidate: 120 },
+  });
+  if (!response.ok) throw new Error(`Coletor serverless HTTP ${response.status}`);
+  if (Number(response.headers.get("content-length") || 0) > 1_000_000) {
+    throw new Error("Resposta social excede limite");
+  }
+  const body = await response.text();
+  if (body.length > 1_000_000) throw new Error("Resposta social excede limite");
+  const raw = object(JSON.parse(body));
+  const collectedAt = validDate(raw.collectedAt);
+  if (!collectedAt) throw new Error("Coleta social sem data válida");
+
+  const ig = object(raw.instagram);
+  const instagramFollowers = integer(ig.followers);
+  if (instagramFollowers === null) {
+    throw new Error("Instagram não respondeu ao coletor público");
+  }
+  const accounts: Array<Record<string, unknown>> = [{
+    id: "instagram",
+    name: "Instagram",
+    handle: "@camaradosdeputados",
+    followers: instagramFollowers,
+    change24h: null,
+    updatedAt: collectedAt,
+  }];
+  const x = object(raw.x);
+  const xFollowers = integer(x.followers);
+  if (xFollowers !== null) {
+    accounts.push({
+      id: "x", name: "X", handle: "@camaradeputados",
+      followers: xFollowers, change24h: null, updatedAt: collectedAt,
+    });
+  }
+  const snapshot = parseSnapshot({
+    schemaVersion: 1,
+    collectedAt,
+    accounts,
+    posts: Array.isArray(ig.posts) ? ig.posts.slice(0, 6) : [],
+  });
+  panel.accounts = panel.accounts.map(
+    (account) => snapshot.accounts.find((item) => item.id === account.id) || account,
+  );
+  panel.posts = snapshot.posts;
+  panel.sources.social = {
+    state: "ok",
+    checkedAt: snapshot.collectedAt,
+    message: "Instagram: coleta pública serverless; demais redes aguardam conexão",
+  };
+}
+
 async function social(
   panel: PanelData,
   signal: AbortSignal,
@@ -257,8 +323,28 @@ async function social(
 ): Promise<void> {
   const source = environment.PANEL_SOCIAL_SOURCE_URL;
   if (!source) {
-    if (environment.PANEL_SOCIAL_FALLBACK_PANEL_URL)
-      await socialFromLegacyPanel(panel, signal, environment.PANEL_SOCIAL_FALLBACK_PANEL_URL);
+    const publicEndpoint = environment.PANEL_PUBLIC_SOCIAL_URL ||
+      (process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}/api/social_public`
+        : undefined);
+    let serverlessError: unknown = null;
+    if (publicEndpoint) {
+      try {
+        await socialFromServerless(panel, signal, publicEndpoint);
+        return;
+      } catch (error) {
+        serverlessError = error;
+      }
+    }
+    if (environment.PANEL_SOCIAL_FALLBACK_PANEL_URL) {
+      try {
+        await socialFromLegacyPanel(panel, signal, environment.PANEL_SOCIAL_FALLBACK_PANEL_URL);
+        return;
+      } catch (error) {
+        if (!serverlessError) serverlessError = error;
+      }
+    }
+    if (serverlessError) throw serverlessError;
     return;
   }
   const url = safeHttpsUrl(source);
@@ -302,6 +388,7 @@ export async function getPanel(
     PANEL_SOCIAL_SOURCE_URL: process.env.PANEL_SOCIAL_SOURCE_URL,
     PANEL_SOCIAL_SOURCE_TOKEN: process.env.PANEL_SOCIAL_SOURCE_TOKEN,
     PANEL_SOCIAL_FALLBACK_PANEL_URL: process.env.PANEL_SOCIAL_FALLBACK_PANEL_URL,
+    PANEL_PUBLIC_SOCIAL_URL: process.env.PANEL_PUBLIC_SOCIAL_URL,
   },
 ): Promise<PanelData> {
   const panel = emptyPanel();
