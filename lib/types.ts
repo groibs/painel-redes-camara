@@ -11,6 +11,8 @@ export type Source = {
   state: SourceState;
   checkedAt: string | null;
   message: string;
+  /** For partial social responses, whether Instagram posts were fetched. */
+  instagramAvailable?: boolean;
 };
 
 export type SocialAccount = {
