@@ -67,9 +67,9 @@ function displayOrgan(event: AgendaEvent) {
  */
 function tickerHeadline(title: string) {
   return title.replace(/\s+/g, " ").trim().replace(
-    /Apreciação dos PLNs?\s*n[º°]s?\.?\s*((?:\d+\s*,\s*){4,}\d+),?\s*de\s*(20\d{2})/gi,
+    /Apreciação dos PLNs?['’]?\s*n[º°]s?\.?\s*((?:\d+\s*,\s*){4,}\d+(?:\s*e\s*\d+)?),?\s*de\s*(20\d{2})/gi,
     (_match, numbers: string, year: string) =>
-      `Apreciação de ${numbers.split(",").length} PLNs de ${year}`,
+      `Apreciação de ${(numbers.match(/\d+/g) || []).length} PLNs de ${year}`,
   );
 }
 function socialFollowerCount(id: NetworkId, value: number | null) {
