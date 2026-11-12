@@ -171,6 +171,11 @@ def update_history(previous, result, fresh_names):
         if (name not in fresh_names or not isinstance(source, dict)
                 or type(source.get("followers")) is not int):
             continue
+        if name == "instagram" and source.get("source") == "embed_observed":
+            # Repeated cached HTML is not a new follower measurement.
+            if (parse_date(source.get("followersObservedAt"))
+                    != parse_date(result["collectedAt"])):
+                continue
         row = {
             "network": name,
             "followers": source["followers"],
