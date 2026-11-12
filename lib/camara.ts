@@ -272,7 +272,8 @@ function applyPublicCollection(panel: PanelData, value: unknown): void {
   const telegram = object(raw.telegram);
   const instagramFollowers = integer(ig.followers);
   const xFollowers = integer(x.followers);
-  const igObserved = validDate(ig.observedAt) || collectedAt;
+  const igObserved = validDate(ig.followersObservedAt) ||
+    validDate(ig.observedAt) || collectedAt;
   const xObserved = validDate(x.observedAt) || collectedAt;
   const instagramPosts = Array.isArray(ig.posts) ? ig.posts.slice(0, 6) : [];
   const telegramPosts = Array.isArray(telegram.posts) ? telegram.posts.slice(0, 6) : [];
@@ -285,6 +286,7 @@ function applyPublicCollection(panel: PanelData, value: unknown): void {
       id: "instagram", name: "Instagram", handle: "@camaradosdeputados",
       followers: instagramFollowers, change24h: integer(ig.change24h) ?? null,
       updatedAt: igObserved,
+      source: ig.source === "embed_observed" ? "public_embed" : undefined,
     });
   }
   if (xFollowers !== null) {
@@ -335,9 +337,11 @@ function applyPublicCollection(panel: PanelData, value: unknown): void {
     feedSource: usingInstagramFeed ? "instagram" :
       telegramPosts.length ? "telegram" : undefined,
     message: usingInstagramFeed
-      ? ig.source === "embed"
-        ? "Posts reais do Instagram via incorporação pública; seguidores informados manualmente"
-        : "Publicações originais do Instagram"
+      ? ig.source === "embed_observed"
+        ? "Posts e seguidores via incorporação pública; contagem pode estar defasada"
+        : ig.source === "embed"
+          ? "Posts reais do Instagram via incorporação pública; contador manual até validação"
+          : "Publicações originais do Instagram"
       : telegramPosts.length
         ? "Instagram indisponível; últimas imagens do canal oficial da Câmara no Telegram"
         : "Instagram indisponível; métricas públicas disponíveis",
