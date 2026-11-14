@@ -304,6 +304,31 @@
       "collectedAt": "2026-11-14T10:59:32.456427+00:00",
       "followers": 666103,
       "network": "facebook"
+    },
+    {
+      "collectedAt": "2026-11-14T16:36:04.900099+00:00",
+      "followers": 398518,
+      "network": "instagram"
+    },
+    {
+      "collectedAt": "2026-11-14T16:36:04.900099+00:00",
+      "followers": 1087097,
+      "network": "x"
+    },
+    {
+      "collectedAt": "2026-11-14T16:36:04.900099+00:00",
+      "followers": 1500000,
+      "network": "youtube"
+    },
+    {
+      "collectedAt": "2026-11-14T16:36:04.900099+00:00",
+      "followers": 149600,
+      "network": "tiktok"
+    },
+    {
+      "collectedAt": "2026-11-14T16:36:04.900099+00:00",
+      "followers": 666122,
+      "network": "facebook"
     }
   ],
   "schemaVersion": 1
