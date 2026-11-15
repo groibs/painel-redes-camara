@@ -369,6 +369,21 @@
       "collectedAt": "2026-11-14T21:34:44.497059+00:00",
       "followers": 666135,
       "network": "facebook"
+    },
+    {
+      "collectedAt": "2026-11-15T01:21:17.435779+00:00",
+      "followers": 1500000,
+      "network": "youtube"
+    },
+    {
+      "collectedAt": "2026-11-15T01:21:17.435779+00:00",
+      "followers": 149600,
+      "network": "tiktok"
+    },
+    {
+      "collectedAt": "2026-11-15T01:21:17.435779+00:00",
+      "followers": 666131,
+      "network": "facebook"
     }
   ],
   "schemaVersion": 1
