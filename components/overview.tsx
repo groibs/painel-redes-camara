@@ -212,7 +212,8 @@ export function SocialMetrics({
       <div className="metrics-list">
         {data.accounts.map((account) => {
           const delta = account.change24h;
-          const publicInstagram = account.id === "instagram" && account.source === "public_embed";
+          const publicInstagram = account.id === "instagram" &&
+            ["public_embed", "public_profile"].includes(account.source || "");
           // Public counts are collected at least daily; a normal delay
           // between GitHub Actions runs must not be labelled stale.
           const freshnessWindow = 26 * 60 * 60 * 1000;

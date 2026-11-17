@@ -164,6 +164,74 @@ def _parse_embed_profile(page):
     raise RuntimeError("instagram:embed_data_missing")
 
 
+def _parse_public_profile_followers(page):
+    """Read only the named profile's exact counter from inert page JSON."""
+    inspected = 0
+    for match in re.finditer(r"<script\b[^>]*>(.*?)</script\s*>", page, re.I | re.S):
+        try:
+            data = json.loads(match.group(1))
+        except (ValueError, TypeError):
+            continue
+        stack = [data]
+        while stack and inspected < 50000:
+            inspected += 1
+            value = stack.pop()
+            if isinstance(value, dict):
+                if str(value.get("username", "")).lower() == IG_HANDLE:
+                    followers = _count(value.get("follower_count"))
+                    if followers is not None and followers < 10**9:
+                        return followers
+                stack.extend(value.values())
+            elif isinstance(value, list):
+                stack.extend(value)
+    raise RuntimeError("instagram:profile_counter_missing")
+
+
+def _ig_public_profile_followers():
+    response = requests.get(
+        f"https://www.instagram.com/{IG_HANDLE}/",
+        headers={
+            "User-Agent": "Mozilla/5.0",
+            "Accept": "text/html",
+            "Accept-Language": "pt-BR,pt;q=0.9",
+            "Cache-Control": "no-cache",
+        },
+        timeout=12,
+        allow_redirects=False,
+    )
+    if response.status_code != 200:
+        raise RuntimeError(f"instagram:profile_http_{response.status_code}")
+    if len(response.content) > MAX_BODY:
+        raise RuntimeError("instagram:profile_too_large")
+    return _parse_public_profile_followers(response.text)
+
+
+def _ig_public_collection():
+    """Prefer the public profile counter; retain embed posts independently."""
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        profile_future = pool.submit(_ig_public_profile_followers)
+        embed_future = pool.submit(_ig_embed)
+        embed_error = None
+        try:
+            result = embed_future.result()
+        except Exception as error:
+            embed_error = error
+            result = {"handle": "@" + IG_HANDLE, "posts": []}
+        try:
+            followers = profile_future.result()
+        except Exception:
+            if embed_error is not None:
+                raise embed_error
+            return result
+        return {
+            **result,
+            "embedFollowers": result.get("publicFollowers"),
+            "followers": followers,
+            "publicFollowers": followers,
+            "source": "profile",
+        }
+
+
 def _ig_embed():
     """Fetch original recent Instagram thumbnails without login or Meta API.
 
@@ -489,7 +557,7 @@ def collect():
     # serverless response inside the dashboard's network deadline.
     with ThreadPoolExecutor(max_workers=3) as pool:
         instagram_future = (
-            pool.submit(_ig_embed)
+            pool.submit(_ig_public_collection)
             if not (os.environ.get("INSTAGRAM_ACCESS_TOKEN") and os.environ.get("INSTAGRAM_USER_ID"))
             else None
         )

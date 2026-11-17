@@ -4,7 +4,10 @@ import json
 from unittest import TestCase
 from unittest.mock import patch
 
-from api.social_public import _ig_embed, _parse_embed_profile
+from api.social_public import (
+    _ig_embed, _parse_embed_profile, _parse_public_profile_followers,
+    _ig_public_collection,
+)
 
 
 class DummyResponse:
@@ -60,6 +63,49 @@ class InstagramEmbedTests(TestCase):
     def test_missing_embed_data_is_rejected(self):
         with self.assertRaises(RuntimeError):
             _parse_embed_profile("<html>Não há dados</html>")
+
+    def test_profile_counter_requires_the_official_username(self):
+        page = '<script type="application/json">' + json.dumps({"payload": [
+            {"username": "outra_conta", "follower_count": 900000},
+            {"username": "camaradosdeputados", "follower_count": 400027},
+        ]}) + '</script>'
+        self.assertEqual(_parse_public_profile_followers(page), 400027)
+
+    def test_profile_counter_does_not_use_rounded_metadata_or_invalid_values(self):
+        for value in (None, True, -1, "400027", 10**20):
+            page = '<meta content="400K seguidores"><script type="application/json">' + json.dumps({
+                "username": "camaradosdeputados", "follower_count": value,
+            }) + '</script>'
+            with self.subTest(value=value), self.assertRaises(RuntimeError):
+                _parse_public_profile_followers(page)
+
+    def test_profile_count_wins_over_stale_embed_but_preserves_posts(self):
+        embed = {"followers": None, "publicFollowers": 399737,
+                 "posts": [{"id": "post-1"}], "source": "embed"}
+        with patch("api.social_public._ig_embed", return_value=embed), \
+             patch("api.social_public._ig_public_profile_followers", return_value=400027):
+            result = _ig_public_collection()
+        self.assertEqual(result["followers"], 400027)
+        self.assertEqual(result["publicFollowers"], 400027)
+        self.assertEqual(result["embedFollowers"], 399737)
+        self.assertEqual(result["source"], "profile")
+        self.assertEqual(result["posts"], embed["posts"])
+
+    def test_unavailable_profile_keeps_the_embed_fallback(self):
+        embed = {"followers": None, "publicFollowers": 399737,
+                 "posts": [{"id": "post-1"}], "source": "embed"}
+        with patch("api.social_public._ig_embed", return_value=embed), \
+             patch("api.social_public._ig_public_profile_followers", side_effect=RuntimeError("unavailable")):
+            result = _ig_public_collection()
+        self.assertEqual(result, embed)
+
+    def test_profile_count_survives_an_unavailable_embed(self):
+        with patch("api.social_public._ig_embed", side_effect=RuntimeError("unavailable")), \
+             patch("api.social_public._ig_public_profile_followers", return_value=400027):
+            result = _ig_public_collection()
+        self.assertEqual(result["followers"], 400027)
+        self.assertEqual(result["source"], "profile")
+        self.assertEqual(result["posts"], [])
 
 
 if __name__ == "__main__":

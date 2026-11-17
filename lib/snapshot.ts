@@ -70,7 +70,7 @@ export function parseSnapshot(value: unknown): SocialSnapshot {
     const updatedAt = item.updatedAt ?? value.collectedAt;
     if (!timestamp(updatedAt) || Date.parse(updatedAt) > Date.now() + 300000)
       throw new Error("Data de métrica inválida");
-    if (item.source !== undefined && !["manual", "public_embed"].includes(item.source as string))
+    if (item.source !== undefined && !["manual", "public_embed", "public_profile"].includes(item.source as string))
       throw new Error("Origem da métrica inválida");
     seen.add(item.id as string);
     return {

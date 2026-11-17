@@ -86,7 +86,7 @@ def merge_collection(fresh, previous):
 
 
 def reconcile_instagram_public_followers(fresh, previous):
-    """Use the Instagram public embed counter directly, including decreases.
+    """Use public profile readings, with embed as a fallback, including decreases.
 
     The embed can be cached. Label it publicly and avoid fabricating
     historical follower changes when a cached count is repeated.
@@ -100,6 +100,18 @@ def reconcile_instagram_public_followers(fresh, previous):
         return
     prior = previous.get("instagram")
     prior = prior if isinstance(prior, dict) else {}
+    prior_observed = parse_date(prior.get("followersObservedAt") or prior.get("observedAt"))
+    if (ig.get("source") == "embed" and prior.get("source") == "profile_observed"
+            and prior_observed and dt.timedelta(0) <= now - prior_observed <= dt.timedelta(days=MAX_AGE_DAYS)):
+        # An unavailable profile must not replace its last valid count with
+        # the separately cached embed counter. Posts may still refresh.
+        ig["embedFollowers"] = current
+        ig["embedCheckedAt"] = now.isoformat()
+        for key in ("followers", "publicFollowers", "followersObservedAt",
+                    "publicCheckedAt", "publicCountChangedAt", "source"):
+            if key in prior:
+                ig[key] = prior[key]
+        return
     prev_count = prior.get("publicFollowers")
     prev_changed = parse_date(prior.get("publicCountChangedAt"))
     changed = (current != prev_count or prev_changed is None)
@@ -109,7 +121,7 @@ def reconcile_instagram_public_followers(fresh, previous):
     )
     ig["followers"] = current
     ig["followersObservedAt"] = now.isoformat()
-    ig["source"] = "embed_observed"
+    ig["source"] = "profile_observed" if ig.get("source") == "profile" else "embed_observed"
 
 
 
@@ -133,7 +145,7 @@ def update_history(previous, result, fresh_names):
         if (name not in fresh_names or not isinstance(source, dict)
                 or type(source.get("followers")) is not int):
             continue
-        if name == "instagram" and source.get("source") == "embed_observed":
+        if name == "instagram" and source.get("source") in ("embed_observed", "profile_observed"):
             # Repeated counts aren't new changes, even if checked again.
             changed_at = parse_date(source.get("publicCountChangedAt"))
             if changed_at != parse_date(result["collectedAt"]):

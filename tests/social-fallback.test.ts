@@ -58,7 +58,7 @@ test("fresh scheduled collection supplies every network without a partial fallba
   const collectedAt = new Date().toISOString();
   const stored = {
     collectedAt,
-    instagram: { followers: 399737, source: "embed_observed" },
+    instagram: { followers: 400027, source: "profile_observed" },
     x: { followers: 1087006 },
     tiktok: { followers: 149700 },
     youtube: { followers: 1500000 },
@@ -77,6 +77,8 @@ test("fresh scheduled collection supplies every network without a partial fallba
 
   const result = await getPanel({ PANEL_PUBLIC_SOCIAL_URL: liveEndpoint });
   assert.equal(liveRequests, 0);
+  assert.equal(result.accounts.find((account) => account.id === "instagram")?.followers, 400027);
+  assert.equal(result.accounts.find((account) => account.id === "instagram")?.source, "public_profile");
   assert.ok(result.accounts.every((account) => account.followers !== null));
   assert.ok(result.accounts.every((account) => account.updatedAt === collectedAt));
 });

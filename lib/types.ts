@@ -25,8 +25,8 @@ export type SocialAccount = {
   followers: number | null;
   change24h: number | null;
   updatedAt: string | null;
-  /** Explicitly reported follower count; never treated as a live API collection. */
-  source?: "manual" | "public_embed";
+  /** Follower-count provenance; public Instagram readings may be cached. */
+  source?: "manual" | "public_embed" | "public_profile";
 };
 export type SocialPost = {
   id: string;

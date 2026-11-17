@@ -143,6 +143,39 @@ class ScheduledSocialTests(unittest.TestCase):
         reconcile_instagram_public_followers(fresh, {})
         self.assertEqual(fresh["instagram"]["followers"], 396850)
 
+    def test_profile_reading_preserves_its_provenance_and_accepts_decreases(self):
+        previous = {"instagram": {"followers": 400100, "source": "profile_observed"}}
+        fresh = {"collectedAt": self.now.isoformat(), "instagram": {
+            "source": "profile", "followers": 400027, "publicFollowers": 400027,
+        }}
+        reconcile_instagram_public_followers(fresh, previous)
+        self.assertEqual(fresh["instagram"]["followers"], 400027)
+        self.assertEqual(fresh["instagram"]["source"], "profile_observed")
+        self.assertEqual(fresh["instagram"]["followersObservedAt"], self.now.isoformat())
+
+    def test_cached_embed_cannot_replace_a_recent_profile_reading(self):
+        old = (self.now - dt.timedelta(minutes=30)).isoformat()
+        previous = {"instagram": {
+            "source": "profile_observed", "followers": 400027, "publicFollowers": 400027,
+            "followersObservedAt": old, "publicCheckedAt": old,
+            "publicCountChangedAt": old,
+        }}
+        fresh = {"collectedAt": self.now.isoformat(), "instagram": {
+            "source": "embed", "followers": None, "publicFollowers": 399737,
+            "posts": [{"id": "fresh-post"}],
+        }}
+        reconcile_instagram_public_followers(fresh, previous)
+        ig = fresh["instagram"]
+        self.assertEqual(ig["followers"], 400027)
+        self.assertEqual(ig["source"], "profile_observed")
+        self.assertEqual(ig["followersObservedAt"], old)
+        self.assertEqual(ig["publicCheckedAt"], old)
+        self.assertEqual(ig["embedFollowers"], 399737)
+        self.assertEqual(ig["posts"], [{"id": "fresh-post"}])
+        merged, names = merge_collection(fresh, previous)
+        _, rows = update_history({}, merged, names)
+        self.assertEqual(rows, [])
+
     def test_instagram_daily_audit_flags_old_unchanged_public_count(self):
         old = (self.now - dt.timedelta(hours=73)).isoformat()
         recent = self.now.isoformat()

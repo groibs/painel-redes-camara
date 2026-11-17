@@ -271,7 +271,7 @@ function applyPublicCollection(panel: PanelData, value: unknown): void {
   const x = object(raw.x);
   const telegram = object(raw.telegram);
   const instagramFollowers = integer(ig.followers) ??
-    (ig.source === "embed" ? integer(ig.publicFollowers) : null);
+    (["embed", "profile"].includes(String(ig.source)) ? integer(ig.publicFollowers) : null);
   const xFollowers = integer(x.followers);
   const igObserved = validDate(ig.followersObservedAt) ||
     validDate(ig.observedAt) || collectedAt;
@@ -287,8 +287,10 @@ function applyPublicCollection(panel: PanelData, value: unknown): void {
       id: "instagram", name: "Instagram", handle: "@camaradosdeputados",
       followers: instagramFollowers, change24h: integer(ig.change24h) ?? null,
       updatedAt: igObserved,
-      source: ["embed", "embed_observed"].includes(String(ig.source))
-        ? "public_embed" : undefined,
+      source: ["profile", "profile_observed"].includes(String(ig.source))
+        ? "public_profile"
+        : ["embed", "embed_observed"].includes(String(ig.source))
+          ? "public_embed" : undefined,
     });
   }
   if (xFollowers !== null) {
@@ -341,7 +343,9 @@ function applyPublicCollection(panel: PanelData, value: unknown): void {
     feedSource: usingInstagramFeed ? "instagram" :
       telegramPosts.length ? "telegram" : undefined,
     message: usingInstagramFeed
-      ? ["embed", "embed_observed"].includes(String(ig.source))
+      ? ["profile", "profile_observed"].includes(String(ig.source))
+        ? "Seguidores do perfil público do Instagram; posts via incorporação oficial"
+        : ["embed", "embed_observed"].includes(String(ig.source))
         ? "Instagram via fonte pública; contagem sujeita a atraso da plataforma"
         : "Publicações originais do Instagram"
       : telegramPosts.length
