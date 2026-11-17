@@ -1915,6 +1915,22 @@ legend {
   padding: 14px 0;
   border-top: 1px solid #e2ecf1;
 }
+.celebration-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 0 14px;
+}
+.celebration-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 9px 14px;
+  border: 0;
+  border-radius: 5px;
+  font-size: 12px;
+}
+.celebration-actions svg { width: 17px; height: 17px; }
 .settings-row > span {
   display: flex;
   flex-direction: column;

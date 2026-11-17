@@ -13,6 +13,7 @@ import {
   Minimize2,
   Moon,
   RefreshCw,
+  PartyPopper,
   Sun,
   Vote as VoteIcon,
   X,
@@ -27,6 +28,7 @@ import {
   TopicRadar,
   Week,
 } from "@/components/overview";
+import InstagramCelebration from "@/components/instagram-celebration";
 import { demoPanel, emptyPanel } from "@/lib/data";
 import {
   brasiliaDate,
@@ -149,6 +151,7 @@ export default function Dashboard({
   const [scale, setScale] = useState(1);
   const [mobile, setMobile] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [celebrationEnabled, setCelebrationEnabled] = useState(true);
   const [theme, setTheme] = useState<"day" | "night">(initialTheme);
   const [view, setView] = useState<"agenda" | "vote">("agenda");
   const [autoRotate, setAutoRotate] = useState(true);
@@ -164,6 +167,7 @@ export default function Dashboard({
   const dataRef = useRef<PanelData | null>(null);
   const requestRef = useRef(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const closeCelebration = useCallback(() => setCelebrationEnabled(false), []);
 
   const refresh = useCallback(
     async (initial = false) => {
@@ -246,6 +250,8 @@ export default function Dashboard({
       if (saved.view === "agenda" || saved.view === "vote") setView(saved.view);
       if (typeof saved.autoRotate === "boolean")
         setAutoRotate(saved.autoRotate);
+      if (typeof saved.celebrationEnabled === "boolean")
+        setCelebrationEnabled(saved.celebrationEnabled);
       if ([30, 60, 120, 300].includes(saved.refreshSeconds))
         setRefreshSeconds(saved.refreshSeconds);
     } catch {
@@ -327,12 +333,12 @@ export default function Dashboard({
     try {
       localStorage.setItem(
         SETTINGS_KEY,
-        JSON.stringify({ view, autoRotate, refreshSeconds }),
+        JSON.stringify({ view, autoRotate, refreshSeconds, celebrationEnabled }),
       );
     } catch {
       /* Optional preferences. */
     }
-  }, [view, autoRotate, refreshSeconds, data]);
+  }, [view, autoRotate, refreshSeconds, celebrationEnabled, data]);
 
   useEffect(() => {
     if (settingsOpen && !dialogRef.current?.open)
@@ -348,6 +354,7 @@ export default function Dashboard({
 
   useEffect(() => {
     const keyboard = (event: KeyboardEvent) => {
+      if (event.ctrlKey || event.metaKey || event.altKey || event.repeat) return;
       if (
         ["INPUT", "SELECT", "TEXTAREA"].includes(
           (event.target as HTMLElement).tagName,
@@ -361,6 +368,8 @@ export default function Dashboard({
         setTheme((value) => (value === "day" ? "night" : "day"));
       if (event.key.toLowerCase() === "r" && !dialogRef.current?.open)
         void refresh();
+      if (event.key.toLowerCase() === "c" && !dialogRef.current?.open)
+        setCelebrationEnabled((value) => !value);
     };
     window.addEventListener("keydown", keyboard);
     return () => window.removeEventListener("keydown", keyboard);
@@ -510,6 +519,7 @@ export default function Dashboard({
               <CircleHelp />
             </button>
           </footer>
+          {celebrationEnabled && <InstagramCelebration onClose={closeCelebration} />}
         </div>
       </div>
 
@@ -588,6 +598,33 @@ export default function Dashboard({
             </button>
           </div>
         </fieldset>
+        <label className="settings-row">
+          <span>
+            <strong>Comemoração de 400 mil no Instagram</strong>
+            <small>
+              Número em tela cheia e confetes contínuos, por tempo indeterminado.
+              Use C para alternar ou Esc para voltar ao painel.
+            </small>
+          </span>
+          <input
+            type="checkbox"
+            checked={celebrationEnabled}
+            onChange={(event) => setCelebrationEnabled(event.target.checked)}
+          />
+        </label>
+        <div className="celebration-actions">
+          <button
+            type="button"
+            className="primary-button"
+            onClick={() => {
+              setCelebrationEnabled(true);
+              setSettingsOpen(false);
+            }}
+          >
+            <PartyPopper />
+            Exibir comemoração
+          </button>
+        </div>
         <label className="settings-row">
           <span>
             <strong>Rotação de conteúdos</strong>
@@ -684,7 +721,7 @@ export default function Dashboard({
           </button>
         </div>
         <p className="keyboard-hint">
-          S · configurações &nbsp; N · modo noturno &nbsp; V · alternar votação &nbsp; R · consultar
+          C · comemoração &nbsp; Esc · voltar ao painel &nbsp; S · configurações &nbsp; N · modo noturno &nbsp; V · alternar votação &nbsp; R · consultar
         </p>
       </dialog>
       {notice && (

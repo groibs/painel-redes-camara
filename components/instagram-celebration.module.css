@@ -1,0 +1,272 @@
+.celebration {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  overflow: hidden;
+  isolation: isolate;
+  container-type: size;
+  color: #fff;
+  background: radial-gradient(ellipse at 50% 105%, #086457 0, transparent 62%), #052f39;
+  border-top: 6px solid #27fb6b;
+  outline: none;
+}
+
+.geometry,
+.confetti {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.geometry { z-index: -1; }
+.geometry > span { position: absolute; }
+
+.ring {
+  width: 1080px;
+  height: 1080px;
+  border: 170px solid #00b142;
+  border-radius: 50%;
+  top: -710px;
+  right: -350px;
+  opacity: .21;
+}
+
+.quarter {
+  width: 540px;
+  height: 540px;
+  border-radius: 0 100% 0 0;
+  background: #0095d4;
+  bottom: -125px;
+  left: -225px;
+  opacity: .17;
+}
+
+.circle {
+  width: 290px;
+  height: 290px;
+  border-radius: 50%;
+  background: #bcffdb;
+  bottom: -180px;
+  left: 320px;
+  opacity: .1;
+}
+
+.lines {
+  width: 210px;
+  height: 210px;
+  bottom: 78px;
+  right: 80px;
+  border-top: 2px solid #bcffdb;
+  border-right: 2px solid #bcffdb;
+  opacity: .18;
+}
+.lines::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 22px;
+  right: 22px;
+  border-top: inherit;
+  border-right: inherit;
+}
+
+.brand {
+  position: absolute;
+  left: 66px;
+  top: 54px;
+  font: 700 38px/1 var(--display);
+  letter-spacing: -.5px;
+  color: #bcffdb;
+}
+
+.logo {
+  position: absolute;
+  right: 66px;
+  top: 49px;
+  width: 226px;
+  height: 70px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.content {
+  position: absolute;
+  inset: 130px 50px 65px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  animation: arrive 1.2s cubic-bezier(.2, .7, .2, 1) both;
+}
+
+.eyebrow {
+  margin-bottom: 18px;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: 9px;
+  color: #bcffdb;
+}
+
+.number {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 28px;
+  font-family: var(--display);
+  font-size: 550px;
+  font-weight: 900;
+  line-height: .83;
+  letter-spacing: -14px;
+  white-space: nowrap;
+  text-shadow: 0 12px 65px #001a2626;
+}
+
+.unit {
+  font-size: 340px;
+  letter-spacing: -8px;
+  color: #27fb6b;
+}
+
+.followers {
+  margin-top: 31px;
+  font-family: var(--display);
+  font-size: 54px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 6px;
+}
+
+.rule {
+  width: 70px;
+  height: 4px;
+  flex: none;
+  margin: 30px 0 23px;
+  background: #27fb6b;
+}
+
+.thanks {
+  font-size: 24px;
+  line-height: 1.4;
+  color: #c0dedc;
+}
+
+.handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  margin-top: 30px;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+
+.instagram {
+  display: grid;
+  place-items: center;
+  width: 39px;
+  height: 39px;
+  border-radius: 11px;
+  background: radial-gradient(circle at 27% 108%, #ffe96a, #ffb538 27%, #f22b73 54%, #a929ca 75%, #6851d8);
+}
+.instagram svg { width: 24px; height: 24px; }
+
+.confetti { z-index: 2; }
+.falling {
+  position: absolute;
+  top: -45px;
+  left: var(--left);
+  animation: fall var(--fall-duration) var(--fall-delay) linear infinite;
+  will-change: transform;
+}
+.sway {
+  display: block;
+  animation: sway var(--sway-duration) var(--fall-delay) ease-in-out infinite alternate;
+}
+.paper {
+  display: block;
+  width: var(--paper-width);
+  height: var(--paper-height);
+  background: var(--paper-color);
+  opacity: .85;
+  border-radius: 1px;
+  animation: turn var(--turn-duration) var(--fall-delay) linear infinite;
+}
+.round { height: var(--paper-width); border-radius: 50%; }
+
+.close {
+  position: absolute;
+  z-index: 3;
+  bottom: 25px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 13px;
+  border: 1px solid #bcffdb30;
+  border-radius: 6px;
+  background: #052f39;
+  color: #bcffdb;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity .2s;
+}
+.close svg { width: 18px; height: 18px; }
+.celebration:hover .close,
+.close:focus-visible { opacity: 1; }
+
+@keyframes arrive {
+  from { opacity: 0; transform: translateY(25px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes fall {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(var(--drift), calc(100cqh + 100px), 0); }
+}
+@keyframes sway {
+  from { transform: translateX(-24px); }
+  to { transform: translateX(24px); }
+}
+@keyframes turn {
+  from { transform: rotate(0deg) rotateY(0deg); }
+  to { transform: rotate(360deg) rotateY(720deg); }
+}
+
+@media (max-width: 799px) {
+  .celebration {
+    position: fixed;
+    height: 100dvh;
+    width: 100%;
+    border-top-width: 4px;
+  }
+  .brand { left: 22px; top: 27px; font-size: 26px; }
+  .logo { right: 22px; top: 24px; width: 130px; height: 43px; }
+  .content { inset: 105px 18px 85px; }
+  .eyebrow { font-size: 15px; letter-spacing: 5px; margin-bottom: 20px; }
+  .number { font-size: 45cqw; letter-spacing: -1.1cqw; gap: 2cqw; }
+  .unit { font-size: 25cqw; letter-spacing: -.7cqw; }
+  .followers { margin-top: 23px; font-size: 6.4cqw; letter-spacing: 1.5px; }
+  .rule { margin: 25px 0 21px; width: 45px; height: 3px; }
+  .thanks { max-width: 290px; font-size: 16px; }
+  .handle { font-size: 15px; gap: 9px; margin-top: 24px; }
+  .instagram { width: 30px; height: 30px; border-radius: 8px; }
+  .instagram svg { width: 19px; height: 19px; }
+  .ring { right: -440px; top: -800px; }
+  .quarter { width: 370px; height: 370px; bottom: -220px; }
+  .circle { display: none; }
+  .lines { width: 90px; height: 90px; right: 20px; bottom: 95px; }
+  .close { opacity: .6; font-size: 12px; bottom: 16px; right: 16px; }
+  .paper { width: calc(var(--paper-width) * .65); height: calc(var(--paper-height) * .65); }
+  .round { height: calc(var(--paper-width) * .65); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content { animation: none; }
+  .falling { animation: none; top: calc(var(--left) * .9); }
+  .sway, .paper { animation: none; }
+  .paper { opacity: .4; }
+}

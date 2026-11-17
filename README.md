@@ -32,10 +32,18 @@ npm start
 - Engrenagem ou **S**: configurações e fontes.
 - **V** ou botão no rodapé: alternar agenda/votação.
 - **R**: consultar novamente.
+- **C**: exibir ou ocultar a comemoração dos 400 mil seguidores no Instagram.
+- **Esc**: sair da comemoração e voltar ao painel.
 - Setas nas seções: trocar páginas da agenda, semana e feed.
 - Rotação automática: alterna as páginas de agenda e publicações a cada 20 segundos; pode ser desligada.
 
 Preferências e último snapshot recebido ficam no navegador, quando o armazenamento local está disponível. Em caso de falha de uma fonte, seu último conteúdo e horário são mantidos. Uma resposta vazia bem-sucedida limpa o conteúdo antigo. A demonstração nunca é salva no cache de dados reais.
+
+## Comemoração de 400 mil no Instagram
+
+A tela comemorativa vem ativada por padrão, com **400 MIL** em destaque e uma chuva contínua de confetes nas cores institucionais. Ela permanece na tela por tempo indeterminado, inclusive durante as consultas de dados. A mensagem é uma peça comemorativa; os contadores das redes continuam usando as fontes originais.
+
+Use **C** para alternar a comemoração ou **Esc** para retornar ao painel. O botão “Voltar ao painel” aparece ao mover o mouse ou navegar pelo teclado. Em **S → Configurações**, a opção “Comemoração de 400 mil no Instagram” e o botão “Exibir comemoração” também controlam a exibição. A escolha fica salva neste navegador, inclusive após recarregar a página. Em dispositivos com redução de movimento, os confetes ficam estáticos.
 
 ## Agenda e votações
 
