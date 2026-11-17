@@ -1,27 +1,29 @@
 {
-  "collectedAt": "2026-11-17T17:47:37.528377+00:00",
+  "collectedAt": "2026-11-17T17:49:13.829178+00:00",
   "errors": {
-    "instagram": "instagram:embed_http_302"
+    "tiktok": "ValueError",
+    "x": "x:403,403,403"
   },
   "facebook": {
     "change24h": 251,
     "followers": 666344,
     "handle": "@camaradeputados",
-    "observedAt": "2026-11-17T17:47:37.528377+00:00"
+    "observedAt": "2026-11-17T17:49:13.829178+00:00"
   },
   "instagram": {
     "change24h": null,
-    "followers": 399737,
-    "followersObservedAt": "2026-11-17T17:39:36.390315+00:00",
+    "embedFollowers": 399737,
+    "followers": 400027,
+    "followersObservedAt": "2026-11-17T17:49:13.829178+00:00",
     "handle": "@camaradosdeputados",
-    "observedAt": "2026-11-17T17:39:36.390315+00:00",
+    "observedAt": "2026-11-17T17:49:13.829178+00:00",
     "posts": [
       {
         "caption": "Novas regras para o mercado digital podem ser votadas hoje na Câmara!\n\nO projeto de lei (PL 4.675/2025) que regulamenta a atuação das grandes empresas de tecnologia, conhecidas como big techs, pode ser votado nesta terça-feira (17).\n\nA proposta busca evitar práticas abusivas, estimular a concorrência e ampliar as oportunidades para pequenas empresas e as opções para os consumidores.\n\nEm entrevista ao Câmara Agora, o relator do projeto, deputado Aliel Machado (PV-PR), explicou como essas medidas podem impactar o dia a dia da população e esclareceu que a proposta não trata da moderação de conteúdo nas redes sociais. O parlamentar também falou sobre as negociações com as bancadas partidárias e os ajustes no texto antes da votação.\n\n📺 Quer entender melhor a proposta e o que pode mudar no mercado digital brasileiro? Confira a entrevista completa no Câmara Agora!\n▶️ YouTube: cd.leg.br/youtube\n📺 TV Câmara: camara.leg.br/tv\n\n#CâmaraAgora #TVCâmara #BigTechs #MercadoDigital",
         "comments": 0,
         "id": "4032537571716042918",
-        "likes": 5,
-        "mediaUrl": "https://scontent-sjc3-1.cdninstagram.com/v/t51.82787-15/910648389_17995152375065500_5092589544996107909_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=107&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMjUzNzU3MTcxNjA0MjkxODE3OTk1MTUyMzcyMDY1NTAw.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEwODAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=dgDxMnPu9G8Q7kNvwEe0BCy&_nc_oc=AdpY5x9Tmuw4a8p0MYqd96TApN75wWjKKNeZWvF2fXglgW2nJXzSYit20aUmOwio32k&_nc_zt=23&_nc_ht=scontent-sjc3-1.cdninstagram.com&_nc_gid=2vYcVYU9TlKu0PYShxEAHQ&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQRKzTgdxeQZ3nOkx4CTnHnhknKG0cCJDkfZ0r91UKCPQA&oe=6B025D44",
+        "likes": 6,
+        "mediaUrl": "https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/910648389_17995152375065500_5092589544996107909_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=107&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMjUzNzU3MTcxNjA0MjkxODE3OTk1MTUyMzcyMDY1NTAw.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEwODAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=dgDxMnPu9G8Q7kNvwHOGxOi&_nc_oc=AdpJb5iEQQZLy9YJwqTu1qk1oAtnF2v5GWbaJEKPU59xILqSn-MzLar-9CXMW-0st6TNb_WpIYWUgy74Zd3zsyOP&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&_nc_gid=2Quvz9_Zf_IYGRbf1XBCog&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQSUvoiB1Z43tiz4FbuLg46m75f0qOQSj_wBjiX7qF9FyA&oe=6B025D44",
         "permalink": "https://www.instagram.com/p/Df2c45hjRCm/",
         "publishedAt": "2026-11-17T17:19:58+00:00",
         "type": "video"
@@ -30,8 +32,8 @@
         "caption": "Parece que, desta vez, os Simpsons não acertaram! Nem eles, nem os boatos de testes militares ou atualizações de comunicação que poderiam parar o mundo neste 17 de novembro.\n\nPor aqui, nada de apagão. Então, tem muito trabalho!! Confira a agenda completa da Câmara para hoje no site oficial e acompanhe as atividades ao vivo.\n\nVai lá no: camara.leg.br.\n\n#apagao #17denovembro #camaradosdeputados #simpsons",
         "comments": 21,
         "id": "4032377322812486334",
-        "likes": 259,
-        "mediaUrl": "https://scontent-sjc3-1.cdninstagram.com/v/t51.82787-15/902962230_18359492899174424_946843646385880477_n.webp?_nc_cat=110&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTk4OTcwNzEwNTkwNzQ4OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=6CQxDdt5-WQQ7kNvwFlTlw_&_nc_oc=Adp5KOADf2HxPRZsAmoJTBVdn1yrhpqAdY8IDT3CndSgcU1GvZej4SzYwtuc1lEzimo&_nc_zt=23&_nc_ht=scontent-sjc3-1.cdninstagram.com&_nc_gid=2vYcVYU9TlKu0PYShxEAHQ&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQR90gzgGZTjiiK2-g-VQrA2gDMKpemx-dPDTLMrbMcw4w&oe=6B02734D",
+        "likes": 262,
+        "mediaUrl": "https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/902962230_18359492899174424_946843646385880477_n.webp?_nc_cat=110&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTk4OTcwNzEwNTkwNzQ4OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=6CQxDdt5-WQQ7kNvwGPI1Qs&_nc_oc=Adq7TnY7N2Ta42ukaRWn8bAdjHbAlgvVRAq0fnUhTZpDevW6p1mdFGRuTFT21ICkwu6h8iKvCBt567nUMBPMG2lD&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&_nc_gid=2Quvz9_Zf_IYGRbf1XBCog&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQRM5FyhIf1_uK4Z7hLZk6uVMx2zmiztvebSQuR-MX9kzg&oe=6B02734D",
         "permalink": "https://www.instagram.com/p/Df14c-GlDK-/",
         "publishedAt": "2026-11-17T12:00:09+00:00",
         "type": "carousel"
@@ -40,8 +42,8 @@
         "caption": "🚨 É HOJE! ÚLTIMA CHANCE!\n\nSonha em trabalhar na Câmara dos Deputados? Então corre, porque as inscrições para o concurso público terminam HOJE (17/11), às 18h, no horário de Brasília! ⏰\n\nSão 66 vagas imediatas e 118 para cadastro de reserva, com remuneração inicial de R$ 32 mil!\n\n🎓 Cargo: Analista Legislativo, com oportunidades nas áreas de Comunicação Social, Engenharia, Arquivologia, Biblioteconomia, Museologia e Registro e Redação.\n\n💳 Taxa de inscrição: R$ 130, com pagamento até 19 de novembro.\n\n📝 Provas: previstas para 17 de janeiro de 2027.\n\n⚠️ Atenção: o prazo para pagar a taxa é até 19/11, mas a inscrição precisa ser feita até as 18h de hoje!\n\n🔗 Acesse cd.leg.br/concurso, confira o edital e não deixe essa oportunidade passar!\n\n#ConcursoCâmara #ConcursoPúblico #CâmaraDosDeputados",
         "comments": 14,
         "id": "4031964905551213525",
-        "likes": 557,
-        "mediaUrl": "https://scontent-sjc6-1.cdninstagram.com/v/t51.82787-15/907237696_18359489626174424_8511028849691084554_n.webp?_nc_cat=100&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTk2NDkwNTU1MTIxMzUyNQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=rI2kicO6UB8Q7kNvwEb6jwW&_nc_oc=Adp69rP4XSJR2d3cD4WCsXisbWjXZS9Cx9rc3Jiy463e8CjzHh1H4uej9Hk_UaMCfIY&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&_nc_gid=2vYcVYU9TlKu0PYShxEAHQ&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQREPen_mHoEzKok2GqAC4_GGmNCyGyhKF2wbbL-KT0r-A&oe=6B025B9D",
+        "likes": 563,
+        "mediaUrl": "https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/907237696_18359489626174424_8511028849691084554_n.webp?_nc_cat=100&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTk2NDkwNTU1MTIxMzUyNQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=rI2kicO6UB8Q7kNvwEkEzPj&_nc_oc=AdqrxYcZfy9vbemBZlER00dXtBmFsK8JDwaxlwfjU_tSGi1Z3kCyxIrQ_JYUy9E-vdBhCnRue_0bqpn36qJey32j&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&_nc_gid=2Quvz9_Zf_IYGRbf1XBCog&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQRpGQ1LSQ2tYJXGiWMveml3wqvj1dIXW6yyEvBP8WKzxA&oe=6B025B9D",
         "permalink": "https://www.instagram.com/p/Df0argmOLPV/",
         "publishedAt": "2026-11-17T11:30:02+00:00",
         "type": "image"
@@ -51,7 +53,7 @@
         "comments": 10,
         "id": "4031995422608094172",
         "likes": 85,
-        "mediaUrl": "https://scontent-sjc6-1.cdninstagram.com/v/t51.82787-15/904461866_17995055262065500_708466457804069642_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTk5NTQyMjYwODA5NDE3MjE3OTk1MDU1MjU5MDY1NTAw.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEwODAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=mnp0ajlwt0QQ7kNvwGFq34T&_nc_oc=Ados5LMjetHxEf_oyG1iamfsxevLxUFR_vjKQcVtyPNNuMEobgfajUshTGjo_UTsr7w&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&_nc_gid=2vYcVYU9TlKu0PYShxEAHQ&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQQGpQMxwzegoXhbOKVPaCUHTnxHF1nbvQZRaNWO7-yXIA&oe=6B027A20",
+        "mediaUrl": "https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/904461866_17995055262065500_708466457804069642_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTk5NTQyMjYwODA5NDE3MjE3OTk1MDU1MjU5MDY1NTAw.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEwODAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=mnp0ajlwt0QQ7kNvwFhX3PS&_nc_oc=AdrNSbM_6jYJLsC-8_wbrGdFB7A1RXx2AV7Ne77V4_mq_XMNPebOiXBY9_FPY_1hcm1-hXoLI7To-xPJCvyPcxEY&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&_nc_gid=2Quvz9_Zf_IYGRbf1XBCog&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQQNjEDNv7R1xLigi6vjS3g00bpPk-2aJjFjYUzBNQ6rww&oe=6B027A20",
         "permalink": "https://www.instagram.com/p/Df0hnl0jnPc/",
         "publishedAt": "2026-11-16T23:23:08+00:00",
         "type": "video"
@@ -61,7 +63,7 @@
         "comments": 2,
         "id": "4031924019096717352",
         "likes": 0,
-        "mediaUrl": "https://scontent-sjc6-1.cdninstagram.com/v/t51.82787-15/869737238_18397438921206702_2139902185586740999_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ig_cache_key=NDAxODA3MzY1MDA0MjI2MzI2Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=kv3s5H9NCSYQ7kNvwGpH08v&_nc_oc=Adp2x8mfcpLE-6pVNC7ylPn6RraLeG2KTnzMTn3oFaj94zxqgj-s-jOfEVhuC-BavxY&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&_nc_gid=2vYcVYU9TlKu0PYShxEAHQ&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQRet9nlbdbEK6Z5GQYZFEonLCFnA5MRnk1UjO2IryssaQ&oe=6B024C3A",
+        "mediaUrl": "https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/869737238_18397438921206702_2139902185586740999_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ig_cache_key=NDAxODA3MzY1MDA0MjI2MzI2Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=kv3s5H9NCSYQ7kNvwEjiSiO&_nc_oc=AdrzQW1V7k4iM-dSgugmnoOK3e9H-Tx5QLF3qpHUvkppI2dQ9qCgSK_U3oMXVT1GwL-91yKlj81cFHAOjeXu32UG&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&_nc_gid=2Quvz9_Zf_IYGRbf1XBCog&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQSYvqA0kVbeDVbetZgfB5ETgocHaEtymPJghifVMUn9-w&oe=6B024C3A",
         "permalink": "https://www.instagram.com/p/Df0RYiHoAgo/",
         "publishedAt": "2026-11-16T21:00:00+00:00",
         "type": "carousel"
@@ -71,16 +73,16 @@
         "comments": 33,
         "id": "4031847316414856039",
         "likes": 1335,
-        "mediaUrl": "https://scontent-sjc6-1.cdninstagram.com/v/t51.82787-15/910904843_18359470483174424_6678997532596877710_n.webp?_nc_cat=104&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTg0NzMxNjQxNDg1NjAzOQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=UixZ8A-oOMEQ7kNvwFBg00_&_nc_oc=AdpkWugAH6TChVrwEdHwNbd-8GwhX7vW1jDPN5xVyrXkZER3HOJ8joUrhauLVY-Ybl4&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&_nc_gid=2vYcVYU9TlKu0PYShxEAHQ&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQQeG3hEg1vWMG7L0UL-ts_2vV1sRDhlCCjYk4aygF7a1w&oe=6B02483B",
+        "mediaUrl": "https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/910904843_18359470483174424_6678997532596877710_n.webp?_nc_cat=104&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTg0NzMxNjQxNDg1NjAzOQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=UixZ8A-oOMEQ7kNvwGAXXRY&_nc_oc=AdrWtVCg-87ltsf74W7K6W9DPEyN4ltew1CFMvgbJfCdLj6LL02NYrS_t_u4FCQxpgsKjZ2rtIbBasJPfPd_bv8V&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&_nc_gid=2Quvz9_Zf_IYGRbf1XBCog&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQROO_AXGqme5kjexMMWOxFDF0OKOd_8_Y3YnDTf9FhzGQ&oe=6B02807B",
         "permalink": "https://www.instagram.com/p/Dfz_8XLhPtn/",
         "publishedAt": "2026-11-16T18:27:58+00:00",
         "type": "image"
       }
     ],
-    "publicCheckedAt": "2026-11-17T17:39:36.390315+00:00",
-    "publicCountChangedAt": "2026-11-17T17:29:10.963855+00:00",
-    "publicFollowers": 399737,
-    "source": "embed_observed"
+    "publicCheckedAt": "2026-11-17T17:49:13.829178+00:00",
+    "publicCountChangedAt": "2026-11-17T17:49:13.829178+00:00",
+    "publicFollowers": 400027,
+    "source": "profile_observed"
   },
   "telegram": {
     "observedAt": "2026-11-17T17:47:37.528377+00:00",
@@ -163,6 +165,6 @@
     "change24h": null,
     "followers": 1500000,
     "handle": "@camaradosdeputadosoficial",
-    "observedAt": "2026-11-17T17:47:37.528377+00:00"
+    "observedAt": "2026-11-17T17:49:13.829178+00:00"
   }
 }
