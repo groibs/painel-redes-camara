@@ -19,6 +19,7 @@ function walk(directory, route) {
 add('.next/server/app/index.html', '/');
 add('.next/server/app/demo.html', '/demo');
 add('.next/server/app/400mil.html', '/400mil');
+add('.next/server/app/150mil.html', '/150mil');
 walk('.next/static', '/_next/static');
 walk('public', '');
 add('app/icon.svg', '/icon.svg');
@@ -38,7 +39,7 @@ export default {
       }
       catch { console.error('[painel] erro ao preparar resposta'); return Response.json({error:'Painel temporariamente indisponível'},{status:503}); }
     }
-    const route = ['/demo/', '/400mil/'].includes(url.pathname) ? url.pathname.slice(0, -1) : url.pathname;
+    const route = ['/demo/', '/400mil/', '/150mil/'].includes(url.pathname) ? url.pathname.slice(0, -1) : url.pathname;
     const file = files[route];
     if (!file) return new Response('Página não encontrada', {status:404});
     const headers = {'Content-Type':file.type,'Cache-Control':route.startsWith('/_next/static/')?'public, max-age=31536000, immutable':'no-cache','X-Content-Type-Options':'nosniff'};

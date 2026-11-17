@@ -607,6 +607,18 @@ export default function Dashboard({
             Abrir
           </Link>
         </div>
+        <div className="settings-row">
+          <span>
+            <strong>Comemoração de 150 mil no TikTok</strong>
+            <small>
+              Tela comemorativa em uma página própria, com confetes contínuos.
+            </small>
+          </span>
+          <Link href="/150mil" className="celebration-link">
+            <PartyPopper />
+            Abrir
+          </Link>
+        </div>
         <label className="settings-row">
           <span>
             <strong>Rotação de conteúdos</strong>

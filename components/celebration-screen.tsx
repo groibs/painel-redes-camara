@@ -2,9 +2,10 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import InstagramCelebration from "@/components/instagram-celebration";
+import SocialCelebration from "@/components/social-celebration";
+import type { CelebrationNetwork } from "@/components/social-celebration";
 
-export default function CelebrationScreen() {
+export default function CelebrationScreen({ network = "instagram" }: { network?: CelebrationNetwork }) {
   const router = useRouter();
   const [viewport, setViewport] = useState({ scale: 1, mobile: false });
   const returnToPanel = useCallback(() => router.push("/"), [router]);
@@ -36,7 +37,7 @@ export default function CelebrationScreen() {
         <div className="stage" style={viewport.mobile ? undefined : {
           transform: `scale(${viewport.scale})`,
         }}>
-          <InstagramCelebration onClose={returnToPanel} />
+          <SocialCelebration network={network} onClose={returnToPanel} />
         </div>
       </div>
     </main>

@@ -7,6 +7,7 @@ Painel em português para uma TV 16:9 conectada por HDMI ao computador. Exibe se
 - `/`: dados reais. A agenda e os resultados vêm da API oficial da Câmara. Redes sem conexão mostram “Aguardando conexão”, sem números inventados.
 - `/demo`: prévia visual. **Todos os números, eventos, publicações e votos desta página são ilustrativos.** Não há mistura entre demonstração e dados oficiais.
 - `/400mil`: comemoração dos 400 mil seguidores no Instagram, com confetes contínuos por tempo indeterminado.
+- `/150mil`: comemoração dos 150 mil seguidores no TikTok, com confetes contínuos e detalhes em ciano e rosa.
 
 A composição segue a referência visual fornecida: cabeçalho claro e relógio grande; contadores verticais e feed à esquerda; destaque do plenário, resumo do dia e comissões ao centro; pautas e semana à direita. A faixa “Na pauta” mostra os destaques da agenda recebida. Os indicadores são calculados a partir dos eventos do dia, e “em andamento” usa a situação da fonte.
 
@@ -40,11 +41,13 @@ npm start
 
 Preferências e último snapshot recebido ficam no navegador, quando o armazenamento local está disponível. Em caso de falha de uma fonte, seu último conteúdo e horário são mantidos. Uma resposta vazia bem-sucedida limpa o conteúdo antigo. A demonstração nunca é salva no cache de dados reais.
 
-## Comemoração de 400 mil no Instagram
+## Comemorações das redes
 
-A comemoração fica exclusivamente em **`/400mil`**, com **400 MIL** em destaque e uma chuva contínua de confetes nas cores institucionais, por tempo indeterminado. A página principal `/` abre o painel normal, inclusive em navegadores que tinham a comemoração ativada nas preferências antigas. A página comemorativa não consulta as fontes de dados do painel.
+A comemoração do Instagram fica em **`/400mil`**, com **400 MIL** em destaque e uma chuva contínua de confetes nas cores institucionais, por tempo indeterminado. A página principal `/` abre o painel normal, inclusive em navegadores que tinham a comemoração ativada nas preferências antigas. A página comemorativa não consulta as fontes de dados do painel.
 
 Use **C** no painel ou o link em **S → Configurações → Comemoração de 400 mil no Instagram → Abrir** para acessar a página. Na comemoração, **Esc**, **C** ou “Voltar ao painel” retornam à página principal. Recarregar `/400mil` mantém a comemoração. Os confetes continuam animados quando o navegador da TV sinaliza redução de movimento; a entrada do texto respeita essa preferência. A queda usa medidas compatíveis com navegadores sem suporte a unidades de contêiner.
+
+O TikTok tem sua própria página em **`/150mil`**, preparada com **150 MIL**, o ícone oficial e confetes contínuos em ciano, rosa e cores institucionais. Também está disponível em **S → Configurações → Comemoração de 150 mil no TikTok → Abrir**. **Esc**, **C** ou “Voltar ao painel” retornam à página principal. As páginas comemorativas são peças independentes dos contadores reais das redes.
 
 ## Agenda e votações
 

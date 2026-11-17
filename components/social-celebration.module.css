@@ -1,4 +1,5 @@
 .celebration {
+  --accent: #27fb6b;
   --fall-distance: 1180px;
   position: absolute;
   inset: 0;
@@ -8,7 +9,7 @@
   container-type: size;
   color: #fff;
   background: radial-gradient(ellipse at 50% 105%, #086457 0, transparent 62%), #052f39;
-  border-top: 6px solid #27fb6b;
+  border-top: 6px solid var(--accent);
   outline: none;
 }
 
@@ -128,7 +129,7 @@
 .unit {
   font-size: 340px;
   letter-spacing: -8px;
-  color: #27fb6b;
+  color: var(--accent);
 }
 
 .followers {
@@ -145,7 +146,7 @@
   height: 4px;
   flex: none;
   margin: 30px 0 23px;
-  background: #27fb6b;
+  background: var(--accent);
 }
 
 .thanks {
@@ -165,7 +166,7 @@
   letter-spacing: .2px;
 }
 
-.instagram {
+.socialIcon {
   display: grid;
   place-items: center;
   width: 39px;
@@ -173,7 +174,13 @@
   border-radius: 11px;
   background: radial-gradient(circle at 27% 108%, #ffe96a, #ffb538 27%, #f22b73 54%, #a929ca 75%, #6851d8);
 }
-.instagram svg { width: 24px; height: 24px; }
+.socialIcon svg { width: 24px; height: 24px; }
+
+.tiktok { --accent: #25f4ee; }
+.tiktok .ring { border-color: #25f4ee; opacity: .12; }
+.tiktok .quarter { background: #fe2c55; opacity: .12; }
+.tiktok .circle { background: #25f4ee; }
+.tiktok .socialIcon { background: #000; border: 1px solid #ffffff30; }
 
 .confetti { z-index: 2; }
 .falling {
@@ -261,8 +268,8 @@
   .rule { margin: 25px 0 21px; width: 45px; height: 3px; }
   .thanks { max-width: 290px; font-size: 16px; }
   .handle { font-size: 15px; gap: 9px; margin-top: 24px; }
-  .instagram { width: 30px; height: 30px; border-radius: 8px; }
-  .instagram svg { width: 19px; height: 19px; }
+  .socialIcon { width: 30px; height: 30px; border-radius: 8px; }
+  .socialIcon svg { width: 19px; height: 19px; }
   .ring { right: -440px; top: -800px; }
   .quarter { width: 370px; height: 370px; bottom: -220px; }
   .circle { display: none; }
