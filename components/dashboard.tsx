@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   CalendarDays,
   Check,
@@ -28,7 +30,6 @@ import {
   TopicRadar,
   Week,
 } from "@/components/overview";
-import InstagramCelebration from "@/components/instagram-celebration";
 import { demoPanel, emptyPanel } from "@/lib/data";
 import {
   brasiliaDate,
@@ -146,12 +147,12 @@ export default function Dashboard({
   demo: boolean;
   initialTheme?: "day" | "night";
 }) {
+  const router = useRouter();
   const [data, setData] = useState<PanelData | null>(null);
   const [now, setNow] = useState<Date | null>(null);
   const [scale, setScale] = useState(1);
   const [mobile, setMobile] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [celebrationEnabled, setCelebrationEnabled] = useState(true);
   const [theme, setTheme] = useState<"day" | "night">(initialTheme);
   const [view, setView] = useState<"agenda" | "vote">("agenda");
   const [autoRotate, setAutoRotate] = useState(true);
@@ -167,7 +168,6 @@ export default function Dashboard({
   const dataRef = useRef<PanelData | null>(null);
   const requestRef = useRef(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const closeCelebration = useCallback(() => setCelebrationEnabled(false), []);
 
   const refresh = useCallback(
     async (initial = false) => {
@@ -250,8 +250,6 @@ export default function Dashboard({
       if (saved.view === "agenda" || saved.view === "vote") setView(saved.view);
       if (typeof saved.autoRotate === "boolean")
         setAutoRotate(saved.autoRotate);
-      if (typeof saved.celebrationEnabled === "boolean")
-        setCelebrationEnabled(saved.celebrationEnabled);
       if ([30, 60, 120, 300].includes(saved.refreshSeconds))
         setRefreshSeconds(saved.refreshSeconds);
     } catch {
@@ -333,12 +331,12 @@ export default function Dashboard({
     try {
       localStorage.setItem(
         SETTINGS_KEY,
-        JSON.stringify({ view, autoRotate, refreshSeconds, celebrationEnabled }),
+        JSON.stringify({ view, autoRotate, refreshSeconds }),
       );
     } catch {
       /* Optional preferences. */
     }
-  }, [view, autoRotate, refreshSeconds, celebrationEnabled, data]);
+  }, [view, autoRotate, refreshSeconds, data]);
 
   useEffect(() => {
     if (settingsOpen && !dialogRef.current?.open)
@@ -369,11 +367,11 @@ export default function Dashboard({
       if (event.key.toLowerCase() === "r" && !dialogRef.current?.open)
         void refresh();
       if (event.key.toLowerCase() === "c" && !dialogRef.current?.open)
-        setCelebrationEnabled((value) => !value);
+        router.push("/400mil");
     };
     window.addEventListener("keydown", keyboard);
     return () => window.removeEventListener("keydown", keyboard);
-  }, [refresh]);
+  }, [refresh, router]);
 
   useEffect(() => {
     if (now && data && brasiliaDate(now) !== data.date) void refresh(true);
@@ -519,7 +517,6 @@ export default function Dashboard({
               <CircleHelp />
             </button>
           </footer>
-          {celebrationEnabled && <InstagramCelebration onClose={closeCelebration} />}
         </div>
       </div>
 
@@ -598,32 +595,17 @@ export default function Dashboard({
             </button>
           </div>
         </fieldset>
-        <label className="settings-row">
+        <div className="settings-row">
           <span>
             <strong>Comemoração de 400 mil no Instagram</strong>
             <small>
-              Número em tela cheia e confetes contínuos, por tempo indeterminado.
-              Use C para alternar ou Esc para voltar ao painel.
+              Tela comemorativa em uma página própria, com confetes contínuos.
             </small>
           </span>
-          <input
-            type="checkbox"
-            checked={celebrationEnabled}
-            onChange={(event) => setCelebrationEnabled(event.target.checked)}
-          />
-        </label>
-        <div className="celebration-actions">
-          <button
-            type="button"
-            className="primary-button"
-            onClick={() => {
-              setCelebrationEnabled(true);
-              setSettingsOpen(false);
-            }}
-          >
+          <Link href="/400mil" className="celebration-link">
             <PartyPopper />
-            Exibir comemoração
-          </button>
+            Abrir
+          </Link>
         </div>
         <label className="settings-row">
           <span>
@@ -721,7 +703,7 @@ export default function Dashboard({
           </button>
         </div>
         <p className="keyboard-hint">
-          C · comemoração &nbsp; Esc · voltar ao painel &nbsp; S · configurações &nbsp; N · modo noturno &nbsp; V · alternar votação &nbsp; R · consultar
+          C · 400 mil &nbsp; S · configurações &nbsp; N · modo noturno &nbsp; V · alternar votação &nbsp; R · consultar
         </p>
       </dialog>
       {notice && (

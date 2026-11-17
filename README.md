@@ -6,6 +6,7 @@ Painel em português para uma TV 16:9 conectada por HDMI ao computador. Exibe se
 
 - `/`: dados reais. A agenda e os resultados vêm da API oficial da Câmara. Redes sem conexão mostram “Aguardando conexão”, sem números inventados.
 - `/demo`: prévia visual. **Todos os números, eventos, publicações e votos desta página são ilustrativos.** Não há mistura entre demonstração e dados oficiais.
+- `/400mil`: comemoração dos 400 mil seguidores no Instagram, com confetes contínuos por tempo indeterminado.
 
 A composição segue a referência visual fornecida: cabeçalho claro e relógio grande; contadores verticais e feed à esquerda; destaque do plenário, resumo do dia e comissões ao centro; pautas e semana à direita. A faixa “Na pauta” mostra os destaques da agenda recebida. Os indicadores são calculados a partir dos eventos do dia, e “em andamento” usa a situação da fonte.
 
@@ -32,7 +33,7 @@ npm start
 - Engrenagem ou **S**: configurações e fontes.
 - **V** ou botão no rodapé: alternar agenda/votação.
 - **R**: consultar novamente.
-- **C**: exibir ou ocultar a comemoração dos 400 mil seguidores no Instagram.
+- **C**: abrir `/400mil`; na página comemorativa, voltar ao painel.
 - **Esc**: sair da comemoração e voltar ao painel.
 - Setas nas seções: trocar páginas da agenda, semana e feed.
 - Rotação automática: alterna as páginas de agenda e publicações a cada 20 segundos; pode ser desligada.
@@ -41,9 +42,9 @@ Preferências e último snapshot recebido ficam no navegador, quando o armazenam
 
 ## Comemoração de 400 mil no Instagram
 
-A tela comemorativa vem ativada por padrão, com **400 MIL** em destaque e uma chuva contínua de confetes nas cores institucionais. Ela permanece na tela por tempo indeterminado, inclusive durante as consultas de dados. A mensagem é uma peça comemorativa; os contadores das redes continuam usando as fontes originais.
+A comemoração fica exclusivamente em **`/400mil`**, com **400 MIL** em destaque e uma chuva contínua de confetes nas cores institucionais, por tempo indeterminado. A página principal `/` abre o painel normal, inclusive em navegadores que tinham a comemoração ativada nas preferências antigas. A página comemorativa não consulta as fontes de dados do painel.
 
-Use **C** para alternar a comemoração ou **Esc** para retornar ao painel. O botão “Voltar ao painel” aparece ao mover o mouse ou navegar pelo teclado. Em **S → Configurações**, a opção “Comemoração de 400 mil no Instagram” e o botão “Exibir comemoração” também controlam a exibição. A escolha fica salva neste navegador, inclusive após recarregar a página. Os confetes continuam animados quando o navegador da TV sinaliza redução de movimento; a entrada do texto respeita essa preferência. A queda usa medidas compatíveis com navegadores sem suporte a unidades de contêiner.
+Use **C** no painel ou o link em **S → Configurações → Comemoração de 400 mil no Instagram → Abrir** para acessar a página. Na comemoração, **Esc**, **C** ou “Voltar ao painel” retornam à página principal. Recarregar `/400mil` mantém a comemoração. Os confetes continuam animados quando o navegador da TV sinaliza redução de movimento; a entrada do texto respeita essa preferência. A queda usa medidas compatíveis com navegadores sem suporte a unidades de contêiner.
 
 ## Agenda e votações
 
@@ -72,6 +73,8 @@ A Vercel consulta os dados nesta prioridade:
 2. Último snapshot da branch `social-data` do GitHub.
 3. Função pública `/api/social_public` da própria Vercel (se o snapshot agendado tiver mais de seis horas).
 4. Fontes anteriores de contingência.
+
+Quando a coleta agendada fica atrasada, a fonte de contingência atualiza Instagram e X e preserva os últimos números de TikTok, YouTube e Facebook, com as datas originais de observação de cada rede.
 
 As fotos alternativas são **publicações do Telegram**, claramente identificadas; não representam os seis últimos posts do Instagram.
 

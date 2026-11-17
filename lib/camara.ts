@@ -426,6 +426,16 @@ async function social(
       } catch { /* Malformed snapshot; try the other source. */ }
     }
 
+    // Seed the last stored readings before the partial live collector runs.
+    // That collector covers Instagram and X; it must not erase TikTok,
+    // Facebook or YouTube when Actions is delayed. Keep original timestamps.
+    for (const item of valid) {
+      try {
+        applyPublicCollection(panel, item);
+        break;
+      } catch { /* Try the next stored snapshot. */ }
+    }
+
     // If Actions is delayed or both stores fail, query the Vercel function.
     const publicEndpoint = environment.PANEL_PUBLIC_SOCIAL_URL ||
       (process.env.NODE_ENV === "production"
