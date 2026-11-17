@@ -1,11 +1,13 @@
 {
-  "collectedAt": "2026-11-17T19:10:38.104599+00:00",
-  "errors": {},
+  "collectedAt": "2026-11-17T19:54:35.832818+00:00",
+  "errors": {
+    "instagram": "instagram:embed_http_302"
+  },
   "facebook": {
-    "change24h": 248,
-    "followers": 666341,
+    "change24h": 246,
+    "followers": 666340,
     "handle": "@camaradeputados",
-    "observedAt": "2026-11-17T19:10:38.104599+00:00"
+    "observedAt": "2026-11-17T19:54:35.832818+00:00"
   },
   "instagram": {
     "change24h": null,
@@ -83,7 +85,7 @@
     "source": "profile_observed"
   },
   "telegram": {
-    "observedAt": "2026-11-17T17:47:37.528377+00:00",
+    "observedAt": "2026-11-17T19:54:35.832818+00:00",
     "posts": [
       {
         "caption": "🚨 É HOJE! ÚLTIMA CHANCE! Sonha em trabalhar na Câmara dos Deputados? Então corre, porque as inscrições para o concurso público terminam HOJE (17/11), às 18h, no horário de Brasília! ⏰ São 66 vagas imediatas e 118 para cadastro de reserva, com remuneração inicial de R$ 32 mil! 🎓 Cargo: Analista Legislativo, com oportunidades nas áreas de Comunicação Social, Engenharia, Arquivologia, Biblioteconomia, Museologia e Registro e Redação. 💳 Taxa de inscrição: R$ 130, com pagamento até 19 de novembro. 📝 Provas: previstas para 17 de janeiro de 2027. ⚠️ Atenção: o prazo para pagar a taxa é até 19/11, mas a inscrição precisa ser feita até as 18h de hoje! 🔗 Acesse cd.leg.br/concurso , confira o edital e não deixe essa oportunidade passar!",
@@ -100,7 +102,7 @@
         "comments": null,
         "id": "tg-15979",
         "likes": null,
-        "mediaUrl": "https://cdn1.telesco.pe/file/ffHIzxBNgV0ChOte22vtKTzoc9MieDu0qmkc2cRrAJdqVWsUSZivK-qW-VhTAEwPdiMfbcjp21GM3wljxR66JfRAD9Pt5itQouUV7ZZV7CJ-K5Piuwu16ST3iSoIBeIALqpIJUuITeQLubS6qNZAOMgTbo6DLmia0dEDP5PtWont5kJjfVI3BeBmHUkwHGrD4okxnh9BrN5lLzzDSc2Rtvldn3VXZ7NN2J9sY-5NKBt69Sh7BWcD--5IVKBxXghf06QEMbDU0d1dqvkZELoS5rKPJMWaFoP7GCLW91TW5kz_3zICFOocRhyESA3ZuE2aeF5taXfyxhox9iX4TkGwig.jpg",
+        "mediaUrl": "https://cdn1.telesco.pe/file/NBmYYun_7QLRZljlKZ_2cueSes4wXtd3Hq_fij0wU-ZQfmBAWvkGVHKOpdQhXXoOGel6ZLoyEBXGMKnNKdupkMeNGBOMIJAhN6KxIrliFBrbEK2j1sf_z4t8oaJA1g42CxxA1FfetJwU_g4dvsvusQxY4FskhSFC72j9m2mkmmcb7v1t0v0rBaqY7_4ZcIFcE3Uyv-t0d2hxNysK8WGcOPNGfP1nNrgL2gUhcXdpeyE5aHmI8e_JJ3Ze7qNtIoxE1w5hwxnL7xtNLj6DV8u0WKGmXGWzeC-Pvn1jTHkh8hE1bnPVLCd2FKaFtOJwkmlGHLJHEgQyNVszRiR5IusSaw.jpg",
         "permalink": "https://t.me/CamaradosDeputados/15979",
         "publishedAt": "2026-11-16T19:06:44+00:00",
         "type": "image"
@@ -120,7 +122,7 @@
         "comments": null,
         "id": "tg-15976",
         "likes": null,
-        "mediaUrl": "https://cdn1.telesco.pe/file/muAUVZdACHDPSHyKOFCKnnJMxQaSO8W27NtDDz16D21L0NSE3g1hL_NwCJCtnoH7I0xvWBInJJd4-tP4v2fYRIYXJpwTb_gHxtapqKJzyzeBhP-WKX5uU3huX4cNkbpZFmUc3dX8WjYFf5erE6xJO03x-NREVUbv8FBrlU6uqBm9wFO1oO10Kx0a7R5mArg3zlpqr8bfYaubKAi95OGc_151eeqsh3U2aMHqyyd8Uv4ortrU4u8J1runitiwzImCgs-0WRvql8kwUMkdffVlOE9mcLoXt9ZjAW5WQ112Jj3pS5lHLBNPVuNRJUMFI-shGJuLfDAFdzUSqLyEXoy8mw.jpg",
+        "mediaUrl": "https://cdn1.telesco.pe/file/erH3O33b_SaKdo5mt-lmALdi79XIxP0VSLTvGPgVMpYTyLpAFPdCEFtXQoGk83A693IW3WywSRgEWig9NhEi-uV0K3KrHFpgmqndx8ZO--EhEqpd06Rov4BAq-fWKXfifEfQGu40rhlXhazQn1wYy0-2snvfdbgba6yahRBhLla_HV8X_sKtgl6KoVADWugzgISm2yfguMM-42YUpHu3wENyE3c_1N114_uO5GuLCJKGv4cR7ofF8i4eNHjLSb1DQ_xVK4hriDzaKEYUO5u6u0K8Z2cIIumSusWPGQ5Yjb4jhwguAaXPFLOVgVizUPaFXV9mU_8NBfq-bE_Oe00reQ.jpg",
         "permalink": "https://t.me/CamaradosDeputados/15976",
         "publishedAt": "2026-11-13T20:00:53+00:00",
         "type": "image"
@@ -130,7 +132,7 @@
         "comments": null,
         "id": "tg-15975",
         "likes": null,
-        "mediaUrl": "https://cdn1.telesco.pe/file/JhLPuf2X0fx0BkdjK-aKi3o4UOwCygal5Q5caxlBXbVr9WnlVzmGd_6GAVb6rSPOOF02sYu7hXajRhRWdlF8b52U4JdOMTdfEdYxZsjvgja1SdmRqaGVIIJJQifJ8uzNsp85cu2eYeLE_QX_F-DVXU_yxD-O4-5i5b-IvWN0-xAYwvX7CH9sXCYhtSxxx_mEiOEBxstJPzy4uivG1zfIeRCNXUvJijs_9POcD54SF464LLqNvnIv39WxKAohRz7-Xo7BHI4Nfi_dwDT3mDnS8CBhlKE2eT5lWAGK1l39IZnpz0uLSNQsbViL1KvIyCD3wYU3dXrX7eS8YM6C1DO9rw.jpg",
+        "mediaUrl": "https://cdn1.telesco.pe/file/ffYB5FQ4YQx8eBqN1zOTxZmxF0nOkSgoKuNFWw_q9gE4751000JHyKyHQsjSrb0qMx5y_FK5pN2H_GsKXb9sgDpgBXha2PTJWUSVX0Vw3MzmTrB6Ju2z8GizEMpJkHVM500p_fsU-f9vjzeuCW8FF9xldGPV_5Og-JLcGpmGYUDzxOWvM1oCOHj7p5SwqR15fCquL9wWwXNax1C6kqlF66rMfPZ7xn4UNQy0dm4KI3Ocn1TMji7cVIBr1VquSf6IcLXfnl0m5yhzdrPH82jp1MZw-86CaK7BsJifIt1iCxwQKordCy4foDpUcUiN8mZFTgQ_8MoV5Vb2r9Pbtpa5Fw.jpg",
         "permalink": "https://t.me/CamaradosDeputados/15975",
         "publishedAt": "2026-11-13T19:37:19+00:00",
         "type": "image"
@@ -140,7 +142,7 @@
         "comments": null,
         "id": "tg-15974",
         "likes": null,
-        "mediaUrl": "https://cdn1.telesco.pe/file/FulJcyAQPVDYVbZLn42Fmf3t9_4A-fKCkry_MCPSQxf6Qa4jBd2h6SvsHNucijBqGDttMkolzuy8xEpnw_whoFjt_NLaa_LdcSDYirBLsWwgQuEwEWHLUKOvl1HboW4uyEVFH5N5xDuooK60NBSKdXCz_1rmMx1i1GSJAVa01lB4VOwT0FJSm1nsWVm8ywFK-bj2-mOvM1JnG309kO4pNeDNMx-J8b-o0714G0OlXlhy20oMDnwXoAGOoBK2_EVSmIQeIY04R9D1nqZNbku2m_eiHfnXcRuSk4e1H4hs77B2otEAYnKAPF-UgXgsL2pTIzR8XhktoCkmOqnl06maFg.jpg",
+        "mediaUrl": "https://cdn1.telesco.pe/file/IDfs_bMqMK8R8iEo5zUxAWlVBqmw5ysCSVONpvPT0zI-dh1gFLthFNbUsLdQKCAUsTAZnwd8TqmmCjpkE2PCDSilaQGmlFNd8dhAxbbK6cHt8PQmBowtXuW9rStvMeZ7Fiuh7dDhfvn-rtOqAr7DvQci4IwIpH9mBeJsLrOEDLVm1qAZmkK1gS7FjoW_C5s2Lm18zwROPtZi61iLrRgtuVVf_2Qn1C1hODLXFWmkTg7wZOsO5pmOpPEwMMJPQ28w4b5YkZPh_e4MeqEaaU6dzW4JkiKtFBJ_yVXp9_yZCpdi494d_Mn8yF1-tBnBcFgt5nk2g6qsyKRuiIVMaqmOrQ.jpg",
         "permalink": "https://t.me/CamaradosDeputados/15974",
         "publishedAt": "2026-11-13T19:22:37+00:00",
         "type": "image"
@@ -151,18 +153,18 @@
     "change24h": 100,
     "followers": 149700,
     "handle": "@camaradosdeputados",
-    "observedAt": "2026-11-17T19:10:38.104599+00:00"
+    "observedAt": "2026-11-17T19:54:35.832818+00:00"
   },
   "x": {
-    "change24h": -66,
-    "followers": 1087009,
+    "change24h": -63,
+    "followers": 1087003,
     "handle": "@camaradeputados",
-    "observedAt": "2026-11-17T19:10:38.104599+00:00"
+    "observedAt": "2026-11-17T19:54:35.832818+00:00"
   },
   "youtube": {
     "change24h": null,
     "followers": 1500000,
     "handle": "@camaradosdeputadosoficial",
-    "observedAt": "2026-11-17T19:10:38.104599+00:00"
+    "observedAt": "2026-11-17T19:54:35.832818+00:00"
   }
 }
