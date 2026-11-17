@@ -1,49 +1,47 @@
 {
-  "collectedAt": "2026-11-17T17:49:13.829178+00:00",
-  "errors": {
-    "tiktok": "ValueError",
-    "x": "x:403,403,403"
-  },
+  "collectedAt": "2026-11-17T19:10:38.104599+00:00",
+  "errors": {},
   "facebook": {
-    "change24h": 251,
-    "followers": 666344,
+    "change24h": 248,
+    "followers": 666341,
     "handle": "@camaradeputados",
-    "observedAt": "2026-11-17T17:49:13.829178+00:00"
+    "observedAt": "2026-11-17T19:10:38.104599+00:00"
   },
   "instagram": {
     "change24h": null,
+    "embedCheckedAt": "2026-11-17T19:10:38.104599+00:00",
     "embedFollowers": 399737,
     "followers": 400027,
     "followersObservedAt": "2026-11-17T17:49:13.829178+00:00",
     "handle": "@camaradosdeputados",
-    "observedAt": "2026-11-17T17:49:13.829178+00:00",
+    "observedAt": "2026-11-17T19:10:38.104599+00:00",
     "posts": [
       {
         "caption": "Novas regras para o mercado digital podem ser votadas hoje na Câmara!\n\nO projeto de lei (PL 4.675/2025) que regulamenta a atuação das grandes empresas de tecnologia, conhecidas como big techs, pode ser votado nesta terça-feira (17).\n\nA proposta busca evitar práticas abusivas, estimular a concorrência e ampliar as oportunidades para pequenas empresas e as opções para os consumidores.\n\nEm entrevista ao Câmara Agora, o relator do projeto, deputado Aliel Machado (PV-PR), explicou como essas medidas podem impactar o dia a dia da população e esclareceu que a proposta não trata da moderação de conteúdo nas redes sociais. O parlamentar também falou sobre as negociações com as bancadas partidárias e os ajustes no texto antes da votação.\n\n📺 Quer entender melhor a proposta e o que pode mudar no mercado digital brasileiro? Confira a entrevista completa no Câmara Agora!\n▶️ YouTube: cd.leg.br/youtube\n📺 TV Câmara: camara.leg.br/tv\n\n#CâmaraAgora #TVCâmara #BigTechs #MercadoDigital",
-        "comments": 0,
+        "comments": 12,
         "id": "4032537571716042918",
-        "likes": 6,
-        "mediaUrl": "https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/910648389_17995152375065500_5092589544996107909_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=107&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMjUzNzU3MTcxNjA0MjkxODE3OTk1MTUyMzcyMDY1NTAw.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEwODAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=dgDxMnPu9G8Q7kNvwHOGxOi&_nc_oc=AdpJb5iEQQZLy9YJwqTu1qk1oAtnF2v5GWbaJEKPU59xILqSn-MzLar-9CXMW-0st6TNb_WpIYWUgy74Zd3zsyOP&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&_nc_gid=2Quvz9_Zf_IYGRbf1XBCog&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQSUvoiB1Z43tiz4FbuLg46m75f0qOQSj_wBjiX7qF9FyA&oe=6B025D44",
+        "likes": 13,
+        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/910648389_17995152375065500_5092589544996107909_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=107&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMjUzNzU3MTcxNjA0MjkxODE3OTk1MTUyMzcyMDY1NTAw.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEwODAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=dgDxMnPu9G8Q7kNvwHKfbUi&_nc_oc=AdpMo0fRS54jeBiq7-0m_0qHnrnhgqtX_BPobubHinzvQAusXcDbeYm4qHYAwPOmJZ8&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=UJEa5Dhwp-WMujj6titSGw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQQjda5LbkdmDOFzd5MtB8lHM_YUCiugAcfJygjXxvUbBA&oe=6B025D44",
         "permalink": "https://www.instagram.com/p/Df2c45hjRCm/",
         "publishedAt": "2026-11-17T17:19:58+00:00",
         "type": "video"
       },
       {
         "caption": "Parece que, desta vez, os Simpsons não acertaram! Nem eles, nem os boatos de testes militares ou atualizações de comunicação que poderiam parar o mundo neste 17 de novembro.\n\nPor aqui, nada de apagão. Então, tem muito trabalho!! Confira a agenda completa da Câmara para hoje no site oficial e acompanhe as atividades ao vivo.\n\nVai lá no: camara.leg.br.\n\n#apagao #17denovembro #camaradosdeputados #simpsons",
-        "comments": 21,
+        "comments": 27,
         "id": "4032377322812486334",
-        "likes": 262,
-        "mediaUrl": "https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/902962230_18359492899174424_946843646385880477_n.webp?_nc_cat=110&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTk4OTcwNzEwNTkwNzQ4OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=6CQxDdt5-WQQ7kNvwGPI1Qs&_nc_oc=Adq7TnY7N2Ta42ukaRWn8bAdjHbAlgvVRAq0fnUhTZpDevW6p1mdFGRuTFT21ICkwu6h8iKvCBt567nUMBPMG2lD&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&_nc_gid=2Quvz9_Zf_IYGRbf1XBCog&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQRM5FyhIf1_uK4Z7hLZk6uVMx2zmiztvebSQuR-MX9kzg&oe=6B02734D",
+        "likes": 277,
+        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/902962230_18359492899174424_946843646385880477_n.webp?_nc_cat=110&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTk4OTcwNzEwNTkwNzQ4OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=6CQxDdt5-WQQ7kNvwHBCKUa&_nc_oc=AdoMyAEGewNQZdBpg2RS2SDeWaTnV4Yw_bAN_j5TifxPcAtw3tyJMdO7BZSmOllkSCI&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=UJEa5Dhwp-WMujj6titSGw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQSBkTEjnKRZZ_zqwYYR8Fab9vz0iWQY67MkjvX_nFGCHg&oe=6B02734D",
         "permalink": "https://www.instagram.com/p/Df14c-GlDK-/",
         "publishedAt": "2026-11-17T12:00:09+00:00",
         "type": "carousel"
       },
       {
         "caption": "🚨 É HOJE! ÚLTIMA CHANCE!\n\nSonha em trabalhar na Câmara dos Deputados? Então corre, porque as inscrições para o concurso público terminam HOJE (17/11), às 18h, no horário de Brasília! ⏰\n\nSão 66 vagas imediatas e 118 para cadastro de reserva, com remuneração inicial de R$ 32 mil!\n\n🎓 Cargo: Analista Legislativo, com oportunidades nas áreas de Comunicação Social, Engenharia, Arquivologia, Biblioteconomia, Museologia e Registro e Redação.\n\n💳 Taxa de inscrição: R$ 130, com pagamento até 19 de novembro.\n\n📝 Provas: previstas para 17 de janeiro de 2027.\n\n⚠️ Atenção: o prazo para pagar a taxa é até 19/11, mas a inscrição precisa ser feita até as 18h de hoje!\n\n🔗 Acesse cd.leg.br/concurso, confira o edital e não deixe essa oportunidade passar!\n\n#ConcursoCâmara #ConcursoPúblico #CâmaraDosDeputados",
-        "comments": 14,
+        "comments": 18,
         "id": "4031964905551213525",
-        "likes": 563,
-        "mediaUrl": "https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/907237696_18359489626174424_8511028849691084554_n.webp?_nc_cat=100&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTk2NDkwNTU1MTIxMzUyNQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=rI2kicO6UB8Q7kNvwEkEzPj&_nc_oc=AdqrxYcZfy9vbemBZlER00dXtBmFsK8JDwaxlwfjU_tSGi1Z3kCyxIrQ_JYUy9E-vdBhCnRue_0bqpn36qJey32j&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&_nc_gid=2Quvz9_Zf_IYGRbf1XBCog&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQRpGQ1LSQ2tYJXGiWMveml3wqvj1dIXW6yyEvBP8WKzxA&oe=6B025B9D",
+        "likes": 604,
+        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/907237696_18359489626174424_8511028849691084554_n.webp?_nc_cat=100&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTk2NDkwNTU1MTIxMzUyNQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=VCDPV2nOsaUQ7kNvwEiW2nn&_nc_oc=AdqB0eKHrjt_pXqFpQcKcKHo4maE0GOo0nmjEZYcDx-R60Ishmrk9-LvoBNQnFAif3M&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=UJEa5Dhwp-WMujj6titSGw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQSl6zmfKeKOyw_mFyhr3p6UF-OsFseQLLDiLCmWN7SZaw&oe=6B0293DD",
         "permalink": "https://www.instagram.com/p/Df0argmOLPV/",
         "publishedAt": "2026-11-17T11:30:02+00:00",
         "type": "image"
@@ -52,8 +50,8 @@
         "caption": "🌎 TV Câmara recebe reconhecimento internacional por projetos de comunicação pública!\n\nQuatro iniciativas da TV Câmara foram incluídas no Atlas Global de Inovação em Comunicação Pública das Nações Unidas. Ao todo, o levantamento selecionou 102 projetos de 50 países.\n\nEntre as iniciativas reconhecidas estão os programas Bora Entender, Participação Popular e Elas Pautam, além do sistema automático de transmissão das sessões do Plenário e das reuniões das comissões no YouTube.\n\nEm entrevista à TV Câmara, o presidente da Câmara dos Deputados, Hugo Motta (Republicanos-PB), destacou a importância da comunicação pública para a transparência e o fortalecimento da democracia.\n\nSegundo Motta, quanto mais a população entende o funcionamento do Congresso Nacional, maior é a capacidade de acompanhar e fiscalizar o trabalho dos parlamentares.\n\nA TV Câmara também concorre ao Prêmio TAL-ALCAP, que reconhece produções de emissoras públicas, parlamentares e judiciais da América Latina. Os vencedores serão anunciados no dia 20 de novembro, no México.\n\n👉 E você? Costuma acompanhar as decisões e os debates da Câmara dos Deputados?\n\n#TVCâmara #CâmaraDosDeputados #ComunicaçãoPública #Democracia",
         "comments": 10,
         "id": "4031995422608094172",
-        "likes": 85,
-        "mediaUrl": "https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/904461866_17995055262065500_708466457804069642_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTk5NTQyMjYwODA5NDE3MjE3OTk1MDU1MjU5MDY1NTAw.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEwODAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=mnp0ajlwt0QQ7kNvwFhX3PS&_nc_oc=AdrNSbM_6jYJLsC-8_wbrGdFB7A1RXx2AV7Ne77V4_mq_XMNPebOiXBY9_FPY_1hcm1-hXoLI7To-xPJCvyPcxEY&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&_nc_gid=2Quvz9_Zf_IYGRbf1XBCog&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQQNjEDNv7R1xLigi6vjS3g00bpPk-2aJjFjYUzBNQ6rww&oe=6B027A20",
+        "likes": 88,
+        "mediaUrl": "https://scontent-sea5-2.cdninstagram.com/v/t51.82787-15/904461866_17995055262065500_708466457804069642_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTk5NTQyMjYwODA5NDE3MjE3OTk1MDU1MjU5MDY1NTAw.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEwODAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=mnp0ajlwt0QQ7kNvwEx9MYl&_nc_oc=AdqiuRlzk_i16F1aCDBfwPTbgP8iuNG3bcqIDWtv8DyqDe43T40-eMcSSZBKOwKA4jE&_nc_zt=23&_nc_ht=scontent-sea5-2.cdninstagram.com&_nc_gid=UJEa5Dhwp-WMujj6titSGw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQQK0wWRhfL7tEDxiS3WEoeSgy22FjeHtGjIGH-mET_kjQ&oe=6B027A20",
         "permalink": "https://www.instagram.com/p/Df0hnl0jnPc/",
         "publishedAt": "2026-11-16T23:23:08+00:00",
         "type": "video"
@@ -63,7 +61,7 @@
         "comments": 2,
         "id": "4031924019096717352",
         "likes": 0,
-        "mediaUrl": "https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/869737238_18397438921206702_2139902185586740999_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ig_cache_key=NDAxODA3MzY1MDA0MjI2MzI2Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=kv3s5H9NCSYQ7kNvwEjiSiO&_nc_oc=AdrzQW1V7k4iM-dSgugmnoOK3e9H-Tx5QLF3qpHUvkppI2dQ9qCgSK_U3oMXVT1GwL-91yKlj81cFHAOjeXu32UG&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&_nc_gid=2Quvz9_Zf_IYGRbf1XBCog&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQSYvqA0kVbeDVbetZgfB5ETgocHaEtymPJghifVMUn9-w&oe=6B024C3A",
+        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/869737238_18397438921206702_2139902185586740999_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ig_cache_key=NDAxODA3MzY1MDA0MjI2MzI2Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=kv3s5H9NCSYQ7kNvwE94afn&_nc_oc=AdpiCRuAaVduVjLXCf5BdvX1iUBrTpMAB4czF7hyWyHSq4TH6qLuIKk1WIgJ5loPN3k&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=UJEa5Dhwp-WMujj6titSGw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQTPv4BdoYTGXW-WSkbv4cnyNQJymwd3ksrKriCCrc5a9w&oe=6B02847A",
         "permalink": "https://www.instagram.com/p/Df0RYiHoAgo/",
         "publishedAt": "2026-11-16T21:00:00+00:00",
         "type": "carousel"
@@ -72,8 +70,8 @@
         "caption": "O apagão é boato. O prazo, não. ⏳💡\n\nAs inscrições para o Concurso da Câmara encerram amanhã, 17 de novembro, às 18h (horário de Brasília).\n\nA taxa é de R$ 130, e a remuneração prevista é de R$ 32.070,88 para jornada de 40 horas semanais.\n\nNão deixe sua inscrição para a última hora: inscreva-se pelo site do Cebraspe.\n\nMais informações em cd.leg.br/concurso!\n\n#ConcursoDaCâmara #ConcursoPúblico #CâmaraDosDeputados #Cebraspe #Inscrições",
         "comments": 33,
         "id": "4031847316414856039",
-        "likes": 1335,
-        "mediaUrl": "https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/910904843_18359470483174424_6678997532596877710_n.webp?_nc_cat=104&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTg0NzMxNjQxNDg1NjAzOQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=UixZ8A-oOMEQ7kNvwGAXXRY&_nc_oc=AdrWtVCg-87ltsf74W7K6W9DPEyN4ltew1CFMvgbJfCdLj6LL02NYrS_t_u4FCQxpgsKjZ2rtIbBasJPfPd_bv8V&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&_nc_gid=2Quvz9_Zf_IYGRbf1XBCog&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQROO_AXGqme5kjexMMWOxFDF0OKOd_8_Y3YnDTf9FhzGQ&oe=6B02807B",
+        "likes": 1344,
+        "mediaUrl": "https://scontent-sea5-2.cdninstagram.com/v/t51.82787-15/910904843_18359470483174424_6678997532596877710_n.webp?_nc_cat=104&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTg0NzMxNjQxNDg1NjAzOQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=UixZ8A-oOMEQ7kNvwGLcC4g&_nc_oc=AdoGmMPQAg1VMdlpaSQNj_len5JdGMEyG52BWnQol9XXMs0WSE0xaompsshiybQRkzU&_nc_zt=23&_nc_ht=scontent-sea5-2.cdninstagram.com&_nc_gid=UJEa5Dhwp-WMujj6titSGw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQT7F9lXngza1BkqYRD2_e5foZBWvv4qbMoGum2ARfjfRQ&oe=6B02807B",
         "permalink": "https://www.instagram.com/p/Dfz_8XLhPtn/",
         "publishedAt": "2026-11-16T18:27:58+00:00",
         "type": "image"
@@ -153,18 +151,18 @@
     "change24h": 100,
     "followers": 149700,
     "handle": "@camaradosdeputados",
-    "observedAt": "2026-11-17T17:47:37.528377+00:00"
+    "observedAt": "2026-11-17T19:10:38.104599+00:00"
   },
   "x": {
-    "change24h": -69,
-    "followers": 1087006,
+    "change24h": -66,
+    "followers": 1087009,
     "handle": "@camaradeputados",
-    "observedAt": "2026-11-17T17:47:37.528377+00:00"
+    "observedAt": "2026-11-17T19:10:38.104599+00:00"
   },
   "youtube": {
     "change24h": null,
     "followers": 1500000,
     "handle": "@camaradosdeputadosoficial",
-    "observedAt": "2026-11-17T17:49:13.829178+00:00"
+    "observedAt": "2026-11-17T19:10:38.104599+00:00"
   }
 }
