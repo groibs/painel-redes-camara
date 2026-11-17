@@ -1,6 +1,8 @@
 {
-  "collectedAt": "2026-11-17T02:08:18.150585+00:00",
-  "errors": {},
+  "collectedAt": "2026-11-17T10:50:13.310146+00:00",
+  "errors": {
+    "facebook": "ValueError"
+  },
   "facebook": {
     "change24h": 48,
     "followers": 666135,
@@ -10,56 +12,56 @@
   "instagram": {
     "change24h": null,
     "followers": 398935,
-    "followersObservedAt": "2026-11-17T02:08:18.150585+00:00",
+    "followersObservedAt": "2026-11-17T10:50:13.310146+00:00",
     "handle": "@camaradosdeputados",
-    "observedAt": "2026-11-17T02:08:18.150585+00:00",
+    "observedAt": "2026-11-17T10:50:13.310146+00:00",
     "posts": [
       {
         "caption": "O apagão é boato. O prazo, não. ⏳💡\n\nAs inscrições para o Concurso da Câmara encerram amanhã, 17 de novembro, às 18h (horário de Brasília).\n\nA taxa é de R$ 130, e a remuneração prevista é de R$ 32.070,88 para jornada de 40 horas semanais.\n\nNão deixe sua inscrição para a última hora: inscreva-se pelo site do Cebraspe.\n\nMais informações em cd.leg.br/concurso!\n\n#ConcursoDaCâmara #ConcursoPúblico #CâmaraDosDeputados #Cebraspe #Inscrições",
-        "comments": 26,
+        "comments": 31,
         "id": "4031847316414856039",
-        "likes": 1124,
-        "mediaUrl": "https://scontent-iad3-2.cdninstagram.com/v/t51.82787-15/910904843_18359470483174424_6678997532596877710_n.webp?_nc_cat=104&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTg0NzMxNjQxNDg1NjAzOQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=UixZ8A-oOMEQ7kNvwE_DMgU&_nc_oc=Adp-_uMps1M9JWmMN3gjjT9pgT0dylWYQmVZwBwE1ClwHMBTXc0QA-dVnSWcJ7bofoc&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&_nc_gid=HH0dSgXT9X3HqP88LHfAsQ&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQTOuxeS4p1gSb2qmd_A61VgT4DGcuUgzfvlLWDkDNr5vA&oe=6B019F7B",
+        "likes": 1225,
+        "mediaUrl": "https://scontent-sea5-2.cdninstagram.com/v/t51.82787-15/910904843_18359470483174424_6678997532596877710_n.webp?_nc_cat=104&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTg0NzMxNjQxNDg1NjAzOQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=UixZ8A-oOMEQ7kNvwFgvFg8&_nc_oc=AdooTKV2gJm6PcoGEhv2NwHdyV243BkFDxBr_i2xDEFgPcSntYUgQvGmX3PVcHcVMm8&_nc_zt=23&_nc_ht=scontent-sea5-2.cdninstagram.com&_nc_gid=lpySH84H4VobTK77BzJbLg&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQRGJf9WUBwgYK-iZtHzsxnKVlPqA6LvG0EhtSzUCE4nMw&oe=6B020FFB",
         "permalink": "https://www.instagram.com/p/Dfz_8XLhPtn/",
         "publishedAt": "2026-11-16T18:27:58+00:00",
         "type": "image"
       },
       {
         "caption": "[INSCRIÇÕES ABERTAS] Tem dúvidas sobre como participar do edital cultural da Câmara dos Deputados?\n\nO supervisor do Centro Cultural, Clauder Diniz, responde às principais questões relacionadas à seleção de projetos de exposições artísticas e históricas para compor a agenda 2027.\nArtistas e curadores têm até 30 de novembro de 2026 para enviar seus projetos.\n\nNão deixe o prazo passar!\n\nRegulamento e formulário online estão no cd.leg.br/editalcultural",
-        "comments": 15,
+        "comments": 22,
         "id": "4031821492554629244",
-        "likes": 287,
-        "mediaUrl": "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-15/909651726_17913649371587030_8521813528934355488_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=103&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTgyMTQ5MjU1NDYyOTI0NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEwODAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=WThQ4iKnMPIQ7kNvwG0FjXb&_nc_oc=AdroahoZVRRsZWeUANpwK7xPKJEoZvG4aBmjpIPoBPc7dpXQxaZ4SvknitgzAguDeiM&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_gid=HH0dSgXT9X3HqP88LHfAsQ&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQTLUGM3Eyf9dzEeWlpq4xTCI3WlfnS_cfCgwKrviSlA9Q&oe=6B01701A",
+        "likes": 373,
+        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/909651726_17913649371587030_8521813528934355488_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=103&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTgyMTQ5MjU1NDYyOTI0NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEwODAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=WThQ4iKnMPIQ7kNvwHr9XHa&_nc_oc=Adp7wlygyRMSj4eivZgkarMWdF3dG3zAI9bCwuZtqGEkwunCmHvidDnNsAHQllHm2-Q&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=lpySH84H4VobTK77BzJbLg&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQTPME2EcNoXZ9bZtPW8gjOXv3AGh5PdtnJfDHRBaoXqag&oe=6B0218DA",
         "permalink": "https://www.instagram.com/p/Dfz6Ek1gQB8/",
         "publishedAt": "2026-11-16T17:37:53+00:00",
         "type": "video"
       },
       {
         "caption": "🎉 A comunicação pública da @camaradosdeputados é destaque internacional em transparência e entendimento!\n\nA TV Câmara foi reconhecida no Atlas Global de Inovação em Comunicação Pública, iniciativa do PNUD (Programa das Nações Unidas para o Desenvolvimento), agência da ONU que celebra práticas inovadoras capazes de fortalecer a transparência, a participação, a inclusão e a confiança nas instituições.\n\nEstamos presentes com iniciativas que aproximam o Legislativo das pessoas e ampliam o acesso à informação. Arrasta para o lado e confira em detalhes as iniciativas valorizadas.\n\nEsse reconhecimento celebra o compromisso de nossa comunicação com uma instituição mais aberta, participativa e conectada com a sociedade.\n\n#TVCâmara #ONU #ComunicaçãoPública",
-        "comments": 4,
+        "comments": 5,
         "id": "4031818343288466470",
-        "likes": 105,
-        "mediaUrl": "https://scontent-iad3-2.cdninstagram.com/v/t39.30808-6/912982630_1743848994412873_7806768752120228572_n.jpg?stp=c0.45.1080.1350a_dst-jpg_e35_sh2.08_tt6&_nc_cat=100&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTgxODMxMDM0NjM0NDAwNA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=w23b4lbt03QQ7kNvwH0HJrs&_nc_oc=Adrv_09a6CpxEu3WNlc39WOZJ94r3zVx2MMHyrPI6ukEqvTn5hUMb2anBGuQe2WS4_Y&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&_nc_gid=HH0dSgXT9X3HqP88LHfAsQ&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQREv-akjDz4gAAHWXXjcD1QlykzJbf719LTAqzLts964Q&oe=6B01895F",
+        "likes": 144,
+        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t39.30808-6/912982630_1743848994412873_7806768752120228572_n.jpg?stp=c0.45.1080.1350a_dst-jpg_e35_sh2.08_tt6&_nc_cat=100&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTgxODMxMDM0NjM0NDAwNA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=w23b4lbt03QQ7kNvwGXiuQE&_nc_oc=Adr5x0e7A77GoJMlthK03Sfuecb2YBBWnwmm0IgacLUNqIkPvsbdouhUdxaY68YwMaY&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=lpySH84H4VobTK77BzJbLg&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQQ6WB6dseAF4gaG5RjTBW296VWl9a4Z-B6Kji-6dPOTUA&oe=6B01F9DF",
         "permalink": "https://www.instagram.com/p/Dfz5Wv2nOwm/",
         "publishedAt": "2026-11-16T17:30:22+00:00",
         "type": "carousel"
       },
       {
         "caption": "A jornada de trabalho do professor vai mudar. A última etapa do projeto aqui na Câmara foi concluída e o texto agora vai para análise do Senado [PL 4332/2024].\n\nA proposta transforma a hora-aula em unidade de referência para o cálculo de carga horária. Na prática, será considerada uma unidade de referência mesmo que a hora-aula dure menos de 60 minutos.\n\nAcompanhe as nossas redes!\n\nAutor: @tarcisiomottapsol (Psol-RJ)\nRelatora: @lidicedamata (PSB-BA)\n\n#camaradosdeputados #professor #jornadadetrabalho #horaaula",
-        "comments": 862,
+        "comments": 913,
         "id": "4031621994084376384",
-        "likes": 4808,
-        "mediaUrl": "https://scontent-iad6-1.cdninstagram.com/v/t39.30808-6/904543207_1592225656274221_7611935526664093617_n.jpg?stp=c0.45.1080.1350a_dst-jpg_e35_sh2.08_tt6&_nc_cat=101&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTYyMTk5NDA4NDM3NjM4NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=nea52SKyA_sQ7kNvwFPyeRp&_nc_oc=AdoEqXcrjMdLpcrRI9TxuETfp_d6BC9m4w1VvdpfFqZnFKNr2THbnLL4OCPnd6Pohvk&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&_nc_gid=HH0dSgXT9X3HqP88LHfAsQ&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQS8KeTPp37q2-nDKkdFmIKeGXLmT19u0jVVgvA1R5IdJQ&oe=6B01882B",
+        "likes": 5179,
+        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t39.30808-6/904543207_1592225656274221_7611935526664093617_n.jpg?stp=c0.45.1080.1350a_dst-jpg_e35_sh2.08_tt6&_nc_cat=101&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTYyMTk5NDA4NDM3NjM4NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=nea52SKyA_sQ7kNvwGsAuh4&_nc_oc=AdoKCTmPi1oV8DrIdiNg_36yDASatcbMyXipLBn53Cy4sxxjBOOireARG73B0DgLuzE&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=lpySH84H4VobTK77BzJbLg&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQTxEyCA917HfNEjPYvOhFlCAP9cDBg4GsgXxjUN_fGU8Q&oe=6B01F8AB",
         "permalink": "https://www.instagram.com/p/DfzMtfaDR9A/",
         "publishedAt": "2026-11-16T11:00:15+00:00",
         "type": "image"
       },
       {
         "caption": "🛡️ Proteção de crianças na internet.\n\nQual deve ser o papel dos pais, da escola, do poder público e das plataformas digitais na construção de um ambiente digital mais seguro para crianças e adolescentes?\n\nEm debate na Câmara, Fabrício Lopes, da Agência Nacional de Proteção de Dados, ressaltou a importância de cada setor para a proteção das crianças.\n\n📲 E pra você, quem deve assumir essa responsabilidade? Conta pra gente!\n\n#anpd #plataformasdigitais #proteçãodainfância #camaradosdeputados",
-        "comments": 17,
+        "comments": 16,
         "id": "4031018246504485808",
-        "likes": 338,
-        "mediaUrl": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/902585773_18359098564174424_6823070832261104459_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=105&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTAxODI0NjUwNDQ4NTgwODE4MzU5MDk4NTY3MTc0NDI0.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjYwMC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=86A-Cca13KgQ7kNvwH7Ve7e&_nc_oc=Adp1J2MiJN4Z1PRMNzruRNQDcKGBLbEHbzvTgwTjOGZ8MrfkxsgmCmn6hOwVxXjZobQ&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&_nc_gid=HH0dSgXT9X3HqP88LHfAsQ&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQQbblnI2dtZqtLuAY8YiwFtfxqiqz-Bfyq5g7nqjG8xUQ&oe=6B016DA4",
+        "likes": 342,
+        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/902585773_18359098564174424_6823070832261104459_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=105&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTAxODI0NjUwNDQ4NTgwODE4MzU5MDk4NTY3MTc0NDI0.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjYwMC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=86A-Cca13KgQ7kNvwHaFCS6&_nc_oc=AdrXHUvOEP4USykZ7fBl4zi0_JCPIpG-RS3lY2vmB3z2lylsOrBHOj-CihQDH-cJLYE&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=lpySH84H4VobTK77BzJbLg&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQSqT4LLT2rhkb3QqVyfG83VVE1_wGA68sSFtyWn9ZTEog&oe=6B021664",
         "permalink": "https://www.instagram.com/p/DfxDbzqBJOw/",
         "publishedAt": "2026-11-15T15:00:41+00:00",
         "type": "video"
@@ -68,14 +70,14 @@
         "caption": "📚💛 E se uma hora fosse suficiente para desintoxicar, desacelerar e descansar das telas?\n\nFoi com essa proposta que a Câmara dos Deputados realizou a primeira edição da Hora da Leitura!\n\nO Salão Nobre abriu espaço para os livros, a imaginação e uma pausa na correria do dia a dia. Tudo isso ao som de uma trilha musical especialmente preparada pela Rádio Câmara. 🎶\n\nO encontro também contou com o lançamento do livro Volúpia e outras peças, da dramaturga Guilhermina Rocha.\n\nE você? Qual livro merece uma horinha do seu dia? 👀\n\n#HoraDaLeitura #CâmaraDosDeputados #Leitura #Livros #Cultura",
         "comments": 11,
         "id": "4030897569693343205",
-        "likes": 92,
-        "mediaUrl": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/904396616_18359293180174424_3820289402663093312_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=101&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMDg5NzU2OTY5MzM0MzIwNTE4MzU5MjkzMTc3MTc0NDI0.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEwODAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=3DV6HLqFOAcQ7kNvwFuFMZn&_nc_oc=AdowAalT8UDekZ0Ef8UXxR3Y20FY4phTCbKStDBZU4tmNzsoOpsjLBL0iTAEJE4XmZU&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&_nc_gid=HH0dSgXT9X3HqP88LHfAsQ&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQT7ylOv1TfdBOh0BxwOcASgYtf7_tUe-1blEeYG9b8l4w&oe=6B018ADF",
+        "likes": 93,
+        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/904396616_18359293180174424_3820289402663093312_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=101&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMDg5NzU2OTY5MzM0MzIwNTE4MzU5MjkzMTc3MTc0NDI0.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEwODAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=3DV6HLqFOAcQ7kNvwGxi59-&_nc_oc=AdoLT0eaxP0_iPku1nl61Q0zwem6FfXdLhtk9dkET8qu1Ast3Rfngh3bZBiVqnJ_w7w&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=lpySH84H4VobTK77BzJbLg&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQTZUkCH8-32AvD1jU12gxv6dRpfrqgjxP43i5p79Flvbw&oe=6B01FB5F",
         "permalink": "https://www.instagram.com/p/Dfwn_unjp3l/",
         "publishedAt": "2026-11-15T11:01:36+00:00",
         "type": "video"
       }
     ],
-    "publicCheckedAt": "2026-11-17T02:08:18.150585+00:00",
+    "publicCheckedAt": "2026-11-17T10:50:13.310146+00:00",
     "publicCountChangedAt": "2026-11-16T18:39:26.719919+00:00",
     "publicFollowers": 398935,
     "source": "embed_observed"
@@ -146,21 +148,21 @@
     ]
   },
   "tiktok": {
-    "change24h": 0,
+    "change24h": null,
     "followers": 149600,
     "handle": "@camaradosdeputados",
-    "observedAt": "2026-11-17T02:08:18.150585+00:00"
+    "observedAt": "2026-11-17T10:50:13.310146+00:00"
   },
   "x": {
-    "change24h": -33,
-    "followers": 1087047,
+    "change24h": null,
+    "followers": 1087016,
     "handle": "@camaradeputados",
-    "observedAt": "2026-11-17T02:08:18.150585+00:00"
+    "observedAt": "2026-11-17T10:50:13.310146+00:00"
   },
   "youtube": {
     "change24h": null,
     "followers": 1500000,
     "handle": "@camaradosdeputadosoficial",
-    "observedAt": "2026-11-17T02:08:18.150585+00:00"
+    "observedAt": "2026-11-17T10:50:13.310146+00:00"
   }
 }
