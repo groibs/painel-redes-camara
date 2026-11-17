@@ -43,7 +43,7 @@ Preferências e último snapshot recebido ficam no navegador, quando o armazenam
 
 A tela comemorativa vem ativada por padrão, com **400 MIL** em destaque e uma chuva contínua de confetes nas cores institucionais. Ela permanece na tela por tempo indeterminado, inclusive durante as consultas de dados. A mensagem é uma peça comemorativa; os contadores das redes continuam usando as fontes originais.
 
-Use **C** para alternar a comemoração ou **Esc** para retornar ao painel. O botão “Voltar ao painel” aparece ao mover o mouse ou navegar pelo teclado. Em **S → Configurações**, a opção “Comemoração de 400 mil no Instagram” e o botão “Exibir comemoração” também controlam a exibição. A escolha fica salva neste navegador, inclusive após recarregar a página. Em dispositivos com redução de movimento, os confetes ficam estáticos.
+Use **C** para alternar a comemoração ou **Esc** para retornar ao painel. O botão “Voltar ao painel” aparece ao mover o mouse ou navegar pelo teclado. Em **S → Configurações**, a opção “Comemoração de 400 mil no Instagram” e o botão “Exibir comemoração” também controlam a exibição. A escolha fica salva neste navegador, inclusive após recarregar a página. Os confetes continuam animados quando o navegador da TV sinaliza redução de movimento; a entrada do texto respeita essa preferência. A queda usa medidas compatíveis com navegadores sem suporte a unidades de contêiner.
 
 ## Agenda e votações
 
