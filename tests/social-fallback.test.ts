@@ -82,3 +82,27 @@ test("fresh scheduled collection supplies every network without a partial fallba
   assert.ok(result.accounts.every((account) => account.followers !== null));
   assert.ok(result.accounts.every((account) => account.updatedAt === collectedAt));
 });
+
+test("a newly published counter is not held by the mutable branch CDN cache", async (t) => {
+  let now = Date.now();
+  let followers = 399737;
+  const cdn = new Map<string, unknown>();
+  t.mock.method(Date, "now", () => now);
+  t.mock.method(globalThis, "fetch", async (input: string | URL | Request) => {
+    const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
+    if (url.includes("raw.githubusercontent.com")) {
+      if (!cdn.has(url)) cdn.set(url, {
+        collectedAt: new Date(now).toISOString(),
+        instagram: { followers, source: "profile_observed" },
+      });
+      return Response.json(cdn.get(url));
+    }
+    return Response.json({ dados: [], links: [] });
+  });
+  const before = await getPanel({ PANEL_PUBLIC_SOCIAL_URL: liveEndpoint });
+  assert.equal(before.accounts.find((account) => account.id === "instagram")?.followers, 399737);
+  followers = 400027;
+  now += 91000;
+  const after = await getPanel({ PANEL_PUBLIC_SOCIAL_URL: liveEndpoint });
+  assert.equal(after.accounts.find((account) => account.id === "instagram")?.followers, 400027);
+});

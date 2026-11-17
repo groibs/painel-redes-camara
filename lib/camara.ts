@@ -416,7 +416,10 @@ async function social(
       } catch { /* Dedicated Supabase not provisioned yet: use GitHub. */ }
     }
     try {
-      candidates.push(await limitedJson(GITHUB_SOCIAL_DATA, signal));
+      // Raw GitHub can cache a mutable branch for five minutes. A bounded
+      // cache key keeps newly collected counts visible on the next refresh.
+      const cacheBucket = Math.floor(Date.now() / 90000);
+      candidates.push(await limitedJson(`${GITHUB_SOCIAL_DATA}?v=${cacheBucket}`, signal));
     } catch { /* No scheduled snapshot published yet: use live collector. */ }
 
     // Prefer the freshest *scheduled* snapshot if collection is recent.
