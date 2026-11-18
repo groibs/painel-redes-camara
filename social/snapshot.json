@@ -1,6 +1,8 @@
 {
-  "collectedAt": "2026-11-18T10:46:52.525318+00:00",
-  "errors": {},
+  "collectedAt": "2026-11-18T18:51:20.215989+00:00",
+  "errors": {
+    "facebook": "ValueError"
+  },
   "facebook": {
     "change24h": null,
     "followers": 666472,
@@ -9,72 +11,72 @@
   },
   "instagram": {
     "change24h": null,
-    "embedCheckedAt": "2026-11-18T10:46:52.525318+00:00",
-    "embedFollowers": 399737,
+    "embedCheckedAt": "2026-11-18T18:51:20.215989+00:00",
+    "embedFollowers": 400247,
     "followers": 400027,
     "followersObservedAt": "2026-11-17T17:49:13.829178+00:00",
     "handle": "@camaradosdeputados",
-    "observedAt": "2026-11-18T10:46:52.525318+00:00",
+    "observedAt": "2026-11-18T18:51:20.215989+00:00",
     "posts": [
       {
-        "caption": "Mais recursos para reduzir os impactos de guerras, tarifas internacionais e desastres climáticos sobre a população e setores da economia foram aprovados na Câmara. As iniciativas estão em cinco medidas provisórias, que já estão valendo, mas precisam da aprovação do Congresso para virarem leis permanentes. \n\nSão elas:\n\n✅ [MP 1389/26] – Destina R$ 6,6 bilhões para a produção e a importação de gasolina e óleo diesel. O objetivo é reduzir o impacto do aumento internacional dos preços desses combustíveis e garantir o abastecimento no país.\n\n✅ [MP 1397/2026] – Destina R$ 6,49 bilhões para apoiar empresas exportadoras de bens e serviços afetadas pelas tarifas dos Estados Unidos.\n\n✅ [MP 1383/2026] - Destina R$ 360 milhões para o enfrentamento das consequências de desastres climáticos, como chuvas intensas, vendavais e estiagem.\n\n✅ [MP 1384/2026] - Destina R$ 925 milhões para abastecimento, segurança alimentar e combate à fome de populações atingidas por eventos climáticos provocados pelo El-Niño.\n\n✅ [MP 1398/2026] - Destina de R$ 300 milhões para ações de defesa civil em municípios afetados por desastres climáticos. O foco principal é o combate a incêndios na Amazônia.\n\nA medidas seguem agora para análise do Senado. Se aprovadas, vão virar lei.\n\nAcompanhe as redes da Câmara!",
+        "caption": "👧🏽👦🏻 Proteger crianças e adolescentes é uma responsabilidade de todos. Mas tem gente que faz disso uma missão diária!\n\n18 de novembro é dia de homenagear os profissionais que atuam na defesa dos direitos de crianças e adolescentes em todo o Brasil: o Conselheiro Tutelar.\n\nE você sabia que existem projetos em análise na Câmara para garantir piso salarial, licença médica, assistência psicológica, mais segurança e melhores condições de trabalho para esses profissionais?\n\n📲 Arraste para o lado, conheça o trabalho dos conselheiros tutelares e descubra algumas propostas que podem fortalecer essa atuação.\n\n🚨 Suspeita de violação dos direitos de uma criança ou adolescente? Procure o Conselho Tutelar da sua região ou denuncie pelo Disque 100.\n\n#DiaDoConselheiroTutelar #ConselhoTutelar #DireitosDaCriança #ECA #CâmaraDosDeputados",
         "comments": 3,
+        "id": "4033300833785657191",
+        "likes": 65,
+        "mediaUrl": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/907304795_18359665885174424_5126577166678285271_n.webp?_nc_cat=102&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzI5OTk4OTIxOTMxMjY2Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=m9S5FJo7OF8Q7kNvwEckMAG&_nc_oc=AdqlpmHXzTgvk__tQXQ3Cxrzjl16aX4Ec6IqR998O_w1-Pf8CFYyH3JsqDvMIRSniT4&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&_nc_gid=OGTWBL64LAoAM2Z-HNJ6CA&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQTSpeGSeyygBpIHSqt3GdOQ52pO_6-9ypxyGXvFxmGadA&oe=6B03CF36",
+        "permalink": "https://www.instagram.com/p/Df5Kb0uFLdn/",
+        "publishedAt": "2026-11-18T18:35:48+00:00",
+        "type": "carousel"
+      },
+      {
+        "caption": "A Lei de Alienação Parental pode estar com os dias contados!\n\nA Câmara dos Deputados rejeitou um recurso que impedia o envio imediato ao Senado do [PL 2812/2022], que propõe revogar integralmente a legislação em vigor desde 2010.\n\nA proposta busca evitar que a lei seja utilizada para desacreditar denúncias de violência doméstica e abuso sexual envolvendo crianças e adolescentes.\nO texto já havia sido aprovado nas comissões da Câmara e agora segue para análise do Senado.\n\nA lei sobre alienação parental foi criada para impedir situações em que o pai ou a mãe da criança procura afastar o outro da convivência com os filhos, seja por meio da desqualificação, seja dificultando o convívio ou a manutenção de vínculos.\n\n⚠️ Atenção: a lei continua em vigor. Para ser derrubada, o projeto precisa também da aprovação do Senado.\n\nAcompanhe as redes da Câmara!\n\n#alienacaoparental #paternidade #maternidade #camaradosdeputados",
+        "comments": 109,
+        "id": "4033262923107705571",
+        "likes": 766,
+        "mediaUrl": "https://scontent-iad3-1.cdninstagram.com/v/t39.30808-6/913278524_1598000145696772_6945299105599606883_n.jpg?stp=c0.45.1080.1350a_dst-jpg_e35_sh2.08_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzI2MjkyMzEwNzcwNTU3MQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=nW2gW2RvOpIQ7kNvwGmKX6M&_nc_oc=AdqEe9Yin1VYqnZ7UINI0xHDPvgmSgpbewnH79Ctg6ByV70eNVymUmhrT1Oknl09ZIY&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_gid=OGTWBL64LAoAM2Z-HNJ6CA&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQSj7DlD33KnNRZygXmGE7IHdrC2P9lKzXgr1IBKA92YMQ&oe=6B03CDC7",
+        "permalink": "https://www.instagram.com/p/Df5B0JplqLj/",
+        "publishedAt": "2026-11-18T17:20:30+00:00",
+        "type": "image"
+      },
+      {
+        "caption": "A capacidade da população de fiscalizar a administração pública mudou de patamar em 18 de novembro de 2011. Nesse dia, foi sancionada a  Lei de Acesso à Informação (LAI). O Brasil dava um passo decisivo para aumentar a transparência nos Três Poderes!\n\nA norma passou a garantir a qualquer pessoa ou empresa o direito de solicitar dados e documentos aos órgãos públicos, que ficaram obrigados a fornecer essas informações.\n\nNa prática, a LAI ampliou as ferramentas de fiscalização da sociedade e fortaleceu o acompanhamento das ações e decisões do Executivo, do Legislativo e do Judiciário.\n\nNo Portal de Transparência da Câmara, você pode pesquisar informações sobre a atuação e os gastos de cada deputado, licitações, contratos, despesas, funcionários e diversos outros assuntos. Se não encontrar o que procura, é só entrar em contato por um dos canais de atendimento da LAI para fazer a solicitação.\n\nAcesse camara.leg.br e confira!\n\n#transparencia #LAI #fiscalização #camaradosdeputados",
+        "comments": 9,
+        "id": "4033184637613864667",
+        "likes": 153,
+        "mediaUrl": "https://scontent-iad3-1.cdninstagram.com/v/t39.30808-6/912568459_1597876139042506_4094401571855985014_n.jpg?stp=c0.45.1080.1350a_dst-jpg_e35_sh2.08_tt6&_nc_cat=104&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzE4NDYzNzYxMzg2NDY2Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=37EqQoPaNQoQ7kNvwFeV-8k&_nc_oc=Adox2C5L_SmT7M322d6Y6U-XIRtKte6cUQ8tZhRz5Np0n4byyBenUYngZ0kvLOXs07k&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_gid=OGTWBL64LAoAM2Z-HNJ6CA&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQTjJ-w_TptfnL7GSh_ymZSHr6LsKQJhSlSyKcbP_RpdmQ&oe=6B03C5FE",
+        "permalink": "https://www.instagram.com/p/Df4wA8miXbb/",
+        "publishedAt": "2026-11-18T14:44:57+00:00",
+        "type": "image"
+      },
+      {
+        "caption": "As empresas com dívidas trabalhistas podem ter no máximo 10% dos recursos mensais bloqueados para acertar essas contas, isso já descontado o pagamento mensal dos salários dos empregados atuais. É o que prevê um projeto aprovado pela Câmara [PL 3083/2019] e que agora segue para análise do Senado.\n\nA ideia é que o  percentual do que pode ser penhorado seja definido pelo juiz trabalhista, que analisa o caso e as provas existentes.\n\nA mudança na Consolidação das Leis do Trabalho (CLT) está sendo proposta para \"garantir o pagamento da dívida em tempo razoável, mas sem tornar inviável a atividade empresarial”, esclarece o texto.\n\nAutor: deputado @marcospereira1010 (Republicanos-SP)\nRelator: deputado @silviocostafilho (Republicanos-PE)\n\nQuer saber mais sobre o assunto? Vai lá no site oficial da Câmara e coloca o número do projeto na busca. Está tudo explicadinho.\n\nAqui nas redes da Câmara, a gente te deixa por dentro de tudo o que seus representantes fazem. Siga a gente!\n\n#dívidatrabalhista #penhora #CLT",
+        "comments": 6,
+        "id": "4032767769321038631",
+        "likes": 62,
+        "mediaUrl": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/902954711_18359601715174424_1983923847264540317_n.webp?_nc_cat=109&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMjc2Nzc2OTMyMTAzODYzMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=gAqySTbnxHYQ7kNvwGnREbL&_nc_oc=Adq8c4SOe8AmOGkOK320wOWZGiOZHPXzbiIfgJcWewaQHfRGUINPQlanrClL6hglMkY&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&_nc_gid=OGTWBL64LAoAM2Z-HNJ6CA&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQTPSMjiApZREL9932R-Wwr5RymrK1bO2i7rORWWzb5g_Q&oe=6B03D1CA",
+        "permalink": "https://www.instagram.com/p/Df3ROtwBmMn/",
+        "publishedAt": "2026-11-18T11:00:04+00:00",
+        "type": "image"
+      },
+      {
+        "caption": "Mais recursos para reduzir os impactos de guerras, tarifas internacionais e desastres climáticos sobre a população e setores da economia foram aprovados na Câmara. As iniciativas estão em cinco medidas provisórias, que já estão valendo, mas precisam da aprovação do Congresso para virarem leis permanentes. \n\nSão elas:\n\n✅ [MP 1389/26] – Destina R$ 6,6 bilhões para a produção e a importação de gasolina e óleo diesel. O objetivo é reduzir o impacto do aumento internacional dos preços desses combustíveis e garantir o abastecimento no país.\n\n✅ [MP 1397/2026] – Destina R$ 6,49 bilhões para apoiar empresas exportadoras de bens e serviços afetadas pelas tarifas dos Estados Unidos.\n\n✅ [MP 1383/2026] - Destina R$ 360 milhões para o enfrentamento das consequências de desastres climáticos, como chuvas intensas, vendavais e estiagem.\n\n✅ [MP 1384/2026] - Destina R$ 925 milhões para abastecimento, segurança alimentar e combate à fome de populações atingidas por eventos climáticos provocados pelo El-Niño.\n\n✅ [MP 1398/2026] - Destina de R$ 300 milhões para ações de defesa civil em municípios afetados por desastres climáticos. O foco principal é o combate a incêndios na Amazônia.\n\nA medidas seguem agora para análise do Senado. Se aprovadas, vão virar lei.\n\nAcompanhe as redes da Câmara!",
+        "comments": 6,
         "id": "4032719040786541025",
-        "likes": 68,
-        "mediaUrl": "https://scontent-sea5-2.cdninstagram.com/v/t51.82787-15/910471712_18359597590174424_4450426735263806008_n.webp?_nc_cat=108&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMjcxOTA0MDc4NjU0MTAyNQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=Y8CDF5ciVjsQ7kNvwGQQ0vM&_nc_oc=AdpMpr_-25_BW-V9KjSGtgvD4rhOaViXWqPLIqrAJEW_dpaxBBWfF1nh9J7EF9Tikqc&_nc_zt=23&_nc_ht=scontent-sea5-2.cdninstagram.com&_nc_gid=xh4GAmIawd815uZ7XNQdYg&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQSzzW4mnq21_2E576GtPq58JjpRWwCQPDpd4v7gELVU3w&oe=6B036E3C",
+        "likes": 93,
+        "mediaUrl": "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-15/910471712_18359597590174424_4450426735263806008_n.webp?_nc_cat=108&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMjcxOTA0MDc4NjU0MTAyNQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=Y8CDF5ciVjsQ7kNvwGoYagx&_nc_oc=Adp-qpRjHHyU9gptR7-gIxL6ty67zgHZqjjnzTyKLXyFA20vt2eskdhNfGpGCiRJb2c&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_gid=OGTWBL64LAoAM2Z-HNJ6CA&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQQ8O8RpDBa-srI6ZxG2tPF-q3IHG6Dz3jfSR8-afo9aBg&oe=6B03DEBC",
         "permalink": "https://www.instagram.com/p/Df3GJnxCSnh/",
         "publishedAt": "2026-11-17T23:19:59+00:00",
         "type": "image"
       },
       {
         "caption": "Na manhã desta terça-feira (17), o presidente do Senado Federal, Davi Alcolumbre, e o presidente da Câmara dos Deputados, Hugo Motta, reuniram-se, em agenda institucional, com o ministro Alexandre de Moraes, do Supremo Tribunal Federal (STF), relator das ações diretas de inconstitucionalidade que questionam a Lei da Dosimetria.\n\nDurante o encontro, os presidentes das duas Casas solicitaram ao ministro que libere as ações para inclusão na pauta do Plenário do Supremo, na expectativa de que o julgamento definitivo seja concluído ainda este ano. @davialcolumbre e @hugomottapb ressaltaram a importância de uma decisão do STF sobre a validade da lei aprovada pelo Congresso Nacional. O ministro Alexandre de Moraes ouviu atentamente os argumentos apresentados e informou que dará retorno sobre o pedido assim que possível.",
-        "comments": 484,
+        "comments": 609,
         "id": "4032656416522390734",
-        "likes": 735,
-        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/911571089_18359592154174424_8900892946150057928_n.webp?_nc_cat=111&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMjY1NjQxNjUyMjM5MDczNA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=gidJAyiNMmYQ7kNvwFBluiq&_nc_oc=Adp0aMuFhxRLZrVzYuj-PNjKCCti3nLYWvmHd215L5i1rUMPsMjT55ArmR1CJ-0etaM&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=xh4GAmIawd815uZ7XNQdYg&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQSWCVaKEPw8g5y2RBIQmChdDKb5lGF-rO8XZQHou2N6Vg&oe=6B0342DB",
+        "likes": 870,
+        "mediaUrl": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/911571089_18359592154174424_8900892946150057928_n.webp?_nc_cat=111&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMjY1NjQxNjUyMjM5MDczNA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=gidJAyiNMmYQ7kNvwEfM6VG&_nc_oc=AdqFET8EsUx4PR7lp6VvdePSICCHWH1la3twpdJm4hgpf8tVyp2Xrd9SSLByJVSkrSY&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&_nc_gid=OGTWBL64LAoAM2Z-HNJ6CA&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQReYpfE_TQSHqjx8hWxZJWiBU7IKqfqRtVgx_oT7tA09w&oe=6B03B35B",
         "permalink": "https://www.instagram.com/p/Df236UYBEzO/",
         "publishedAt": "2026-11-17T21:15:31+00:00",
         "type": "image"
-      },
-      {
-        "caption": "Novas regras para o mercado digital podem ser votadas hoje na Câmara!\n\nO projeto de lei (PL 4.675/2025) que regulamenta a atuação das grandes empresas de tecnologia, conhecidas como big techs, pode ser votado nesta terça-feira (17).\n\nA proposta busca evitar práticas abusivas, estimular a concorrência e ampliar as oportunidades para pequenas empresas e as opções para os consumidores.\n\nEm entrevista ao Câmara Agora, o relator do projeto, deputado Aliel Machado (PV-PR), explicou como essas medidas podem impactar o dia a dia da população e esclareceu que a proposta não trata da moderação de conteúdo nas redes sociais. O parlamentar também falou sobre as negociações com as bancadas partidárias e os ajustes no texto antes da votação.\n\n📺 Quer entender melhor a proposta e o que pode mudar no mercado digital brasileiro? Confira a entrevista completa no Câmara Agora!\n▶️ YouTube: cd.leg.br/youtube\n📺 TV Câmara: camara.leg.br/tv\n\n#CâmaraAgora #TVCâmara #BigTechs #MercadoDigital",
-        "comments": 27,
-        "id": "4032537571716042918",
-        "likes": 39,
-        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/910648389_17995152375065500_5092589544996107909_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=107&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMjUzNzU3MTcxNjA0MjkxODE3OTk1MTUyMzcyMDY1NTAw.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEwODAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=dgDxMnPu9G8Q7kNvwEgL_1l&_nc_oc=AdpCzNMTSM6jcg_CpvksTbk5YfhRS7vX_2c3UxAO_w0-nGgxnZUYwuhWduWMw-KAJB8&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=xh4GAmIawd815uZ7XNQdYg&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQRReoL0tWKNrlGPc4XlMpky58cKLQYYSpB60Y1w5ECESA&oe=6B033E44",
-        "permalink": "https://www.instagram.com/p/Df2c45hjRCm/",
-        "publishedAt": "2026-11-17T17:19:58+00:00",
-        "type": "video"
-      },
-      {
-        "caption": "Parece que, desta vez, os Simpsons não acertaram! Nem eles, nem os boatos de testes militares ou atualizações de comunicação que poderiam parar o mundo neste 17 de novembro.\n\nPor aqui, nada de apagão. Então, tem muito trabalho!! Confira a agenda completa da Câmara para hoje no site oficial e acompanhe as atividades ao vivo.\n\nVai lá no: camara.leg.br.\n\n#apagao #17denovembro #camaradosdeputados #simpsons",
-        "comments": 31,
-        "id": "4032377322812486334",
-        "likes": 315,
-        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/902962230_18359492899174424_946843646385880477_n.webp?_nc_cat=110&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTk4OTcwNzEwNTkwNzQ4OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=6CQxDdt5-WQQ7kNvwGT75jg&_nc_oc=AdrbVop9ltDCMw1joCGXBoCX-_MvjM8H4ENYSE_xjrVFZTzP8gQCeLjWqCjPNn6azDs&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=xh4GAmIawd815uZ7XNQdYg&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQRI3KLNfv6sC_9NJSZXDuFvM82VEPOsmKZHIATrXr_G3A&oe=6B03544D",
-        "permalink": "https://www.instagram.com/p/Df14c-GlDK-/",
-        "publishedAt": "2026-11-17T12:00:09+00:00",
-        "type": "carousel"
-      },
-      {
-        "caption": "🚨 É HOJE! ÚLTIMA CHANCE!\n\nSonha em trabalhar na Câmara dos Deputados? Então corre, porque as inscrições para o concurso público terminam HOJE (17/11), às 18h, no horário de Brasília! ⏰\n\nSão 66 vagas imediatas e 118 para cadastro de reserva, com remuneração inicial de R$ 32 mil!\n\n🎓 Cargo: Analista Legislativo, com oportunidades nas áreas de Comunicação Social, Engenharia, Arquivologia, Biblioteconomia, Museologia e Registro e Redação.\n\n💳 Taxa de inscrição: R$ 130, com pagamento até 19 de novembro.\n\n📝 Provas: previstas para 17 de janeiro de 2027.\n\n⚠️ Atenção: o prazo para pagar a taxa é até 19/11, mas a inscrição precisa ser feita até as 18h de hoje!\n\n🔗 Acesse cd.leg.br/concurso, confira o edital e não deixe essa oportunidade passar!\n\n#ConcursoCâmara #ConcursoPúblico #CâmaraDosDeputados",
-        "comments": 31,
-        "id": "4031964905551213525",
-        "likes": 728,
-        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/907237696_18359489626174424_8511028849691084554_n.webp?_nc_cat=100&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTk2NDkwNTU1MTIxMzUyNQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=VCDPV2nOsaUQ7kNvwEewPF-&_nc_oc=AdrdbEbHPiUPSWFtbosovyQ7l4ayZX1wdDDW-BZLh2jg6vEFmu9PeCINyu2cG2Jr5UU&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=xh4GAmIawd815uZ7XNQdYg&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQQsZYEfmvcTMxaXnbQJEodXZys1c1u0VhSGEA0yvaTLwA&oe=6B033C9D",
-        "permalink": "https://www.instagram.com/p/Df0argmOLPV/",
-        "publishedAt": "2026-11-17T11:30:02+00:00",
-        "type": "image"
-      },
-      {
-        "caption": "🌎 TV Câmara recebe reconhecimento internacional por projetos de comunicação pública!\n\nQuatro iniciativas da TV Câmara foram incluídas no Atlas Global de Inovação em Comunicação Pública das Nações Unidas. Ao todo, o levantamento selecionou 102 projetos de 50 países.\n\nEntre as iniciativas reconhecidas estão os programas Bora Entender, Participação Popular e Elas Pautam, além do sistema automático de transmissão das sessões do Plenário e das reuniões das comissões no YouTube.\n\nEm entrevista à TV Câmara, o presidente da Câmara dos Deputados, Hugo Motta (Republicanos-PB), destacou a importância da comunicação pública para a transparência e o fortalecimento da democracia.\n\nSegundo Motta, quanto mais a população entende o funcionamento do Congresso Nacional, maior é a capacidade de acompanhar e fiscalizar o trabalho dos parlamentares.\n\nA TV Câmara também concorre ao Prêmio TAL-ALCAP, que reconhece produções de emissoras públicas, parlamentares e judiciais da América Latina. Os vencedores serão anunciados no dia 20 de novembro, no México.\n\n👉 E você? Costuma acompanhar as decisões e os debates da Câmara dos Deputados?\n\n#TVCâmara #CâmaraDosDeputados #ComunicaçãoPública #Democracia",
-        "comments": 11,
-        "id": "4031995422608094172",
-        "likes": 101,
-        "mediaUrl": "https://scontent-sea5-2.cdninstagram.com/v/t51.82787-15/904461866_17995055262065500_708466457804069642_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMTk5NTQyMjYwODA5NDE3MjE3OTk1MDU1MjU5MDY1NTAw.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEwODAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=mnp0ajlwt0QQ7kNvwEz2dwQ&_nc_oc=Adp4-Bfo-A2ia98JABZuipCHwfxia0GuqnPqsjkmO5IkOcgEuEb1eVmEXYk_pcKKSw8&_nc_zt=23&_nc_ht=scontent-sea5-2.cdninstagram.com&_nc_gid=xh4GAmIawd815uZ7XNQdYg&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQRZoBJYM7TlURIGvauBZnXO3_XRNWb-P600Yo5r5kgLDQ&oe=6B035B20",
-        "permalink": "https://www.instagram.com/p/Df0hnl0jnPc/",
-        "publishedAt": "2026-11-16T23:23:08+00:00",
-        "type": "video"
       }
     ],
     "publicCheckedAt": "2026-11-17T17:49:13.829178+00:00",
@@ -148,21 +150,21 @@
     ]
   },
   "tiktok": {
-    "change24h": 100,
+    "change24h": 0,
     "followers": 149700,
     "handle": "@camaradosdeputados",
-    "observedAt": "2026-11-18T10:46:52.525318+00:00"
+    "observedAt": "2026-11-18T18:51:20.215989+00:00"
   },
   "x": {
-    "change24h": -98,
-    "followers": 1086918,
+    "change24h": -133,
+    "followers": 1086876,
     "handle": "@camaradeputados",
-    "observedAt": "2026-11-18T10:46:52.525318+00:00"
+    "observedAt": "2026-11-18T18:51:20.215989+00:00"
   },
   "youtube": {
     "change24h": null,
     "followers": 1500000,
     "handle": "@camaradosdeputadosoficial",
-    "observedAt": "2026-11-18T10:46:52.525318+00:00"
+    "observedAt": "2026-11-18T18:51:20.215989+00:00"
   }
 }
