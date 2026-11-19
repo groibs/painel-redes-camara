@@ -1,6 +1,8 @@
 {
-  "collectedAt": "2026-11-18T19:09:51.840285+00:00",
-  "errors": {},
+  "collectedAt": "2026-11-19T01:16:52.502184+00:00",
+  "errors": {
+    "facebook": "ValueError"
+  },
   "facebook": {
     "change24h": 166,
     "followers": 666507,
@@ -9,39 +11,59 @@
   },
   "instagram": {
     "change24h": null,
-    "embedCheckedAt": "2026-11-18T19:09:51.840285+00:00",
+    "embedCheckedAt": "2026-11-19T01:16:52.502184+00:00",
     "embedFollowers": 400247,
     "followers": 400027,
     "followersObservedAt": "2026-11-17T17:49:13.829178+00:00",
     "handle": "@camaradosdeputados",
-    "observedAt": "2026-11-18T19:09:51.840285+00:00",
+    "observedAt": "2026-11-19T01:16:52.502184+00:00",
     "posts": [
       {
+        "caption": "O ajuste fiscal proposto pelo Governo vai ser colocado em discussão no Plenário da Câmara na segunda-feira (23/11). O anúncio foi feito há pouco pelo presidente, deputado Hugo Motta. \n\nO Senado concluiu a votação da proposta nesta quarta-feira (18/11) [PLP 299/2026]. Com base nas medidas aprovadas, o governo estima uma melhora de R$ 45,1 bilhões a R$ 56,1 bilhões no resultado primário de 2027, que é a diferença entre as receitas e as despesas, sem considerar os juros da dívida pública.\n\n#Ajustefiscal #CâmaradosDeputados",
+        "comments": 25,
+        "id": "4033497452949897823",
+        "likes": 101,
+        "mediaUrl": "https://scontent-iad3-2.cdninstagram.com/v/t51.82787-15/912724905_18359686729174424_3907275029517795689_n.webp?_nc_cat=108&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzQ5NzQ1Mjk0OTg5NzgyMw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=wZrxrwdXC4wQ7kNvwG2Q8Vv&_nc_oc=Ado51Ip1Q5FqUPHlmXEFOTcwb3P5iBwyANaf0Av8Qfg67TjfELYcK6NouGzWPnHKJt0&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&_nc_gid=_4u3dOBQXlNg-x-Dc_-32A&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQTrqGq3WEJhLlxS4iZFDIEp9V-tnrmQYUX9NNuTEbiGIQ&oe=6B04190C",
+        "permalink": "https://www.instagram.com/p/Df53JAlhYJf/",
+        "publishedAt": "2026-11-19T01:06:30+00:00",
+        "type": "image"
+      },
+      {
+        "caption": "Defensor da escola pública, laica e em tempo integral, Darcy Ribeiro se tornou uma das maiores autoridades em educação no Brasil. Ele empresta o nome ao prêmio criado pela Câmara para reconhecer o trabalho de pessoas e instituições que fazem a diferença na educação.\n\nPara ser premiado, é preciso ter um impacto significativo nas comunidades em que atua.\n\nOs vencedores deste ano foram:\n\n● Instituto Ayrton Senna\n● Instituto Alana\n● Escola Nacional Florestan Fernandes\n\nArraste para o lado e descubra por que eles mereceram esse reconhecimento.\n\nE conta pra gente: que mudanças você gostaria de ver na educação brasileira?\n\n#educação #PremioDarcyRibeiro #CâmaradosDeputados",
+        "comments": 2,
+        "id": "4033452440586303817",
+        "likes": 36,
+        "mediaUrl": "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-15/914285428_18359682748174424_426285281467676701_n.webp?_nc_cat=103&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzQ1MTQ5ODgyNDY0MTYyMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=HG0OlaNeBY8Q7kNvwFTveO2&_nc_oc=AdruVZOe_hlgRMbxJrAWeiPbHbU1FrOyksDTQwi1h1zvEL3uNQ2-UdIDzBb1G2JBqCk&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_gid=_4u3dOBQXlNg-x-Dc_-32A&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQQpi99o4x_fOK_QlJcqn9pI3lg1HupJp1jjjC2zhAh97A&oe=6B0429FF",
+        "permalink": "https://www.instagram.com/p/Df5s5_jlDlJ/",
+        "publishedAt": "2026-11-18T23:37:01+00:00",
+        "type": "carousel"
+      },
+      {
         "caption": "👧🏽👦🏻 Proteger crianças e adolescentes é uma responsabilidade de todos. Mas tem gente que faz disso uma missão diária!\n\n18 de novembro é dia de homenagear os profissionais que atuam na defesa dos direitos de crianças e adolescentes em todo o Brasil: o Conselheiro Tutelar.\n\nE você sabia que existem projetos em análise na Câmara para garantir piso salarial, licença médica, assistência psicológica, mais segurança e melhores condições de trabalho para esses profissionais?\n\n📲 Arraste para o lado, conheça o trabalho dos conselheiros tutelares e descubra algumas propostas que podem fortalecer essa atuação.\n\n🚨 Suspeita de violação dos direitos de uma criança ou adolescente? Procure o Conselho Tutelar da sua região ou denuncie pelo Disque 100.\n\n#DiaDoConselheiroTutelar #ConselhoTutelar #DireitosDaCriança #ECA #CâmaraDosDeputados",
-        "comments": 4,
+        "comments": 26,
         "id": "4033300833785657191",
-        "likes": 104,
-        "mediaUrl": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/907304795_18359665885174424_5126577166678285271_n.webp?_nc_cat=102&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzI5OTk4OTIxOTMxMjY2Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=m9S5FJo7OF8Q7kNvwEFmvgF&_nc_oc=AdphnoJ7zOjLT3CVSNq0ihVq-oK6NlQZxbrb_U7FkaYYPVOlYv8E6M6WsWpvVvLst4s&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&_nc_gid=pWd-SF2dEs7M3vFkycxAGg&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQQsbThwdcBxsPq9ktnCfYLvk3X5Hv89uMN7ingl2K741Q&oe=6B03CF36",
+        "likes": 415,
+        "mediaUrl": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/907304795_18359665885174424_5126577166678285271_n.webp?_nc_cat=102&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzI5OTk4OTIxOTMxMjY2Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=m9S5FJo7OF8Q7kNvwHOMw5X&_nc_oc=AdpeSSbiJPQ6cBJIja5vOe4XXJK_7WD9efCPF1Z8Hgw3Dt6EDNnrjkmWIYBUkvCEmEg&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&_nc_gid=_4u3dOBQXlNg-x-Dc_-32A&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQQbNACkxtU-cn7LhgQW0ipMQS0oFucUy12oJz9XDQtdWg&oe=6B040776",
         "permalink": "https://www.instagram.com/p/Df5Kb0uFLdn/",
         "publishedAt": "2026-11-18T18:35:48+00:00",
         "type": "carousel"
       },
       {
         "caption": "A Lei de Alienação Parental pode estar com os dias contados!\n\nA Câmara dos Deputados rejeitou um recurso que impedia o envio imediato ao Senado do [PL 2812/2022], que propõe revogar integralmente a legislação em vigor desde 2010.\n\nA proposta busca evitar que a lei seja utilizada para desacreditar denúncias de violência doméstica e abuso sexual envolvendo crianças e adolescentes.\nO texto já havia sido aprovado nas comissões da Câmara e agora segue para análise do Senado.\n\nA lei sobre alienação parental foi criada para impedir situações em que o pai ou a mãe da criança procura afastar o outro da convivência com os filhos, seja por meio da desqualificação, seja dificultando o convívio ou a manutenção de vínculos.\n\n⚠️ Atenção: a lei continua em vigor. Para ser derrubada, o projeto precisa também da aprovação do Senado.\n\nAcompanhe as redes da Câmara!\n\n#alienacaoparental #paternidade #maternidade #camaradosdeputados",
-        "comments": 128,
+        "comments": 434,
         "id": "4033262923107705571",
-        "likes": 901,
-        "mediaUrl": "https://scontent-ord5-1.cdninstagram.com/v/t39.30808-6/913278524_1598000145696772_6945299105599606883_n.jpg?stp=c0.45.1080.1350a_dst-jpg_e35_sh2.08_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzI2MjkyMzEwNzcwNTU3MQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=nW2gW2RvOpIQ7kNvwEIH341&_nc_oc=Adqv0kONAd0SDvCUH_ZB2EGAZbhMEe5GCiJ35zGAsJMCn0sJ1v0dMWXOne7bPa0Q2qs&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&_nc_gid=pWd-SF2dEs7M3vFkycxAGg&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQRKg2V2bSwojZsLLXbR2rLVj9NjwLfq54QiG5ohUpmnkQ&oe=6B03CDC7",
+        "likes": 2154,
+        "mediaUrl": "https://scontent-iad3-1.cdninstagram.com/v/t39.30808-6/913278524_1598000145696772_6945299105599606883_n.jpg?stp=c0.45.1080.1350a_dst-jpg_e35_sh2.08_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzI2MjkyMzEwNzcwNTU3MQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=nW2gW2RvOpIQ7kNvwEze_-q&_nc_oc=AdqGJvxd7DeGJUtjPKReM8Ozr3KYyLFx2YLUDcm3wGRYrrDPblK4OttCkbQ2L2rF6vg&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_gid=_4u3dOBQXlNg-x-Dc_-32A&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQTVWP2LsvFOvjQFmVerhOGZ59__Cs00Wdrc6d6CAkDhNA&oe=6B040607",
         "permalink": "https://www.instagram.com/p/Df5B0JplqLj/",
         "publishedAt": "2026-11-18T17:20:30+00:00",
         "type": "image"
       },
       {
         "caption": "A capacidade da população de fiscalizar a administração pública mudou de patamar em 18 de novembro de 2011. Nesse dia, foi sancionada a  Lei de Acesso à Informação (LAI). O Brasil dava um passo decisivo para aumentar a transparência nos Três Poderes!\n\nA norma passou a garantir a qualquer pessoa ou empresa o direito de solicitar dados e documentos aos órgãos públicos, que ficaram obrigados a fornecer essas informações.\n\nNa prática, a LAI ampliou as ferramentas de fiscalização da sociedade e fortaleceu o acompanhamento das ações e decisões do Executivo, do Legislativo e do Judiciário.\n\nNo Portal de Transparência da Câmara, você pode pesquisar informações sobre a atuação e os gastos de cada deputado, licitações, contratos, despesas, funcionários e diversos outros assuntos. Se não encontrar o que procura, é só entrar em contato por um dos canais de atendimento da LAI para fazer a solicitação.\n\nAcesse camara.leg.br e confira!\n\n#transparencia #LAI #fiscalização #camaradosdeputados",
-        "comments": 9,
+        "comments": 13,
         "id": "4033184637613864667",
-        "likes": 156,
-        "mediaUrl": "https://scontent-ord5-1.cdninstagram.com/v/t39.30808-6/912568459_1597876139042506_4094401571855985014_n.jpg?stp=c0.45.1080.1350a_dst-jpg_e35_sh2.08_tt6&_nc_cat=104&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzE4NDYzNzYxMzg2NDY2Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=37EqQoPaNQoQ7kNvwHf75NG&_nc_oc=AdoNNad-CsXDAggGrSs0gglCXbadCdHKHD9-KG1AAonTPy9k_4eX3MAOVwunFqdyXnI&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&_nc_gid=pWd-SF2dEs7M3vFkycxAGg&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQQS8aznLkFAFffta4c3gn1AcymqiOcyqZezYJ9zdV3OuA&oe=6B03C5FE",
+        "likes": 206,
+        "mediaUrl": "https://scontent-iad3-1.cdninstagram.com/v/t39.30808-6/912568459_1597876139042506_4094401571855985014_n.jpg?stp=c0.45.1080.1350a_dst-jpg_e35_sh2.08_tt6&_nc_cat=104&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzE4NDYzNzYxMzg2NDY2Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=37EqQoPaNQoQ7kNvwEOpV6P&_nc_oc=AdojvIjDUDye78KLzDmX455dujzwJ03L7l1edIlE6t4t-QlapjKaDXIho8IVN3o0lZs&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_gid=_4u3dOBQXlNg-x-Dc_-32A&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQSWrJc_WO0394luRduBoFTW1S5B0NmddoIvnwvH3x8VlQ&oe=6B04367E",
         "permalink": "https://www.instagram.com/p/Df4wA8miXbb/",
         "publishedAt": "2026-11-18T14:44:57+00:00",
         "type": "image"
@@ -50,30 +72,10 @@
         "caption": "As empresas com dívidas trabalhistas podem ter no máximo 10% dos recursos mensais bloqueados para acertar essas contas, isso já descontado o pagamento mensal dos salários dos empregados atuais. É o que prevê um projeto aprovado pela Câmara [PL 3083/2019] e que agora segue para análise do Senado.\n\nA ideia é que o  percentual do que pode ser penhorado seja definido pelo juiz trabalhista, que analisa o caso e as provas existentes.\n\nA mudança na Consolidação das Leis do Trabalho (CLT) está sendo proposta para \"garantir o pagamento da dívida em tempo razoável, mas sem tornar inviável a atividade empresarial”, esclarece o texto.\n\nAutor: deputado @marcospereira1010 (Republicanos-SP)\nRelator: deputado @silviocostafilho (Republicanos-PE)\n\nQuer saber mais sobre o assunto? Vai lá no site oficial da Câmara e coloca o número do projeto na busca. Está tudo explicadinho.\n\nAqui nas redes da Câmara, a gente te deixa por dentro de tudo o que seus representantes fazem. Siga a gente!\n\n#dívidatrabalhista #penhora #CLT",
         "comments": 6,
         "id": "4032767769321038631",
-        "likes": 62,
-        "mediaUrl": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/902954711_18359601715174424_1983923847264540317_n.webp?_nc_cat=109&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMjc2Nzc2OTMyMTAzODYzMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=gAqySTbnxHYQ7kNvwEUkV_N&_nc_oc=AdpOvPN6IjWE3dyvYbzi-tOha_ScDkfyHIT8XYY66ev-O-0xzxqBZtBe9rFPqWqcKwM&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&_nc_gid=pWd-SF2dEs7M3vFkycxAGg&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQTqsrMbwqOluJ_5erFIbNQfkV5A15clU2KWqloQWQzeGA&oe=6B03D1CA",
+        "likes": 67,
+        "mediaUrl": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/902954711_18359601715174424_1983923847264540317_n.webp?_nc_cat=109&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMjc2Nzc2OTMyMTAzODYzMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=0dB-ra7xqqAQ7kNvwF-7Z-2&_nc_oc=Ado6yjzKH7hCKJ5O30ucus4NUwv8BLSbW5100AebCsf2kPTafg_LdCtM4aXWoID70Ro&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&_nc_gid=_4u3dOBQXlNg-x-Dc_-32A&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQTjtwYhCjvvxiNW9ZNMjKdid-RwEjjdSJAmbiD2IEhIJw&oe=6B040A0A",
         "permalink": "https://www.instagram.com/p/Df3ROtwBmMn/",
         "publishedAt": "2026-11-18T11:00:04+00:00",
-        "type": "image"
-      },
-      {
-        "caption": "Mais recursos para reduzir os impactos de guerras, tarifas internacionais e desastres climáticos sobre a população e setores da economia foram aprovados na Câmara. As iniciativas estão em cinco medidas provisórias, que já estão valendo, mas precisam da aprovação do Congresso para virarem leis permanentes. \n\nSão elas:\n\n✅ [MP 1389/26] – Destina R$ 6,6 bilhões para a produção e a importação de gasolina e óleo diesel. O objetivo é reduzir o impacto do aumento internacional dos preços desses combustíveis e garantir o abastecimento no país.\n\n✅ [MP 1397/2026] – Destina R$ 6,49 bilhões para apoiar empresas exportadoras de bens e serviços afetadas pelas tarifas dos Estados Unidos.\n\n✅ [MP 1383/2026] - Destina R$ 360 milhões para o enfrentamento das consequências de desastres climáticos, como chuvas intensas, vendavais e estiagem.\n\n✅ [MP 1384/2026] - Destina R$ 925 milhões para abastecimento, segurança alimentar e combate à fome de populações atingidas por eventos climáticos provocados pelo El-Niño.\n\n✅ [MP 1398/2026] - Destina de R$ 300 milhões para ações de defesa civil em municípios afetados por desastres climáticos. O foco principal é o combate a incêndios na Amazônia.\n\nA medidas seguem agora para análise do Senado. Se aprovadas, vão virar lei.\n\nAcompanhe as redes da Câmara!",
-        "comments": 6,
-        "id": "4032719040786541025",
-        "likes": 93,
-        "mediaUrl": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/910471712_18359597590174424_4450426735263806008_n.webp?_nc_cat=108&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMjcxOTA0MDc4NjU0MTAyNQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=Y8CDF5ciVjsQ7kNvwGILvGA&_nc_oc=AdoSyPVu97X6x3jPt_SjPSJizwrqNCZORaUQRBlVuUVZXCkHcktf7aDZsoGhZ0nWFxk&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&_nc_gid=pWd-SF2dEs7M3vFkycxAGg&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQR4z5P0EMFbJZsNbMHjKioY7b92IiXlyNDNi4f8E2Unuw&oe=6B03DEBC",
-        "permalink": "https://www.instagram.com/p/Df3GJnxCSnh/",
-        "publishedAt": "2026-11-17T23:19:59+00:00",
-        "type": "image"
-      },
-      {
-        "caption": "Na manhã desta terça-feira (17), o presidente do Senado Federal, Davi Alcolumbre, e o presidente da Câmara dos Deputados, Hugo Motta, reuniram-se, em agenda institucional, com o ministro Alexandre de Moraes, do Supremo Tribunal Federal (STF), relator das ações diretas de inconstitucionalidade que questionam a Lei da Dosimetria.\n\nDurante o encontro, os presidentes das duas Casas solicitaram ao ministro que libere as ações para inclusão na pauta do Plenário do Supremo, na expectativa de que o julgamento definitivo seja concluído ainda este ano. @davialcolumbre e @hugomottapb ressaltaram a importância de uma decisão do STF sobre a validade da lei aprovada pelo Congresso Nacional. O ministro Alexandre de Moraes ouviu atentamente os argumentos apresentados e informou que dará retorno sobre o pedido assim que possível.",
-        "comments": 612,
-        "id": "4032656416522390734",
-        "likes": 873,
-        "mediaUrl": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/911571089_18359592154174424_8900892946150057928_n.webp?_nc_cat=111&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMjY1NjQxNjUyMjM5MDczNA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=gidJAyiNMmYQ7kNvwFAm6b_&_nc_oc=Adq6Vzf2sJpPYkxtzUfAFOBErtsokI8ghzdElxZvMWYlwRNPTbnSyK2Zn432n7_KgPA&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&_nc_gid=pWd-SF2dEs7M3vFkycxAGg&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQQL5K8E5ENEQJ4pz_LCpkIthO6_t2rJo8iFBjc4y6hnYg&oe=6B03B35B",
-        "permalink": "https://www.instagram.com/p/Df236UYBEzO/",
-        "publishedAt": "2026-11-17T21:15:31+00:00",
         "type": "image"
       }
     ],
@@ -151,18 +153,18 @@
     "change24h": 0,
     "followers": 149700,
     "handle": "@camaradosdeputados",
-    "observedAt": "2026-11-18T19:09:51.840285+00:00"
+    "observedAt": "2026-11-19T01:16:52.502184+00:00"
   },
   "x": {
-    "change24h": -132,
-    "followers": 1086877,
+    "change24h": -463,
+    "followers": 1086466,
     "handle": "@camaradeputados",
-    "observedAt": "2026-11-18T19:09:51.840285+00:00"
+    "observedAt": "2026-11-19T01:16:52.502184+00:00"
   },
   "youtube": {
     "change24h": null,
     "followers": 1500000,
     "handle": "@camaradosdeputadosoficial",
-    "observedAt": "2026-11-18T19:09:51.840285+00:00"
+    "observedAt": "2026-11-19T01:16:52.502184+00:00"
   }
 }
