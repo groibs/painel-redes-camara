@@ -1,79 +1,79 @@
 {
-  "collectedAt": "2026-11-19T08:55:08.233591+00:00",
+  "collectedAt": "2026-11-19T18:22:59.516134+00:00",
   "errors": {},
   "facebook": {
-    "change24h": null,
-    "followers": 666534,
+    "change24h": 73,
+    "followers": 666580,
     "handle": "@camaradeputados",
-    "observedAt": "2026-11-19T08:55:08.233591+00:00"
+    "observedAt": "2026-11-19T18:22:59.516134+00:00"
   },
   "instagram": {
     "change24h": null,
-    "embedCheckedAt": "2026-11-19T08:55:08.233591+00:00",
-    "embedFollowers": 400247,
+    "embedCheckedAt": "2026-11-19T18:22:59.516134+00:00",
+    "embedFollowers": 400678,
     "followers": 400027,
     "followersObservedAt": "2026-11-17T17:49:13.829178+00:00",
     "handle": "@camaradosdeputados",
-    "observedAt": "2026-11-19T08:55:08.233591+00:00",
+    "observedAt": "2026-11-19T18:22:59.516134+00:00",
     "posts": [
       {
+        "caption": "A exposição “Okàn Ijó: um passo entre o corpo e a ancestralidade” celebra as danças afro-brasileiras e sua importância cultural. A mostra reúne fotos, vídeos e textos na Galeria Tereza de Benguela, na Câmara, de 19/11/26 a 07/01/27. Entrada franca. Visitação: de segunda a sexta, das 9h às 17h.",
+        "comments": 2,
+        "id": "4033979840810336103",
+        "likes": 19,
+        "mediaUrl": "https://scontent-iad3-1.cdninstagram.com/v/t39.30808-6/916698997_1599021968927923_5956999051801081945_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=108&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzk3OTg0MDgxMDMzNjEwMw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=DU_45tH66ecQ7kNvwEpTtvB&_nc_oc=AdqSBq0jW9J_1dEIvU7b0pf8P5xuHTZ3qB2jt0VPOgeF9suOcriy4R5QxYrk5GYsyCI&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_gid=4UJBjGzVj-FWQMoKm9hQTw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQRc2lhA2IJAhMc1KsKpq04xtEve9BZN8waS-QH3-w4F0Q&oe=6B05120C",
+        "permalink": "https://www.instagram.com/p/Df7k0rSlj9n/",
+        "publishedAt": "2026-11-19T17:04:53+00:00",
+        "type": "image"
+      },
+      {
+        "caption": "Para garantir mais acesso ao ensino, a Câmara dos Deputados ampliou a oferta da Educação de Jovens e Adultos (EJA).\n\nProjeto aprovado determina que as escolas deverão oferecer aulas em pelo menos dois turnos [PL 2721/2015]:\n\nOpção 1 - De manhã e à noite.\n\nOpção 2 - À tarde e à noite.\n\nE isso é o mínimo.\n\nA proposta nasceu para dar opções ao jovem e ao adulto que trabalham. Com a mudança, não importa mais o turno em que o aluno entra no trampo. Sempre vai ter uma opção no contraturno.\n\nO projeto ainda precisa da aprovação do Senado e do ok do presidente da República para virar lei.\n\nAutor:  dep. @dr.damiao (União-PB)\nRelator: dep. @felixmendoncajr (PDT-BA)\n\nSiga nossas redes e fique por dentro das propostas que podem interferir na sua vida!\n\n#eja #alfabetização #educacao #camaradosdeputados",
+        "comments": 14,
+        "id": "4033468870177332436",
+        "likes": 353,
+        "mediaUrl": "https://scontent-iad3-2.cdninstagram.com/v/t51.82787-15/907477222_18359684248174424_7571427686398846461_n.webp?_nc_cat=104&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzQ2ODg3MDE3NzMzMjQzNg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=J7093e7LfBoQ7kNvwHGRnQd&_nc_oc=AdrBOpv444GK9phLwhnM6Vd56XNLLA9bJKBy_JIsSnjah2UIin1mdUSZDoFz4R-kx54&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&_nc_gid=4UJBjGzVj-FWQMoKm9hQTw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQS7V1cFQL8vrY1qJQsllvbGzcLvvIiUjTm6mjWhZplukg&oe=6B051522",
+        "permalink": "https://www.instagram.com/p/Df5wpEzhBzU/",
+        "publishedAt": "2026-11-19T11:00:05+00:00",
+        "type": "image"
+      },
+      {
         "caption": "O ajuste fiscal proposto pelo Governo vai ser colocado em discussão no Plenário da Câmara na segunda-feira (23/11). O anúncio foi feito há pouco pelo presidente, deputado Hugo Motta. \n\nO Senado concluiu a votação da proposta nesta quarta-feira (18/11) [PLP 299/2026]. Com base nas medidas aprovadas, o governo estima uma melhora de R$ 45,1 bilhões a R$ 56,1 bilhões no resultado primário de 2027, que é a diferença entre as receitas e as despesas, sem considerar os juros da dívida pública.\n\n#Ajustefiscal #CâmaradosDeputados",
-        "comments": 133,
+        "comments": 260,
         "id": "4033497452949897823",
-        "likes": 390,
-        "mediaUrl": "https://scontent-sea5-2.cdninstagram.com/v/t51.82787-15/912724905_18359686729174424_3907275029517795689_n.webp?_nc_cat=108&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzQ5NzQ1Mjk0OTg5NzgyMw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=wZrxrwdXC4wQ7kNvwF4kevN&_nc_oc=Adrf0T4oX_piqTVXyxOL44_9XN0kOgKJbVNVN1py781ZENNmZBAelM_qt6delSkpqsA&_nc_zt=23&_nc_ht=scontent-sea5-2.cdninstagram.com&_nc_gid=ILrIZZmWQEqGnt7_Xbc2Iw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQTYBYM6eEjIgXpTm6WSfUHrPcZQmt2OKu8Q3c-FDq3TBg&oe=6B04898C",
+        "likes": 576,
+        "mediaUrl": "https://scontent-iad3-2.cdninstagram.com/v/t51.82787-15/912724905_18359686729174424_3907275029517795689_n.webp?_nc_cat=108&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzQ5NzQ1Mjk0OTg5NzgyMw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=wZrxrwdXC4wQ7kNvwEJuJS1&_nc_oc=AdqH-Jatw4bRlVeXMMbQI6UChjAKEK6TGNlk7yMEYkPRAAL67mbvnQhA9cDLNLdTtUw&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&_nc_gid=4UJBjGzVj-FWQMoKm9hQTw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQS47FsPI66qNmFBksgjk2qoB4NFmsSBE7UGeRUlKsiWZw&oe=6B04FA0C",
         "permalink": "https://www.instagram.com/p/Df53JAlhYJf/",
         "publishedAt": "2026-11-19T01:06:30+00:00",
         "type": "image"
       },
       {
         "caption": "Defensor da escola pública, laica e em tempo integral, Darcy Ribeiro se tornou uma das maiores autoridades em educação no Brasil. Ele empresta o nome ao prêmio criado pela Câmara para reconhecer o trabalho de pessoas e instituições que fazem a diferença na educação.\n\nPara ser premiado, é preciso ter um impacto significativo nas comunidades em que atua.\n\nOs vencedores deste ano foram:\n\n● Instituto Ayrton Senna\n● Instituto Alana\n● Escola Nacional Florestan Fernandes\n\nArraste para o lado e descubra por que eles mereceram esse reconhecimento.\n\nE conta pra gente: que mudanças você gostaria de ver na educação brasileira?\n\n#educação #PremioDarcyRibeiro #CâmaradosDeputados",
-        "comments": 2,
+        "comments": 4,
         "id": "4033452440586303817",
-        "likes": 69,
-        "mediaUrl": "https://scontent-sea5-2.cdninstagram.com/v/t51.82787-15/914285428_18359682748174424_426285281467676701_n.webp?_nc_cat=103&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzQ1MTQ5ODgyNDY0MTYyMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=HG0OlaNeBY8Q7kNvwFf4ePo&_nc_oc=AdryQVWiUzOLS-Kcf1i0G9RbLoo2SXHbz0EXdNijRdqkgrJvomxXNwdt1cR0jlwrqN8&_nc_zt=23&_nc_ht=scontent-sea5-2.cdninstagram.com&_nc_gid=ILrIZZmWQEqGnt7_Xbc2Iw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQR6P77o_7ix75OGdQK-MEOlC7-vfnL9xYbt10ObsfxnkA&oe=6B049A7F",
+        "likes": 118,
+        "mediaUrl": "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-15/914285428_18359682748174424_426285281467676701_n.webp?_nc_cat=103&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzQ1MTQ5ODgyNDY0MTYyMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=HG0OlaNeBY8Q7kNvwFBx7KP&_nc_oc=Ado_SSAed6B3MNwcsaPafGklkfS4JaavsXY0_1vkMrnFTpJmeWNdl48-OwGpymPg1kg&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_gid=4UJBjGzVj-FWQMoKm9hQTw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQQWzq2fBpgHeCCksIUH-lJbyDePDUlEMT-xVspob4zUEg&oe=6B050AFF",
         "permalink": "https://www.instagram.com/p/Df5s5_jlDlJ/",
         "publishedAt": "2026-11-18T23:37:01+00:00",
         "type": "carousel"
       },
       {
         "caption": "👧🏽👦🏻 Proteger crianças e adolescentes é uma responsabilidade de todos. Mas tem gente que faz disso uma missão diária!\n\n18 de novembro é dia de homenagear os profissionais que atuam na defesa dos direitos de crianças e adolescentes em todo o Brasil: o Conselheiro Tutelar.\n\nE você sabia que existem projetos em análise na Câmara para garantir piso salarial, licença médica, assistência psicológica, mais segurança e melhores condições de trabalho para esses profissionais?\n\n📲 Arraste para o lado, conheça o trabalho dos conselheiros tutelares e descubra algumas propostas que podem fortalecer essa atuação.\n\n🚨 Suspeita de violação dos direitos de uma criança ou adolescente? Procure o Conselho Tutelar da sua região ou denuncie pelo Disque 100.\n\n#DiaDoConselheiroTutelar #ConselhoTutelar #DireitosDaCriança #ECA #CâmaraDosDeputados",
-        "comments": 31,
+        "comments": 33,
         "id": "4033300833785657191",
-        "likes": 451,
-        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/907304795_18359665885174424_5126577166678285271_n.webp?_nc_cat=102&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzI5OTk4OTIxOTMxMjY2Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=m9S5FJo7OF8Q7kNvwHqmTI_&_nc_oc=AdqhUpTzsXrCSJpEixIrx-SQylpJsTWgEArYf8O2QeML5eqM2iDsGBWgngANSMxDMvY&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=ILrIZZmWQEqGnt7_Xbc2Iw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQS3IED9f6c2hIaiS1FXPpEgRLh7gsiZvP4rgnZW3L7wYA&oe=6B0477F6",
+        "likes": 494,
+        "mediaUrl": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/907304795_18359665885174424_5126577166678285271_n.webp?_nc_cat=102&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzI5OTk4OTIxOTMxMjY2Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=m9S5FJo7OF8Q7kNvwGfbFN1&_nc_oc=AdowNdm8KKuXsxTasoNQ9JJGwwyJ_vPKu8wOCl_5KTK59BSbXVGupZEu_emwDYpL3aM&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&_nc_gid=4UJBjGzVj-FWQMoKm9hQTw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQR3GdDzbylISt5j-PxvZrc8Emp6jWlONctx8kZyHYRCXg&oe=6B0520B6",
         "permalink": "https://www.instagram.com/p/Df5Kb0uFLdn/",
         "publishedAt": "2026-11-18T18:35:48+00:00",
         "type": "carousel"
       },
       {
         "caption": "A Lei de Alienação Parental pode estar com os dias contados!\n\nA Câmara dos Deputados rejeitou um recurso que impedia o envio imediato ao Senado do [PL 2812/2022], que propõe revogar integralmente a legislação em vigor desde 2010.\n\nA proposta busca evitar que a lei seja utilizada para desacreditar denúncias de violência doméstica e abuso sexual envolvendo crianças e adolescentes.\nO texto já havia sido aprovado nas comissões da Câmara e agora segue para análise do Senado.\n\nA lei sobre alienação parental foi criada para impedir situações em que o pai ou a mãe da criança procura afastar o outro da convivência com os filhos, seja por meio da desqualificação, seja dificultando o convívio ou a manutenção de vínculos.\n\n⚠️ Atenção: a lei continua em vigor. Para ser derrubada, o projeto precisa também da aprovação do Senado.\n\nAcompanhe as redes da Câmara!\n\n#alienacaoparental #paternidade #maternidade #camaradosdeputados",
-        "comments": 528,
+        "comments": 603,
         "id": "4033262923107705571",
-        "likes": 2536,
-        "mediaUrl": "https://scontent-sea5-2.cdninstagram.com/v/t39.30808-6/913278524_1598000145696772_6945299105599606883_n.jpg?stp=c0.45.1080.1350a_dst-jpg_e35_sh2.08_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzI2MjkyMzEwNzcwNTU3MQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=nW2gW2RvOpIQ7kNvwEImT-v&_nc_oc=AdoQeO2M-XVo0hpjcTUhyL2ccv-9NGiw0t3qGUG-28wSR4nd1mBKtWg1OMz8EQ1exVs&_nc_zt=23&_nc_ht=scontent-sea5-2.cdninstagram.com&_nc_gid=ILrIZZmWQEqGnt7_Xbc2Iw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQSzhkVLs-QLszSm1o55uvKQWyW3ucaKhx1y0DNE4LkmIw&oe=6B047687",
+        "likes": 3279,
+        "mediaUrl": "https://scontent-iad3-1.cdninstagram.com/v/t39.30808-6/913278524_1598000145696772_6945299105599606883_n.jpg?stp=c0.45.1080.1350a_dst-jpg_e35_sh2.08_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzI2MjkyMzEwNzcwNTU3MQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=nW2gW2RvOpIQ7kNvwGr8xOc&_nc_oc=AdrFEgG84tw_qphsKF0IiEAVEkK_jRRIQDczX-hxnVF5bTyRG2IOgWbOKU0b4LuthhA&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_gid=4UJBjGzVj-FWQMoKm9hQTw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQQq10X3Ipj2Q1DE5V1PuekBFmSDw3KCHkX4AkSs6Q8U4g&oe=6B051F47",
         "permalink": "https://www.instagram.com/p/Df5B0JplqLj/",
         "publishedAt": "2026-11-18T17:20:30+00:00",
-        "type": "image"
-      },
-      {
-        "caption": "A capacidade da população de fiscalizar a administração pública mudou de patamar em 18 de novembro de 2011. Nesse dia, foi sancionada a  Lei de Acesso à Informação (LAI). O Brasil dava um passo decisivo para aumentar a transparência nos Três Poderes!\n\nA norma passou a garantir a qualquer pessoa ou empresa o direito de solicitar dados e documentos aos órgãos públicos, que ficaram obrigados a fornecer essas informações.\n\nNa prática, a LAI ampliou as ferramentas de fiscalização da sociedade e fortaleceu o acompanhamento das ações e decisões do Executivo, do Legislativo e do Judiciário.\n\nNo Portal de Transparência da Câmara, você pode pesquisar informações sobre a atuação e os gastos de cada deputado, licitações, contratos, despesas, funcionários e diversos outros assuntos. Se não encontrar o que procura, é só entrar em contato por um dos canais de atendimento da LAI para fazer a solicitação.\n\nAcesse camara.leg.br e confira!\n\n#transparencia #LAI #fiscalização #camaradosdeputados",
-        "comments": 13,
-        "id": "4033184637613864667",
-        "likes": 230,
-        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t39.30808-6/912568459_1597876139042506_4094401571855985014_n.jpg?stp=c0.45.1080.1350a_dst-jpg_e35_sh2.08_tt6&_nc_cat=104&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzE4NDYzNzYxMzg2NDY2Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=37EqQoPaNQoQ7kNvwEGugDV&_nc_oc=AdoY6EJ0-1PCQGPjk2guABKT92yULnPTSrtdbzAnz3MhEtn-ZY_u1zEaOzzgfmgre58&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=ILrIZZmWQEqGnt7_Xbc2Iw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQTlfaP6aB08xv3Jvw7qQxl3k_AD-gJr6uNW6od_eVwr4g&oe=6B04A6FE",
-        "permalink": "https://www.instagram.com/p/Df4wA8miXbb/",
-        "publishedAt": "2026-11-18T14:44:57+00:00",
-        "type": "image"
-      },
-      {
-        "caption": "As empresas com dívidas trabalhistas podem ter no máximo 10% dos recursos mensais bloqueados para acertar essas contas, isso já descontado o pagamento mensal dos salários dos empregados atuais. É o que prevê um projeto aprovado pela Câmara [PL 3083/2019] e que agora segue para análise do Senado.\n\nA ideia é que o  percentual do que pode ser penhorado seja definido pelo juiz trabalhista, que analisa o caso e as provas existentes.\n\nA mudança na Consolidação das Leis do Trabalho (CLT) está sendo proposta para \"garantir o pagamento da dívida em tempo razoável, mas sem tornar inviável a atividade empresarial”, esclarece o texto.\n\nAutor: deputado @marcospereira1010 (Republicanos-SP)\nRelator: deputado @silviocostafilho (Republicanos-PE)\n\nQuer saber mais sobre o assunto? Vai lá no site oficial da Câmara e coloca o número do projeto na busca. Está tudo explicadinho.\n\nAqui nas redes da Câmara, a gente te deixa por dentro de tudo o que seus representantes fazem. Siga a gente!\n\n#dívidatrabalhista #penhora #CLT",
-        "comments": 5,
-        "id": "4032767769321038631",
-        "likes": 69,
-        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/902954711_18359601715174424_1983923847264540317_n.webp?_nc_cat=109&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMjc2Nzc2OTMyMTAzODYzMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=0dB-ra7xqqAQ7kNvwEvNOV_&_nc_oc=AdqGVsZv3BnIw83L60msar-fX4gmJuSIq92sOcFgFFo-yKq2xyLhYkOG5jyzGQPppaM&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=ILrIZZmWQEqGnt7_Xbc2Iw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQQSkiet1ftBLwjoSiI-708R2_4ci0LJ_0AXA_qqqeMgIA&oe=6B047A8A",
-        "permalink": "https://www.instagram.com/p/Df3ROtwBmMn/",
-        "publishedAt": "2026-11-18T11:00:04+00:00",
         "type": "image"
       }
     ],
@@ -148,21 +148,21 @@
     ]
   },
   "tiktok": {
-    "change24h": null,
+    "change24h": 0,
     "followers": 149700,
     "handle": "@camaradosdeputados",
-    "observedAt": "2026-11-19T08:55:08.233591+00:00"
+    "observedAt": "2026-11-19T18:22:59.516134+00:00"
   },
   "x": {
-    "change24h": null,
-    "followers": 1086452,
+    "change24h": -419,
+    "followers": 1086457,
     "handle": "@camaradeputados",
-    "observedAt": "2026-11-19T08:55:08.233591+00:00"
+    "observedAt": "2026-11-19T18:22:59.516134+00:00"
   },
   "youtube": {
     "change24h": null,
     "followers": 1500000,
     "handle": "@camaradosdeputadosoficial",
-    "observedAt": "2026-11-19T08:55:08.233591+00:00"
+    "observedAt": "2026-11-19T18:22:59.516134+00:00"
   }
 }

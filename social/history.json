@@ -1,146 +1,6 @@
 {
   "samples": [
     {
-      "collectedAt": "2026-11-12T15:11:53.881745+00:00",
-      "followers": 1087136,
-      "network": "x"
-    },
-    {
-      "collectedAt": "2026-11-12T15:16:53.281369+00:00",
-      "followers": 1087136,
-      "network": "x"
-    },
-    {
-      "collectedAt": "2026-11-12T15:16:53.281369+00:00",
-      "followers": 1500000,
-      "network": "youtube"
-    },
-    {
-      "collectedAt": "2026-11-12T15:16:53.281369+00:00",
-      "followers": 149500,
-      "network": "tiktok"
-    },
-    {
-      "collectedAt": "2026-11-12T15:16:53.281369+00:00",
-      "followers": 666033,
-      "network": "facebook"
-    },
-    {
-      "collectedAt": "2026-11-12T15:24:23.551486+00:00",
-      "followers": 1087137,
-      "network": "x"
-    },
-    {
-      "collectedAt": "2026-11-12T15:24:23.551486+00:00",
-      "followers": 1500000,
-      "network": "youtube"
-    },
-    {
-      "collectedAt": "2026-11-12T15:24:23.551486+00:00",
-      "followers": 149500,
-      "network": "tiktok"
-    },
-    {
-      "collectedAt": "2026-11-12T15:24:23.551486+00:00",
-      "followers": 666033,
-      "network": "facebook"
-    },
-    {
-      "collectedAt": "2026-11-12T15:54:13.312515+00:00",
-      "followers": 1087129,
-      "network": "x"
-    },
-    {
-      "collectedAt": "2026-11-12T15:54:13.312515+00:00",
-      "followers": 1500000,
-      "network": "youtube"
-    },
-    {
-      "collectedAt": "2026-11-12T15:54:13.312515+00:00",
-      "followers": 149500,
-      "network": "tiktok"
-    },
-    {
-      "collectedAt": "2026-11-12T15:54:13.312515+00:00",
-      "followers": 666038,
-      "network": "facebook"
-    },
-    {
-      "collectedAt": "2026-11-12T16:50:08.496719+00:00",
-      "followers": 1500000,
-      "network": "youtube"
-    },
-    {
-      "collectedAt": "2026-11-12T16:50:08.496719+00:00",
-      "followers": 149500,
-      "network": "tiktok"
-    },
-    {
-      "collectedAt": "2026-11-12T16:50:08.496719+00:00",
-      "followers": 666046,
-      "network": "facebook"
-    },
-    {
-      "collectedAt": "2026-11-12T16:54:43.464929+00:00",
-      "followers": 1087132,
-      "network": "x"
-    },
-    {
-      "collectedAt": "2026-11-12T16:54:43.464929+00:00",
-      "followers": 1500000,
-      "network": "youtube"
-    },
-    {
-      "collectedAt": "2026-11-12T16:54:43.464929+00:00",
-      "followers": 149500,
-      "network": "tiktok"
-    },
-    {
-      "collectedAt": "2026-11-12T16:54:43.464929+00:00",
-      "followers": 666047,
-      "network": "facebook"
-    },
-    {
-      "collectedAt": "2026-11-12T17:44:20.625955+00:00",
-      "followers": 1087136,
-      "network": "x"
-    },
-    {
-      "collectedAt": "2026-11-12T17:44:20.625955+00:00",
-      "followers": 1500000,
-      "network": "youtube"
-    },
-    {
-      "collectedAt": "2026-11-12T17:44:20.625955+00:00",
-      "followers": 149500,
-      "network": "tiktok"
-    },
-    {
-      "collectedAt": "2026-11-12T17:44:20.625955+00:00",
-      "followers": 666054,
-      "network": "facebook"
-    },
-    {
-      "collectedAt": "2026-11-12T17:53:33.525246+00:00",
-      "followers": 1087129,
-      "network": "x"
-    },
-    {
-      "collectedAt": "2026-11-12T17:53:33.525246+00:00",
-      "followers": 1500000,
-      "network": "youtube"
-    },
-    {
-      "collectedAt": "2026-11-12T17:53:33.525246+00:00",
-      "followers": 149500,
-      "network": "tiktok"
-    },
-    {
-      "collectedAt": "2026-11-12T17:53:33.525246+00:00",
-      "followers": 666055,
-      "network": "facebook"
-    },
-    {
       "collectedAt": "2026-11-12T21:55:55.659775+00:00",
       "followers": 1087133,
       "network": "x"
@@ -813,6 +673,26 @@
     {
       "collectedAt": "2026-11-19T08:55:08.233591+00:00",
       "followers": 666534,
+      "network": "facebook"
+    },
+    {
+      "collectedAt": "2026-11-19T18:22:59.516134+00:00",
+      "followers": 1086457,
+      "network": "x"
+    },
+    {
+      "collectedAt": "2026-11-19T18:22:59.516134+00:00",
+      "followers": 1500000,
+      "network": "youtube"
+    },
+    {
+      "collectedAt": "2026-11-19T18:22:59.516134+00:00",
+      "followers": 149700,
+      "network": "tiktok"
+    },
+    {
+      "collectedAt": "2026-11-19T18:22:59.516134+00:00",
+      "followers": 666580,
       "network": "facebook"
     }
   ],
