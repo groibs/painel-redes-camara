@@ -1,6 +1,8 @@
 {
-  "collectedAt": "2026-11-20T00:56:42.501850+00:00",
-  "errors": {},
+  "collectedAt": "2026-11-20T08:39:30.599943+00:00",
+  "errors": {
+    "facebook": "ValueError"
+  },
   "facebook": {
     "change24h": null,
     "followers": 666573,
@@ -9,69 +11,69 @@
   },
   "instagram": {
     "change24h": null,
-    "embedCheckedAt": "2026-11-20T00:56:42.501850+00:00",
+    "embedCheckedAt": "2026-11-20T08:39:30.599943+00:00",
     "embedFollowers": 400678,
     "followers": 400027,
     "followersObservedAt": "2026-11-17T17:49:13.829178+00:00",
     "handle": "@camaradosdeputados",
-    "observedAt": "2026-11-20T00:56:42.501850+00:00",
+    "observedAt": "2026-11-20T08:39:30.599943+00:00",
     "posts": [
       {
         "caption": "📊 Imposto do pecado e sobre lucros e dividendos, mercado digital, uso de animais em filme pornô e auxílio\na professores para compra da casa própria. Esses foram os temas que mais mobilizaram o público nos canais da Câmara nesta semana.\n\nNo topo da lista, está a medida do governo que estabelece as alíquotas do imposto seletivo sobre itens como bebidas, cigarros, refrigerantes e carros a combustão, criado na reforma tributária. A preocupação com o bolso também está registrada nos projetos que regulamentam a tributação sobre lucros e dividendos.\n\nO levantamento reúne dados de participação nos canais da Câmara entre 16 e 18 de novembro de 2026.\n\n🔎 Quer saber mais sobre alguma dessas propostas?\n\n📱 Acesse o nosso portal - camara.leg.br. Vai lá em Atividade Legislativa.\n\n#impostoseletivo #casadoprofessor #impostos #proteçaoaosanimais #mercadodigital",
-        "comments": 0,
+        "comments": 4,
         "id": "4034163876777272174",
-        "likes": 11,
-        "mediaUrl": "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-15/914852174_18359773393174424_1198003195931935193_n.webp?_nc_cat=104&_nc_map=urlgen_bucketless&ig_cache_key=NDAzNDE2Mzg3Njc3NzI3MjE3NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=RKuAgk-iTx8Q7kNvwGpq50T&_nc_oc=AdpiqC4nzJ7D6r1vOM7vtSWkrmiUEyTSJ0OZZsU-xKznxOphk_uFQwoKujLnVxgnCPg&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_gid=DtCXzqZ64LS1lAHP4tfhKA&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQRdtKXriZ4g6-WLpEeSbcjm91LulhR55_7sMQWLsD3RdQ&oe=6B0587FD",
+        "likes": 19,
+        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/914852174_18359773393174424_1198003195931935193_n.webp?_nc_cat=104&_nc_map=urlgen_bucketless&ig_cache_key=NDAzNDE2Mzg3Njc3NzI3MjE3NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=RKuAgk-iTx8Q7kNvwH2ZzDO&_nc_oc=AdqEN3abLcTWWdCf3MJFlbc41U-mwtTNb_lW1fbeTSrZG1tg541G0cPqR7814CCgEwM&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=B1b_UQ-2hh498SFRoPuq1g&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQSisk1Xzbwn4YZIRnAal8QIPjgSM6Yy7g4LcNfLdVZ6IQ&oe=6B05C03D",
         "permalink": "https://www.instagram.com/p/Df8OqwJBaNu/",
         "publishedAt": "2026-11-20T00:35:11+00:00",
         "type": "image"
       },
       {
         "caption": "Fim da escala 6x1, tem novidades à vista!\n\nO governo federal publicou um decreto que regulamenta as novas regras da jornada de trabalho, após a aprovação da mudança pelo Congresso Nacional.\n\nA redução será gradual: 42 horas semanais a partir de 16 de dezembro de 2026; e 40 horas a partir de dezembro de 2027. Os dois dias de descanso semanal remunerado, sem redução salarial, já valem na primeira etapa.\n\nO decreto também trata das escalas especiais e estabelece novas referências para o cálculo do valor da hora trabalhada. \n\nPara quem trabalha em turnos ininterruptos de revezamento, a jornada continua sendo de seis horas diárias.  Nesse caso, a jornada pode até variar de semana para semana, mas, na contagem do mês, a média semanal não poderá ultrapassar o novo limite. O trabalhador deverá ter garantido o equivalente a dois dias de repouso remunerado por semana.\n\nPara quem trabalha na jornada 12x36, será assegurada a compensação das horas ou o pagamento de horas extras quando a média semanal ultrapassar o limite.\n\nAs exceções podem ser definidas por acordos ou convenções coletivas de trabalho.\n\nO Ministério do Trabalho terá que editar um ato para tratar da efetiva aplicação do repouso semanal remunerado e dos regimes especiais de jornada.\n\nE fica ligado aqui nas redes da Câmara! A gente acompanha as novidades e explica o que muda na sua vida.\n\n#fimdaescala6x1 #jornadadetrabalho #12x36",
-        "comments": 13,
+        "comments": 23,
         "id": "4034160922360837139",
-        "likes": 573,
-        "mediaUrl": "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-15/912549680_18359772613174424_8607354581632686027_n.webp?_nc_cat=108&_nc_map=urlgen_bucketless&ig_cache_key=NDAzNDE2MDQ3MzI1OTA0MTQ0Ng%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=bvkjeyh_ye0Q7kNvwFI1oeS&_nc_oc=AdpAw7kHVWcLTKYOKr7koZx_Djq93M3QYifdltz2GK4IPClAN49b2s3n1O9wiN83DQk&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_gid=DtCXzqZ64LS1lAHP4tfhKA&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQQin3-EQJKRm8hbpt1D3M9KyJkA8bhaXv0wVHDL2TEH9w&oe=6B0571F4",
+        "likes": 819,
+        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/912549680_18359772613174424_8607354581632686027_n.webp?_nc_cat=108&_nc_map=urlgen_bucketless&ig_cache_key=NDAzNDE2MDQ3MzI1OTA0MTQ0Ng%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=bvkjeyh_ye0Q7kNvwHONYCQ&_nc_oc=AdpE5pWjIyPKe3q-Zx44CcEH-hlKvGkjEsas9-L2A9wOOlYGvPkMlZc-ENAuM0EuSIU&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=B1b_UQ-2hh498SFRoPuq1g&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQTc5JUmdrf4-5_8O8udZS7DGcsXctEfKzsvCPI1fkYP3w&oe=6B05E274",
         "permalink": "https://www.instagram.com/p/Df8N_woFHQT/",
         "publishedAt": "2026-11-19T23:04:39+00:00",
         "type": "carousel"
       },
       {
         "caption": "⚖️ Fim da escala 6x1: como ficam os dias de trabalho e descanso?\n\nO fim da escala 6x1 prevê pelo menos dois dias de descanso remunerado por semana e jornada de, no máximo, 40 horas semanais. Mas isso não significa que todos os trabalhadores terão necessariamente folga aos sábados e domingos: diferentes modelos de escala poderão ser organizados por meio de acordos coletivos.\n\nNo Palavra Aberta, o deputado Reginaldo Lopes (@reginaldolopesmg), do PT de Minas Gerais, autor da proposta que pôs fim à escala 6x1, explica como poderão funcionar jornadas como a 12x36 e a distribuição dos dias de descanso.\n\nParticipou desta edição:\n➡️ Deputado Reginaldo Lopes (PT-MG)\n\n👉 Na sua opinião, como a mudança deve impactar a rotina dos trabalhadores?\n\nAssista ou ouça o programa completo nos nossos canais!\n📺 cd.leg.br/youtube\n📺 camara.leg.br/tv\n\n#fimdaescal6x1 #escala5x2 #tvcâmara #câmaradosdeputados",
-        "comments": 10,
+        "comments": 14,
         "id": "4034017965162531928",
-        "likes": 116,
-        "mediaUrl": "https://scontent-iad3-2.cdninstagram.com/v/t51.82787-15/918089845_17995406376065500_5874089941127404428_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=110&_nc_map=urlgen_bucketless&ig_cache_key=NDAzNDAxNzk2NTE2MjUzMTkyODE3OTk1NDA2MzcwMDY1NTAw.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEwODAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=4gPGNCc2gMkQ7kNvwFS8PSW&_nc_oc=AdrELpx8C9usbIRuLep-YJNnt1mSpEF7HxZ1RFmwRo8EgWfnwhzj9HMG_ouSvt7Pa1o&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&_nc_gid=DtCXzqZ64LS1lAHP4tfhKA&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQQONStar0xMtu_FMaCPJw-g1EKy4k-_CkEU7PKq08b9pg&oe=6B058684",
+        "likes": 160,
+        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/918089845_17995406376065500_5874089941127404428_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=110&_nc_map=urlgen_bucketless&ig_cache_key=NDAzNDAxNzk2NTE2MjUzMTkyODE3OTk1NDA2MzcwMDY1NTAw.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEwODAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=4gPGNCc2gMkQ7kNvwFfb3W8&_nc_oc=AdrY-p33PwkrCZzdLNlq_njzL682FcIpKuFw6RfW9Hm27gJALzk-MmcTl6UfqnrJU0A&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=B1b_UQ-2hh498SFRoPuq1g&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQS6wEZDyjfUMlL-PKByKTQ0xKadDIbRGlqtfKbrnvDAEg&oe=6B05BEC4",
         "permalink": "https://www.instagram.com/p/Df7tfdXDoxY/",
         "publishedAt": "2026-11-19T18:21:24+00:00",
         "type": "video"
       },
       {
         "caption": "A exposição “Okàn Ijó: um passo entre o corpo e a ancestralidade” celebra as danças afro-brasileiras e sua importância cultural. A mostra reúne fotos, vídeos e textos na Galeria Tereza de Benguela, na Câmara, de 19/11/26 a 07/01/27. Entrada franca. Visitação: de segunda a sexta, das 9h às 17h.",
-        "comments": 7,
+        "comments": 8,
         "id": "4033979840810336103",
-        "likes": 37,
-        "mediaUrl": "https://scontent-iad3-1.cdninstagram.com/v/t39.30808-6/916698997_1599021968927923_5956999051801081945_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=108&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzk3OTg0MDgxMDMzNjEwMw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=DU_45tH66ecQ7kNvwHQMym7&_nc_oc=Adp_GfbbOQ5fvp9Gp39mhC5N2Jocn_MnbLaon1hpHQJtZxs_BAJdu-hdcKK3T5lD_nM&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_gid=DtCXzqZ64LS1lAHP4tfhKA&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQTtxZfqC8HSA_5-JDUes8pqXSJhvZ4iRAWhcRbZTJIy3g&oe=6B05828C",
+        "likes": 44,
+        "mediaUrl": "https://scontent-sea5-2.cdninstagram.com/v/t39.30808-6/916698997_1599021968927923_5956999051801081945_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=108&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzk3OTg0MDgxMDMzNjEwMw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=DU_45tH66ecQ7kNvwEMcG8G&_nc_oc=AdrL8EayO_Gas79s_9yyva4XXOV1_U_UY3kiCtDZDzy13XzhtJ0aUBeMMzaiOF3LEpA&_nc_zt=23&_nc_ht=scontent-sea5-2.cdninstagram.com&_nc_gid=B1b_UQ-2hh498SFRoPuq1g&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQSWaNllruHItOJf-D9l0n8sMHEHEgjwZWHEhimBAtthUQ&oe=6B05F30C",
         "permalink": "https://www.instagram.com/p/Df7k0rSlj9n/",
         "publishedAt": "2026-11-19T17:04:53+00:00",
         "type": "image"
       },
       {
         "caption": "Para garantir mais acesso ao ensino, a Câmara dos Deputados ampliou a oferta da Educação de Jovens e Adultos (EJA).\n\nProjeto aprovado determina que as escolas deverão oferecer aulas em pelo menos dois turnos [PL 2721/2015]:\n\nOpção 1 - De manhã e à noite.\n\nOpção 2 - À tarde e à noite.\n\nE isso é o mínimo.\n\nA proposta nasceu para dar opções ao jovem e ao adulto que trabalham. Com a mudança, não importa mais o turno em que o aluno entra no trampo. Sempre vai ter uma opção no contraturno.\n\nO projeto ainda precisa da aprovação do Senado e do ok do presidente da República para virar lei.\n\nAutor:  dep. @dr.damiao (União-PB)\nRelator: dep. @felixmendoncajr (PDT-BA)\n\nSiga nossas redes e fique por dentro das propostas que podem interferir na sua vida!\n\n#eja #alfabetização #educacao #camaradosdeputados",
-        "comments": 19,
+        "comments": 22,
         "id": "4033468870177332436",
-        "likes": 489,
-        "mediaUrl": "https://scontent-iad3-2.cdninstagram.com/v/t51.82787-15/907477222_18359684248174424_7571427686398846461_n.webp?_nc_cat=104&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzQ2ODg3MDE3NzMzMjQzNg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=J7093e7LfBoQ7kNvwFglZ8i&_nc_oc=AdrUK7XP6f9hZLb1OEqjjkxUChXNy976olyHAsw1NC69lWj-k6yPKOEoo_muVJs4adg&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&_nc_gid=DtCXzqZ64LS1lAHP4tfhKA&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQT0S8V2PxOZ2oLF45s_HDUCUj5cLclR8TdWEjVuFW7FXA&oe=6B0585A2",
+        "likes": 533,
+        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/907477222_18359684248174424_7571427686398846461_n.webp?_nc_cat=104&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzQ2ODg3MDE3NzMzMjQzNg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=J7093e7LfBoQ7kNvwFNcvq1&_nc_oc=AdrcecGAUnPDHiumBMW-JKpUBKx9fK4Q6uNxA5g40wZO9wVJzHJz4DCQCOAHvp2_EL8&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=B1b_UQ-2hh498SFRoPuq1g&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQR3BApT4KcoYprobsLQ-lJUo_ErmmmSRnoFMMHHf16gBA&oe=6B05BDE2",
         "permalink": "https://www.instagram.com/p/Df5wpEzhBzU/",
         "publishedAt": "2026-11-19T11:00:05+00:00",
         "type": "image"
       },
       {
         "caption": "O ajuste fiscal proposto pelo Governo vai ser colocado em discussão no Plenário da Câmara na segunda-feira (23/11). O anúncio foi feito há pouco pelo presidente, deputado Hugo Motta. \n\nO Senado concluiu a votação da proposta nesta quarta-feira (18/11) [PLP 299/2026]. Com base nas medidas aprovadas, o governo estima uma melhora de R$ 45,1 bilhões a R$ 56,1 bilhões no resultado primário de 2027, que é a diferença entre as receitas e as despesas, sem considerar os juros da dívida pública.\n\n#Ajustefiscal #CâmaradosDeputados",
-        "comments": 290,
+        "comments": 302,
         "id": "4033497452949897823",
-        "likes": 597,
-        "mediaUrl": "https://scontent-iad3-2.cdninstagram.com/v/t51.82787-15/912724905_18359686729174424_3907275029517795689_n.webp?_nc_cat=108&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzQ5NzQ1Mjk0OTg5NzgyMw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=wZrxrwdXC4wQ7kNvwFAf26R&_nc_oc=AdoqeEhx23qAKwUddp2Mx0GbGqQWywpJv7mrHDEXAoxF3IPmDmlIq1A3z6XhIkdkypE&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&_nc_gid=DtCXzqZ64LS1lAHP4tfhKA&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQQzeFmpmqaWXPoBnBPL1TS4biII891JbpooH-se9eI4BA&oe=6B056A8C",
+        "likes": 603,
+        "mediaUrl": "https://scontent-sea5-2.cdninstagram.com/v/t51.82787-15/912724905_18359686729174424_3907275029517795689_n.webp?_nc_cat=108&_nc_map=urlgen_bucketless&ig_cache_key=NDAzMzQ5NzQ1Mjk0OTg5NzgyMw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=wZrxrwdXC4wQ7kNvwHcinRa&_nc_oc=AdpLfD-pVkWOrYda3vW8ysc3SIEMgHMc-goiLsZ3_OmFVsV8JZ-k9IPdbk1zBFbbilY&_nc_zt=23&_nc_ht=scontent-sea5-2.cdninstagram.com&_nc_gid=B1b_UQ-2hh498SFRoPuq1g&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQTSyPkib-9E5MUcTnu1SXl327u1u4iJZ1iKRSLPvTuNog&oe=6B05DB0C",
         "permalink": "https://www.instagram.com/p/Df53JAlhYJf/",
         "publishedAt": "2026-11-19T01:06:30+00:00",
         "type": "image"
@@ -151,18 +153,18 @@
     "change24h": 0,
     "followers": 149700,
     "handle": "@camaradosdeputados",
-    "observedAt": "2026-11-20T00:56:42.501850+00:00"
+    "observedAt": "2026-11-20T08:39:30.599943+00:00"
   },
   "x": {
     "change24h": -50,
-    "followers": 1086416,
+    "followers": 1086402,
     "handle": "@camaradeputados",
-    "observedAt": "2026-11-20T00:56:42.501850+00:00"
+    "observedAt": "2026-11-20T08:39:30.599943+00:00"
   },
   "youtube": {
     "change24h": null,
     "followers": 1500000,
     "handle": "@camaradosdeputadosoficial",
-    "observedAt": "2026-11-20T00:56:42.501850+00:00"
+    "observedAt": "2026-11-20T08:39:30.599943+00:00"
   }
 }
