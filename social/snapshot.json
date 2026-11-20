@@ -1,27 +1,37 @@
 {
-  "collectedAt": "2026-11-20T18:36:42.533568+00:00",
+  "collectedAt": "2026-11-20T23:24:38.962786+00:00",
   "errors": {},
   "facebook": {
-    "change24h": -51,
-    "followers": 666529,
+    "change24h": null,
+    "followers": 666462,
     "handle": "@camaradeputados",
-    "observedAt": "2026-11-20T18:36:42.533568+00:00"
+    "observedAt": "2026-11-20T23:24:38.962786+00:00"
   },
   "instagram": {
     "change24h": null,
-    "embedCheckedAt": "2026-11-20T18:36:42.533568+00:00",
+    "embedCheckedAt": "2026-11-20T23:24:38.962786+00:00",
     "embedFollowers": 400987,
     "followers": 400027,
     "followersObservedAt": "2026-11-17T17:49:13.829178+00:00",
     "handle": "@camaradosdeputados",
-    "observedAt": "2026-11-20T18:36:42.533568+00:00",
+    "observedAt": "2026-11-20T23:24:38.962786+00:00",
     "posts": [
       {
+        "caption": "Grandes transformações não acontecem por acaso!\n\nAs leis que combatem o racismo, protegem direitos e ampliam oportunidades para a população negra foram conquistadas após muitos anos de resistência, mobilização e participação política.\n\nNeste carrossel, reunimos alguns momentos que ajudam a contar essa história.\nPasse para o lado e confira.\n\n#movimentonegro #igualdaderacial #legislaçãoantirracismo #camaradosdeputados",
+        "comments": 1,
+        "id": "4034853311965841506",
+        "likes": 29,
+        "mediaUrl": "https://scontent-iad6-1.cdninstagram.com/v/t39.30808-6/913553378_1599179252245528_323499651368379762_n.jpg?stp=c0.45.1080.1350a_dst-jpg_e35_sh2.08_tt6&_nc_cat=108&_nc_map=urlgen_bucketless&ig_cache_key=NDAzNDg1MzI1MzQzODUyMjMyOA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=fR3pRWwF9mkQ7kNvwHQQTSh&_nc_oc=AdpCwVXDvppausAmlKuEZjWcmLb3IsSGfyvNzWWVGuDPoiMYm4ZQ5vU7YJkzSz8UNWQ&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&_nc_gid=KG4PmKoAxUKFY65ptrJLOw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQRwZLzCXa1Y1xNLUuXBguABHr5_v7ar2OXaSd4kMFsX-g&oe=6B06A6BE",
+        "permalink": "https://www.instagram.com/p/Df-rbWsiEhi/",
+        "publishedAt": "2026-11-20T22:00:18+00:00",
+        "type": "carousel"
+      },
+      {
         "caption": "\"Podemos ocupar todos os espaços que precisamos ocupar.\" Homenageada na Câmara pelo Dia da Consciência Negra e por sua trajetória política e de luta, a deputada @instadabene (PT-RJ) destaca os desafios enfrentados por mulheres negras que rompem barreiras e reforça a importância da luta por direitos, representatividade e igualdade de oportunidades.\n\nMais do que presença, é participação, voz e protagonismo nos espaços de decisão.\n\nAcompanhe nossas redes - cd.leg.br/redes\n\n#consciencianegra #democracia #soberania #camaradosdeputados",
-        "comments": 4,
+        "comments": 83,
         "id": "4034732736011246654",
-        "likes": 135,
-        "mediaUrl": "https://scontent-sjc3-1.cdninstagram.com/v/t51.82787-15/918036539_18359848747174424_8668973297156795603_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=106&_nc_map=urlgen_bucketless&ig_cache_key=NDAzNDczMjczNjAxMTI0NjY1NDE4MzU5ODQ4NzQ0MTc0NDI0.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjYwMC5zZHIudmlkZW9fdXNlcl91cGxvYWRlZF90aHVtYm5haWwuQzMifQ%3D%3D&_nc_ohc=SXAbtpS3geIQ7kNvwGixbr2&_nc_oc=Adq_kBpEsW6_xoafNc6pOFVmrnsA0sCS8GrQUhgDFKmgdWkA4W6x0j6BHvPVjtcj2DE&_nc_zt=23&_nc_ht=scontent-sjc3-1.cdninstagram.com&_nc_gid=RW-rhGBZnrfCcSwndSqlfA&_nc_ss=7b60f&_nc_ct=RQosPBUIFQwlBAAAAA&oh=00_AQS6osug_Zx9Y__ma3iF6GpOSazrykS9a8hNrOHOxl12YA&oe=6B065296",
+        "likes": 1234,
+        "mediaUrl": "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-15/918036539_18359848747174424_8668973297156795603_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=106&_nc_map=urlgen_bucketless&ig_cache_key=NDAzNDczMjczNjAxMTI0NjY1NDE4MzU5ODQ4NzQ0MTc0NDI0.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjYwMC5zZHIudmlkZW9fdXNlcl91cGxvYWRlZF90aHVtYm5haWwuQzMifQ%3D%3D&_nc_ohc=SXAbtpS3geIQ7kNvwFANMqp&_nc_oc=AdpiXbAl-ujf3CBgPpJTHmmHnIHLhY2ftEdIPv_B3aW5VfmeWPemqHAqeixIjd0RZLw&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_gid=KG4PmKoAxUKFY65ptrJLOw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQwlBAAAAA&oh=00_AQQjBCeETCHP49b4pU84XhIYuDQBcUpe47ojHy7CKUIExQ&oe=6B06C316",
         "permalink": "https://www.instagram.com/p/Df-QAvllxw-/",
         "publishedAt": "2026-11-20T18:01:06+00:00",
         "type": "video"
@@ -30,28 +40,28 @@
         "caption": "Antes de cada conquista, houve luta. Antes de cada cadeira ocupada, houve quem desafiasse as barreiras do seu tempo para abrir caminhos.\n\nDa eleição de Antônio Pereira Rebouças, em 1828, ao reconhecimento da Bancada Negra, em 2023, a presença negra na Câmara dos Deputados foi construída por gerações que se recusaram a ficar de fora das decisões sobre o Brasil.\n\nEsta é uma história de resistência, organização política, participação democrática e transformação.\n\nPorque a representação importa. E, quando ela se fortalece, a democracia avança.\n✊🏿🖤\nAcompanhe as redes da Câmara!\n\n#BancadaNegra #Representatividade #PopulaçãoNegra #camaradosdeputados",
         "comments": 3,
         "id": "4034611985974274893",
-        "likes": 55,
-        "mediaUrl": "https://scontent-sjc6-1.cdninstagram.com/v/t51.82787-15/902586402_18359768761174424_7093102397562539561_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=107&_nc_map=urlgen_bucketless&ig_cache_key=NDAzNDYxMTk4NTk3NDI3NDg5MzE4MzU5NzY4NzU4MTc0NDI0.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjYwMC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=v5SXHRSa_DgQ7kNvwF_o0Rt&_nc_oc=AdqK6ILQaN7f4r3GZNoE-YZDAxuWWTatsQ6vnr29ncsvccDe_TVH_SlRa_MYbIjzAUo&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&_nc_gid=RW-rhGBZnrfCcSwndSqlfA&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQTQpVOwcGaT0xDHLSw8o036QMP_TKIhPxsOduCpouP2Og&oe=6B067FD5",
+        "likes": 66,
+        "mediaUrl": "https://scontent-iad3-2.cdninstagram.com/v/t51.82787-15/902586402_18359768761174424_7093102397562539561_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=107&_nc_map=urlgen_bucketless&ig_cache_key=NDAzNDYxMTk4NTk3NDI3NDg5MzE4MzU5NzY4NzU4MTc0NDI0.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjYwMC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=v5SXHRSa_DgQ7kNvwE6ivYr&_nc_oc=AdpafjPnigqusYZIw7atgHQwSMeoG55Nl2m7Eys1Y8rm8r8bxDyeINqSDPMIyEX1bC0&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&_nc_gid=KG4PmKoAxUKFY65ptrJLOw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQROL57XOOe9lE4wufYczx6jr5JQNGrKpEo8iaB8YxwQWg&oe=6B06B815",
         "permalink": "https://www.instagram.com/p/Df90jmWh6tN/",
         "publishedAt": "2026-11-20T14:00:45+00:00",
         "type": "video"
       },
       {
         "caption": "As bets devem acabar de vez no Brasil?\n\nO mercado de apostas online movimenta bilhões de reais, gera empregos e arrecadação, mas também levanta preocupações sobre endividamento, dependência e saúde mental. Afinal, até que ponto os benefícios econômicos compensam os impactos na vida dos brasileiros?\n\nNo novo episódio do Me Conta+, conversamos com o deputado @pedrocampospe (PSB-PE), presidente da Frente Parlamentar Mista para a Promoção da Saúde Mental, sobre os riscos das apostas, os desafios para o atendimento de pessoas que desenvolveram dependência e as consequências desse mercado para as famílias e a economia.\n\nTambém falamos sobre a proibição das bets, as alternativas de regulamentação e os debates em andamento no Congresso Nacional.\n\nE você, o que acha? O Brasil deve proibir as bets de vez ou adotar regras mais rigorosas?\n\nAssista à conversa completa no YouTube da Câmara dos Deputados!\n\n#bets #apostas #camaradosdeputados",
-        "comments": 11,
+        "comments": 12,
         "id": "4034611997886033900",
-        "likes": 103,
-        "mediaUrl": "https://scontent-sjc6-1.cdninstagram.com/v/t51.82787-15/910367772_18359761963174424_6629522657964644364_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=104&_nc_map=urlgen_bucketless&ig_cache_key=NDAzNDYxMTk5Nzg4NjAzMzkwMDE4MzU5NzYxOTY2MTc0NDI0.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjYwMC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=6aXx4q7s8FMQ7kNvwHqsLFu&_nc_oc=AdrnDeTH3bBGr3RilQ5zn_l6k2_XUMaTmpkIVtNSnB2SKIBqn_HnVkOEHiDrTLqSJDc&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&_nc_gid=RW-rhGBZnrfCcSwndSqlfA&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQT8jzDvJXGm_yz4zo0jIAtXeWV6ZqfBpJO4B70GAFC31w&oe=6B065760",
+        "likes": 112,
+        "mediaUrl": "https://scontent-iad3-2.cdninstagram.com/v/t51.82787-15/910367772_18359761963174424_6629522657964644364_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=104&_nc_map=urlgen_bucketless&ig_cache_key=NDAzNDYxMTk5Nzg4NjAzMzkwMDE4MzU5NzYxOTY2MTc0NDI0.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjYwMC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=6aXx4q7s8FMQ7kNvwHWGVtD&_nc_oc=Adq4ujuegFq2xIavJmP4V2D-YXoZ9DBBAJSgqo461nIj-ly_Ut2FwoI5nvBaoCwOSis&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&_nc_gid=KG4PmKoAxUKFY65ptrJLOw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQRKjjHEpszzl3zOfxYSpA8wRMhkvB7BC22dM61G8MMktA&oe=6B068FA0",
         "permalink": "https://www.instagram.com/p/Df90jxchq_s/",
         "publishedAt": "2026-11-20T14:00:36+00:00",
         "type": "video"
       },
       {
         "caption": "✊🏿 20 de novembro, Dia Nacional de Zumbi e da Consciência Negra.\n\nMais do que um feriado, uma data para celebrar a resistência, valorizar a cultura negra e reforçar a luta por igualdade.\n\nSímbolo da resistência à escravidão, Zumbi dos Palmares deixou um legado que atravessa gerações. Deslize e confira um pouco mais sobre esse líder histórico, agora homenageado com um feriado nacional.\n\nNa Câmara, essa luta também se traduz em debates, projetos de lei e iniciativas para combater o racismo e promover a igualdade racial.\n\nHonrar o passado também é construir um futuro com mais respeito, direitos e oportunidades.\n\n#ConsciênciaNegra #ZumbiDosPalmares #20DeNovembro #CâmaraDosDeputados",
-        "comments": 567,
+        "comments": 676,
         "id": "4034521104281904207",
-        "likes": 15840,
-        "mediaUrl": "https://scontent-sjc6-1.cdninstagram.com/v/t39.30808-6/915015168_1599155998914520_5803398259200890117_n.jpg?stp=c0.45.1080.1350a_dst-jpg_e35_sh2.08_tt6&_nc_cat=106&_nc_map=urlgen_bucketless&ig_cache_key=NDAzNDUyMTA1Njk0NDk5MzQ4MA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=_MuyTZJ7wsEQ7kNvwHi-wbV&_nc_oc=Ado_U280rt5bCvx7c7q4alLBzuyMZz8QSE6iEDauyJvvElLTfvk4LfL0qSNxIS-i1Sg&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&_nc_gid=RW-rhGBZnrfCcSwndSqlfA&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQQOzpVmfw0igHtJAdClnf53PRjHkKzr5qC63GUAjsAQ0g&oe=6B065B56",
+        "likes": 16272,
+        "mediaUrl": "https://scontent-iad3-2.cdninstagram.com/v/t39.30808-6/915015168_1599155998914520_5803398259200890117_n.jpg?stp=c0.45.1080.1350a_dst-jpg_e35_sh2.08_tt6&_nc_cat=106&_nc_map=urlgen_bucketless&ig_cache_key=NDAzNDUyMTA1Njk0NDk5MzQ4MA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=Q-ShSmidU6kQ7kNvwGLDq-2&_nc_oc=Adqaz6mBl4WvbW1tvmO0OqYaaWgm0LNnPOU-pv0NDDDQ3gqPyPewsLyTA0v6NcS7Pew&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&_nc_gid=KG4PmKoAxUKFY65ptrJLOw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQSHuWZSHC5OW4PIk3bXOa870htU_i0PoPo6vRvQ_tpESg&oe=6B069396",
         "permalink": "https://www.instagram.com/p/Df9f5GLiiRP/",
         "publishedAt": "2026-11-20T11:00:16+00:00",
         "type": "carousel"
@@ -60,21 +70,11 @@
         "caption": "📊 Imposto do pecado e sobre lucros e dividendos, mercado digital, uso de animais em filme pornô e auxílio\na professores para compra da casa própria. Esses foram os temas que mais mobilizaram o público nos canais da Câmara nesta semana.\n\nNo topo da lista, está a medida do governo que estabelece as alíquotas do imposto seletivo sobre itens como bebidas, cigarros, refrigerantes e carros a combustão, criado na reforma tributária. A preocupação com o bolso também está registrada nos projetos que regulamentam a tributação sobre lucros e dividendos.\n\nO levantamento reúne dados de participação nos canais da Câmara entre 16 e 18 de novembro de 2026.\n\n🔎 Quer saber mais sobre alguma dessas propostas?\n\n📱 Acesse o nosso portal - camara.leg.br. Vai lá em Atividade Legislativa.\n\n#impostoseletivo #casadoprofessor #impostos #proteçaoaosanimais #mercadodigital",
         "comments": 9,
         "id": "4034163876777272174",
-        "likes": 27,
-        "mediaUrl": "https://scontent-sjc6-1.cdninstagram.com/v/t51.82787-15/914852174_18359773393174424_1198003195931935193_n.webp?_nc_cat=104&_nc_map=urlgen_bucketless&ig_cache_key=NDAzNDE2Mzg3Njc3NzI3MjE3NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=RKuAgk-iTx8Q7kNvwGgQt63&_nc_oc=AdoaLKqLTyObO87TIXeFyBiRy5avu8E5RwDcbVM5NuHNWMcU-22T0X3Xftzt16zSkp0&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&_nc_gid=RW-rhGBZnrfCcSwndSqlfA&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQQUhmdFf7ys29ZoTMYpppyDeF2HB1PlbmYqdnfd1NUY4Q&oe=6B0668FD",
+        "likes": 28,
+        "mediaUrl": "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-15/914852174_18359773393174424_1198003195931935193_n.webp?_nc_cat=104&_nc_map=urlgen_bucketless&ig_cache_key=NDAzNDE2Mzg3Njc3NzI3MjE3NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=RKuAgk-iTx8Q7kNvwEcXHA5&_nc_oc=AdpuG5orAmJHeWCKLwsIksASWdC1BqCtTLgltyH4FSiMFlNFMolFtFdjV-2EYhKHFSc&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_gid=KG4PmKoAxUKFY65ptrJLOw&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQTmu3jYoAzmygn07lQd3k1OFJziQOsdeo2-sUzdA5hvbA&oe=6B06A13D",
         "permalink": "https://www.instagram.com/p/Df8OqwJBaNu/",
         "publishedAt": "2026-11-20T00:35:11+00:00",
         "type": "image"
-      },
-      {
-        "caption": "Fim da escala 6x1, tem novidades à vista!\n\nO governo federal publicou um decreto que regulamenta as novas regras da jornada de trabalho, após a aprovação da mudança pelo Congresso Nacional.\n\nA redução será gradual: 42 horas semanais a partir de 16 de dezembro de 2026; e 40 horas a partir de dezembro de 2027. Os dois dias de descanso semanal remunerado, sem redução salarial, já valem na primeira etapa.\n\nO decreto também trata das escalas especiais e estabelece novas referências para o cálculo do valor da hora trabalhada. \n\nPara quem trabalha em turnos ininterruptos de revezamento, a jornada continua sendo de seis horas diárias.  Nesse caso, a jornada pode até variar de semana para semana, mas, na contagem do mês, a média semanal não poderá ultrapassar o novo limite. O trabalhador deverá ter garantido o equivalente a dois dias de repouso remunerado por semana.\n\nPara quem trabalha na jornada 12x36, será assegurada a compensação das horas ou o pagamento de horas extras quando a média semanal ultrapassar o limite.\n\nAs exceções podem ser definidas por acordos ou convenções coletivas de trabalho.\n\nO Ministério do Trabalho terá que editar um ato para tratar da efetiva aplicação do repouso semanal remunerado e dos regimes especiais de jornada.\n\nE fica ligado aqui nas redes da Câmara! A gente acompanha as novidades e explica o que muda na sua vida.\n\n#fimdaescala6x1 #jornadadetrabalho #12x36",
-        "comments": 42,
-        "id": "4034160922360837139",
-        "likes": 1263,
-        "mediaUrl": "https://scontent-sjc6-1.cdninstagram.com/v/t51.82787-15/912549680_18359772613174424_8607354581632686027_n.webp?_nc_cat=108&_nc_map=urlgen_bucketless&ig_cache_key=NDAzNDE2MDQ3MzI1OTA0MTQ0Ng%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=bvkjeyh_ye0Q7kNvwEAfNUG&_nc_oc=Adr8o44ePKtc33Hkb6GLXE9D-Foe0eddn8AiMMTLhX8RmdLxivMULo-5R4QBLvtzzOo&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&_nc_gid=RW-rhGBZnrfCcSwndSqlfA&_nc_ss=7b60f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQRyK0XwOnHlRHv9UW3dZXYKueY-OKmIpw35WUx84_DEFQ&oe=6B0652F4",
-        "permalink": "https://www.instagram.com/p/Df8N_woFHQT/",
-        "publishedAt": "2026-11-19T23:04:39+00:00",
-        "type": "carousel"
       }
     ],
     "publicCheckedAt": "2026-11-17T17:49:13.829178+00:00",
@@ -148,21 +148,21 @@
     ]
   },
   "tiktok": {
-    "change24h": 0,
+    "change24h": null,
     "followers": 149700,
     "handle": "@camaradosdeputados",
-    "observedAt": "2026-11-20T18:36:42.533568+00:00"
+    "observedAt": "2026-11-20T23:24:38.962786+00:00"
   },
   "x": {
-    "change24h": -72,
-    "followers": 1086385,
+    "change24h": null,
+    "followers": 1086373,
     "handle": "@camaradeputados",
-    "observedAt": "2026-11-20T18:36:42.533568+00:00"
+    "observedAt": "2026-11-20T23:24:38.962786+00:00"
   },
   "youtube": {
     "change24h": null,
     "followers": 1500000,
     "handle": "@camaradosdeputadosoficial",
-    "observedAt": "2026-11-20T18:36:42.533568+00:00"
+    "observedAt": "2026-11-20T23:24:38.962786+00:00"
   }
 }
