@@ -1,41 +1,6 @@
 {
   "samples": [
     {
-      "collectedAt": "2026-11-18T18:51:20.215989+00:00",
-      "followers": 1086876,
-      "network": "x"
-    },
-    {
-      "collectedAt": "2026-11-18T18:51:20.215989+00:00",
-      "followers": 1500000,
-      "network": "youtube"
-    },
-    {
-      "collectedAt": "2026-11-18T18:51:20.215989+00:00",
-      "followers": 149700,
-      "network": "tiktok"
-    },
-    {
-      "collectedAt": "2026-11-18T19:09:51.840285+00:00",
-      "followers": 1086877,
-      "network": "x"
-    },
-    {
-      "collectedAt": "2026-11-18T19:09:51.840285+00:00",
-      "followers": 1500000,
-      "network": "youtube"
-    },
-    {
-      "collectedAt": "2026-11-18T19:09:51.840285+00:00",
-      "followers": 149700,
-      "network": "tiktok"
-    },
-    {
-      "collectedAt": "2026-11-18T19:09:51.840285+00:00",
-      "followers": 666507,
-      "network": "facebook"
-    },
-    {
       "collectedAt": "2026-11-19T01:16:52.502184+00:00",
       "followers": 1086466,
       "network": "x"
@@ -543,6 +508,31 @@
     {
       "collectedAt": "2026-11-25T13:09:07.709502+00:00",
       "followers": 666444,
+      "network": "facebook"
+    },
+    {
+      "collectedAt": "2026-11-25T19:56:10.802791+00:00",
+      "followers": 403356,
+      "network": "instagram"
+    },
+    {
+      "collectedAt": "2026-11-25T19:56:10.802791+00:00",
+      "followers": 1085781,
+      "network": "x"
+    },
+    {
+      "collectedAt": "2026-11-25T19:56:10.802791+00:00",
+      "followers": 1500000,
+      "network": "youtube"
+    },
+    {
+      "collectedAt": "2026-11-25T19:56:10.802791+00:00",
+      "followers": 150200,
+      "network": "tiktok"
+    },
+    {
+      "collectedAt": "2026-11-25T19:56:10.802791+00:00",
+      "followers": 666454,
       "network": "facebook"
     }
   ],
