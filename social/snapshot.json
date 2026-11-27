@@ -1,37 +1,47 @@
 {
-  "collectedAt": "2026-11-27T15:39:15.463038+00:00",
+  "collectedAt": "2026-11-27T19:27:49.008494+00:00",
   "errors": {
-    "facebook": "ValueError"
+    "x": "x:404,404,404"
   },
   "facebook": {
-    "change24h": 44,
-    "followers": 666433,
+    "change24h": 27,
+    "followers": 666458,
     "handle": "@camaradeputados",
-    "observedAt": "2026-11-27T05:26:00.558593+00:00"
+    "observedAt": "2026-11-27T19:27:49.008494+00:00"
   },
   "instagram": {
     "change24h": null,
     "followers": 403796,
-    "followersObservedAt": "2026-11-27T15:39:15.463038+00:00",
+    "followersObservedAt": "2026-11-27T19:27:49.008494+00:00",
     "handle": "@camaradosdeputados",
-    "observedAt": "2026-11-27T15:39:15.463038+00:00",
+    "observedAt": "2026-11-27T19:27:49.008494+00:00",
     "posts": [
       {
+        "caption": "O Intercâmbio Legislativo é o programa de curta duração que oferecerá a vereadores e vereadoras de todo o Brasil, de 1º a 3 de dezembro, a oportunidade de vivenciar a rotina parlamentar de perto, criar conexões e trocar experiências.\n\nParticipe da palestra magna inaugural “O município no centro da federação: desafios do Poder Legislativo municipal em 2027” dia 1º de dezembro, a partir das 14h45, no Auditório Nereu Ramos da Câmara dos Deputados, com a presença dos palestrantes:\n\nGilson Daniel – Deputado Federal e Ouvidor-Geral da Câmara dos Deputados;\n\nVanessa Anjos – Advogada municipalista e CEO do Instituto INCAP;\n\nJoão Trindade – Consultor legislativo do Senado Federal.\n\nA palestra será aberta ao público sem necessidade de inscrição.\n\nPara mais informações, acesse cd.leg.br/intercambio\n\nAssista online em cd.leg.br/youtube",
+        "comments": 0,
+        "id": "4039237586211079703",
+        "likes": 104,
+        "mediaUrl": "https://scontent-lga3-1.cdninstagram.com/v/t51.82787-15/928381675_18360404431174424_3721871887832703703_n.webp?_nc_cat=106&_nc_map=urlgen_bucketless&ig_cache_key=NDAzOTIzNzU4NjIxMTA3OTcwMw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=q2f8T0TQYYEQ7kNvwE_qUmK&_nc_oc=Adql0DyJx3v5VoKBzCUGnjombJRmpjgZa2rU94zCEwA1mzab0XAk2ntIazvwm7DE83s&_nc_zt=23&_nc_ht=scontent-lga3-1.cdninstagram.com&_nc_gid=cWEq4pNnjqraVg1jxPrRuw&_nc_ss=7b70f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQUwIxHNJDpqie47zPkT2MCnwgmHN-K4fJlEiyRFV7OzIw&oe=6B0FA9D7",
+        "permalink": "https://www.instagram.com/p/DgOQS8RhIYX/",
+        "publishedAt": "2026-11-27T17:48:54+00:00",
+        "type": "image"
+      },
+      {
         "caption": "Ajuste fiscal aprovado! E por que o governo precisa equilibrar as contas públicas? O que isso tem a ver com o preço dos alimentos, os juros e a qualidade dos serviços públicos?\n\nEssas são algumas das questões que discutimos com o deputado Mauro Benevides Filho, relator da proposta de ajuste fiscal [PLP 299/2026] na Câmara dos Deputados, em mais um episódio do Me Conta+!\n\nA conversa tratou do pacote de medidas aprovado pelo Congresso Nacional e já convertido em lei, que tem uma economia projetada de R$ 56 bilhões.\n\nO deputado explicou de onde vem essa economia, como funciona o orçamento público e quais são os desafios para equilibrar as contas sem comprometer os serviços oferecidos à população, mostrando como essas decisões\npodem impactar o bolso e o dia a dia dos brasileiros.\n\nConfira o episódio completo no YouTube, no X e no Tik Tok da Câmara dos Deputados!\n\n#ajustefiscal #orçamento #sus #economia",
-        "comments": 3,
+        "comments": 5,
         "id": "4039685363974183020",
-        "likes": 14,
-        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/916148782_18360398044174424_7053969008316992471_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ig_cache_key=NDAzOTY4NTM2Mzk3NDE4MzAyMDE4MzYwMzk4MDM4MTc0NDI0.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjYwMC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=I_YWDu0kIEgQ7kNvwFh0dG7&_nc_oc=AdppkTRfBfuO_W7ySChJk_xbH6mC7ppMAzo9SUb1eAomYxk54GSSsaH1M1cMd9VPs6g&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=ExWsJ3Gd_y0ZU3BAWoDoFw&_nc_ss=7b70f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQWxU8rXUSGFqC9lrWCxFmMFn60b5vRIJ7FwcYcekmeD7g&oe=6B0F5E42",
+        "likes": 18,
+        "mediaUrl": "https://scontent-lga3-3.cdninstagram.com/v/t51.82787-15/916148782_18360398044174424_7053969008316992471_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ig_cache_key=NDAzOTY4NTM2Mzk3NDE4MzAyMDE4MzYwMzk4MDM4MTc0NDI0.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjYwMC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=I_YWDu0kIEgQ7kNvwECoIeN&_nc_oc=AdpPDonS5yWlGhOaiJEWDrDGKLsCNVtylQbRrtEmQ-ioKFbfzFKd5SoeY6K8XrsPAH4&_nc_zt=23&_nc_ht=scontent-lga3-3.cdninstagram.com&_nc_gid=cWEq4pNnjqraVg1jxPrRuw&_nc_ss=7b70f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQVhaDlc3WvrzJkvAUahRkgKxZvXoX8FSdPX43aF8wFjaQ&oe=6B0F9682",
         "permalink": "https://www.instagram.com/p/DgP2G90Bphs/",
         "publishedAt": "2026-11-27T14:00:08+00:00",
         "type": "video"
       },
       {
         "caption": "21 dias de ativismo pelo fim da violência contra as mulheres! No Brasil, a campanha mundial, concentrada em 16 dias, se estende um pouco mais, indo de 20 de novembro, Dia da Consciência Negra, a 10 de dezembro, Dia Internacional dos Direitos Humanos.\n\nMas todo dia é dia de luta!\n\nA violência contra a mulher é uma violação de direitos humanos e uma questão de saúde pública, segurança, justiça e democracia.\n\nO feminicídio pode ser precedido por controle, ameaça, humilhação, perseguição e isolamento. Reconhecer os sinais e denunciar pode ajudar a acionar a rede de proteção.\n\nA violência digital também entrou nas estatísticas: entre janeiro e outubro de 2026, o Ligue 180 registrou 6.245 denúncias de agressões no ambiente virtual.\n\nEm situação de violência, ligue 180. Atendimento gratuito, sigiloso e disponível 24 horas.\n\n💜 ✊🏽📢 As falas deste carrossel aconteceram em sessão solene no Plenário da Câmara dos Deputados, no Dia Internacional pela Eliminação da Violência contra a Mulher.\n\n#21DiasDeAtivismo #FimDaViolênciaContraAsMulheres #Ligue180 #CâmaraDosDeputados",
-        "comments": 20,
+        "comments": 27,
         "id": "4039583602669251587",
-        "likes": 192,
-        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/907613073_18360444322174424_6676079639831501713_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=101&_nc_map=urlgen_bucketless&ig_cache_key=NDAzOTU4MzYwMjY2OTI1MTU4NzE4MzYwNDQ0MzE2MTc0NDI0.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEwODAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=j3dA3ytNJm4Q7kNvwEjgzA3&_nc_oc=Adr1-VtVW3sJ9t7cXC3dps3jajm7CJJ8Pa8BSXJ-jY_eL1t-N-UGZzaiCJRPKWdCMKU&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=ExWsJ3Gd_y0ZU3BAWoDoFw&_nc_ss=7b70f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQWo7eC7wRMa2fYd4IAqxEuZdL8gaq8XEgLaMFClW10uCA&oe=6B0F8926",
+        "likes": 212,
+        "mediaUrl": "https://scontent-lga3-2.cdninstagram.com/v/t51.82787-15/907613073_18360444322174424_6676079639831501713_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=101&_nc_map=urlgen_bucketless&ig_cache_key=NDAzOTU4MzYwMjY2OTI1MTU4NzE4MzYwNDQ0MzE2MTc0NDI0.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEwODAuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=j3dA3ytNJm4Q7kNvwF93gW7&_nc_oc=AdrixEVniOU5lqQ925fYvs3O3H53BKw-ATxva5z-zXu1kAqhHzn68jG0bWlL1BLB3bM&_nc_zt=23&_nc_ht=scontent-lga3-2.cdninstagram.com&_nc_gid=cWEq4pNnjqraVg1jxPrRuw&_nc_ss=7b70f&_nc_ct=RQosPBUIFQQlBAAAAA&oh=00_AQVZAEMSmQbfyoYRaRKUVyFqRnNi_p8dmllx2eTbTcZK7w&oe=6B0FC166",
         "permalink": "https://www.instagram.com/p/DgPe-JNl-wD/",
         "publishedAt": "2026-11-27T10:39:20+00:00",
         "type": "video"
@@ -40,18 +50,18 @@
         "caption": "O rompimento das barragens de Mariana e Brumadinho, em Minas Gerais, causou 292 mortes e criou um caos ambiental que não foi resolvido até hoje. A Comissão Externa da Câmara dos Deputados sobre Fiscalização de Rompimentos de Barragens se debruçou sobre o assunto durante quatro anos.\n\nO relatório foi aprovado e contém oito eixos de recomendações. São medidas de prevenção a desastres e participação social nas ações de recuperação ambiental.\n\nPara se ter uma ideia, até hoje os rios atingidos (Rio Doce e Paraopeba) não foram recuperados. A comissão também pressiona pela punição criminal dos responsáveis.\n\nQue conhecer o relatório? Vai lá no nosso portal - camara.leg.br\n\n#brumadinho #marianamg #barragens #camaradosdeputados",
         "comments": 4,
         "id": "4039148507973267531",
-        "likes": 99,
-        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/930207667_18360395311174424_8469760801265831144_n.webp?_nc_cat=105&_nc_map=urlgen_bucketless&ig_cache_key=NDAzOTE0ODUwNzk3MzI2NzUzMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=X5f2TbpjKJ8Q7kNvwFXDczY&_nc_oc=AdqiYdk8zVlghMqelk8XTjBhnSCWiNoizk8ETifqGiDtLzkNCeNbzyCUH393d7xWvuE&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=ExWsJ3Gd_y0ZU3BAWoDoFw&_nc_ss=7b70f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQX8Q6Jvx_ecTNC7DjLs1bobZTCIGwkX6v-aOcTvsr4bGQ&oe=6B0F6846",
+        "likes": 108,
+        "mediaUrl": "https://scontent-lga3-1.cdninstagram.com/v/t51.82787-15/930207667_18360395311174424_8469760801265831144_n.webp?_nc_cat=105&_nc_map=urlgen_bucketless&ig_cache_key=NDAzOTE0ODUwNzk3MzI2NzUzMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=fWsGwOZs9sYQ7kNvwHzeDbr&_nc_oc=AdoRnSZ58BjfcE2QE9wZbuCb4Y_vXgIEzCbIwLVAoeSHNBgJn8D4_96GZ4nnRg_ymI8&_nc_zt=23&_nc_ht=scontent-lga3-1.cdninstagram.com&_nc_gid=cWEq4pNnjqraVg1jxPrRuw&_nc_ss=7b70f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQVbO9OrbJf1xGyD12zb3VG4UUfr2HjMQ-mOxd_02yailA&oe=6B0FA086",
         "permalink": "https://www.instagram.com/p/DgN8Crsy7BL/",
         "publishedAt": "2026-11-26T20:14:08+00:00",
         "type": "image"
       },
       {
         "caption": "📚 Filosofia e Sociologia nos três anos do ensino médio!\n\nAs matérias podem voltar a ser obrigatórias, com pelo menos duas aulas semanais cada, para todas as séries do ensino médio. A ideia está em uma proposta, aprovada na Comissão de Educação da Câmara, que também determina que os professores tenham formação específica nas áreas.\n\nAtualmente, não há uma carga horária mínima determinada por lei para essas disciplinas, o que, na prática, desobriga as escolas a inserir as aulas na grade.\n\nO projeto [PL 1466/2026] agora vai para análise do Plenário da Câmara.\n\nE você, o que acha disso?\n\n#CâmaraDosDeputados #Educação #EnsinoMédio #Filosofia #Sociologia",
-        "comments": 463,
+        "comments": 477,
         "id": "4038912290810698469",
-        "likes": 1594,
-        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/930081649_18360363397174424_2572468249242242201_n.webp?stp=dst-webp_p1080x1080_sh2.08&_nc_cat=107&_nc_map=urlgen_bucketless&ig_cache_key=NDAzODkxMjI5MDgxMDY5ODQ2OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=LZev5DTJD9IQ7kNvwFu0Cty&_nc_oc=AdplEybRhhpkxmzTnSavL6eiuuWISAmOvIY0Z0YfLZJM_EINehQpKvNKPkLZ3_HkWk4&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=ExWsJ3Gd_y0ZU3BAWoDoFw&_nc_ss=7b70f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQXFgnVj-sLf6K1HvKi89tVodwR4wiqV2vGZoTFuMzZ0Nw&oe=6B0F901A",
+        "likes": 1648,
+        "mediaUrl": "https://scontent-lga3-3.cdninstagram.com/v/t51.82787-15/930081649_18360363397174424_2572468249242242201_n.webp?stp=dst-webp_p1080x1080_sh2.08&_nc_cat=107&_nc_map=urlgen_bucketless&ig_cache_key=NDAzODkxMjI5MDgxMDY5ODQ2OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=LZev5DTJD9IQ7kNvwG-Zfti&_nc_oc=AdoCVxZK_fQF3w0zbgRwr2ExJzXpThAORq4vpb86nzOO8WI76KyUbJAE_u91LI0uaQk&_nc_zt=23&_nc_ht=scontent-lga3-3.cdninstagram.com&_nc_gid=cWEq4pNnjqraVg1jxPrRuw&_nc_ss=7b70f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQVUOztx88ct9XzK4dl2FO96eFHrfZG3vvqeGHGSxJQ59w&oe=6B0FC85A",
         "permalink": "https://www.instagram.com/p/DgNGVRUuxrl/",
         "publishedAt": "2026-11-26T12:24:49+00:00",
         "type": "image"
@@ -61,23 +71,13 @@
         "comments": 5,
         "id": "4038872067574443401",
         "likes": 63,
-        "mediaUrl": "https://scontent-sea5-2.cdninstagram.com/v/t51.82787-15/929816091_18360357418174424_7129052787768438960_n.webp?_nc_cat=103&_nc_map=urlgen_bucketless&ig_cache_key=NDAzODg3MjA2NzU3NDQ0MzQwMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=BtNKC826RsAQ7kNvwG_XzzZ&_nc_oc=AdpFQz8N5MysfMqo2nCyDw9Bw9zhGPS9YE0KhV0b9ZpHpngL82_DuzQVAMnYpSM2LHo&_nc_zt=23&_nc_ht=scontent-sea5-2.cdninstagram.com&_nc_gid=ExWsJ3Gd_y0ZU3BAWoDoFw&_nc_ss=7b70f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQVdIVYcO_breXXGTdWgpMH3TREPhY3hRdyueYGOGl9XZQ&oe=6B0F7FEB",
+        "mediaUrl": "https://scontent-lga3-2.cdninstagram.com/v/t51.82787-15/929816091_18360357418174424_7129052787768438960_n.webp?_nc_cat=103&_nc_map=urlgen_bucketless&ig_cache_key=NDAzODg3MjA2NzU3NDQ0MzQwMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=BtNKC826RsAQ7kNvwF2GhOJ&_nc_oc=Adoc6b0grzmUfA8SU533pzU0bmlkH6k5EmlfBawwygnbIbmuA5b4QqovrwrpMqdzNoY&_nc_zt=23&_nc_ht=scontent-lga3-2.cdninstagram.com&_nc_gid=cWEq4pNnjqraVg1jxPrRuw&_nc_ss=7b70f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQU0eMsVFYjrq7vHzAyD-BZFmVhjyqFp6o2SYJHs5L2uig&oe=6B0FB82B",
         "permalink": "https://www.instagram.com/p/DgM9L8hBa2J/",
         "publishedAt": "2026-11-26T11:04:54+00:00",
         "type": "image"
-      },
-      {
-        "caption": "Crimes de racismo não poderão mais ficar sem julgamento. Projeto aprovado pela Câmara impede o acordo de não persecução penal em crimes de racismo. [PL 2559/2022].\n\nEsse acordo costuma ser firmado entre o Ministério Público e o investigado e validado por um juiz. Se o investigado cumprir as condições, o caso se encerra sem processo criminal, sem condenação e sem registro de antecedentes criminais. Em troca, o criminoso aceita cumprir medidas alternativas: pagamentos de indenização, multa, prestação de serviços em escolas, hospitais e etc.\n\nAgora isto fica proibido. A nova regra também se aplica à injuria racial (ofensas a idosos, a pessoas com deficiência e por motivos de religião, origem, raça, cor ou etnia).\n\nA proposta segue para o Senado.\n\nAutora: Benedita da Silva (PT-RJ) @instadabene\nRelatora: Dandara (PT-MG) @todandara\n\n#racismo #crime #camaradosdeputados",
-        "comments": 7,
-        "id": "4038512839806942180",
-        "likes": 214,
-        "mediaUrl": "https://scontent-sea5-1.cdninstagram.com/v/t51.82787-15/917946717_18360312841174424_1842241837035526530_n.webp?_nc_cat=101&_nc_map=urlgen_bucketless&ig_cache_key=NDAzODUxMjgzOTgwNjk0MjE4MA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=U6h91x6wSpAQ7kNvwGCG8-a&_nc_oc=Adqt4kjCKaYNf1riJaQgbwU370KcWXWKHniGoELEQnf1Grk-2j1VOi057JtF49tEQyY&_nc_zt=23&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_gid=ExWsJ3Gd_y0ZU3BAWoDoFw&_nc_ss=7b70f&_nc_ct=RQosPBUIFQIlBAAAAA&oh=00_AQViMV7XdtxaRCkpU-0YHQ1rIN7torx5322A3mQ9aheY7w&oe=6B0F8BDD",
-        "permalink": "https://www.instagram.com/p/DgLrgfli_vk/",
-        "publishedAt": "2026-11-26T00:30:31+00:00",
-        "type": "image"
       }
     ],
-    "publicCheckedAt": "2026-11-27T15:39:15.463038+00:00",
+    "publicCheckedAt": "2026-11-27T19:27:49.008494+00:00",
     "publicCountChangedAt": "2026-11-27T15:39:15.463038+00:00",
     "publicFollowers": 403796,
     "source": "embed_observed"
@@ -87,7 +87,7 @@
     "change24h": 0,
     "followers": 150200,
     "handle": "@camaradosdeputados",
-    "observedAt": "2026-11-27T15:39:15.463038+00:00"
+    "observedAt": "2026-11-27T19:27:49.008494+00:00"
   },
   "x": {
     "change24h": -31,
@@ -99,6 +99,6 @@
     "change24h": null,
     "followers": 1500000,
     "handle": "@camaradosdeputadosoficial",
-    "observedAt": "2026-11-27T15:39:15.463038+00:00"
+    "observedAt": "2026-11-27T19:27:49.008494+00:00"
   }
 }
